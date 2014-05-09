@@ -186,9 +186,10 @@ Partial Class FrmHome
         '
         'LblBalanceHdr
         '
+        Me.LblBalanceHdr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblBalanceHdr.AutoSize = True
         Me.LblBalanceHdr.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblBalanceHdr.Location = New System.Drawing.Point(235, 674)
+        Me.LblBalanceHdr.Location = New System.Drawing.Point(896, 747)
         Me.LblBalanceHdr.Name = "LblBalanceHdr"
         Me.LblBalanceHdr.Size = New System.Drawing.Size(90, 13)
         Me.LblBalanceHdr.TabIndex = 5
@@ -196,9 +197,10 @@ Partial Class FrmHome
         '
         'LblBalanceField
         '
+        Me.LblBalanceField.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblBalanceField.AutoSize = True
         Me.LblBalanceField.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblBalanceField.Location = New System.Drawing.Point(318, 674)
+        Me.LblBalanceField.Location = New System.Drawing.Point(992, 747)
         Me.LblBalanceField.Name = "LblBalanceField"
         Me.LblBalanceField.Size = New System.Drawing.Size(175, 13)
         Me.LblBalanceField.TabIndex = 6
