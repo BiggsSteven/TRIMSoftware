@@ -33,6 +33,8 @@ Partial Class FrmHome
         Me.ClndrFrom = New System.Windows.Forms.MonthCalendar
         Me.ClndrTo = New System.Windows.Forms.MonthCalendar
         Me.BtnGtInfo = New System.Windows.Forms.Button
+        Me.BtnSwchPay = New System.Windows.Forms.Button
+        Me.BtnSwchInv = New System.Windows.Forms.Button
         Me.MenuStrip1.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
         Me.SuspendLayout()
@@ -122,11 +124,31 @@ Partial Class FrmHome
         Me.BtnGtInfo.Text = "Get Technition"
         Me.BtnGtInfo.UseVisualStyleBackColor = True
         '
+        'BtnSwchPay
+        '
+        Me.BtnSwchPay.Location = New System.Drawing.Point(961, 670)
+        Me.BtnSwchPay.Name = "BtnSwchPay"
+        Me.BtnSwchPay.Size = New System.Drawing.Size(100, 50)
+        Me.BtnSwchPay.TabIndex = 2
+        Me.BtnSwchPay.Text = "Button1"
+        Me.BtnSwchPay.UseVisualStyleBackColor = True
+        '
+        'BtnSwchInv
+        '
+        Me.BtnSwchInv.Location = New System.Drawing.Point(1067, 670)
+        Me.BtnSwchInv.Name = "BtnSwchInv"
+        Me.BtnSwchInv.Size = New System.Drawing.Size(100, 50)
+        Me.BtnSwchInv.TabIndex = 3
+        Me.BtnSwchInv.Text = "Button2"
+        Me.BtnSwchInv.UseVisualStyleBackColor = True
+        '
         'FrmHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1179, 732)
+        Me.Controls.Add(Me.BtnSwchInv)
+        Me.Controls.Add(Me.BtnSwchPay)
         Me.Controls.Add(Me.PnlFilter)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
@@ -150,5 +172,7 @@ Partial Class FrmHome
     Friend WithEvents LstBoxTech As System.Windows.Forms.ListBox
     Friend WithEvents BtnGtInfo As System.Windows.Forms.Button
     Friend WithEvents ClndrTo As System.Windows.Forms.MonthCalendar
+    Friend WithEvents BtnSwchPay As System.Windows.Forms.Button
+    Friend WithEvents BtnSwchInv As System.Windows.Forms.Button
 
 End Class
