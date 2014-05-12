@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FrmHome
+Partial Class FormHome
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -29,19 +29,21 @@ Partial Class FrmHome
         Me.ReceiversToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.AcToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.PnlFilter = New System.Windows.Forms.Panel
-        Me.LstBoxTech = New System.Windows.Forms.ListBox
-        Me.ClndrFrom = New System.Windows.Forms.MonthCalendar
-        Me.ClndrTo = New System.Windows.Forms.MonthCalendar
         Me.BtnGtInfo = New System.Windows.Forms.Button
+        Me.LstBoxTech = New System.Windows.Forms.ListBox
         Me.BtnSwchPay = New System.Windows.Forms.Button
         Me.BtnSwchInv = New System.Windows.Forms.Button
-        Me.PnlClndr = New System.Windows.Forms.Panel
         Me.GrpDtaView = New System.Windows.Forms.GroupBox
         Me.LblBalanceHdr = New System.Windows.Forms.Label
         Me.LblBalanceField = New System.Windows.Forms.Label
+        Me.DTPkrFrom = New System.Windows.Forms.DateTimePicker
+        Me.DTPkrEnd = New System.Windows.Forms.DateTimePicker
+        Me.LblDtFrm = New System.Windows.Forms.Label
+        Me.LblDtEnd = New System.Windows.Forms.Label
+        Me.Label1 = New System.Windows.Forms.Label
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
-        Me.PnlClndr.SuspendLayout()
+        Me.GrpDtaView.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStripHome
@@ -67,7 +69,7 @@ Partial Class FrmHome
         Me.ImportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TechniciansToolStripMenuItem, Me.ReceiversToolStripMenuItem, Me.AcToolStripMenuItem})
         Me.ImportToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
-        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
         Me.ImportToolStripMenuItem.Text = "Import"
         '
         'TechniciansToolStripMenuItem
@@ -94,7 +96,10 @@ Partial Class FrmHome
         'PnlFilter
         '
         Me.PnlFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PnlFilter.Controls.Add(Me.PnlClndr)
+        Me.PnlFilter.Controls.Add(Me.LblDtEnd)
+        Me.PnlFilter.Controls.Add(Me.LblDtFrm)
+        Me.PnlFilter.Controls.Add(Me.DTPkrEnd)
+        Me.PnlFilter.Controls.Add(Me.DTPkrFrom)
         Me.PnlFilter.Controls.Add(Me.BtnGtInfo)
         Me.PnlFilter.Controls.Add(Me.LstBoxTech)
         Me.PnlFilter.Dock = System.Windows.Forms.DockStyle.Left
@@ -103,31 +108,6 @@ Partial Class FrmHome
         Me.PnlFilter.Name = "PnlFilter"
         Me.PnlFilter.Size = New System.Drawing.Size(229, 757)
         Me.PnlFilter.TabIndex = 1
-        '
-        'LstBoxTech
-        '
-        Me.LstBoxTech.Dock = System.Windows.Forms.DockStyle.Top
-        Me.LstBoxTech.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LstBoxTech.FormattingEnabled = True
-        Me.LstBoxTech.Location = New System.Drawing.Point(0, 0)
-        Me.LstBoxTech.Name = "LstBoxTech"
-        Me.LstBoxTech.ScrollAlwaysVisible = True
-        Me.LstBoxTech.Size = New System.Drawing.Size(227, 303)
-        Me.LstBoxTech.TabIndex = 0
-        '
-        'ClndrFrom
-        '
-        Me.ClndrFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ClndrFrom.Location = New System.Drawing.Point(0, 9)
-        Me.ClndrFrom.Name = "ClndrFrom"
-        Me.ClndrFrom.TabIndex = 1
-        '
-        'ClndrTo
-        '
-        Me.ClndrTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ClndrTo.Location = New System.Drawing.Point(0, 181)
-        Me.ClndrTo.Name = "ClndrTo"
-        Me.ClndrTo.TabIndex = 2
         '
         'BtnGtInfo
         '
@@ -139,6 +119,18 @@ Partial Class FrmHome
         Me.BtnGtInfo.TabIndex = 3
         Me.BtnGtInfo.Text = "Get Technition"
         Me.BtnGtInfo.UseVisualStyleBackColor = True
+        '
+        'LstBoxTech
+        '
+        Me.LstBoxTech.Dock = System.Windows.Forms.DockStyle.Top
+        Me.LstBoxTech.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LstBoxTech.FormattingEnabled = True
+        Me.LstBoxTech.Items.AddRange(New Object() {"Test Name", "Test Name 2"})
+        Me.LstBoxTech.Location = New System.Drawing.Point(0, 0)
+        Me.LstBoxTech.Name = "LstBoxTech"
+        Me.LstBoxTech.ScrollAlwaysVisible = True
+        Me.LstBoxTech.Size = New System.Drawing.Size(227, 524)
+        Me.LstBoxTech.TabIndex = 0
         '
         'BtnSwchPay
         '
@@ -162,19 +154,9 @@ Partial Class FrmHome
         Me.BtnSwchInv.Text = "Inventory"
         Me.BtnSwchInv.UseVisualStyleBackColor = True
         '
-        'PnlClndr
-        '
-        Me.PnlClndr.Controls.Add(Me.ClndrTo)
-        Me.PnlClndr.Controls.Add(Me.ClndrFrom)
-        Me.PnlClndr.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PnlClndr.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PnlClndr.Location = New System.Drawing.Point(0, 303)
-        Me.PnlClndr.Name = "PnlClndr"
-        Me.PnlClndr.Size = New System.Drawing.Size(227, 355)
-        Me.PnlClndr.TabIndex = 4
-        '
         'GrpDtaView
         '
+        Me.GrpDtaView.Controls.Add(Me.Label1)
         Me.GrpDtaView.Dock = System.Windows.Forms.DockStyle.Top
         Me.GrpDtaView.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrpDtaView.Location = New System.Drawing.Point(229, 24)
@@ -206,7 +188,48 @@ Partial Class FrmHome
         Me.LblBalanceField.TabIndex = 6
         Me.LblBalanceField.Text = "________________________"
         '
-        'FrmHome
+        'DTPkrFrom
+        '
+        Me.DTPkrFrom.Location = New System.Drawing.Point(3, 555)
+        Me.DTPkrFrom.Name = "DTPkrFrom"
+        Me.DTPkrFrom.Size = New System.Drawing.Size(219, 20)
+        Me.DTPkrFrom.TabIndex = 0
+        '
+        'DTPkrEnd
+        '
+        Me.DTPkrEnd.Location = New System.Drawing.Point(3, 626)
+        Me.DTPkrEnd.Name = "DTPkrEnd"
+        Me.DTPkrEnd.Size = New System.Drawing.Size(219, 20)
+        Me.DTPkrEnd.TabIndex = 4
+        '
+        'LblDtFrm
+        '
+        Me.LblDtFrm.AutoSize = True
+        Me.LblDtFrm.Location = New System.Drawing.Point(11, 539)
+        Me.LblDtFrm.Name = "LblDtFrm"
+        Me.LblDtFrm.Size = New System.Drawing.Size(74, 13)
+        Me.LblDtFrm.TabIndex = 5
+        Me.LblDtFrm.Text = "Begin Date:"
+        '
+        'LblDtEnd
+        '
+        Me.LblDtEnd.AutoSize = True
+        Me.LblDtEnd.Location = New System.Drawing.Point(11, 610)
+        Me.LblDtEnd.Name = "LblDtEnd"
+        Me.LblDtEnd.Size = New System.Drawing.Size(64, 13)
+        Me.LblDtEnd.TabIndex = 6
+        Me.LblDtEnd.Text = "End Date:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(186, 420)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(45, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Label1"
+        '
+        'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -219,13 +242,15 @@ Partial Class FrmHome
         Me.Controls.Add(Me.PnlFilter)
         Me.Controls.Add(Me.MenuStripHome)
         Me.MainMenuStrip = Me.MenuStripHome
-        Me.Name = "FrmHome"
+        Me.Name = "FormHome"
         Me.Text = "Form1"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStripHome.ResumeLayout(False)
         Me.MenuStripHome.PerformLayout()
         Me.PnlFilter.ResumeLayout(False)
-        Me.PnlClndr.ResumeLayout(False)
+        Me.PnlFilter.PerformLayout()
+        Me.GrpDtaView.ResumeLayout(False)
+        Me.GrpDtaView.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -237,15 +262,17 @@ Partial Class FrmHome
     Friend WithEvents ReceiversToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AcToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PnlFilter As System.Windows.Forms.Panel
-    Friend WithEvents ClndrFrom As System.Windows.Forms.MonthCalendar
     Friend WithEvents LstBoxTech As System.Windows.Forms.ListBox
     Friend WithEvents BtnGtInfo As System.Windows.Forms.Button
-    Friend WithEvents ClndrTo As System.Windows.Forms.MonthCalendar
     Friend WithEvents BtnSwchPay As System.Windows.Forms.Button
     Friend WithEvents BtnSwchInv As System.Windows.Forms.Button
-    Friend WithEvents PnlClndr As System.Windows.Forms.Panel
     Friend WithEvents GrpDtaView As System.Windows.Forms.GroupBox
     Friend WithEvents LblBalanceHdr As System.Windows.Forms.Label
     Friend WithEvents LblBalanceField As System.Windows.Forms.Label
+    Friend WithEvents DTPkrFrom As System.Windows.Forms.DateTimePicker
+    Friend WithEvents DTPkrEnd As System.Windows.Forms.DateTimePicker
+    Friend WithEvents LblDtFrm As System.Windows.Forms.Label
+    Friend WithEvents LblDtEnd As System.Windows.Forms.Label
+    Friend WithEvents Label1 As System.Windows.Forms.Label
 
 End Class
