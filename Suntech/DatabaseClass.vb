@@ -21,5 +21,30 @@ Public Class DatabaseClass
         sqlCon.Open()
     End Sub
 
+    Public Sub RetrieveTechList(ByRef TechArray() As String)
+
+        sqlText = "SELECT COUNT(*) From " & ConfigurationSettings.AppSettings("Tech")
+        sqlCmd = New SqlCommand(sqlText, sqlCon)
+        Dim rowCount As Integer = sqlCmd.ExecuteScalar()
+        ReDim TechArray(rowCount - 1)
+
+
+        Dim Query As String = "SELECT [ID],[Name] FROM [ReceiverInstallation].[dbo].[Technicians]"
+
+        sqlText = "SELECT [ID], [NAME] FROM " & ConfigurationSettings.AppSettings("Tech")
+        sqlDa = New SqlDataAdapter(sqlText, sqlCon)
+        dt.Clear()
+        sqlDa.Fill(dt)
+
+        Do While (rowCount > 0)
+            TechArray(rowCount - 1) = dt.Rows(rowCount - 1).Item(0) & "  \  " & dt.Rows(rowCount - 1).Item(1)
+            rowCount -= 1
+        Loop
+
+
+
+
+
+    End Sub
 
 End Class

@@ -40,10 +40,8 @@ Partial Class FormHome
         Me.DTPkrEnd = New System.Windows.Forms.DateTimePicker
         Me.LblDtFrm = New System.Windows.Forms.Label
         Me.LblDtEnd = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
-        Me.GrpDtaView.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStripHome
@@ -156,7 +154,6 @@ Partial Class FormHome
         '
         'GrpDtaView
         '
-        Me.GrpDtaView.Controls.Add(Me.Label1)
         Me.GrpDtaView.Dock = System.Windows.Forms.DockStyle.Top
         Me.GrpDtaView.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrpDtaView.Location = New System.Drawing.Point(229, 24)
@@ -220,15 +217,6 @@ Partial Class FormHome
         Me.LblDtEnd.TabIndex = 6
         Me.LblDtEnd.Text = "End Date:"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(186, 420)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(45, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Label1"
-        '
         'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -249,8 +237,6 @@ Partial Class FormHome
         Me.MenuStripHome.PerformLayout()
         Me.PnlFilter.ResumeLayout(False)
         Me.PnlFilter.PerformLayout()
-        Me.GrpDtaView.ResumeLayout(False)
-        Me.GrpDtaView.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -273,6 +259,5 @@ Partial Class FormHome
     Friend WithEvents DTPkrEnd As System.Windows.Forms.DateTimePicker
     Friend WithEvents LblDtFrm As System.Windows.Forms.Label
     Friend WithEvents LblDtEnd As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
 
 End Class
