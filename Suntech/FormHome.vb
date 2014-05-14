@@ -1,4 +1,5 @@
-﻿Public Class FormHome
+﻿Imports System.Configuration
+Public Class FormHome
 
     Private data As DatabaseClass
 
@@ -12,16 +13,19 @@
     End Sub
 
     Private Sub BuildTechList()
-        Dim TechArray() As String
+
         LstBoxTech.Items.Clear()
 
-        'RetrieveTechList Queries database Technician Table and returns all technicians in an array of strings
-        data.RetrieveTechList(TechArray)
+        'runs a select Query to retrieve list of Techs
+        Dim table As String = ConfigurationSettings.AppSettings("Tech")
+        Dim fieldString As String = "[ID], [NAME]"
+        Dim TechArray(,) As String
+        data.RunDynamicSelect(table, fieldString, "", TechArray)
 
         'Populate listbox with Technicians
         Dim counter As Integer = 0
-        While (counter < TechArray.Length)
-            LstBoxTech.Items.Add(TechArray(counter))
+        While (counter < TechArray.GetLength(0))
+            LstBoxTech.Items.Add(TechArray(counter, 0) & "  \  " & TechArray(counter, 1))
             counter += 1
         End While
     End Sub

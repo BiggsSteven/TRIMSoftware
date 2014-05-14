@@ -35,6 +35,12 @@ Public Class ImportClass
         While Not MyReader.EndOfData
             lineArray = MyReader.ReadFields()
 
+            Dim tables As String
+            Dim fieldsString As String
+            Dim condition As String
+            Dim fieldsCatch() As String
+
+
             'call function to add to database
 
         End While

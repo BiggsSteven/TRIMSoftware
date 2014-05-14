@@ -21,23 +21,34 @@ Public Class DatabaseClass
         sqlCon.Open()
     End Sub
 
-    Public Sub RetrieveTechList(ByRef TechArray() As String)
-        'Retrieves # of technicians
-        sqlText = "SELECT COUNT(*) From " & ConfigurationSettings.AppSettings("Tech")
-        sqlCmd = New SqlCommand(sqlText, sqlCon)
-        Dim rowCount As Integer = sqlCmd.ExecuteScalar()
-        ReDim TechArray(rowCount - 1)
+    Public Sub RunDynamicSelect(ByVal table As String, ByVal fieldString As String, ByVal condition As String, ByRef field(,) As String)
 
-        'Retrieves technician list
-        sqlText = "SELECT [ID], [NAME] FROM " & ConfigurationSettings.AppSettings("Tech")
+
+        'build query with optional condition statement
+        sqlText = "SELECT " & fieldString & " FROM " & table
+
+        If condition <> String.Empty Then
+            sqlText = sqlText & " WHERE " & condition
+        End If
+
+
+        'runs query and returns it to the program
         sqlDa = New SqlDataAdapter(sqlText, sqlCon)
         dt.Clear()
         sqlDa.Fill(dt)
 
-        Do While (rowCount > 0)
-            TechArray(rowCount - 1) = dt.Rows(rowCount - 1).Item(0) & "  \  " & dt.Rows(rowCount - 1).Item(1)
-            rowCount -= 1
+        'passes data to a 2 diminsional array
+        ReDim field(dt.Rows.Count() - 1, dt.Columns.Count() - 1)
+        Dim rowCount As Integer = 0
+        Do While (rowCount < dt.Rows.Count())
+            Dim columnCount As Integer = 0
+            Do While (columnCount < dt.Columns.Count())
+                field(rowCount, columnCount) = dt.Rows(rowCount).Item(columnCount)
+                columnCount += 1
+            Loop
+            rowCount += 1
         Loop
+
 
     End Sub
 
