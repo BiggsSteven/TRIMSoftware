@@ -1,10 +1,9 @@
 ﻿Imports System.Configuration
 Public Class FormHome
 
-    Private data As DatabaseClass
+
 
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        data = New DatabaseClass
 
         'Sub to Initialize the Technician list
         BuildTechList()
@@ -12,8 +11,8 @@ Public Class FormHome
 
     End Sub
 
-    Private Sub BuildTechList()
-
+    Public Sub BuildTechList()
+        Dim data As DatabaseClass = New DatabaseClass
         LstBoxTech.Items.Clear()
 
         'runs a select Query to retrieve list of Techs

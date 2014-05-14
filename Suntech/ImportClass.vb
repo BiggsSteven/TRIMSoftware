@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Configuration
 
 Public Class ImportClass
 
@@ -25,24 +26,32 @@ Public Class ImportClass
     End Sub
 
     Private Sub importTech(ByVal selectedFile As String)
+        Dim data As DatabaseClass = New DatabaseClass
 
+        'Created parser
         Dim lineArray() As String
         Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(selectedFile)
         MyReader.TextFieldType = FileIO.FieldType.Delimited
         MyReader.SetDelimiters(",")
 
+        'Parse line
 
         While Not MyReader.EndOfData
             lineArray = MyReader.ReadFields()
 
-            Dim tables As String
-            Dim fieldsString As String
-            Dim condition As String
-            Dim fieldsCatch() As String
+            'Check table if Tech is present
+            Dim tables As String = ConfigurationSettings.AppSettings("Tech")
+            Dim fieldsString As String = "[ID],[NAME],[LOCATION]"
+            Dim condition As String = " [ID] = '" & lineArray(0) & "'"
+            Dim fields(,) As String
+            Data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
+            If fields.Length = 0 Then
+                data.RunDynamicInsert(tables, fieldsString, lineArray)
+                'MessageBox.Show("Tech: """ & lineArray(1) & """ not found, adding technician now")
+            End If
 
-            'call function to add to database
-
+            FormHome.BuildTechList()
         End While
 
 

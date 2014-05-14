@@ -52,4 +52,22 @@ Public Class DatabaseClass
 
     End Sub
 
+    Public Sub RunDynamicInsert(ByVal table As String, ByVal fieldString As String, ByRef field() As String)
+
+        Dim values As String = String.Empty
+        For counter As Integer = 0 To (field.Length() - 1)
+            If counter = 0 Then
+                values += "'" & field(counter) & "'"
+            Else
+                values += ",'" & field(counter) & "'"
+            End If
+
+        Next
+
+        'build query with optional condition statement
+        sqlText = "INSERT INTO " & table & "(" & fieldString & ") VALUES (" & values & ")"
+        sqlCmd = New SqlCommand(sqlText, sqlCon)
+        sqlCmd.ExecuteNonQuery()
+
+    End Sub
 End Class
