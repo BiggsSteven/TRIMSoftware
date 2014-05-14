@@ -24,22 +24,24 @@ Partial Class FormHome
     Private Sub InitializeComponent()
         Me.MenuStripHome = New System.Windows.Forms.MenuStrip
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.TechniciansToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ReceiversToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.AcToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.TSMItmImport = New System.Windows.Forms.ToolStripMenuItem
+        Me.TSMItmTech = New System.Windows.Forms.ToolStripMenuItem
+        Me.TSMItmActive = New System.Windows.Forms.ToolStripMenuItem
+        Me.TSMItmRecList = New System.Windows.Forms.ToolStripMenuItem
+        Me.TSMItmRecRet = New System.Windows.Forms.ToolStripMenuItem
         Me.PnlFilter = New System.Windows.Forms.Panel
+        Me.LblDtEnd = New System.Windows.Forms.Label
+        Me.LblDtFrm = New System.Windows.Forms.Label
+        Me.DTPkrEnd = New System.Windows.Forms.DateTimePicker
+        Me.DTPkrFrom = New System.Windows.Forms.DateTimePicker
         Me.BtnGtInfo = New System.Windows.Forms.Button
         Me.LstBoxTech = New System.Windows.Forms.ListBox
-        Me.BtnSwchPay = New System.Windows.Forms.Button
-        Me.BtnSwchInv = New System.Windows.Forms.Button
+        Me.BtnSwchData = New System.Windows.Forms.Button
+        Me.BtnPayTch = New System.Windows.Forms.Button
         Me.GrpDtaView = New System.Windows.Forms.GroupBox
         Me.LblBalanceHdr = New System.Windows.Forms.Label
         Me.LblBalanceField = New System.Windows.Forms.Label
-        Me.DTPkrFrom = New System.Windows.Forms.DateTimePicker
-        Me.DTPkrEnd = New System.Windows.Forms.DateTimePicker
-        Me.LblDtFrm = New System.Windows.Forms.Label
-        Me.LblDtEnd = New System.Windows.Forms.Label
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
         Me.SuspendLayout()
@@ -56,40 +58,46 @@ Partial Class FormHome
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMItmImport})
         Me.FileToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
         Me.FileToolStripMenuItem.Text = "File"
         '
-        'ImportToolStripMenuItem
+        'TSMItmImport
         '
-        Me.ImportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TechniciansToolStripMenuItem, Me.ReceiversToolStripMenuItem, Me.AcToolStripMenuItem})
-        Me.ImportToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
-        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
-        Me.ImportToolStripMenuItem.Text = "Import"
+        Me.TSMItmImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMItmTech, Me.TSMItmActive, Me.TSMItmRecList, Me.TSMItmRecRet})
+        Me.TSMItmImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TSMItmImport.Name = "TSMItmImport"
+        Me.TSMItmImport.Size = New System.Drawing.Size(152, 22)
+        Me.TSMItmImport.Text = "Import"
         '
-        'TechniciansToolStripMenuItem
+        'TSMItmTech
         '
-        Me.TechniciansToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TechniciansToolStripMenuItem.Name = "TechniciansToolStripMenuItem"
-        Me.TechniciansToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-        Me.TechniciansToolStripMenuItem.Text = "Technicians"
+        Me.TSMItmTech.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TSMItmTech.Name = "TSMItmTech"
+        Me.TSMItmTech.Size = New System.Drawing.Size(173, 22)
+        Me.TSMItmTech.Text = "Technicians"
         '
-        'ReceiversToolStripMenuItem
+        'TSMItmActive
         '
-        Me.ReceiversToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ReceiversToolStripMenuItem.Name = "ReceiversToolStripMenuItem"
-        Me.ReceiversToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-        Me.ReceiversToolStripMenuItem.Text = "Receiver Inventory"
+        Me.TSMItmActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TSMItmActive.Name = "TSMItmActive"
+        Me.TSMItmActive.Size = New System.Drawing.Size(173, 22)
+        Me.TSMItmActive.Text = "Activities"
         '
-        'AcToolStripMenuItem
+        'TSMItmRecList
         '
-        Me.AcToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AcToolStripMenuItem.Name = "AcToolStripMenuItem"
-        Me.AcToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-        Me.AcToolStripMenuItem.Text = "Activities"
+        Me.TSMItmRecList.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TSMItmRecList.Name = "TSMItmRecList"
+        Me.TSMItmRecList.Size = New System.Drawing.Size(173, 22)
+        Me.TSMItmRecList.Text = "Receiver List"
+        '
+        'TSMItmRecRet
+        '
+        Me.TSMItmRecRet.Name = "TSMItmRecRet"
+        Me.TSMItmRecRet.Size = New System.Drawing.Size(173, 22)
+        Me.TSMItmRecRet.Text = "Receiver Returns"
         '
         'PnlFilter
         '
@@ -107,6 +115,38 @@ Partial Class FormHome
         Me.PnlFilter.Size = New System.Drawing.Size(229, 757)
         Me.PnlFilter.TabIndex = 1
         '
+        'LblDtEnd
+        '
+        Me.LblDtEnd.AutoSize = True
+        Me.LblDtEnd.Location = New System.Drawing.Point(11, 610)
+        Me.LblDtEnd.Name = "LblDtEnd"
+        Me.LblDtEnd.Size = New System.Drawing.Size(64, 13)
+        Me.LblDtEnd.TabIndex = 6
+        Me.LblDtEnd.Text = "End Date:"
+        '
+        'LblDtFrm
+        '
+        Me.LblDtFrm.AutoSize = True
+        Me.LblDtFrm.Location = New System.Drawing.Point(11, 539)
+        Me.LblDtFrm.Name = "LblDtFrm"
+        Me.LblDtFrm.Size = New System.Drawing.Size(74, 13)
+        Me.LblDtFrm.TabIndex = 5
+        Me.LblDtFrm.Text = "Begin Date:"
+        '
+        'DTPkrEnd
+        '
+        Me.DTPkrEnd.Location = New System.Drawing.Point(3, 626)
+        Me.DTPkrEnd.Name = "DTPkrEnd"
+        Me.DTPkrEnd.Size = New System.Drawing.Size(219, 20)
+        Me.DTPkrEnd.TabIndex = 4
+        '
+        'DTPkrFrom
+        '
+        Me.DTPkrFrom.Location = New System.Drawing.Point(3, 555)
+        Me.DTPkrFrom.Name = "DTPkrFrom"
+        Me.DTPkrFrom.Size = New System.Drawing.Size(219, 20)
+        Me.DTPkrFrom.TabIndex = 0
+        '
         'BtnGtInfo
         '
         Me.BtnGtInfo.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -123,34 +163,33 @@ Partial Class FormHome
         Me.LstBoxTech.Dock = System.Windows.Forms.DockStyle.Top
         Me.LstBoxTech.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LstBoxTech.FormattingEnabled = True
-        Me.LstBoxTech.Items.AddRange(New Object() {"Test Name", "Test Name 2"})
         Me.LstBoxTech.Location = New System.Drawing.Point(0, 0)
         Me.LstBoxTech.Name = "LstBoxTech"
         Me.LstBoxTech.ScrollAlwaysVisible = True
         Me.LstBoxTech.Size = New System.Drawing.Size(227, 524)
         Me.LstBoxTech.TabIndex = 0
         '
-        'BtnSwchPay
+        'BtnSwchData
         '
-        Me.BtnSwchPay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnSwchPay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSwchPay.Location = New System.Drawing.Point(235, 728)
-        Me.BtnSwchPay.Name = "BtnSwchPay"
-        Me.BtnSwchPay.Size = New System.Drawing.Size(100, 50)
-        Me.BtnSwchPay.TabIndex = 2
-        Me.BtnSwchPay.Text = "Payment"
-        Me.BtnSwchPay.UseVisualStyleBackColor = True
+        Me.BtnSwchData.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnSwchData.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSwchData.Location = New System.Drawing.Point(235, 728)
+        Me.BtnSwchData.Name = "BtnSwchData"
+        Me.BtnSwchData.Size = New System.Drawing.Size(100, 50)
+        Me.BtnSwchData.TabIndex = 2
+        Me.BtnSwchData.Text = "Inventory"
+        Me.BtnSwchData.UseVisualStyleBackColor = True
         '
-        'BtnSwchInv
+        'BtnPayTch
         '
-        Me.BtnSwchInv.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnSwchInv.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSwchInv.Location = New System.Drawing.Point(341, 728)
-        Me.BtnSwchInv.Name = "BtnSwchInv"
-        Me.BtnSwchInv.Size = New System.Drawing.Size(100, 50)
-        Me.BtnSwchInv.TabIndex = 3
-        Me.BtnSwchInv.Text = "Inventory"
-        Me.BtnSwchInv.UseVisualStyleBackColor = True
+        Me.BtnPayTch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPayTch.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPayTch.Location = New System.Drawing.Point(790, 728)
+        Me.BtnPayTch.Name = "BtnPayTch"
+        Me.BtnPayTch.Size = New System.Drawing.Size(100, 50)
+        Me.BtnPayTch.TabIndex = 3
+        Me.BtnPayTch.Text = "Pay Live Activities"
+        Me.BtnPayTch.UseVisualStyleBackColor = True
         '
         'GrpDtaView
         '
@@ -161,7 +200,7 @@ Partial Class FormHome
         Me.GrpDtaView.Size = New System.Drawing.Size(950, 647)
         Me.GrpDtaView.TabIndex = 4
         Me.GrpDtaView.TabStop = False
-        Me.GrpDtaView.Text = "Technition Name/ Technition ID (Date Range: MM/DD/YYYY - MM/DD/ YYYY)"
+        Me.GrpDtaView.Text = "Technician ID / Technician Name (Date Range: MM/DD/YYYY - MM/DD/ YYYY)"
         '
         'LblBalanceHdr
         '
@@ -185,37 +224,9 @@ Partial Class FormHome
         Me.LblBalanceField.TabIndex = 6
         Me.LblBalanceField.Text = "________________________"
         '
-        'DTPkrFrom
+        'OpenFileDialog1
         '
-        Me.DTPkrFrom.Location = New System.Drawing.Point(3, 555)
-        Me.DTPkrFrom.Name = "DTPkrFrom"
-        Me.DTPkrFrom.Size = New System.Drawing.Size(219, 20)
-        Me.DTPkrFrom.TabIndex = 0
-        '
-        'DTPkrEnd
-        '
-        Me.DTPkrEnd.Location = New System.Drawing.Point(3, 626)
-        Me.DTPkrEnd.Name = "DTPkrEnd"
-        Me.DTPkrEnd.Size = New System.Drawing.Size(219, 20)
-        Me.DTPkrEnd.TabIndex = 4
-        '
-        'LblDtFrm
-        '
-        Me.LblDtFrm.AutoSize = True
-        Me.LblDtFrm.Location = New System.Drawing.Point(11, 539)
-        Me.LblDtFrm.Name = "LblDtFrm"
-        Me.LblDtFrm.Size = New System.Drawing.Size(74, 13)
-        Me.LblDtFrm.TabIndex = 5
-        Me.LblDtFrm.Text = "Begin Date:"
-        '
-        'LblDtEnd
-        '
-        Me.LblDtEnd.AutoSize = True
-        Me.LblDtEnd.Location = New System.Drawing.Point(11, 610)
-        Me.LblDtEnd.Name = "LblDtEnd"
-        Me.LblDtEnd.Size = New System.Drawing.Size(64, 13)
-        Me.LblDtEnd.TabIndex = 6
-        Me.LblDtEnd.Text = "End Date:"
+        Me.OpenFileDialog1.Filter = "Comma Separated Files(*.csv)|*.csv"
         '
         'FormHome
         '
@@ -225,8 +236,8 @@ Partial Class FormHome
         Me.Controls.Add(Me.LblBalanceField)
         Me.Controls.Add(Me.LblBalanceHdr)
         Me.Controls.Add(Me.GrpDtaView)
-        Me.Controls.Add(Me.BtnSwchInv)
-        Me.Controls.Add(Me.BtnSwchPay)
+        Me.Controls.Add(Me.BtnPayTch)
+        Me.Controls.Add(Me.BtnSwchData)
         Me.Controls.Add(Me.PnlFilter)
         Me.Controls.Add(Me.MenuStripHome)
         Me.MainMenuStrip = Me.MenuStripHome
@@ -243,15 +254,15 @@ Partial Class FormHome
     End Sub
     Friend WithEvents MenuStripHome As System.Windows.Forms.MenuStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ImportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TechniciansToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ReceiversToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents AcToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TSMItmImport As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TSMItmTech As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TSMItmActive As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TSMItmRecList As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PnlFilter As System.Windows.Forms.Panel
     Friend WithEvents LstBoxTech As System.Windows.Forms.ListBox
     Friend WithEvents BtnGtInfo As System.Windows.Forms.Button
-    Friend WithEvents BtnSwchPay As System.Windows.Forms.Button
-    Friend WithEvents BtnSwchInv As System.Windows.Forms.Button
+    Friend WithEvents BtnSwchData As System.Windows.Forms.Button
+    Friend WithEvents BtnPayTch As System.Windows.Forms.Button
     Friend WithEvents GrpDtaView As System.Windows.Forms.GroupBox
     Friend WithEvents LblBalanceHdr As System.Windows.Forms.Label
     Friend WithEvents LblBalanceField As System.Windows.Forms.Label
@@ -259,5 +270,7 @@ Partial Class FormHome
     Friend WithEvents DTPkrEnd As System.Windows.Forms.DateTimePicker
     Friend WithEvents LblDtFrm As System.Windows.Forms.Label
     Friend WithEvents LblDtEnd As System.Windows.Forms.Label
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents TSMItmRecRet As System.Windows.Forms.ToolStripMenuItem
 
 End Class
