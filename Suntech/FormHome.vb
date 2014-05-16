@@ -29,6 +29,14 @@ Public Class FormHome
             LstBoxTech.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 1))
             counter += 1
         End While
+
+        LstBoxTech.SelectedItem = LstBoxTech.Items.Item(0)
+
+    End Sub
+
+    Private Sub BtnGtInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGtInfo.Click
+        BuildQuery()
+        ActivitiesDataGridView.Refresh()
     End Sub
 
     Private Sub BuildQuery()
@@ -45,17 +53,22 @@ Public Class FormHome
         'Dim field(,) As String
         'data.RunDynamicSelect(table, fieldString, condition, field)
 
-
+        'Filter ActivitiesDGV
         Dim condition As String = "[TECHID] = '" & TechSelected & "' AND [DATE] >= '" & bgnDate & "' AND [DATE] <= '" & endDate & "'"
         ActivitiesBindingSource.Filter = condition
 
-        'ByVal table As String, ByVal fieldString As String, ByVal condition As String, ByRef field(,) As String
+        Dim rowsCount As Integer = 0
+        Dim total As Double = 0
+
+        While rowsCount < ActivitiesDataGridView.Rows.Count
+            total += ActivitiesDataGridView.Rows(rowsCount).Cells(4).Value
+            rowsCount += 1
+        End While
+
+
+        LblBalanceField.Text = total
     End Sub
 
-    Private Sub BtnGtInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGtInfo.Click
-        BuildQuery()
-        ActivitiesDataGridView.Refresh()
-    End Sub
 
     Private Sub BtnSwchPay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSwchData.Click
 
@@ -80,12 +93,5 @@ Public Class FormHome
     Private Sub callImports(ByVal TypeSelect As Integer)
         Dim ImportItem As ImportClass = New ImportClass
         ImportItem.selectFile(TypeSelect)
-    End Sub
-
-    Private Sub ActivitiesBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ActivitiesBindingNavigatorSaveItem.Click
-        Me.Validate()
-        Me.ActivitiesBindingSource.EndEdit()
-        Me.TableAdapterManager.UpdateAll(Me.DataSet1)
-
     End Sub
 End Class
