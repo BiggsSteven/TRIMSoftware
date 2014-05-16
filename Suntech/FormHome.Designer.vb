@@ -42,8 +42,11 @@ Partial Class FormHome
         Me.LblBalanceHdr = New System.Windows.Forms.Label
         Me.LblBalanceField = New System.Windows.Forms.Label
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
+        Me.GrpDtaView.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStripHome
@@ -193,6 +196,7 @@ Partial Class FormHome
         '
         'GrpDtaView
         '
+        Me.GrpDtaView.Controls.Add(Me.DataGridView1)
         Me.GrpDtaView.Dock = System.Windows.Forms.DockStyle.Top
         Me.GrpDtaView.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrpDtaView.Location = New System.Drawing.Point(229, 24)
@@ -224,6 +228,18 @@ Partial Class FormHome
         Me.LblBalanceField.TabIndex = 6
         Me.LblBalanceField.Text = "________________________"
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView1.Location = New System.Drawing.Point(3, 16)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.Size = New System.Drawing.Size(944, 628)
+        Me.DataGridView1.TabIndex = 0
+        '
         'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -244,6 +260,8 @@ Partial Class FormHome
         Me.MenuStripHome.PerformLayout()
         Me.PnlFilter.ResumeLayout(False)
         Me.PnlFilter.PerformLayout()
+        Me.GrpDtaView.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -268,5 +286,6 @@ Partial Class FormHome
     Friend WithEvents LblDtEnd As System.Windows.Forms.Label
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents TSMItmRecRet As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
 
 End Class

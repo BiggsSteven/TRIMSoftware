@@ -32,6 +32,7 @@ Public Class FormHome
     Private Sub BuildQuery()
 
         Dim TechSelected As String = LstBoxTech.SelectedItem
+        TechSelected = TechSelected.Substring(0, 10)
         Dim bgnDate As Date = DTPkrFrom.Value
         Dim endDate As Date = DTPkrEnd.Value
         Dim table As String = ConfigurationSettings.AppSettings("Activities")
