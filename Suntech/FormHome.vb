@@ -24,7 +24,7 @@ Public Class FormHome
         'Populate listbox with Technicians
         Dim counter As Integer = 0
         While (counter < TechArray.GetLength(0))
-            LstBoxTech.Items.Add(TechArray(counter, 0) & "  \  " & TechArray(counter, 1))
+            LstBoxTech.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 1))
             counter += 1
         End While
     End Sub
@@ -34,7 +34,12 @@ Public Class FormHome
         Dim TechSelected As String = LstBoxTech.SelectedItem
         Dim bgnDate As Date = DTPkrFrom.Value
         Dim endDate As Date = DTPkrEnd.Value
+        Dim table As String = ConfigurationSettings.AppSettings("Activities")
+        Dim fieldString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL]"
+        Dim condition As String = "[TECHID] = '" & TechSelected & "'"
+        Dim field(,) As String
 
+        'ByVal table As String, ByVal fieldString As String, ByVal condition As String, ByRef field(,) As String
     End Sub
 
     Private Sub BtnGtInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGtInfo.Click
