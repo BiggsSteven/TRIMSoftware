@@ -1,11 +1,21 @@
 ﻿Imports System.IO
 Imports System.Configuration
+Imports Excel = Microsoft.Office.Interop.Excel
+Imports Microsoft.Office
 
 Public Class ImportClass
 
     Public inLine As String
 
     Public Sub selectFile(ByVal TypeSelect As Integer)
+        'OpenFileDialog created and function chosen based off which menu option was chosen
+
+        If TypeSelect = 1 Then
+            FormHome.OpenFileDialog1.Filter = "Microsoft Excel 97-2003 Worksheet(.xls)|*.xls"
+        Else
+            FormHome.OpenFileDialog1.Filter = "Comma Separated Files(*.csv)|*.csv"
+        End If
+
         Dim selectedFile As String = String.Empty
         If FormHome.OpenFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
             selectedFile = FormHome.OpenFileDialog1.FileName
@@ -35,7 +45,6 @@ Public Class ImportClass
         MyReader.SetDelimiters(",")
 
         'Parse line
-
         While Not MyReader.EndOfData
             lineArray = MyReader.ReadFields()
 
@@ -56,20 +65,43 @@ Public Class ImportClass
 
 
     End Sub
+
     Private Sub importAct(ByVal selectedFile As String)
+        'Item,Tech#,Activity,Date,Amount
+        'ID,Date,TechID,Type,Account,Total,TechPay
+        Dim data As DatabaseClass = New DatabaseClass
 
-        Dim lineArray() As String
-        Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(selectedFile)
-        MyReader.TextFieldType = FileIO.FieldType.Delimited
-        MyReader.SetDelimiters(",")
+        Dim XLApp As Excel.Application = New Excel.ApplicationClass
+        Dim xlWorkBook As Excel.Workbook = XLApp.Workbooks.Open(selectedFile)
+        Dim XLWorkSheet As Excel.Worksheet = xlWorkBook.Worksheets("sheet3")
+        Dim XLRow As Integer = 3
+        Dim XLColumn As Integer = 4
 
 
-        While Not MyReader.EndOfData
-            lineArray = MyReader.ReadFields()
+        MsgBox(XLWorkSheet.Cells(XLRow, XLColumn).value)
 
-            'call function to add to database
+        'Dim lineArray() As String
+        'Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(selectedFile)
+        'MyReader.TextFieldType = FileIO.FieldType.Delimited
+        'MyReader.SetDelimiters(",")
 
-        End While
+        ''read in line -> if activity exist ->Update 
+        ''else                              ->Insert
+
+        'While Not MyReader.EndOfData
+        '    lineArray = MyReader.ReadFields()
+
+        '    Dim tables As String = ConfigurationSettings.AppSettings("Act")
+        '    Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[ACCOUNT],[TOTAL],[TECHPAY]"
+        '    Dim condition As String = " [ID] = '" & lineArray(2) & "'"
+        '    Dim fields(,) As String
+        '    data.RunDynamicSelect(tables, fieldsString, condition, fields)
+
+        '    If fields.Length = 0 Then
+        '        'Dim tempArray() As String = {}
+        '    End If
+
+        'End While
 
     End Sub
     Private Sub importRec(ByVal selectedFile As String)

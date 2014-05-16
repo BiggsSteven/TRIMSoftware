@@ -69,7 +69,7 @@ Partial Class FormHome
         Me.TSMItmImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMItmTech, Me.TSMItmActive, Me.TSMItmRecList, Me.TSMItmRecRet})
         Me.TSMItmImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TSMItmImport.Name = "TSMItmImport"
-        Me.TSMItmImport.Size = New System.Drawing.Size(152, 22)
+        Me.TSMItmImport.Size = New System.Drawing.Size(109, 22)
         Me.TSMItmImport.Text = "Import"
         '
         'TSMItmTech
@@ -223,10 +223,6 @@ Partial Class FormHome
         Me.LblBalanceField.Size = New System.Drawing.Size(175, 13)
         Me.LblBalanceField.TabIndex = 6
         Me.LblBalanceField.Text = "________________________"
-        '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.Filter = "Comma Separated Files(*.csv)|*.csv"
         '
         'FormHome
         '
