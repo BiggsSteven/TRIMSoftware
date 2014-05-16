@@ -69,6 +69,8 @@ Public Class ImportClass
     Private Sub importAct(ByVal selectedFile As String)
         'Item,Tech#,Activity,Date,Amount
         'ID,Date,TechID,Type,Account,Total,TechPay
+
+        'Created Excel Reference to access cells within it.
         Dim data As DatabaseClass = New DatabaseClass
 
         Dim XLApp As Excel.Application = New Excel.ApplicationClass
@@ -76,23 +78,26 @@ Public Class ImportClass
         Dim XLWorkSheet As Excel.Worksheet = xlWorkBook.Worksheets("sheet3")
         Dim XLRow As Integer = 4
         Dim XLColumn As Integer = 0
-        Dim ImpColumns() As Integer = {11, 12, 9, 8, 16}
+        Dim ImpColumns() As Integer = {11, 12, 9, 8, 16}   'These are the Columns we care about reading in.
+        Dim tempArray(4) As String 'The Array that hold the values retrieved from the excel document
 
-
-        Dim tempArray(4) As String
+        'Loop through rows
         While XLWorkSheet.Cells(XLRow, 1).Value IsNot Nothing
+            'Loop through important columns
             While XLColumn < ImpColumns.Length()
                 tempArray(XLColumn) = XLWorkSheet.Cells(XLRow, ImpColumns(XLColumn)).value
                 XLColumn += 1
             End While
             XLColumn = 0
+
+            'Search Activities for if Activity and Tech has already been entered
             Dim tables As String = ConfigurationSettings.AppSettings("Act")
             Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL]"
             Dim condition As String = " [ID] = '" & tempArray(0) & "' AND [TECHID] = '" & tempArray(2) & "'"
             Dim fields(,) As String
             data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
-            'If Activity + Tech# is not existing -> Create
+            'If there is a return on that 
             If fields.Length = 0 Then
                 data.RunDynamicInsert(tables, fieldsString, tempArray)
             Else
@@ -107,10 +112,11 @@ Public Class ImportClass
                 values(0) = tempArray(4)
                 data.RunDynamicUpdate(tables, condition, editFields, values)
             End If
-                XLRow += 1
+            XLRow += 1
         End While
 
         MessageBox.Show("Your files have finished being imported")
+
 
     End Sub
     Private Sub importRec(ByVal selectedFile As String)

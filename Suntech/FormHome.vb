@@ -4,6 +4,8 @@ Public Class FormHome
 
 
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'DataSet1.Activities' table. You can move, or remove it, as needed.
+        Me.ActivitiesTableAdapter.Fill(Me.DataSet1.Activities)
 
         'Sub to Initialize the Technician list
         BuildTechList()
@@ -30,22 +32,29 @@ Public Class FormHome
     End Sub
 
     Private Sub BuildQuery()
+        Dim data As DatabaseClass = New DatabaseClass
 
         Dim TechSelected As String = LstBoxTech.SelectedItem
         TechSelected = TechSelected.Substring(0, 10)
-        Dim bgnDate As Date = DTPkrFrom.Value
-        Dim endDate As Date = DTPkrEnd.Value
-        Dim table As String = ConfigurationSettings.AppSettings("Activities")
-        Dim fieldString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL]"
-        Dim condition As String = "[TECHID] = '" & TechSelected & "'"
-        Dim field(,) As String
+        Dim bgnDate As String = DTPkrFrom.Value.Date
+        Dim endDate As String = DTPkrEnd.Value.Date
+
+
+        'Dim table As String = ConfigurationSettings.AppSettings("Act")
+        'Dim fieldString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL]"
+        'Dim field(,) As String
+        'data.RunDynamicSelect(table, fieldString, condition, field)
+
+
+        Dim condition As String = "[TECHID] = '" & TechSelected & "' AND [DATE] >= '" & bgnDate & "' AND [DATE] <= '" & endDate & "'"
+        ActivitiesBindingSource.Filter = condition
 
         'ByVal table As String, ByVal fieldString As String, ByVal condition As String, ByRef field(,) As String
     End Sub
 
     Private Sub BtnGtInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGtInfo.Click
         BuildQuery()
-
+        ActivitiesDataGridView.Refresh()
     End Sub
 
     Private Sub BtnSwchPay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSwchData.Click
@@ -73,4 +82,10 @@ Public Class FormHome
         ImportItem.selectFile(TypeSelect)
     End Sub
 
+    Private Sub ActivitiesBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ActivitiesBindingNavigatorSaveItem.Click
+        Me.Validate()
+        Me.ActivitiesBindingSource.EndEdit()
+        Me.TableAdapterManager.UpdateAll(Me.DataSet1)
+
+    End Sub
 End Class
