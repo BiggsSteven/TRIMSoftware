@@ -64,10 +64,34 @@ Public Class DatabaseClass
 
         Next
 
-        'build query with optional condition statement
         sqlText = "INSERT INTO " & table & "(" & fieldString & ") VALUES (" & values & ")"
         sqlCmd = New SqlCommand(sqlText, sqlCon)
         sqlCmd.ExecuteNonQuery()
 
     End Sub
+
+    Public Sub RunDynamicUpdate(ByVal table As String, ByVal condition As String, ByVal EditFields() As String, ByRef field() As String)
+
+        Dim counter As Integer = 0
+        sqlText = "UPDATE " & table & " SET "
+        While counter < EditFields.Length()
+            If counter = 0 Then
+                EditFields(counter) += " = '" & field(counter) & "'"
+            Else
+                EditFields(counter) = ", " & EditFields(counter) & " = '" & field(counter) & "'"
+            End If
+            sqlText += EditFields(counter)
+            counter += 1
+        End While
+
+
+        If condition <> String.Empty Then
+            sqlText = sqlText & " WHERE " & condition
+        End If
+
+        sqlCmd = New SqlCommand(sqlText, sqlCon)
+        sqlCmd.ExecuteNonQuery()
+
+    End Sub
+
 End Class
