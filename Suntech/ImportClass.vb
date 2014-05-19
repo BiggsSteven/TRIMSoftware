@@ -20,18 +20,24 @@ Public Class ImportClass
         If FormHome.OpenFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
             selectedFile = FormHome.OpenFileDialog1.FileName
         End If
+        If selectedFile <> String.Empty Then
+            FormHome.Cursor = Cursors.WaitCursor
 
-        Select Case TypeSelect
-            Case 0
-                importTech(selectedFile)
-            Case 1
-                importAct(selectedFile)
-            Case 2
-                importRec(selectedFile)
-            Case 3
-                importRecRet(selectedFile)
-        End Select
+            Select Case TypeSelect
+                Case 0
+                    importTech(selectedFile)
+                Case 1
+                    importAct(selectedFile)
+                Case 2
+                    importRec(selectedFile)
+                Case 3
+                    importRecRet(selectedFile)
+            End Select
 
+            FormHome.Cursor = Cursors.Default
+            MessageBox.Show("Your files have been successfully imported.")
+
+        End If
 
     End Sub
 
@@ -79,7 +85,7 @@ Public Class ImportClass
         Dim XLRow As Integer = 4
         Dim XLColumn As Integer = 0
         Dim ImpColumns() As Integer = {11, 12, 9, 8, 16}   'These are the Columns we care about reading in.
-        Dim tempArray(4) As String 'The Array that hold the values retrieved from the excel document
+        Dim tempArray(ImpColumns.Length) As String 'The Array that hold the values retrieved from the excel document
 
         'Loop through rows
         While XLWorkSheet.Cells(XLRow, 1).Value IsNot Nothing
@@ -89,10 +95,15 @@ Public Class ImportClass
                 XLColumn += 1
             End While
             XLColumn = 0
+            If tempArray(ImpColumns.Length - 1) >= 0 Then
+                tempArray(ImpColumns.Length) = tempArray(ImpColumns.Length - 1) * 0.7
+            Else
+                tempArray(ImpColumns.Length) = tempArray(ImpColumns.Length - 1)
+            End If
 
             'Search Activities for if Activity and Tech has already been entered
             Dim tables As String = ConfigurationSettings.AppSettings("Act")
-            Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL]"
+            Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY]"
             Dim condition As String = " [ID] = '" & tempArray(0) & "' AND [TECHID] = '" & tempArray(2) & "'"
             Dim fields(,) As String
             data.RunDynamicSelect(tables, fieldsString, condition, fields)
@@ -101,6 +112,7 @@ Public Class ImportClass
             If fields.Length = 0 Then
                 data.RunDynamicInsert(tables, fieldsString, tempArray)
             Else
+                'Updating the type if it is one of the 4
                 Dim editFields() As String = {"[TYPE]"}
                 Dim values() As String = {tempArray(3)}
                 If tempArray(3) = "New Install" Or tempArray(3) = "Upgrade" Or tempArray(3) = "Former Install" Or tempArray(3) = "Service" Then
@@ -108,15 +120,20 @@ Public Class ImportClass
                         data.RunDynamicUpdate(tables, condition, editFields, values)
                     End If
                 End If
+                'Update price
+                ReDim editFields(1)
+                ReDim values(1)
                 editFields(0) = "[TOTAL]"
-                values(0) = tempArray(4)
+                editFields(1) = "[TECHPAY]"
+                values(0) = Math.Round(CDbl(tempArray(4)) + CDbl(fields(0, 4)), 2)
+                values(1) = Math.Round(CDbl(tempArray(5)) + CDbl(fields(0, 5)), 2)
                 data.RunDynamicUpdate(tables, condition, editFields, values)
+
             End If
             XLRow += 1
         End While
 
-        MessageBox.Show("Your files have finished being imported")
-
+        FormHome.ActivitiesTableAdapter.Update(FormHome.DataSet1)
 
     End Sub
 
@@ -136,6 +153,7 @@ Public Class ImportClass
         End While
 
     End Sub
+
     Private Sub importRecRet(ByVal selectedFile As String)
 
 

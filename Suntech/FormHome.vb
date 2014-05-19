@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Data.SqlClient
 
 Public Class FormHome
 
@@ -57,14 +58,14 @@ Public Class FormHome
         'Filter ActivitiesDGV
         Dim condition As String = "[TECHID] = '" & TechSelected & "' AND [DATE] >= '" & bgnDate & "' AND [DATE] <= '" & endDate & "'"
         ActivitiesBindingSource.Filter = condition
-        ActivitiesDataGridView.Sort(ActivitiesDataGridView.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+        ActivitiesDataGridView.Sort(ActivitiesDataGridView.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
 
 
         Dim rowsCount As Integer = 0
         Dim total As Double = 0
 
         While rowsCount < ActivitiesDataGridView.Rows.Count
-            total += ActivitiesDataGridView.Rows(rowsCount).Cells(4).Value
+            total += ActivitiesDataGridView.Rows(rowsCount).Cells(5).Value
             rowsCount += 1
         End While
 
@@ -95,12 +96,15 @@ Public Class FormHome
 
     Private Sub callImports(ByVal TypeSelect As Integer)
         Dim ImportItem As ImportClass = New ImportClass
-        Me.Cursor = Cursors.WaitCursor
-        ProgressBar1.Visible = True
-
         ImportItem.selectFile(TypeSelect)
-
-        Me.Cursor = Cursors.Default
-        ProgressBar1.Visible = False
     End Sub
+
+    Public Sub refreshDataTable()
+
+
+
+
+    End Sub
+
+
 End Class

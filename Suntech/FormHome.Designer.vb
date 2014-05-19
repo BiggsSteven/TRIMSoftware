@@ -42,13 +42,9 @@ Partial Class FormHome
         Me.BtnPayTch = New System.Windows.Forms.Button
         Me.GrpDtaView = New System.Windows.Forms.GroupBox
         Me.ActivitiesDataGridView = New System.Windows.Forms.DataGridView
-        Me.ActivitiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DataSet1 = New Suntech.DataSet1
         Me.LblBalanceHdr = New System.Windows.Forms.Label
         Me.LblBalanceField = New System.Windows.Forms.Label
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
-        Me.ActivitiesTableAdapter = New Suntech.DataSet1TableAdapters.ActivitiesTableAdapter
-        Me.TableAdapterManager = New Suntech.DataSet1TableAdapters.TableAdapterManager
         Me.ActivitiesBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
@@ -62,20 +58,24 @@ Partial Class FormHome
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
         Me.ActivitiesBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ActivitiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DataSet1 = New Suntech.DataSet1
+        Me.ActivitiesTableAdapter = New Suntech.DataSet1TableAdapters.ActivitiesTableAdapter
+        Me.TableAdapterManager = New Suntech.DataSet1TableAdapters.TableAdapterManager
+        Me.TechIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.TypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.TotalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.TechPayDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
         Me.GrpDtaView.SuspendLayout()
         CType(Me.ActivitiesDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ActivitiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ActivitiesBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ActivitiesBindingNavigator.SuspendLayout()
+        CType(Me.ActivitiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStripHome
@@ -84,7 +84,7 @@ Partial Class FormHome
         Me.MenuStripHome.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
         Me.MenuStripHome.Location = New System.Drawing.Point(0, 0)
         Me.MenuStripHome.Name = "MenuStripHome"
-        Me.MenuStripHome.Size = New System.Drawing.Size(1179, 24)
+        Me.MenuStripHome.Size = New System.Drawing.Size(1193, 24)
         Me.MenuStripHome.TabIndex = 0
         Me.MenuStripHome.Text = "MenuStrip1"
         '
@@ -101,7 +101,7 @@ Partial Class FormHome
         Me.TSMItmImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMItmTech, Me.TSMItmActive, Me.TSMItmRecList, Me.TSMItmRecRet})
         Me.TSMItmImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TSMItmImport.Name = "TSMItmImport"
-        Me.TSMItmImport.Size = New System.Drawing.Size(152, 22)
+        Me.TSMItmImport.Size = New System.Drawing.Size(109, 22)
         Me.TSMItmImport.Text = "Import"
         '
         'TSMItmTech
@@ -216,7 +216,7 @@ Partial Class FormHome
         '
         Me.BtnPayTch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPayTch.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPayTch.Location = New System.Drawing.Point(790, 728)
+        Me.BtnPayTch.Location = New System.Drawing.Point(804, 728)
         Me.BtnPayTch.Name = "BtnPayTch"
         Me.BtnPayTch.Size = New System.Drawing.Size(100, 50)
         Me.BtnPayTch.TabIndex = 3
@@ -230,7 +230,7 @@ Partial Class FormHome
         Me.GrpDtaView.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrpDtaView.Location = New System.Drawing.Point(229, 24)
         Me.GrpDtaView.Name = "GrpDtaView"
-        Me.GrpDtaView.Size = New System.Drawing.Size(950, 647)
+        Me.GrpDtaView.Size = New System.Drawing.Size(964, 647)
         Me.GrpDtaView.TabIndex = 4
         Me.GrpDtaView.TabStop = False
         Me.GrpDtaView.Text = "Technician ID / Technician Name (Date Range: MM/DD/YYYY - MM/DD/ YYYY)"
@@ -241,31 +241,21 @@ Partial Class FormHome
         Me.ActivitiesDataGridView.AllowUserToDeleteRows = False
         Me.ActivitiesDataGridView.AutoGenerateColumns = False
         Me.ActivitiesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.ActivitiesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5})
+        Me.ActivitiesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TechIDDataGridViewTextBoxColumn, Me.DateDataGridViewTextBoxColumn, Me.TypeDataGridViewTextBoxColumn, Me.IDDataGridViewTextBoxColumn, Me.TotalDataGridViewTextBoxColumn, Me.TechPayDataGridViewTextBoxColumn})
         Me.ActivitiesDataGridView.DataSource = Me.ActivitiesBindingSource
         Me.ActivitiesDataGridView.Dock = System.Windows.Forms.DockStyle.Top
         Me.ActivitiesDataGridView.Location = New System.Drawing.Point(3, 16)
         Me.ActivitiesDataGridView.Name = "ActivitiesDataGridView"
         Me.ActivitiesDataGridView.ReadOnly = True
-        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(944, 537)
+        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(958, 537)
         Me.ActivitiesDataGridView.TabIndex = 0
-        '
-        'ActivitiesBindingSource
-        '
-        Me.ActivitiesBindingSource.DataMember = "Activities"
-        Me.ActivitiesBindingSource.DataSource = Me.DataSet1
-        '
-        'DataSet1
-        '
-        Me.DataSet1.DataSetName = "DataSet1"
-        Me.DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'LblBalanceHdr
         '
         Me.LblBalanceHdr.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblBalanceHdr.AutoSize = True
         Me.LblBalanceHdr.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblBalanceHdr.Location = New System.Drawing.Point(896, 747)
+        Me.LblBalanceHdr.Location = New System.Drawing.Point(910, 747)
         Me.LblBalanceHdr.Name = "LblBalanceHdr"
         Me.LblBalanceHdr.Size = New System.Drawing.Size(90, 13)
         Me.LblBalanceHdr.TabIndex = 5
@@ -276,25 +266,11 @@ Partial Class FormHome
         Me.LblBalanceField.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblBalanceField.AutoSize = True
         Me.LblBalanceField.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblBalanceField.Location = New System.Drawing.Point(992, 747)
+        Me.LblBalanceField.Location = New System.Drawing.Point(1006, 747)
         Me.LblBalanceField.Name = "LblBalanceField"
         Me.LblBalanceField.Size = New System.Drawing.Size(175, 13)
         Me.LblBalanceField.TabIndex = 6
         Me.LblBalanceField.Text = "________________________"
-        '
-        'ActivitiesTableAdapter
-        '
-        Me.ActivitiesTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.ActivitiesTableAdapter = Me.ActivitiesTableAdapter
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.PaidActivitiesTableAdapter = Nothing
-        Me.TableAdapterManager.ReceiverTransferTableAdapter = Nothing
-        Me.TableAdapterManager.RecInvTableAdapter = Nothing
-        Me.TableAdapterManager.TechniciansTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = Suntech.DataSet1TableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'ActivitiesBindingNavigator
         '
@@ -310,7 +286,7 @@ Partial Class FormHome
         Me.ActivitiesBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
         Me.ActivitiesBindingNavigator.Name = "ActivitiesBindingNavigator"
         Me.ActivitiesBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-        Me.ActivitiesBindingNavigator.Size = New System.Drawing.Size(950, 25)
+        Me.ActivitiesBindingNavigator.Size = New System.Drawing.Size(964, 25)
         Me.ActivitiesBindingNavigator.TabIndex = 7
         Me.ActivitiesBindingNavigator.Text = "BindingNavigator1"
         Me.ActivitiesBindingNavigator.Visible = False
@@ -408,61 +384,77 @@ Partial Class FormHome
         Me.ActivitiesBindingNavigatorSaveItem.Size = New System.Drawing.Size(23, 22)
         Me.ActivitiesBindingNavigatorSaveItem.Text = "Save Data"
         '
-        'ProgressBar1
+        'ActivitiesBindingSource
         '
-        Me.ProgressBar1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.ProgressBar1.Location = New System.Drawing.Point(229, 671)
-        Me.ProgressBar1.MarqueeAnimationSpeed = 20
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.ProgressBar1.Size = New System.Drawing.Size(950, 23)
-        Me.ProgressBar1.Step = 100
-        Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee
-        Me.ProgressBar1.TabIndex = 1
-        Me.ProgressBar1.Value = 10
-        Me.ProgressBar1.Visible = False
+        Me.ActivitiesBindingSource.DataMember = "Activities"
+        Me.ActivitiesBindingSource.DataSource = Me.DataSet1
         '
-        'DataGridViewTextBoxColumn4
+        'DataSet1
         '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "Type"
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Type"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        Me.DataSet1.DataSetName = "DataSet1"
+        Me.DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'DataGridViewTextBoxColumn1
+        'ActivitiesTableAdapter
         '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "ID"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "ID"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.ActivitiesTableAdapter.ClearBeforeFill = True
         '
-        'DataGridViewTextBoxColumn2
+        'TableAdapterManager
         '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "Date"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Date"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.TableAdapterManager.ActivitiesTableAdapter = Me.ActivitiesTableAdapter
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.PaidActivitiesTableAdapter = Nothing
+        Me.TableAdapterManager.ReceiverTransferTableAdapter = Nothing
+        Me.TableAdapterManager.RecInvTableAdapter = Nothing
+        Me.TableAdapterManager.TechniciansTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = Suntech.DataSet1TableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
-        'DataGridViewTextBoxColumn3
+        'TechIDDataGridViewTextBoxColumn
         '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "TechID"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "TechID"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        Me.TechIDDataGridViewTextBoxColumn.DataPropertyName = "TechID"
+        Me.TechIDDataGridViewTextBoxColumn.HeaderText = "TechID"
+        Me.TechIDDataGridViewTextBoxColumn.Name = "TechIDDataGridViewTextBoxColumn"
+        Me.TechIDDataGridViewTextBoxColumn.ReadOnly = True
         '
-        'DataGridViewTextBoxColumn5
+        'DateDataGridViewTextBoxColumn
         '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "Total"
-        Me.DataGridViewTextBoxColumn5.HeaderText = "Total"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        Me.DateDataGridViewTextBoxColumn.DataPropertyName = "Date"
+        Me.DateDataGridViewTextBoxColumn.HeaderText = "Date"
+        Me.DateDataGridViewTextBoxColumn.Name = "DateDataGridViewTextBoxColumn"
+        Me.DateDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'TypeDataGridViewTextBoxColumn
+        '
+        Me.TypeDataGridViewTextBoxColumn.DataPropertyName = "Type"
+        Me.TypeDataGridViewTextBoxColumn.HeaderText = "Type"
+        Me.TypeDataGridViewTextBoxColumn.Name = "TypeDataGridViewTextBoxColumn"
+        Me.TypeDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'IDDataGridViewTextBoxColumn
+        '
+        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
+        Me.IDDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'TotalDataGridViewTextBoxColumn
+        '
+        Me.TotalDataGridViewTextBoxColumn.DataPropertyName = "Total"
+        Me.TotalDataGridViewTextBoxColumn.HeaderText = "Total"
+        Me.TotalDataGridViewTextBoxColumn.Name = "TotalDataGridViewTextBoxColumn"
+        Me.TotalDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'TechPayDataGridViewTextBoxColumn
+        '
+        Me.TechPayDataGridViewTextBoxColumn.DataPropertyName = "TechPay"
+        Me.TechPayDataGridViewTextBoxColumn.HeaderText = "TechPay"
+        Me.TechPayDataGridViewTextBoxColumn.Name = "TechPayDataGridViewTextBoxColumn"
+        Me.TechPayDataGridViewTextBoxColumn.ReadOnly = True
         '
         'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1179, 781)
-        Me.Controls.Add(Me.ProgressBar1)
+        Me.ClientSize = New System.Drawing.Size(1193, 781)
         Me.Controls.Add(Me.ActivitiesBindingNavigator)
         Me.Controls.Add(Me.LblBalanceField)
         Me.Controls.Add(Me.LblBalanceHdr)
@@ -481,11 +473,11 @@ Partial Class FormHome
         Me.PnlFilter.PerformLayout()
         Me.GrpDtaView.ResumeLayout(False)
         CType(Me.ActivitiesDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ActivitiesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ActivitiesBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ActivitiesBindingNavigator.ResumeLayout(False)
         Me.ActivitiesBindingNavigator.PerformLayout()
+        CType(Me.ActivitiesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -528,11 +520,11 @@ Partial Class FormHome
     Friend WithEvents ActivitiesBindingNavigatorSaveItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents ActivitiesDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents TableAdapterManager As Suntech.DataSet1TableAdapters.TableAdapterManager
-    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
-    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TechIDDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TypeDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents IDDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TotalDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TechPayDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class
