@@ -119,6 +119,7 @@ Public Class ImportClass
 
 
     End Sub
+
     Private Sub importRec(ByVal selectedFile As String)
 
         Dim lineArray() As String

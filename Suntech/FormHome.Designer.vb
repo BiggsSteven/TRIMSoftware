@@ -42,11 +42,6 @@ Partial Class FormHome
         Me.BtnPayTch = New System.Windows.Forms.Button
         Me.GrpDtaView = New System.Windows.Forms.GroupBox
         Me.ActivitiesDataGridView = New System.Windows.Forms.DataGridView
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ActivitiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.DataSet1 = New Suntech.DataSet1
         Me.LblBalanceHdr = New System.Windows.Forms.Label
@@ -67,6 +62,12 @@ Partial Class FormHome
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
         Me.ActivitiesBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
         Me.GrpDtaView.SuspendLayout()
@@ -100,7 +101,7 @@ Partial Class FormHome
         Me.TSMItmImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMItmTech, Me.TSMItmActive, Me.TSMItmRecList, Me.TSMItmRecRet})
         Me.TSMItmImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TSMItmImport.Name = "TSMItmImport"
-        Me.TSMItmImport.Size = New System.Drawing.Size(109, 22)
+        Me.TSMItmImport.Size = New System.Drawing.Size(152, 22)
         Me.TSMItmImport.Text = "Import"
         '
         'TSMItmTech
@@ -240,49 +241,14 @@ Partial Class FormHome
         Me.ActivitiesDataGridView.AllowUserToDeleteRows = False
         Me.ActivitiesDataGridView.AutoGenerateColumns = False
         Me.ActivitiesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.ActivitiesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
+        Me.ActivitiesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5})
         Me.ActivitiesDataGridView.DataSource = Me.ActivitiesBindingSource
         Me.ActivitiesDataGridView.Dock = System.Windows.Forms.DockStyle.Top
         Me.ActivitiesDataGridView.Location = New System.Drawing.Point(3, 16)
         Me.ActivitiesDataGridView.Name = "ActivitiesDataGridView"
         Me.ActivitiesDataGridView.ReadOnly = True
-        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(944, 400)
+        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(944, 537)
         Me.ActivitiesDataGridView.TabIndex = 0
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "ID"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "ID"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "Date"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Date"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "TechID"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "TechID"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "Type"
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Type"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "Total"
-        Me.DataGridViewTextBoxColumn5.HeaderText = "Total"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        Me.DataGridViewTextBoxColumn5.ReadOnly = True
         '
         'ActivitiesBindingSource
         '
@@ -442,11 +408,61 @@ Partial Class FormHome
         Me.ActivitiesBindingNavigatorSaveItem.Size = New System.Drawing.Size(23, 22)
         Me.ActivitiesBindingNavigatorSaveItem.Text = "Save Data"
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.ProgressBar1.Location = New System.Drawing.Point(229, 671)
+        Me.ProgressBar1.MarqueeAnimationSpeed = 20
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ProgressBar1.Size = New System.Drawing.Size(950, 23)
+        Me.ProgressBar1.Step = 100
+        Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.ProgressBar1.TabIndex = 1
+        Me.ProgressBar1.Value = 10
+        Me.ProgressBar1.Visible = False
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "Type"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Type"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "ID"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "ID"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "Date"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Date"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "TechID"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "TechID"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "Total"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "Total"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        '
         'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1179, 781)
+        Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.ActivitiesBindingNavigator)
         Me.Controls.Add(Me.LblBalanceField)
         Me.Controls.Add(Me.LblBalanceHdr)
@@ -511,11 +527,12 @@ Partial Class FormHome
     Friend WithEvents BindingNavigatorSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ActivitiesBindingNavigatorSaveItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents ActivitiesDataGridView As System.Windows.Forms.DataGridView
+    Friend WithEvents TableAdapterManager As Suntech.DataSet1TableAdapters.TableAdapterManager
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TableAdapterManager As Suntech.DataSet1TableAdapters.TableAdapterManager
 
 End Class
