@@ -69,7 +69,6 @@ Public Class ImportClass
             FormHome.BuildTechList()
         End While
 
-
     End Sub
 
     Private Sub importAct(ByVal selectedFile As String)
@@ -87,6 +86,11 @@ Public Class ImportClass
         Dim ImpColumns() As Integer = {11, 12, 9, 8, 16}   'These are the Columns we care about reading in.
         Dim tempArray(ImpColumns.Length) As String 'The Array that hold the values retrieved from the excel document
 
+        Dim tables As String
+        Dim fieldsString As String
+        Dim condition As String
+        Dim fields(,) As String
+
         'Loop through rows
         While XLWorkSheet.Cells(XLRow, 1).Value IsNot Nothing
             'Loop through important columns
@@ -102,10 +106,10 @@ Public Class ImportClass
             End If
 
             'Search Activities for if Activity and Tech has already been entered
-            Dim tables As String = ConfigurationSettings.AppSettings("Act")
-            Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY]"
-            Dim condition As String = " [ID] = '" & tempArray(0) & "' AND [TECHID] = '" & tempArray(2) & "'"
-            Dim fields(,) As String
+            tables = ConfigurationSettings.AppSettings("Act")
+            fieldsString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY]"
+            condition = " [ID] = '" & tempArray(0) & "' AND [TECHID] = '" & tempArray(2) & "'"
+            ReDim fields(0, 0)
             data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
             'If there is a return on that 
@@ -133,23 +137,36 @@ Public Class ImportClass
             XLRow += 1
         End While
 
-        FormHome.ActivitiesTableAdapter.Update(FormHome.DataSet1)
 
     End Sub
 
     Private Sub importRec(ByVal selectedFile As String)
 
+        Dim data As DatabaseClass = New DatabaseClass
+
+        'Created parser
         Dim lineArray() As String
         Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(selectedFile)
         MyReader.TextFieldType = FileIO.FieldType.Delimited
         MyReader.SetDelimiters(",")
 
-
+        'Parse line
         While Not MyReader.EndOfData
             lineArray = MyReader.ReadFields()
 
-            'call function to add to database
+            'Check table if Reciever is present
+            Dim tables As String = ConfigurationSettings.AppSettings("RecInv")
+            Dim fieldsString As String = "[SERIALNUM],[FROMTECHID],[TOTECHID],[DATE]"
+            Dim condition As String = " [SERIAL] = '" & lineArray(0) & "'"
+            Dim fields(,) As String
+            data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
+            If fields.Length = 0 Then
+                data.RunDynamicInsert(tables, fieldsString, lineArray)
+                'MessageBox.Show("Tech: """ & lineArray(1) & """ not found, adding technician now")
+            End If
+
+            FormHome.BuildTechList()
         End While
 
     End Sub

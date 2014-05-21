@@ -7,10 +7,10 @@ Public Class FormHome
 
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'DataSet1.Activities' table. You can move, or remove it, as needed.
-        Me.ActivitiesTableAdapter.Fill(Me.DataSet1.Activities)
-
+        
         'Sub to Initialize the Technician list
         BuildTechList()
+        '   ActivitiesDataGridView.Visible = False
 
 
     End Sub
@@ -37,38 +37,37 @@ Public Class FormHome
     End Sub
 
     Private Sub BtnGtInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGtInfo.Click
+        Dim data As DatabaseClass = New DatabaseClass
+
         BuildQuery()
-        ActivitiesDataGridView.Refresh()
+
+        ActivitiesDataGridView.Visible = True
     End Sub
 
     Private Sub BuildQuery()
         Dim data As DatabaseClass = New DatabaseClass
-
+        'set query
         Dim TechSelected As String = LstBoxTech.SelectedItem
         TechSelected = TechSelected.Substring(0, 10)
         Dim bgnDate As String = DTPkrFrom.Value.Date
         Dim endDate As String = DTPkrEnd.Value.Date
 
-
-        'Dim table As String = ConfigurationSettings.AppSettings("Act")
-        'Dim fieldString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL]"
-        'Dim field(,) As String
-        'data.RunDynamicSelect(table, fieldString, condition, field)
-
-        'Filter ActivitiesDGV
-        Dim condition As String = "[TECHID] = '" & TechSelected & "' AND [DATE] >= '" & bgnDate & "' AND [DATE] <= '" & endDate & "'"
-        ActivitiesBindingSource.Filter = condition
+        'reset datasource
+        Dim tables As String = ConfigurationSettings.AppSettings("Act")
+        Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY]"
+        Dim condition As String = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+        Dim fields(,) As String
+        data.RunDynamicSelect(tables, fieldsString, condition, fields)
+        ActivitiesDataGridView.DataSource = data.dt
         ActivitiesDataGridView.Sort(ActivitiesDataGridView.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
 
-
+        'Calculate pay for Tech
         Dim rowsCount As Integer = 0
         Dim total As Double = 0
-
         While rowsCount < ActivitiesDataGridView.Rows.Count
             total += ActivitiesDataGridView.Rows(rowsCount).Cells(5).Value
             rowsCount += 1
         End While
-
 
         LblBalanceField.Text = total
     End Sub
@@ -97,14 +96,7 @@ Public Class FormHome
     Private Sub callImports(ByVal TypeSelect As Integer)
         Dim ImportItem As ImportClass = New ImportClass
         ImportItem.selectFile(TypeSelect)
-    End Sub
-
-    Public Sub refreshDataTable()
-
-
-
 
     End Sub
-
-
+    
 End Class

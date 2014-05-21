@@ -4,7 +4,7 @@ Imports System.Configuration
 Public Class DatabaseClass
     Dim connectionStr As String
     Dim sqlCon As SqlConnection
-    Dim dt As New DataTable
+    Public dt As New DataTable
     Dim sqlDa As SqlDataAdapter
     Dim sqlCmd As SqlCommand
     Dim sqlText As String
