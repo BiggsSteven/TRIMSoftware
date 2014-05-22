@@ -406,6 +406,8 @@ Partial Public Class DataSet1
         
         Private columnTechPay As Global.System.Data.DataColumn
         
+        Private columnPaid As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub New()
             MyBase.New
@@ -480,6 +482,13 @@ Partial Public Class DataSet1
             End Get
         End Property
         
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property PaidColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPaid
+            End Get
+        End Property
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -509,9 +518,9 @@ Partial Public Class DataSet1
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddActivitiesRow(ByVal ID As String, ByVal _Date As String, ByVal TechID As String, ByVal Type As String, ByVal Total As String, ByVal TechPay As String) As ActivitiesRow
+        Public Overloads Function AddActivitiesRow(ByVal ID As String, ByVal _Date As String, ByVal TechID As String, ByVal Type As String, ByVal Total As String, ByVal TechPay As String, ByVal Paid As Boolean) As ActivitiesRow
             Dim rowActivitiesRow As ActivitiesRow = CType(Me.NewRow,ActivitiesRow)
-            Dim columnValuesArray() As Object = New Object() {ID, _Date, TechID, Type, Total, TechPay}
+            Dim columnValuesArray() As Object = New Object() {ID, _Date, TechID, Type, Total, TechPay, Paid}
             rowActivitiesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowActivitiesRow)
             Return rowActivitiesRow
@@ -537,6 +546,7 @@ Partial Public Class DataSet1
             Me.columnType = MyBase.Columns("Type")
             Me.columnTotal = MyBase.Columns("Total")
             Me.columnTechPay = MyBase.Columns("TechPay")
+            Me.columnPaid = MyBase.Columns("Paid")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -556,6 +566,8 @@ Partial Public Class DataSet1
             MyBase.Columns.Add(Me.columnTotal)
             Me.columnTechPay = New Global.System.Data.DataColumn("TechPay", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTechPay)
+            Me.columnPaid = New Global.System.Data.DataColumn("Paid", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPaid)
             Me.columnID.MaxLength = 50
             Me.columnDate.MaxLength = 50
             Me.columnTechID.MaxLength = 10
@@ -1887,6 +1899,20 @@ Partial Public Class DataSet1
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Paid() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableActivities.PaidColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Paid' in table 'Activities' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableActivities.PaidColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsIDNull() As Boolean
             Return Me.IsNull(Me.tableActivities.IDColumn)
         End Function
@@ -1944,6 +1970,16 @@ Partial Public Class DataSet1
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetTechPayNull()
             Me(Me.tableActivities.TechPayColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsPaidNull() As Boolean
+            Return Me.IsNull(Me.tableActivities.PaidColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetPaidNull()
+            Me(Me.tableActivities.PaidColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -2696,18 +2732,20 @@ Namespace DataSet1TableAdapters
             tableMapping.ColumnMappings.Add("Type", "Type")
             tableMapping.ColumnMappings.Add("Total", "Total")
             tableMapping.ColumnMappings.Add("TechPay", "TechPay")
+            tableMapping.ColumnMappings.Add("Paid", "Paid")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [Activities] ([ID], [Date], [TechID], [Type], [Total], [TechPay]) VAL"& _ 
-                "UES (?, ?, ?, ?, ?, ?)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [Activities] ([ID], [Date], [TechID], [Type], [Total], [TechPay], [Pa"& _ 
+                "id]) VALUES (?, ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Date", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Date", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Date", Global.System.Data.OleDb.OleDbType.DBTimeStamp, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Date", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("TechID", Global.System.Data.OleDb.OleDbType.WChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TechID", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Type", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Type", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Total", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Total", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("TechPay", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TechPay", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Paid", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Paid", Global.System.Data.DataRowVersion.Current, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -2721,7 +2759,7 @@ Namespace DataSet1TableAdapters
             Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT ID, Date, TechID, Type, Total, TechPay FROM Activities"
+            Me._commandCollection(0).CommandText = "SELECT ID, Date, TechID, Type, Total, TechPay, Paid FROM Activities"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -2774,16 +2812,16 @@ Namespace DataSet1TableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal ID As String, ByVal _Date As String, ByVal TechID As String, ByVal Type As String, ByVal Total As String, ByVal TechPay As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal ID As String, ByVal _Date As Global.System.Nullable(Of Date), ByVal TechID As String, ByVal Type As String, ByVal Total As String, ByVal TechPay As String, ByVal Paid As Global.System.Nullable(Of Boolean)) As Integer
             If (ID Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(0).Value = CType(ID,String)
             End If
-            If (_Date Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            If (_Date.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(_Date.Value,Date)
             Else
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(_Date,String)
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
             If (TechID Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
@@ -2804,6 +2842,11 @@ Namespace DataSet1TableAdapters
                 Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(5).Value = CType(TechPay,String)
+            End If
+            If (Paid.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(Paid.Value,Boolean)
+            Else
+                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _

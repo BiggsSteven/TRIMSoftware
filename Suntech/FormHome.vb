@@ -54,7 +54,7 @@ Public Class FormHome
 
         'reset datasource
         Dim tables As String = ConfigurationSettings.AppSettings("Act")
-        Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY]"
+        Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID]"
         Dim condition As String = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
         Dim fields(,) As String
         data.RunDynamicSelect(tables, fieldsString, condition, fields)
@@ -73,7 +73,7 @@ Public Class FormHome
     End Sub
 
 
-    Private Sub BtnSwchPay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSwchData.Click
+    Private Sub BtnSwchPay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
 
@@ -99,4 +99,7 @@ Public Class FormHome
 
     End Sub
     
+    Private Sub BtnPayTch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPayTch.Click
+
+    End Sub
 End Class

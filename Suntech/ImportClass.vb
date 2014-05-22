@@ -84,7 +84,7 @@ Public Class ImportClass
         Dim XLRow As Integer = 4
         Dim XLColumn As Integer = 0
         Dim ImpColumns() As Integer = {11, 12, 9, 8, 16}   'These are the Columns we care about reading in.
-        Dim tempArray(ImpColumns.Length) As String 'The Array that hold the values retrieved from the excel document
+        Dim tempArray(ImpColumns.Length + 1) As String 'The Array that hold the values retrieved from the excel document
 
         Dim tables As String
         Dim fieldsString As String
@@ -104,15 +104,16 @@ Public Class ImportClass
             Else
                 tempArray(ImpColumns.Length) = tempArray(ImpColumns.Length - 1)
             End If
-
+            'set paid to be not paid yet
+            tempArray(tempArray.Length - 1) = 0
             'Search Activities for if Activity and Tech has already been entered
             tables = ConfigurationSettings.AppSettings("Act")
-            fieldsString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY]"
+            fieldsString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID]"
             condition = " [ID] = '" & tempArray(0) & "' AND [TECHID] = '" & tempArray(2) & "'"
             ReDim fields(0, 0)
             data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
-            'If there is a return on that 
+            'If there is no return on that 
             If fields.Length = 0 Then
                 data.RunDynamicInsert(tables, fieldsString, tempArray)
             Else
@@ -136,7 +137,6 @@ Public Class ImportClass
             End If
             XLRow += 1
         End While
-
 
     End Sub
 

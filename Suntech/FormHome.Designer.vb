@@ -38,9 +38,7 @@ Partial Class FormHome
         Me.DTPkrFrom = New System.Windows.Forms.DateTimePicker
         Me.BtnGtInfo = New System.Windows.Forms.Button
         Me.LstBoxTech = New System.Windows.Forms.ListBox
-        Me.BtnSwchData = New System.Windows.Forms.Button
         Me.BtnPayTch = New System.Windows.Forms.Button
-        Me.GrpDtaView = New System.Windows.Forms.GroupBox
         Me.ActivitiesDataGridView = New System.Windows.Forms.DataGridView
         Me.LblBalanceHdr = New System.Windows.Forms.Label
         Me.LblBalanceField = New System.Windows.Forms.Label
@@ -58,6 +56,9 @@ Partial Class FormHome
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
         Me.ActivitiesBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
+        Me.TabCtrlDGV = New System.Windows.Forms.TabControl
+        Me.TabPay = New System.Windows.Forms.TabPage
+        Me.TabInv = New System.Windows.Forms.TabPage
         Me.ActivitiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.DataSet1 = New Suntech.DataSet1
         Me.ActivitiesTableAdapter = New Suntech.DataSet1TableAdapters.ActivitiesTableAdapter
@@ -68,12 +69,14 @@ Partial Class FormHome
         Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.TotalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.TechPayDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Paid = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
-        Me.GrpDtaView.SuspendLayout()
         CType(Me.ActivitiesDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ActivitiesBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ActivitiesBindingNavigator.SuspendLayout()
+        Me.TabCtrlDGV.SuspendLayout()
+        Me.TabPay.SuspendLayout()
         CType(Me.ActivitiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -201,17 +204,6 @@ Partial Class FormHome
         Me.LstBoxTech.Size = New System.Drawing.Size(227, 524)
         Me.LstBoxTech.TabIndex = 0
         '
-        'BtnSwchData
-        '
-        Me.BtnSwchData.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnSwchData.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSwchData.Location = New System.Drawing.Point(235, 728)
-        Me.BtnSwchData.Name = "BtnSwchData"
-        Me.BtnSwchData.Size = New System.Drawing.Size(100, 50)
-        Me.BtnSwchData.TabIndex = 2
-        Me.BtnSwchData.Text = "Inventory"
-        Me.BtnSwchData.UseVisualStyleBackColor = True
-        '
         'BtnPayTch
         '
         Me.BtnPayTch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -223,31 +215,19 @@ Partial Class FormHome
         Me.BtnPayTch.Text = "Pay Live Activities"
         Me.BtnPayTch.UseVisualStyleBackColor = True
         '
-        'GrpDtaView
-        '
-        Me.GrpDtaView.Controls.Add(Me.ActivitiesDataGridView)
-        Me.GrpDtaView.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GrpDtaView.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpDtaView.Location = New System.Drawing.Point(229, 24)
-        Me.GrpDtaView.Name = "GrpDtaView"
-        Me.GrpDtaView.Size = New System.Drawing.Size(964, 647)
-        Me.GrpDtaView.TabIndex = 4
-        Me.GrpDtaView.TabStop = False
-        Me.GrpDtaView.Text = "Technician ID / Technician Name (Date Range: MM/DD/YYYY - MM/DD/ YYYY)"
-        '
         'ActivitiesDataGridView
         '
         Me.ActivitiesDataGridView.AllowUserToAddRows = False
         Me.ActivitiesDataGridView.AllowUserToDeleteRows = False
         Me.ActivitiesDataGridView.AutoGenerateColumns = False
         Me.ActivitiesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.ActivitiesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TechIDDataGridViewTextBoxColumn, Me.DateDataGridViewTextBoxColumn, Me.TypeDataGridViewTextBoxColumn, Me.IDDataGridViewTextBoxColumn, Me.TotalDataGridViewTextBoxColumn, Me.TechPayDataGridViewTextBoxColumn})
+        Me.ActivitiesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TechIDDataGridViewTextBoxColumn, Me.DateDataGridViewTextBoxColumn, Me.TypeDataGridViewTextBoxColumn, Me.IDDataGridViewTextBoxColumn, Me.TotalDataGridViewTextBoxColumn, Me.TechPayDataGridViewTextBoxColumn, Me.Paid})
         Me.ActivitiesDataGridView.DataSource = Me.ActivitiesBindingSource
-        Me.ActivitiesDataGridView.Dock = System.Windows.Forms.DockStyle.Top
-        Me.ActivitiesDataGridView.Location = New System.Drawing.Point(3, 16)
+        Me.ActivitiesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ActivitiesDataGridView.Location = New System.Drawing.Point(3, 3)
         Me.ActivitiesDataGridView.Name = "ActivitiesDataGridView"
         Me.ActivitiesDataGridView.ReadOnly = True
-        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(958, 537)
+        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(950, 554)
         Me.ActivitiesDataGridView.TabIndex = 0
         '
         'LblBalanceHdr
@@ -278,6 +258,7 @@ Partial Class FormHome
         Me.ActivitiesBindingNavigator.BindingSource = Me.ActivitiesBindingSource
         Me.ActivitiesBindingNavigator.CountItem = Me.BindingNavigatorCountItem
         Me.ActivitiesBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
+        Me.ActivitiesBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
         Me.ActivitiesBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem, Me.ActivitiesBindingNavigatorSaveItem})
         Me.ActivitiesBindingNavigator.Location = New System.Drawing.Point(229, 671)
         Me.ActivitiesBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
@@ -286,7 +267,7 @@ Partial Class FormHome
         Me.ActivitiesBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
         Me.ActivitiesBindingNavigator.Name = "ActivitiesBindingNavigator"
         Me.ActivitiesBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-        Me.ActivitiesBindingNavigator.Size = New System.Drawing.Size(964, 25)
+        Me.ActivitiesBindingNavigator.Size = New System.Drawing.Size(278, 25)
         Me.ActivitiesBindingNavigator.TabIndex = 7
         Me.ActivitiesBindingNavigator.Text = "BindingNavigator1"
         Me.ActivitiesBindingNavigator.Visible = False
@@ -384,6 +365,38 @@ Partial Class FormHome
         Me.ActivitiesBindingNavigatorSaveItem.Size = New System.Drawing.Size(23, 22)
         Me.ActivitiesBindingNavigatorSaveItem.Text = "Save Data"
         '
+        'TabCtrlDGV
+        '
+        Me.TabCtrlDGV.Controls.Add(Me.TabPay)
+        Me.TabCtrlDGV.Controls.Add(Me.TabInv)
+        Me.TabCtrlDGV.Dock = System.Windows.Forms.DockStyle.Top
+        Me.TabCtrlDGV.Location = New System.Drawing.Point(229, 24)
+        Me.TabCtrlDGV.Name = "TabCtrlDGV"
+        Me.TabCtrlDGV.SelectedIndex = 0
+        Me.TabCtrlDGV.Size = New System.Drawing.Size(964, 586)
+        Me.TabCtrlDGV.TabIndex = 8
+        '
+        'TabPay
+        '
+        Me.TabPay.Controls.Add(Me.ActivitiesDataGridView)
+        Me.TabPay.Location = New System.Drawing.Point(4, 22)
+        Me.TabPay.Name = "TabPay"
+        Me.TabPay.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPay.Size = New System.Drawing.Size(956, 560)
+        Me.TabPay.TabIndex = 0
+        Me.TabPay.Text = "Technician Pay"
+        Me.TabPay.UseVisualStyleBackColor = True
+        '
+        'TabInv
+        '
+        Me.TabInv.Location = New System.Drawing.Point(4, 22)
+        Me.TabInv.Name = "TabInv"
+        Me.TabInv.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabInv.Size = New System.Drawing.Size(956, 560)
+        Me.TabInv.TabIndex = 1
+        Me.TabInv.Text = "Technician Inventory"
+        Me.TabInv.UseVisualStyleBackColor = True
+        '
         'ActivitiesBindingSource
         '
         Me.ActivitiesBindingSource.DataMember = "Activities"
@@ -450,17 +463,23 @@ Partial Class FormHome
         Me.TechPayDataGridViewTextBoxColumn.Name = "TechPayDataGridViewTextBoxColumn"
         Me.TechPayDataGridViewTextBoxColumn.ReadOnly = True
         '
+        'Paid
+        '
+        Me.Paid.DataPropertyName = "Paid"
+        Me.Paid.HeaderText = "Paid"
+        Me.Paid.Name = "Paid"
+        Me.Paid.ReadOnly = True
+        '
         'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1193, 781)
+        Me.Controls.Add(Me.TabCtrlDGV)
         Me.Controls.Add(Me.ActivitiesBindingNavigator)
         Me.Controls.Add(Me.LblBalanceField)
         Me.Controls.Add(Me.LblBalanceHdr)
-        Me.Controls.Add(Me.GrpDtaView)
         Me.Controls.Add(Me.BtnPayTch)
-        Me.Controls.Add(Me.BtnSwchData)
         Me.Controls.Add(Me.PnlFilter)
         Me.Controls.Add(Me.MenuStripHome)
         Me.MainMenuStrip = Me.MenuStripHome
@@ -471,11 +490,12 @@ Partial Class FormHome
         Me.MenuStripHome.PerformLayout()
         Me.PnlFilter.ResumeLayout(False)
         Me.PnlFilter.PerformLayout()
-        Me.GrpDtaView.ResumeLayout(False)
         CType(Me.ActivitiesDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ActivitiesBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ActivitiesBindingNavigator.ResumeLayout(False)
         Me.ActivitiesBindingNavigator.PerformLayout()
+        Me.TabCtrlDGV.ResumeLayout(False)
+        Me.TabPay.ResumeLayout(False)
         CType(Me.ActivitiesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -491,9 +511,7 @@ Partial Class FormHome
     Friend WithEvents PnlFilter As System.Windows.Forms.Panel
     Friend WithEvents LstBoxTech As System.Windows.Forms.ListBox
     Friend WithEvents BtnGtInfo As System.Windows.Forms.Button
-    Friend WithEvents BtnSwchData As System.Windows.Forms.Button
     Friend WithEvents BtnPayTch As System.Windows.Forms.Button
-    Friend WithEvents GrpDtaView As System.Windows.Forms.GroupBox
     Friend WithEvents LblBalanceHdr As System.Windows.Forms.Label
     Friend WithEvents LblBalanceField As System.Windows.Forms.Label
     Friend WithEvents DTPkrFrom As System.Windows.Forms.DateTimePicker
@@ -520,11 +538,15 @@ Partial Class FormHome
     Friend WithEvents ActivitiesBindingNavigatorSaveItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents ActivitiesDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents TableAdapterManager As Suntech.DataSet1TableAdapters.TableAdapterManager
+    Friend WithEvents TabCtrlDGV As System.Windows.Forms.TabControl
+    Friend WithEvents TabPay As System.Windows.Forms.TabPage
+    Friend WithEvents TabInv As System.Windows.Forms.TabPage
     Friend WithEvents TechIDDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TypeDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents IDDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TotalDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TechPayDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Paid As System.Windows.Forms.DataGridViewCheckBoxColumn
 
 End Class
