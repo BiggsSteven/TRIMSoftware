@@ -561,7 +561,7 @@ Partial Class FormHome
         Me.Controls.Add(Me.MenuStripHome)
         Me.MainMenuStrip = Me.MenuStripHome
         Me.Name = "FormHome"
-        Me.Text = "Sim TRR"
+        Me.Text = "SIMTIR (SIMplified Technician and Inventory Records)"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStripHome.ResumeLayout(False)
         Me.MenuStripHome.PerformLayout()

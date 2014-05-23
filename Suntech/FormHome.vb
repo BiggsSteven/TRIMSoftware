@@ -3,8 +3,6 @@ Imports System.Data.SqlClient
 
 Public Class FormHome
 
-
-
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Sub to Initialize the Technician list
         BuildTechList()
@@ -81,14 +79,14 @@ Public Class FormHome
 
         'reset datasource
         Dim tables As String = ConfigurationSettings.AppSettings("RecInv")
-        Dim fieldsString As String = "[SERIAL], [ACCESSCARD], [TECHID], [DATEIN], [DATEOUT] "
+        Dim fieldsString As String = "[SERIALNUM], [ACCESSCARD], [TECHID], [DATEIN], [DATEOUT] "
         Dim condition As String = "[TECHID] = '" & TechSelected & "' AND ([DATEIN] BETWEEN '" & bgnDate & "' AND '" & endDate _
                                     & "' OR [DATEOUT] BETWEEN '" & bgnDate & "' AND '" & endDate & "')"
 
         Dim fields(,) As String
         data.RunDynamicSelect(tables, fieldsString, condition, fields)
         ReceiverInvDataGridView.DataSource = data.dt
-        ReceiverInvDataGridView.Sort(ActivitiesDataGridView.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
+        ReceiverInvDataGridView.Sort(ReceiverInvDataGridView.Columns(3), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 
     Private Sub BtnSwchPay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
