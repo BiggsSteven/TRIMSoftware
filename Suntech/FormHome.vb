@@ -65,7 +65,9 @@ Public Class FormHome
         Dim rowsCount As Integer = 0
         Dim total As Double = 0
         While rowsCount < ActivitiesDataGridView.Rows.Count
-            total += ActivitiesDataGridView.Rows(rowsCount).Cells(5).Value
+            If ActivitiesDataGridView.Rows(rowsCount).Cells(6).Value = 0 Then
+                total += ActivitiesDataGridView.Rows(rowsCount).Cells(5).Value
+            End If
             rowsCount += 1
         End While
 
@@ -97,6 +99,33 @@ Public Class FormHome
     End Sub
     
     Private Sub BtnPayTch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPayTch.Click
+        Dim data As DatabaseClass = New DatabaseClass
+        Dim tables As String = ConfigurationSettings.AppSettings("Act")
+        Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID]"
+        Dim condition As String
+
+
+
+        'Calculate pay for Tech
+        Dim rowsCount As Integer = 0
+        Dim total As Double = 0
+        While rowsCount < ActivitiesDataGridView.Rows.Count
+            Dim editFields() As String = {"[PAID]"}
+            Dim values() As String = {1}
+            condition = " [ID] = '" & ActivitiesDataGridView.Rows(rowsCount).Cells(3).Value & "' " _
+                & "AND [TECHID] = '" & ActivitiesDataGridView.Rows(rowsCount).Cells(0).Value & "'"
+            data.RunDynamicUpdate(tables, condition, editFields, values)
+            ActivitiesDataGridView.Rows(rowsCount).Cells(6).Value = 1
+            rowsCount += 1
+        End While
+
+
+
+        LblBalanceField.Text = total
+
+
+
 
     End Sub
+
 End Class
