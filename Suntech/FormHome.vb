@@ -6,6 +6,8 @@ Public Class FormHome
 
 
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'DataSet1.Activities' table. You can move, or remove it, as needed.
+        
         'Sub to Initialize the Technician list
         BuildTechList()
         '   ActivitiesDataGridView.Visible = False
@@ -37,11 +39,12 @@ Public Class FormHome
     Private Sub BtnGtInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGtInfo.Click
         Dim data As DatabaseClass = New DatabaseClass
 
-        BuildActQuery()
-        BuildRecQuery()
+        BuildQuery()
+
+        ActivitiesDataGridView.Visible = True
     End Sub
 
-    Private Sub BuildActQuery()
+    Private Sub BuildQuery()
         Dim data As DatabaseClass = New DatabaseClass
         'set query
         Dim TechSelected As String = LstBoxTech.SelectedItem
@@ -69,26 +72,6 @@ Public Class FormHome
         End While
 
         LblBalanceField.Text = total
-    End Sub
-
-    Private Sub BuildRecQuery()
-        Dim data As DatabaseClass = New DatabaseClass
-        'set query
-        Dim TechSelected As String = LstBoxTech.SelectedItem
-        TechSelected = TechSelected.Substring(0, 10)
-        Dim bgnDate As String = DTPkrFrom.Value.Date
-        Dim endDate As String = DTPkrEnd.Value.Date
-
-        'reset datasource
-        Dim tables As String = ConfigurationSettings.AppSettings("RecInv")
-        Dim fieldsString As String = "[SERIAL], [ACCESSCARD], [TECHID], [DATEIN], [DATEOUT] "
-        Dim condition As String = "[TECHID] = '" & TechSelected & "' AND ([DATEIN] BETWEEN '" & bgnDate & "' AND '" & endDate _
-                                    & "' OR [DATEOUT] BETWEEN '" & bgnDate & "' AND '" & endDate & "')"
-
-        Dim fields(,) As String
-        data.RunDynamicSelect(tables, fieldsString, condition, fields)
-        RecieverInvDataGridView.DataSource = data.dt
-        RecieverInvDataGridView.Sort(ActivitiesDataGridView.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 
     Private Sub BtnSwchPay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
