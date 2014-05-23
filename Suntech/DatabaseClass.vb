@@ -53,7 +53,7 @@ Public Class DatabaseClass
     End Sub
 
     Public Sub RunDynamicInsert(ByVal table As String, ByVal fieldString As String, ByRef field() As String)
-
+        'Builds Query String
         Dim values As String = String.Empty
         For counter As Integer = 0 To (field.Length() - 1)
             If counter = 0 Then
@@ -64,6 +64,7 @@ Public Class DatabaseClass
 
         Next
 
+        'Executes insert Query
         sqlText = "INSERT INTO " & table & "(" & fieldString & ") VALUES (" & values & ")"
         sqlCmd = New SqlCommand(sqlText, sqlCon)
         sqlCmd.ExecuteNonQuery()
@@ -72,6 +73,7 @@ Public Class DatabaseClass
 
     Public Sub RunDynamicUpdate(ByVal table As String, ByVal condition As String, ByVal EditFields() As String, ByRef field() As String)
 
+        'Constructs the update
         Dim counter As Integer = 0
         sqlText = "UPDATE " & table & " SET "
         While counter < EditFields.Length()
