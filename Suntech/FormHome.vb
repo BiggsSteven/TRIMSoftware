@@ -72,31 +72,28 @@ Public Class FormHome
         LblBalanceField.Text = total
     End Sub
 
-
     Private Sub BtnSwchPay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
 
     Private Sub TechniciansToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmTech.Click
-        callImports(0)
+        Dim ImportItem As ImportClass = New ImportClass
+        ImportItem.selectFile(0, "Import Technician")
     End Sub
 
     Private Sub ActivityToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmActive.Click
-        callImports(1)
+        Dim ImportItem As ImportClass = New ImportClass
+        ImportItem.selectFile(1, "Import Activity")
     End Sub
 
     Private Sub TSMItmRecList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmRecList.Click
-        callImports(2)
+        Dim ImportItem As ImportClass = New ImportClass
+        ImportItem.selectFile(2, "Import Receivers")
     End Sub
 
     Private Sub TSMItmRecRet_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmRecRet.Click
-        callImports(3)
-    End Sub
-
-    Private Sub callImports(ByVal TypeSelect As Integer)
-        Dim ImportItem As ImportClass = New ImportClass
-        ImportItem.selectFile(TypeSelect)
-
+        'Dim ImportItem As ImportClass = New ImportClass
+        'ImportItem.selectFile(2, "Import Receivers")
     End Sub
     
     Private Sub BtnPayTch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPayTch.Click
