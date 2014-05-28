@@ -4,9 +4,11 @@ Imports System.Data.SqlClient
 Public Class FormHome
 
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'DataSet1.PayStubs' table. You can move, or remove it, as needed.
+        Me.PayStubsTableAdapter.Fill(Me.DataSet1.PayStubs)
         'Sub to Initialize the Technician list
         BuildTechList()
-        '   ActivitiesDataGridView.Visible = False
+        RBStrucSearch.Checked = True
 
 
     End Sub
@@ -35,11 +37,12 @@ Public Class FormHome
     Private Sub BtnGtInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGtInfo.Click
         Dim data As DatabaseClass = New DatabaseClass
 
-        BuildActQuery()
-        BuildRecQuery()
+        BuildStrucQuery()
+        BuildTextQuery()
+
     End Sub
 
-    Private Sub BuildActQuery()
+    Private Sub BuildStrucQuery()
         Dim data As DatabaseClass = New DatabaseClass
         'set query
         Dim TechSelected As String = LstBoxTech.SelectedItem
@@ -48,45 +51,51 @@ Public Class FormHome
         Dim endDate As String = DTPkrEnd.Value.Date
 
         'reset datasource
-        Dim tables As String = ConfigurationSettings.AppSettings("Act")
-        Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID]"
-        Dim condition As String = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+        Dim fieldsString As String = "*"
+
+        Dim tables() As String = {ConfigurationSettings.AppSettings("Act"), ConfigurationSettings.AppSettings("RecInv"), _
+                                 ConfigurationSettings.AppSettings("RecTrans"), ConfigurationSettings.AppSettings("Pay")}
+        Dim LiveTable As Integer = TabCtrlDGV.SelectedIndex()
         Dim fields(,) As String
-        data.RunDynamicSelect(tables, fieldsString, condition, fields)
+        Dim condition As String
 
-        ActivitiesDataGridView.DataSource = data.dt
-        ActivitiesDataGridView.Sort(ActivitiesDataGridView.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
+        If LiveTable = 0 Then
+            condition = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ActivitiesDataGridView.DataSource = data.dt
+            Dim rowsCount As Integer = 0
+            Dim total As Double = 0
+            While rowsCount < ActivitiesDataGridView.Rows.Count
+                If ActivitiesDataGridView.Rows(rowsCount).Cells(6).Value = 0 Then
+                    total += ActivitiesDataGridView.Rows(rowsCount).Cells(5).Value
+                End If
+                rowsCount += 1
+            End While
+            LblBalanceField.Text = total
 
-        'Calculate pay for Tech
-        Dim rowsCount As Integer = 0
-        Dim total As Double = 0
-        While rowsCount < ActivitiesDataGridView.Rows.Count
-            If ActivitiesDataGridView.Rows(rowsCount).Cells(6).Value = 0 Then
-                total += ActivitiesDataGridView.Rows(rowsCount).Cells(5).Value
-            End If
-            rowsCount += 1
-        End While
-        LblBalanceField.Text = total
+        ElseIf LiveTable = 1 Then
+            condition = "[TECHID] = '" & TechSelected & "' AND ([DATEIN] BETWEEN '" & bgnDate & "' AND '" _
+            & endDate & "' OR [DATEOUT] BETWEEN '" & bgnDate & "' AND '" & endDate & "')"
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ReceiverInvDataGridView.DataSource = data.dt
+
+        ElseIf LiveTable = 2 Then
+            condition = "([FROMTECHID] = '" & TechSelected & "' OR [TOTECHID] = '" & TechSelected _
+                        & "') AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ReceiverTransferDataGridView.DataSource = data.dt
+
+        ElseIf LiveTable = 3 Then
+            condition = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            PayStubsDataGridView.DataSource = data.dt
+        End If
+
+
     End Sub
 
-    Private Sub BuildRecQuery()
-        Dim data As DatabaseClass = New DatabaseClass
-        'set query
-        Dim TechSelected As String = LstBoxTech.SelectedItem
-        TechSelected = TechSelected.Substring(0, 10)
-        Dim bgnDate As String = DTPkrFrom.Value.Date
-        Dim endDate As String = DTPkrEnd.Value.Date
+    Private Sub BuildTextQuery()
 
-        'reset datasource
-        Dim tables As String = ConfigurationSettings.AppSettings("RecInv")
-        Dim fieldsString As String = "[SERIALNUM], [ACCESSCARD], [TECHID], [DATEIN], [DATEOUT] "
-        Dim condition As String = "[TECHID] = '" & TechSelected & "' AND ([DATEIN] BETWEEN '" & bgnDate & "' AND '" & endDate _
-                                    & "' OR [DATEOUT] BETWEEN '" & bgnDate & "' AND '" & endDate & "')"
-
-        Dim fields(,) As String
-        data.RunDynamicSelect(tables, fieldsString, condition, fields)
-        ReceiverInvDataGridView.DataSource = data.dt
-        ReceiverInvDataGridView.Sort(ReceiverInvDataGridView.Columns(3), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 
     Private Sub TechniciansToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmTech.Click
@@ -146,4 +155,35 @@ Public Class FormHome
     Private Sub LstBoxTech_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LstBoxTech.SelectedIndexChanged
 
     End Sub
+
+    Private Sub RBTextSearch_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RBTextSearch.CheckedChanged
+        If RBTextSearch.Checked = True Then
+            TxtBoxSearch.Enabled = True
+            LstBoxTech.Enabled = False
+            DTPkrFrom.Enabled = False
+            DTPkrEnd.Enabled = False
+            LblDtFrm.Enabled = False
+            LblDtEnd.Enabled = False
+        End If
+    End Sub
+
+    Private Sub RBStrucSearch_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RBStrucSearch.CheckedChanged
+        If RBStrucSearch.Checked = True Then
+            TxtBoxSearch.Enabled = False
+            LstBoxTech.Enabled = True
+            DTPkrFrom.Enabled = True
+            DTPkrEnd.Enabled = True
+            LblDtFrm.Enabled = True
+            LblDtEnd.Enabled = True
+        End If
+    End Sub
+
+    Private Sub TxtBoxSearch_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles TxtBoxSearch.KeyUp
+        'Barcode Scanner is set to press "ENTER" after scanning
+        'This will run after scanning
+        If e.KeyCode = Keys.Enter Then
+
+        End If
+    End Sub
+
 End Class

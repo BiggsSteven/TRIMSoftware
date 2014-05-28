@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Data.SqlClient
+Imports System.Environment
 Public Class TransferForm
     Private Sub TransferForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         CmboFrom.Text = String.Empty
@@ -38,7 +39,8 @@ Public Class TransferForm
             Dim CodeScanned As String = TxtBoxSerial.Text
 
             'Retrieve Tech's name and number
-
+            '_____________________________________________________________________________________________________
+            '
             Dim fieldsString As String = ConfigurationSettings.AppSettings("RecInv") & ".[SERIALNUM]" _
                                         & " , " & ConfigurationSettings.AppSettings("RecInv") & ".[TECHID] " _
                                         & " , " & ConfigurationSettings.AppSettings("Tech") & ".[NAME] "
@@ -52,6 +54,8 @@ Public Class TransferForm
             Dim fields(,) As String
             data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
+            '_____________________________________________________________________________________________________
+
             If fields.Length <> 0 Then
                 CmboFrom.SelectedItem = (fields(0, 1) & "\" & fields(0, 2))
             End If
@@ -60,9 +64,33 @@ Public Class TransferForm
     End Sub
 
     Private Sub BtnTransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnTransfer.Click
+        Dim data As DatabaseClass = New DatabaseClass
+        Dim techFrom As String = CmboFrom.SelectedItem.substring(0, 10)
+        Dim techFromName As String = CmboFrom.SelectedItem.substring(11)
 
-        
+        Dim serial As String = TxtBoxSerial.Text
+        Dim techTo As String = CmboTo.SelectedItem.Substring(0, 10)
+        Dim techToName As String = CmboTo.SelectedItem.Substring(11)
 
+        'Write update to RecInv table
+        'Write Insert to REcTransfer table
+
+
+
+
+
+
+
+
+
+
+        LblOutput.Text = "Receiver: " & serial & Environment.NewLine _
+                        & "Has Been moved from " & techFromName & Environment.NewLine _
+                        & "to " & techToName & " Successfully."
+
+
+        CmboFrom.Text = String.Empty
+        TxtBoxSerial.Text = String.Empty
 
     End Sub
 
