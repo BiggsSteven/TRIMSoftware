@@ -98,6 +98,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TransferForm.Designer.vb">
+      <DependentUpon>TransferForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TransferForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FormHome.resx">
@@ -108,6 +114,10 @@
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TransferForm.resx">
+      <DependentUpon>TransferForm.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

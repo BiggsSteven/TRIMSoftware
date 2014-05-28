@@ -53,6 +53,7 @@ Public Class FormHome
         Dim condition As String = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
         Dim fields(,) As String
         data.RunDynamicSelect(tables, fieldsString, condition, fields)
+
         ActivitiesDataGridView.DataSource = data.dt
         ActivitiesDataGridView.Sort(ActivitiesDataGridView.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
 
@@ -65,7 +66,6 @@ Public Class FormHome
             End If
             rowsCount += 1
         End While
-
         LblBalanceField.Text = total
     End Sub
 
@@ -89,16 +89,12 @@ Public Class FormHome
         ReceiverInvDataGridView.Sort(ReceiverInvDataGridView.Columns(3), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 
-    Private Sub BtnSwchPay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-    End Sub
-
     Private Sub TechniciansToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmTech.Click
         Dim ImportItem As ImportClass = New ImportClass
         ImportItem.selectFile(0, "Import Technician")
     End Sub
 
-    Private Sub ActivityToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmActive.Click
+    Private Sub TSMItmActive_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmActive.Click
         Dim ImportItem As ImportClass = New ImportClass
         ImportItem.selectFile(1, "Import Activity")
     End Sub
@@ -143,4 +139,11 @@ Public Class FormHome
 
     End Sub
 
+    Private Sub TransferToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TransferToolStripMenuItem.Click
+        TransferForm.Show()
+    End Sub
+
+    Private Sub LstBoxTech_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LstBoxTech.SelectedIndexChanged
+
+    End Sub
 End Class
