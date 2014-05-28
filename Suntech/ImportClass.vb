@@ -2,28 +2,32 @@
 Imports System.Configuration
 Imports Excel = Microsoft.Office.Interop.Excel
 Imports Microsoft.Office
+Imports System.Threading
+Imports System.ComponentModel
 
 Public Class ImportClass
 
     Public inLine As String
 
+
     Public Sub selectFile(ByVal TypeSelect As Integer, ByVal titleStr As String)
         'OpenFileDialog created and function chosen based off which menu option was chosen
-
         FormHome.OpenFileDialog1.Title = titleStr
         If TypeSelect = 1 Then
             FormHome.OpenFileDialog1.Filter = "Microsoft Excel 97-2003 Worksheet(.xls)|*.xls"
         Else
             FormHome.OpenFileDialog1.Filter = "Comma Separated Files(*.csv)|*.csv"
         End If
-
-
+        'Get File from OFD
         Dim selectedFile As String = String.Empty
         If FormHome.OpenFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
             selectedFile = FormHome.OpenFileDialog1.FileName
         End If
+        'If it wasn't cancelled then start threading
         If selectedFile <> String.Empty Then
             FormHome.Cursor = Cursors.WaitCursor
+            FormLoading.Show()
+
 
             Select Case TypeSelect
                 Case 0
@@ -37,10 +41,10 @@ Public Class ImportClass
             End Select
             FormHome.OpenFileDialog1.Title = String.Empty
             FormHome.Cursor = Cursors.Default
+            FormLoading.Hide()
             MessageBox.Show("Your files have been successfully imported.")
 
         End If
-
     End Sub
 
     Private Sub importTech(ByVal selectedFile As String)
@@ -65,7 +69,7 @@ Public Class ImportClass
             'Check table if Tech is present
             condition = " [ID] = '" & lineArray(0) & "'"
             ReDim fields(0, 0)
-            Data.RunDynamicSelect(tables, fieldsString, condition, fields)
+            data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
             '------------------------
             'If there is not one already by that Techid
@@ -189,7 +193,7 @@ Public Class ImportClass
             Dim fieldsString As String = "[SERIALNUM], [ACCESSCARD], [TECHID], [DATEIN], [DATEOUT]"
             Dim condition As String = " [SERIALNUM] = '" & lineArray(2) & "'"
             Dim fields(,) As String
-            Data.RunDynamicSelect(tables, fieldsString, condition, fields)
+            data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
             '------------------------
             'If there is not one already by that serialNumber we need to create and insert one
