@@ -37,9 +37,11 @@ Public Class FormHome
     Private Sub BtnGtInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGtInfo.Click
         Dim data As DatabaseClass = New DatabaseClass
 
-        BuildStrucQuery()
-        BuildTextQuery()
-
+        If RBTextSearch.Checked = True Then
+            BuildTextQuery()
+        ElseIf RBStrucSearch.Checked = True Then
+            BuildStrucQuery()
+        End If
     End Sub
 
     Private Sub BuildStrucQuery()
@@ -95,6 +97,47 @@ Public Class FormHome
     End Sub
 
     Private Sub BuildTextQuery()
+        Dim data As DatabaseClass = New DatabaseClass
+        Dim fieldsString As String = "*"
+        Dim FieldInput As String = TxtBoxSearch.Text
+
+        Dim tables() As String = {ConfigurationSettings.AppSettings("Act"), ConfigurationSettings.AppSettings("RecInv"), _
+                                 ConfigurationSettings.AppSettings("RecTrans"), ConfigurationSettings.AppSettings("Pay")}
+        Dim LiveTable As Integer = TabCtrlDGV.SelectedIndex()
+        Dim fields(,) As String
+        Dim condition As String
+
+        If LiveTable = 0 Then
+            condition = "[ID] = '" & FieldInput & "' OR [TECHID] = '" & FieldInput & "'"
+            Data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ActivitiesDataGridView.DataSource = Data.dt
+            Dim rowsCount As Integer = 0
+            Dim total As Double = 0
+            While rowsCount < ActivitiesDataGridView.Rows.Count
+                If ActivitiesDataGridView.Rows(rowsCount).Cells(6).Value = 0 Then
+                    total += ActivitiesDataGridView.Rows(rowsCount).Cells(5).Value
+                End If
+                rowsCount += 1
+            End While
+            LblBalanceField.Text = total
+
+        ElseIf LiveTable = 1 Then
+            condition = "[SERIALNUM] = '" & FieldInput & "' OR [ACCESSCARD] = '" & FieldInput _
+                        & "' OR [TECHID] = '" & FieldInput & "'"
+            Data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ReceiverInvDataGridView.DataSource = Data.dt
+
+        ElseIf LiveTable = 2 Then
+            condition = "[SERIALNUM] = '" & FieldInput & "' OR [FROMTECHID] = '" & FieldInput _
+                        & "' OR [TOTECHID] = '" & FieldInput & "'"
+            Data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ReceiverTransferDataGridView.DataSource = Data.dt
+
+        ElseIf LiveTable = 3 Then
+            condition = "[CHECKNUMBER] = '" & FieldInput & "' OR [TECHID] = '" & FieldInput & "'"
+            Data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            PayStubsDataGridView.DataSource = Data.dt
+        End If
 
     End Sub
 
@@ -120,12 +163,17 @@ Public Class FormHome
 
     Private Sub BtnPayTch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPayTch.Click
         Dim data As DatabaseClass = New DatabaseClass
-        Dim tables As String = ConfigurationSettings.AppSettings("Act")
-        Dim fieldsString As String = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID]"
+
+        Dim CheckNumber As String = txtboxChkNum.Text
+        Dim tables As String = ConfigurationSettings.AppSettings("Pay")
+        Dim fieldString As String = "[CHECKNUMBER], [DATE], [TECHID], [AMOUNT]"
+        Dim fields() As String = {CheckNumber, DateTime.Now.Date, ActivitiesDataGridView.Rows(0).Cells(0).Value, CDbl(LblBalanceField.Text)}
+        data.RunDynamicInsert(tables, fieldString, fields)
+
+
+        tables = ConfigurationSettings.AppSettings("Act")
+        fieldString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID]"
         Dim condition As String
-
-
-
         'Calculate pay for Tech
         Dim rowsCount As Integer = 0
         Dim total As Double = 0
@@ -159,6 +207,7 @@ Public Class FormHome
     Private Sub RBTextSearch_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RBTextSearch.CheckedChanged
         If RBTextSearch.Checked = True Then
             TxtBoxSearch.Enabled = True
+            TxtBoxSearch.Select()
             LstBoxTech.Enabled = False
             DTPkrFrom.Enabled = False
             DTPkrEnd.Enabled = False
@@ -170,6 +219,7 @@ Public Class FormHome
     Private Sub RBStrucSearch_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RBStrucSearch.CheckedChanged
         If RBStrucSearch.Checked = True Then
             TxtBoxSearch.Enabled = False
+            TxtBoxSearch.Text = String.Empty
             LstBoxTech.Enabled = True
             DTPkrFrom.Enabled = True
             DTPkrEnd.Enabled = True
@@ -182,8 +232,9 @@ Public Class FormHome
         'Barcode Scanner is set to press "ENTER" after scanning
         'This will run after scanning
         If e.KeyCode = Keys.Enter Then
-
+            BuildTextQuery()
         End If
     End Sub
+
 
 End Class

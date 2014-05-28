@@ -73,16 +73,17 @@ Public Class TransferForm
         Dim techToName As String = CmboTo.SelectedItem.Substring(11)
 
         'Write update to RecInv table
-        'Write Insert to REcTransfer table
+        Dim table As String = ConfigurationSettings.AppSettings("RecInv")
+        Dim setFields() As String = {"[TECHID]"}
+        Dim fields() As String = {techTo}
+        Dim condition As String = " [SERIALNUM] = '" & serial & "'"
+        data.RunDynamicUpdate(table, condition, setFields, fields)
 
-
-
-
-
-
-
-
-
+        'Write Insert to RecTransfer table
+        table = ConfigurationSettings.AppSettings("RecTrans")
+        Dim fieldsString As String = "[SERIALNUM],[FROMTECHID], [TOTECHID], [DATE]"
+        Dim Values() As String = {serial, techFrom, techTo, DateTime.Now.Date}
+        data.RunDynamicInsert(table, fieldsString, Values)
 
         LblOutput.Text = "Receiver: " & serial & Environment.NewLine _
                         & "Has Been moved from " & techFromName & Environment.NewLine _
