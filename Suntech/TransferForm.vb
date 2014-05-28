@@ -48,12 +48,12 @@ Public Class TransferForm
                         & " ON " & ConfigurationSettings.AppSettings("RecInv") & ".[TECHID]=" _
                         & ConfigurationSettings.AppSettings("Tech") & ".[ID]"
 
-            Dim condition As String = ConfigurationSettings.AppSettings("RecInv") & " [SERIALNUM] = '" & CodeScanned & "'"
+            Dim condition As String = ConfigurationSettings.AppSettings("RecInv") & ".[SERIALNUM] = '" & CodeScanned & "'"
             Dim fields(,) As String
             data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
             If fields.Length <> 0 Then
-
+                CmboFrom.SelectedItem = (fields(0, 1) & "\" & fields(0, 2))
             End If
 
         End If
