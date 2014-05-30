@@ -6,45 +6,70 @@ Imports System.Threading
 Imports System.ComponentModel
 
 Public Class ImportClass
-
-    Public inLine As String
-
+    Private TypeSelected As Integer
+    Private FileSelected As String
+    Private WithEvents bgwkr As BackgroundWorker
 
     Public Sub selectFile(ByVal TypeSelect As Integer, ByVal titleStr As String)
+        TypeSelected = TypeSelect
         'OpenFileDialog created and function chosen based off which menu option was chosen
         FormHome.OpenFileDialog1.Title = titleStr
-        If TypeSelect = 1 Then
+        If TypeSelected = 1 Then
             FormHome.OpenFileDialog1.Filter = "Microsoft Excel 97-2003 Worksheet(.xls)|*.xls"
         Else
             FormHome.OpenFileDialog1.Filter = "Comma Separated Files(*.csv)|*.csv"
         End If
         'Get File from OFD
-        Dim selectedFile As String = String.Empty
+        FileSelected = String.Empty
         If FormHome.OpenFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-            selectedFile = FormHome.OpenFileDialog1.FileName
+            Fileselected = FormHome.OpenFileDialog1.FileName
         End If
         'If it wasn't cancelled then start threading
-        If selectedFile <> String.Empty Then
+        If FileSelected <> String.Empty Then
             FormHome.Cursor = Cursors.WaitCursor
+            FormLoading.Cursor = Cursors.WaitCursor
+            Dim here As Rectangle = Screen.PrimaryScreen.WorkingArea
+            FormLoading.Location = New Point(here.Width / 2, here.Height / 2)
             FormLoading.Show()
+            FormHome.BtnGtInfo.Enabled = False
 
+            bgwkr = New BackgroundWorker
+            bgwkr.WorkerReportsProgress = True
 
-            Select Case TypeSelect
-                Case 0
-                    importTech(selectedFile)
-                Case 1
-                    importAct(selectedFile)
-                Case 2
-                    importRec(selectedFile)
-                Case 3
-                    importRecRet(selectedFile)
-            End Select
-            FormHome.OpenFileDialog1.Title = String.Empty
-            FormHome.Cursor = Cursors.Default
-            FormLoading.Hide()
-            MessageBox.Show("Your files have been successfully imported.")
+            bgwkr.RunWorkerAsync()
 
         End If
+    End Sub
+
+    Private Sub bgwkr_DoWork(ByVal sender As System.Object, ByVal e As DoWorkEventArgs) Handles bgwkr.DoWork
+
+        Select Case TypeSelected
+            Case 0
+                importTech(FileSelected)
+            Case 1
+                importAct(FileSelected)
+            Case 2
+                importRec(FileSelected)
+            Case 3
+                importRecRet(FileSelected)
+        End Select
+
+    End Sub
+
+    Private Sub bgwkrProgressChanged(ByVal sender As Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwkr.ProgressChanged
+        FormLoading.ProgBarImport.Value = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwkrRunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwkr.RunWorkerCompleted
+        FormHome.BtnGtInfo.Enabled = True
+        FormHome.OpenFileDialog1.Title = String.Empty
+        FormHome.Cursor = Cursors.Default
+        FormLoading.Cursor = Cursors.Default
+        FormLoading.Hide()
+        FormLoading.ProgBarImport.Value = 0
+
+        MessageBox.Show("Your files have been successfully imported.")
+
     End Sub
 
     Private Sub importTech(ByVal selectedFile As String)
@@ -105,6 +130,20 @@ Public Class ImportClass
         Dim fieldsString As String
         Dim condition As String
         Dim fields(,) As String
+        Dim XLSheetBounds As Integer = XLWorkSheet.Rows.Count()
+        Dim XLastRow As Integer = 0
+
+        While XLSheetBounds - XLastRow >= 2
+            Dim temp As Integer = (((XLSheetBounds - XLastRow) / 2) + XLastRow)
+            If XLWorkSheet.Cells(temp, 1).Value IsNot Nothing Then
+                XLastRow = temp
+            Else
+                XLSheetBounds = temp
+            End If
+        End While
+
+
+
 
         '------------------------------------------------------------------------------------------
         'While the worksheet still has rows to be read
@@ -167,6 +206,8 @@ Public Class ImportClass
                 '-------------------------
             End If
 
+
+            bgwkr.ReportProgress(CInt(100 * (XLRow / XLastRow)))
             XLRow += 1
         End While
         '------------------------------------------------------------------------------------------
