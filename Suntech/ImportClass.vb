@@ -26,13 +26,12 @@ Public Class ImportClass
         End If
         'If it wasn't cancelled then start threading
         If FileSelected <> String.Empty Then
-            If DuplicateCheck() Then
+            If DuplicateCheck(TypeSelect) Then
                 FormHome.Cursor = Cursors.WaitCursor
                 FormLoading.Cursor = Cursors.WaitCursor
-                Dim here As Rectangle = Screen.PrimaryScreen.WorkingArea
-                FormLoading.Location = New Point(here.Width / 2, here.Height / 2)
                 FormLoading.Show()
                 FormHome.BtnGtInfo.Enabled = False
+                FormHome.BtnPayTch.Enabled = False
 
                 bgwkr = New BackgroundWorker
                 bgwkr.WorkerReportsProgress = True
@@ -42,23 +41,48 @@ Public Class ImportClass
         End If
     End Sub
 
-    Public Function DuplicateCheck()
+    Public Function DuplicateCheck(ByRef TypeSelect As Integer)
         Dim data As DatabaseClass = New DatabaseClass
-        Dim tables As String = ConfigurationSettings.AppSettings("Act")
-        Dim fieldsString As String = "[FILEIMPORTED]"
+
         Dim abridgeFile() As String = FileSelected.Split("\")
         Dim condition As String = " [FILEIMPORTED] = '" & abridgeFile(abridgeFile.Length() - 1) & "'"
 
+        Dim fieldsString As String = "[FILEIMPORTED]"
         Dim fields(,) As String
-        data.RunDynamicSelect(tables, fieldsString, condition, fields)
+
+
+        Dim table As String = String.Empty
+        Dim editFields() As String
+        Dim values() As String
+        Select Case TypeSelect
+            Case 0
+
+            Case 1
+                table = ConfigurationSettings.AppSettings("Act")
+                ReDim editFields(3)
+                editFields(0) = "[TOTAL]"
+                editFields(1) = "[TECHPAY]"
+                editFields(2) = "[PAID]"
+                ReDim values(3)
+                values(0) = 0
+                values(1) = 0
+                values(2) = 0
+            Case 2
+                table = ConfigurationSettings.AppSettings("RecInv")
+                ReDim editFields(0)
+                editFields(0) = "[TECHID]"
+                ReDim values(0)
+                values(0) = "0000000000"
+        End Select
+        data.RunDynamicSelect(table, fieldsString, condition, fields)
+
         Dim proceed As Boolean = True
         If fields.Length <> 0 Then
             proceed = False
             AddDupe.ShowDialog()
             If AddDupe.Choice Then
-                Dim editFields() As String = {"[TOTAL]", "[TECHPAY]", "[PAID]"}
-                Dim values() As String = {0, 0, 0}
-                data.RunDynamicUpdate(tables, condition, editFields, values)
+
+                data.RunDynamicUpdate(table, condition, editFields, values)
                 proceed = True
                 AddDupe.Choice = False
             End If
@@ -76,7 +100,7 @@ Public Class ImportClass
             Case 2
                 importRec(FileSelected)
             Case 3
-                importRecRet(FileSelected)
+                'importRecRet(FileSelected)
         End Select
 
     End Sub
@@ -87,6 +111,7 @@ Public Class ImportClass
 
     Private Sub bgwkrRunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwkr.RunWorkerCompleted
         FormHome.BtnGtInfo.Enabled = True
+        FormHome.BtnPayTch.Enabled = True
         FormHome.OpenFileDialog1.Title = String.Empty
         FormHome.Cursor = Cursors.Default
         FormLoading.Cursor = Cursors.Default
@@ -248,7 +273,7 @@ Public Class ImportClass
         Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(selectedFile)
         MyReader.TextFieldType = FileIO.FieldType.Delimited
         MyReader.SetDelimiters(",")
-
+        Dim abridgeFile() As String = selectedFile.Split("\")
 
         '------------------------------------
         'Parse line
@@ -257,7 +282,7 @@ Public Class ImportClass
             '------------------------
             'Check table if Reciever is present
             Dim tables As String = ConfigurationSettings.AppSettings("RecInv")
-            Dim fieldsString As String = "[SERIALNUM], [ACCESSCARD], [TECHID], [DATEIN], [DATEOUT]"
+            Dim fieldsString As String = "[SERIALNUM], [ACCESSCARD], [TECHID], [DATEIN], [DATEOUT], [FILEIMPORTED]"
             Dim condition As String = " [SERIALNUM] = '" & lineArray(2) & "'"
             Dim fields(,) As String
             data.RunDynamicSelect(tables, fieldsString, condition, fields)
@@ -266,7 +291,7 @@ Public Class ImportClass
             'If there is not one already by that serialNumber we need to create and insert one
             If fields.Length = 0 And lineArray(2) <> "" Then
                 Dim dateEnd As Date = DateAdd(DateInterval.Day, 13, CDate(lineArray(11)))
-                Dim MVField() As String = {lineArray(2), lineArray(3), "0000000000", CDate(lineArray(11)), dateEnd}
+                Dim MVField() As String = {lineArray(2), lineArray(3), "0000000000", CDate(lineArray(11)), dateEnd, abridgeFile(abridgeFile.Length() - 1)}
                 data.RunDynamicInsert(tables, fieldsString, MVField)
             End If
         End While
