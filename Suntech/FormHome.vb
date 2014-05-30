@@ -284,7 +284,10 @@ Public Class FormHome
 
             PrintDocument1.DefaultPageSettings.Landscape = True
             PrintDialog1.Document = PrintDocument1
-            PrintDialog1.ShowDialog()
+            If PrintDialog1.ShowDialog() Then
+                PrintDocument1.Print()
+            End If
+
             'PrintDocument1.Print()
 
             'setup for the update to the activities

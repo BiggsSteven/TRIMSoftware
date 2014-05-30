@@ -26,20 +26,45 @@ Public Class ImportClass
         End If
         'If it wasn't cancelled then start threading
         If FileSelected <> String.Empty Then
-            FormHome.Cursor = Cursors.WaitCursor
-            FormLoading.Cursor = Cursors.WaitCursor
-            Dim here As Rectangle = Screen.PrimaryScreen.WorkingArea
-            FormLoading.Location = New Point(here.Width / 2, here.Height / 2)
-            FormLoading.Show()
-            FormHome.BtnGtInfo.Enabled = False
+            If DuplicateCheck() Then
+                FormHome.Cursor = Cursors.WaitCursor
+                FormLoading.Cursor = Cursors.WaitCursor
+                Dim here As Rectangle = Screen.PrimaryScreen.WorkingArea
+                FormLoading.Location = New Point(here.Width / 2, here.Height / 2)
+                FormLoading.Show()
+                FormHome.BtnGtInfo.Enabled = False
 
-            bgwkr = New BackgroundWorker
-            bgwkr.WorkerReportsProgress = True
+                bgwkr = New BackgroundWorker
+                bgwkr.WorkerReportsProgress = True
 
-            bgwkr.RunWorkerAsync()
-
+                bgwkr.RunWorkerAsync()
+            End If
         End If
     End Sub
+
+    Public Function DuplicateCheck()
+        Dim data As DatabaseClass = New DatabaseClass
+        Dim tables As String = ConfigurationSettings.AppSettings("Act")
+        Dim fieldsString As String = "[FILEIMPORTED]"
+        Dim abridgeFile() As String = FileSelected.Split("\")
+        Dim condition As String = " [FILEIMPORTED] = '" & abridgeFile(abridgeFile.Length() - 1) & "'"
+
+        Dim fields(,) As String
+        data.RunDynamicSelect(tables, fieldsString, condition, fields)
+        Dim proceed As Boolean = True
+        If fields.Length <> 0 Then
+            proceed = False
+            AddDupe.ShowDialog()
+            If AddDupe.Choice Then
+                Dim editFields() As String = {"[TOTAL]", "[TECHPAY]", "[PAID]"}
+                Dim values() As String = {0, 0, 0}
+                data.RunDynamicUpdate(tables, condition, editFields, values)
+                proceed = True
+                AddDupe.Choice = False
+            End If
+        End If
+        Return proceed
+    End Function
 
     Private Sub bgwkr_DoWork(ByVal sender As System.Object, ByVal e As DoWorkEventArgs) Handles bgwkr.DoWork
 
@@ -112,8 +137,8 @@ Public Class ImportClass
     End Sub
 
     Private Sub importAct(ByVal selectedFile As String)
-        'Item,Tech#,Activity,Date,Amount
-        'ID,Date,TechID,Type,Account,Total,TechPay
+
+
         '-------------------------------------------------
         'Created Excel Reference to access cells within it.
         Dim data As DatabaseClass = New DatabaseClass
@@ -123,7 +148,7 @@ Public Class ImportClass
         Dim XLRow As Integer = 4
         Dim XLColumn As Integer = 0
         Dim ImpColumns() As Integer = {11, 12, 9, 8, 16}   'These are the Columns we care about reading in.
-        Dim tempArray(ImpColumns.Length + 1) As String 'The Array that hold the values retrieved from the excel document
+        Dim tempArray(ImpColumns.Length + 2) As String 'The Array that hold the values retrieved from the excel document
         '-------------------------------------------------
         'these are the variables that hold the query parts
         Dim tables As String
@@ -133,6 +158,10 @@ Public Class ImportClass
         Dim XLSheetBounds As Integer = XLWorkSheet.Rows.Count()
         Dim XLastRow As Integer = 0
 
+        Dim abridgeFile() As String = selectedFile.Split("\")
+
+
+        'Finding the number of rows in file so that the progress bar may accurately portray progress
         While XLSheetBounds - XLastRow >= 2
             Dim temp As Integer = (((XLSheetBounds - XLastRow) / 2) + XLastRow)
             If XLWorkSheet.Cells(temp, 1).Value IsNot Nothing Then
@@ -141,9 +170,6 @@ Public Class ImportClass
                 XLSheetBounds = temp
             End If
         End While
-
-
-
 
         '------------------------------------------------------------------------------------------
         'While the worksheet still has rows to be read
@@ -170,12 +196,12 @@ Public Class ImportClass
 
             '---------------------------------------
             'set paid to be not paid yet
-            tempArray(tempArray.Length - 1) = 0
-
+            tempArray(tempArray.Length - 2) = 0
+            tempArray(tempArray.Length - 1) = abridgeFile(abridgeFile.Length() - 1)
             '---------------------------------------
             'Search Activities for if Activity and Tech has already been entered
             tables = ConfigurationSettings.AppSettings("Act")
-            fieldsString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID]"
+            fieldsString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID],[FILEIMPORTED]"
             condition = " [ID] = '" & tempArray(0) & "' AND [TECHID] = '" & tempArray(2) & "'"
             ReDim fields(0, 0)
             data.RunDynamicSelect(tables, fieldsString, condition, fields)
