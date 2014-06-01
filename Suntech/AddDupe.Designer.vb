@@ -33,7 +33,7 @@ Partial Class AddDupe
         Me.lblDupe.Name = "lblDupe"
         Me.lblDupe.Size = New System.Drawing.Size(300, 69)
         Me.lblDupe.TabIndex = 0
-        Me.lblDupe.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The File you are tring to add is already present in your records." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "          " & _
+        Me.lblDupe.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The file you are tring to add is already present in your records." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "          " & _
             "Would you like to replace it now? "
         '
         'BtnDupeY

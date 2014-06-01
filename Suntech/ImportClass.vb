@@ -24,6 +24,7 @@ Public Class ImportClass
         If FormHome.OpenFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
             Fileselected = FormHome.OpenFileDialog1.FileName
         End If
+
         'If it wasn't cancelled then start threading
         If FileSelected <> String.Empty Then
             If DuplicateCheck(TypeSelect) Then
@@ -43,7 +44,6 @@ Public Class ImportClass
 
     Public Function DuplicateCheck(ByRef TypeSelect As Integer)
         Dim data As DatabaseClass = New DatabaseClass
-
         Dim abridgeFile() As String = FileSelected.Split("\")
         Dim condition As String = " [FILEIMPORTED] = '" & abridgeFile(abridgeFile.Length() - 1) & "'"
 
@@ -54,40 +54,56 @@ Public Class ImportClass
         Dim table As String = String.Empty
         Dim editFields() As String
         Dim values() As String
+        Dim proceed As Boolean = True
         Select Case TypeSelect
             Case 0
 
             Case 1
-                table = ConfigurationSettings.AppSettings("Act")
-                ReDim editFields(3)
+                table = ConfigurationManager.AppSettings("Act")
+                ReDim editFields(2)
                 editFields(0) = "[TOTAL]"
                 editFields(1) = "[TECHPAY]"
                 editFields(2) = "[PAID]"
-                ReDim values(3)
+                ReDim values(2)
                 values(0) = 0
                 values(1) = 0
                 values(2) = 0
+                data.RunDynamicSelect(table, fieldsString, condition, fields)
+
+                If fields.Length <> 0 Then
+                    proceed = False
+                    AddDupe.ShowDialog()
+                    If AddDupe.Choice Then
+                        data.RunDynamicUpdate(table, condition, editFields, values)
+                        proceed = True
+                        AddDupe.Choice = False
+                    End If
+                End If
+
             Case 2
-                table = ConfigurationSettings.AppSettings("RecInv")
+                table = ConfigurationManager.AppSettings("RecInv")
                 ReDim editFields(0)
                 editFields(0) = "[TECHID]"
                 ReDim values(0)
                 values(0) = "0000000000"
+                data.RunDynamicSelect(table, fieldsString, condition, fields)
+
+
+                If fields.Length <> 0 Then
+                    proceed = False
+                    AddDupe.ShowDialog()
+                    If AddDupe.Choice Then
+
+                        data.RunDynamicUpdate(table, condition, editFields, values)
+                        proceed = True
+                        AddDupe.Choice = False
+                    End If
+                End If
+
         End Select
-        data.RunDynamicSelect(table, fieldsString, condition, fields)
 
-        Dim proceed As Boolean = True
-        If fields.Length <> 0 Then
-            proceed = False
-            AddDupe.ShowDialog()
-            If AddDupe.Choice Then
-
-                data.RunDynamicUpdate(table, condition, editFields, values)
-                proceed = True
-                AddDupe.Choice = False
-            End If
-        End If
         Return proceed
+
     End Function
 
     Private Sub bgwkr_DoWork(ByVal sender As System.Object, ByVal e As DoWorkEventArgs) Handles bgwkr.DoWork
@@ -131,7 +147,7 @@ Public Class ImportClass
         MyReader.SetDelimiters(",")
 
 
-        Dim tables As String = ConfigurationSettings.AppSettings("Tech")
+        Dim tables As String = ConfigurationManager.AppSettings("Tech")
         Dim fieldsString As String = "[ID],[NAME],[LOCATION]"
         Dim condition As String
         Dim fields(,) As String
@@ -143,7 +159,6 @@ Public Class ImportClass
             '------------------------
             'Check table if Tech is present
             condition = " [ID] = '" & lineArray(0) & "'"
-            ReDim fields(0, 0)
             data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
             '------------------------
@@ -156,8 +171,9 @@ Public Class ImportClass
         End While
         '------------------------
         'After importing Technicians listbox needs to be updated
+        condition = String.Empty
+        data.RunDynamicSelect(tables, fieldsString, condition, fields)
         FormHome.BuildTechList()
-
 
     End Sub
 
@@ -225,7 +241,7 @@ Public Class ImportClass
             tempArray(tempArray.Length - 1) = abridgeFile(abridgeFile.Length() - 1)
             '---------------------------------------
             'Search Activities for if Activity and Tech has already been entered
-            tables = ConfigurationSettings.AppSettings("Act")
+            tables = ConfigurationManager.AppSettings("Act")
             fieldsString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID],[FILEIMPORTED]"
             condition = " [ID] = '" & tempArray(0) & "' AND [TECHID] = '" & tempArray(2) & "'"
             ReDim fields(0, 0)
@@ -281,10 +297,10 @@ Public Class ImportClass
             lineArray = MyReader.ReadFields()
             '------------------------
             'Check table if Reciever is present
-            Dim tables As String = ConfigurationSettings.AppSettings("RecInv")
+            Dim tables As String = ConfigurationManager.AppSettings("RecInv")
             Dim fieldsString As String = "[SERIALNUM], [ACCESSCARD], [TECHID], [DATEIN], [DATEOUT], [FILEIMPORTED]"
             Dim condition As String = " [SERIALNUM] = '" & lineArray(2) & "'"
-            Dim fields(,) As String
+            Dim fields(,) As String = {{}, {}}
             data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
             '------------------------

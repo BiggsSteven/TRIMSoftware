@@ -12,7 +12,6 @@ Public Class FormHome
         BuildTechList()
         RBStrucSearch.Checked = True
 
-
     End Sub
 
     Public Sub BuildTechList()
@@ -20,7 +19,7 @@ Public Class FormHome
         LstBoxTech.Items.Clear()
 
         'runs a select Query to retrieve list of Techs
-        Dim table As String = ConfigurationSettings.AppSettings("Tech")
+        Dim table As String = ConfigurationManager.AppSettings("Tech")
         Dim fieldString As String = "[ID], [NAME]"
         Dim TechArray(,) As String
         data.RunDynamicSelect(table, fieldString, "", TechArray)
@@ -32,8 +31,9 @@ Public Class FormHome
             counter += 1
         End While
 
-        LstBoxTech.SelectedItem = LstBoxTech.Items.Item(0)
-
+        If LstBoxTech.Items.Count <> 0 Then
+            LstBoxTech.SelectedItem = LstBoxTech.Items.Item(0)
+        End If
     End Sub
     '-----------------------------------------------------------
     Private Sub RBTextSearch_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RBTextSearch.CheckedChanged
@@ -94,8 +94,8 @@ Public Class FormHome
         'reset datasource
         Dim fieldsString As String = "*"
 
-        Dim tables() As String = {ConfigurationSettings.AppSettings("Act"), ConfigurationSettings.AppSettings("RecInv"), _
-                                 ConfigurationSettings.AppSettings("RecTrans"), ConfigurationSettings.AppSettings("Pay")}
+        Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
+                                 ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
         Dim LiveTable As Integer = TabCtrlDGV.SelectedIndex()
         Dim fields(,) As String
         Dim condition As String
@@ -145,8 +145,8 @@ Public Class FormHome
         'reset datasource
         Dim fieldsString As String = "*"
 
-        Dim tables() As String = {ConfigurationSettings.AppSettings("Act"), ConfigurationSettings.AppSettings("RecInv"), _
-                                 ConfigurationSettings.AppSettings("RecTrans"), ConfigurationSettings.AppSettings("Pay")}
+        Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
+                                 ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
         Dim LiveTable As Integer = TabCtrlDGV.SelectedIndex()
         Dim fields(,) As String
         Dim condition As String
@@ -191,16 +191,16 @@ Public Class FormHome
         Dim fieldsString As String = "*"
         Dim FieldInput As String = TxtBoxSearch.Text
 
-        Dim tables() As String = {ConfigurationSettings.AppSettings("Act"), ConfigurationSettings.AppSettings("RecInv"), _
-                                 ConfigurationSettings.AppSettings("RecTrans"), ConfigurationSettings.AppSettings("Pay")}
+        Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
+                                 ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
         Dim LiveTable As Integer = TabCtrlDGV.SelectedIndex()
         Dim fields(,) As String
         Dim condition As String
 
         If LiveTable = 0 Then
             condition = "[ID] = '" & FieldInput & "' OR [TECHID] = '" & FieldInput & "'"
-            Data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
-            ActivitiesDataGridView.DataSource = Data.dt
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ActivitiesDataGridView.DataSource = data.dt
             Dim rowsCount As Integer = 0
             Dim total As Double = 0
             While rowsCount < ActivitiesDataGridView.Rows.Count
@@ -214,19 +214,19 @@ Public Class FormHome
         ElseIf LiveTable = 1 Then
             condition = "[SERIALNUM] = '" & FieldInput & "' OR [ACCESSCARD] = '" & FieldInput _
                         & "' OR [TECHID] = '" & FieldInput & "'"
-            Data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
-            ReceiverInvDataGridView.DataSource = Data.dt
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ReceiverInvDataGridView.DataSource = data.dt
 
         ElseIf LiveTable = 2 Then
-            condition = "[SERIALNUM] = '" & FieldInput & "' OR [FROMTECHID] = '" & FieldInput _
+            condition = "[ACCESSCARD] = '" & FieldInput & "' OR [FROMTECHID] = '" & FieldInput _
                         & "' OR [TOTECHID] = '" & FieldInput & "'"
-            Data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
-            ReceiverTransferDataGridView.DataSource = Data.dt
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ReceiverTransferDataGridView.DataSource = data.dt
 
         ElseIf LiveTable = 3 Then
             condition = "[CHECKNUMBER] = '" & FieldInput & "' OR [TECHID] = '" & FieldInput & "'"
-            Data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
-            PayStubsDataGridView.DataSource = Data.dt
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            PayStubsDataGridView.DataSource = data.dt
         End If
 
     End Sub
@@ -243,6 +243,7 @@ Public Class FormHome
     Private Sub TSMItemTech_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmTech.Click
         Dim ImportItem As ImportClass = New ImportClass
         ImportItem.selectFile(0, "Import Technician")
+        BuildTechList()
     End Sub
 
     Private Sub TSMItmActive_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmActive.Click
@@ -277,14 +278,16 @@ Public Class FormHome
         If CheckNumber <> String.Empty And Format(CDbl(LblBalanceField.Text), "c2") <> Format(0, "c2") Then
 
             'Write transaction to logs
-            Dim tables As String = ConfigurationSettings.AppSettings("Pay")
+            Dim tables As String = ConfigurationManager.AppSettings("Pay")
             Dim fieldString As String = "[CHECKNUMBER], [DATE], [TECHID], [AMOUNT]"
             Dim fields() As String = {CheckNumber, DateTime.Now.Date, ActivitiesDataGridView.Rows(0).Cells(0).Value, CDbl(LblBalanceField.Text)}
             data.RunDynamicInsert(tables, fieldString, fields)
 
             PrintDocument1.DefaultPageSettings.Landscape = True
             PrintDialog1.Document = PrintDocument1
-            If PrintDialog1.ShowDialog() Then
+
+            Dim result As DialogResult = PrintDialog1.ShowDialog()
+            If result = DialogResult.OK Then
                 PrintDocument1.Print()
             End If
 
@@ -292,7 +295,7 @@ Public Class FormHome
 
             'setup for the update to the activities
             'This is where the paid gets checked
-            tables = ConfigurationSettings.AppSettings("Act")
+            tables = ConfigurationManager.AppSettings("Act")
             fieldString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID]"
             Dim condition As String
             'Calculate pay for Tech
@@ -326,8 +329,6 @@ Public Class FormHome
         End If
 
     End Sub
-
-
 
     Private Sub PrintDocument1_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
         With ActivitiesDataGridView
