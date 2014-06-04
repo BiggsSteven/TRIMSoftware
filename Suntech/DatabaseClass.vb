@@ -1,5 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Configuration
+Imports System
+Imports System.IO
 
 Public Class DatabaseClass
     Dim connectionStr As String
@@ -12,13 +14,20 @@ Public Class DatabaseClass
 
     Public Sub New()
         Dim server As String = ConfigurationManager.AppSettings("Server")
-        Dim database As String = ConfigurationManager.AppSettings("Database")
+        Dim netLib As String = ConfigurationManager.AppSettings("NetLib")
+        Dim database As String = ConfigurationManager.AppSettings("InitialCat")
         Dim User As String = ConfigurationManager.AppSettings("User")
         Dim Password As String = ConfigurationManager.AppSettings("Password")
 
-        connectionStr = "Server = " & server & "; Database = " & database & "; User Id= " & User & "; Password= " & Password & ";"
-        sqlCon = New SqlConnection(connectionStr)
-        sqlCon.Open()
+        Dim SR As New StreamReader("C:\Constring.txt")
+        Dim ConLine As String = SR.ReadToEnd()
+
+
+
+        '"Server = 192.168.30.4\SQLEXPRESS,1433; Network Library = DBMSSOCN; Initial Catalog = ReceiverInstallation; User Id = sa; Password = Password123;"
+
+        sqlCon = New SqlConnection(ConLine)
+            sqlCon.Open()
     End Sub
 
     Public Sub RunDynamicSelect(ByVal table As String, ByVal fieldString As String, ByVal condition As String, ByRef field(,) As String)
