@@ -23,24 +23,24 @@ Partial Class FormHome
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormHome))
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.MenuStripHome = New System.Windows.Forms.MenuStrip
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.TSMLogin = New System.Windows.Forms.ToolStripMenuItem
+        Me.TSMEditPassword = New System.Windows.Forms.ToolStripMenuItem
         Me.TSMFileImport = New System.Windows.Forms.ToolStripMenuItem
         Me.TSMItmTech = New System.Windows.Forms.ToolStripMenuItem
         Me.TSMItmActive = New System.Windows.Forms.ToolStripMenuItem
         Me.TSMItmRecList = New System.Windows.Forms.ToolStripMenuItem
         Me.TSMFileTransfer = New System.Windows.Forms.ToolStripMenuItem
         Me.ReceiverToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.TSMEditPassword = New System.Windows.Forms.ToolStripMenuItem
         Me.PnlFilter = New System.Windows.Forms.Panel
         Me.LstBoxTech = New System.Windows.Forms.ListBox
         Me.TxtBoxSearch = New System.Windows.Forms.TextBox
@@ -82,15 +82,11 @@ Partial Class FormHome
         Me.ActivitiesBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
         Me.TabCtrlDGV = New System.Windows.Forms.TabControl
         Me.TabAct = New System.Windows.Forms.TabPage
+        Me.ChkBoxPrint = New System.Windows.Forms.CheckBox
         Me.Label1 = New System.Windows.Forms.Label
         Me.txtboxChkNum = New System.Windows.Forms.TextBox
         Me.TabInv = New System.Windows.Forms.TabPage
         Me.ReceiverInvDataGridView = New System.Windows.Forms.DataGridView
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ReceiverInvBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TabTrans = New System.Windows.Forms.TabPage
         Me.ReceiverTransferDataGridView = New System.Windows.Forms.DataGridView
@@ -114,7 +110,10 @@ Partial Class FormHome
         Me.ReceiverInvTableAdapter = New Suntech.DataSet1TableAdapters.ReceiverInvTableAdapter
         Me.ReceiverTransferTableAdapter = New Suntech.DataSet1TableAdapters.ReceiverTransferTableAdapter
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog
-        Me.ChkBoxPrint = New System.Windows.Forms.CheckBox
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
         Me.GrpSearchStyle.SuspendLayout()
@@ -160,6 +159,12 @@ Partial Class FormHome
         Me.TSMLogin.Size = New System.Drawing.Size(154, 22)
         Me.TSMLogin.Text = "Login"
         '
+        'TSMEditPassword
+        '
+        Me.TSMEditPassword.Name = "TSMEditPassword"
+        Me.TSMEditPassword.Size = New System.Drawing.Size(154, 22)
+        Me.TSMEditPassword.Text = "Edit Password"
+        '
         'TSMFileImport
         '
         Me.TSMFileImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMItmTech, Me.TSMItmActive, Me.TSMItmRecList})
@@ -202,12 +207,6 @@ Partial Class FormHome
         Me.ReceiverToolStripMenuItem.Name = "ReceiverToolStripMenuItem"
         Me.ReceiverToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.ReceiverToolStripMenuItem.Text = "Receiver"
-        '
-        'TSMEditPassword
-        '
-        Me.TSMEditPassword.Name = "TSMEditPassword"
-        Me.TSMEditPassword.Size = New System.Drawing.Size(154, 22)
-        Me.TSMEditPassword.Text = "Edit Password"
         '
         'PnlFilter
         '
@@ -349,8 +348,8 @@ Partial Class FormHome
         '
         Me.ActivitiesDataGridView.AllowUserToAddRows = False
         Me.ActivitiesDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ActivitiesDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.ActivitiesDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.ActivitiesDataGridView.AutoGenerateColumns = False
         Me.ActivitiesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ActivitiesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TechIDDataGridViewTextBoxColumn, Me.DateDataGridViewTextBoxColumn, Me.TypeDataGridViewTextBoxColumn, Me.IDDataGridViewTextBoxColumn, Me.TotalDataGridViewTextBoxColumn, Me.TechPayDataGridViewTextBoxColumn, Me.Paid})
@@ -393,9 +392,9 @@ Partial Class FormHome
         'TotalDataGridViewTextBoxColumn
         '
         Me.TotalDataGridViewTextBoxColumn.DataPropertyName = "Total"
-        DataGridViewCellStyle30.Format = "C2"
-        DataGridViewCellStyle30.NullValue = Nothing
-        Me.TotalDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle2.Format = "C2"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.TotalDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
         Me.TotalDataGridViewTextBoxColumn.HeaderText = "Total"
         Me.TotalDataGridViewTextBoxColumn.Name = "TotalDataGridViewTextBoxColumn"
         Me.TotalDataGridViewTextBoxColumn.ReadOnly = True
@@ -403,9 +402,9 @@ Partial Class FormHome
         'TechPayDataGridViewTextBoxColumn
         '
         Me.TechPayDataGridViewTextBoxColumn.DataPropertyName = "TechPay"
-        DataGridViewCellStyle31.Format = "C2"
-        DataGridViewCellStyle31.NullValue = Nothing
-        Me.TechPayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle3.Format = "C2"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.TechPayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
         Me.TechPayDataGridViewTextBoxColumn.HeaderText = "TechPay"
         Me.TechPayDataGridViewTextBoxColumn.Name = "TechPayDataGridViewTextBoxColumn"
         Me.TechPayDataGridViewTextBoxColumn.ReadOnly = True
@@ -592,6 +591,17 @@ Partial Class FormHome
         Me.TabAct.Text = "Technician Activities"
         Me.TabAct.UseVisualStyleBackColor = True
         '
+        'ChkBoxPrint
+        '
+        Me.ChkBoxPrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChkBoxPrint.AutoSize = True
+        Me.ChkBoxPrint.Location = New System.Drawing.Point(571, 610)
+        Me.ChkBoxPrint.Name = "ChkBoxPrint"
+        Me.ChkBoxPrint.Size = New System.Drawing.Size(106, 17)
+        Me.ChkBoxPrint.TabIndex = 9
+        Me.ChkBoxPrint.Text = "Print on Payment"
+        Me.ChkBoxPrint.UseVisualStyleBackColor = True
+        '
         'Label1
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -627,48 +637,18 @@ Partial Class FormHome
         '
         Me.ReceiverInvDataGridView.AllowUserToAddRows = False
         Me.ReceiverInvDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ReceiverInvDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.ReceiverInvDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
         Me.ReceiverInvDataGridView.AutoGenerateColumns = False
         Me.ReceiverInvDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ReceiverInvDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ReceiverInvDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
+        Me.ReceiverInvDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
         Me.ReceiverInvDataGridView.DataSource = Me.ReceiverInvBindingSource
         Me.ReceiverInvDataGridView.Dock = System.Windows.Forms.DockStyle.Top
         Me.ReceiverInvDataGridView.Location = New System.Drawing.Point(3, 3)
         Me.ReceiverInvDataGridView.Name = "ReceiverInvDataGridView"
         Me.ReceiverInvDataGridView.Size = New System.Drawing.Size(950, 528)
         Me.ReceiverInvDataGridView.TabIndex = 0
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "SerialNum"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "SerialNum"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "AccessCard"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "AccessCard"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "TechID"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "TechID"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "DateIn"
-        Me.DataGridViewTextBoxColumn4.HeaderText = "DateIn"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateOut"
-        Me.DataGridViewTextBoxColumn5.HeaderText = "DateOut"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         '
         'ReceiverInvBindingSource
         '
@@ -689,8 +669,8 @@ Partial Class FormHome
         '
         Me.ReceiverTransferDataGridView.AllowUserToAddRows = False
         Me.ReceiverTransferDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ReceiverTransferDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.ReceiverTransferDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.ReceiverTransferDataGridView.AutoGenerateColumns = False
         Me.ReceiverTransferDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ReceiverTransferDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -745,8 +725,8 @@ Partial Class FormHome
         '
         Me.PayStubsDataGridView.AllowUserToAddRows = False
         Me.PayStubsDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle34.NullValue = Nothing
-        Me.PayStubsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle34
+        DataGridViewCellStyle6.NullValue = Nothing
+        Me.PayStubsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
         Me.PayStubsDataGridView.AutoGenerateColumns = False
         Me.PayStubsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.PayStubsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -779,9 +759,9 @@ Partial Class FormHome
         'DataGridViewTextBoxColumn13
         '
         Me.DataGridViewTextBoxColumn13.DataPropertyName = "Amount"
-        DataGridViewCellStyle35.Format = "C2"
-        DataGridViewCellStyle35.NullValue = Nothing
-        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle35
+        DataGridViewCellStyle7.Format = "C2"
+        DataGridViewCellStyle7.NullValue = Nothing
+        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewTextBoxColumn13.HeaderText = "Amount"
         Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
         '
@@ -833,16 +813,29 @@ Partial Class FormHome
         '
         Me.PrintDialog1.UseEXDialog = True
         '
-        'ChkBoxPrint
+        'DataGridViewTextBoxColumn2
         '
-        Me.ChkBoxPrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ChkBoxPrint.AutoSize = True
-        Me.ChkBoxPrint.Location = New System.Drawing.Point(571, 610)
-        Me.ChkBoxPrint.Name = "ChkBoxPrint"
-        Me.ChkBoxPrint.Size = New System.Drawing.Size(106, 17)
-        Me.ChkBoxPrint.TabIndex = 9
-        Me.ChkBoxPrint.Text = "Print on Payment"
-        Me.ChkBoxPrint.UseVisualStyleBackColor = True
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "AccessCard"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "AccessCard"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "TechID"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "TechID"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "DateIn"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "DateIn"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateOut"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "DateOut"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         '
         'FormHome
         '
@@ -928,11 +921,6 @@ Partial Class FormHome
     Friend WithEvents ReceiverInvTableAdapter As Suntech.DataSet1TableAdapters.ReceiverInvTableAdapter
     Friend WithEvents ReceiverInvBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents ReceiverInvDataGridView As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GrpSearchStyle As System.Windows.Forms.GroupBox
     Friend WithEvents TxtBoxSearch As System.Windows.Forms.TextBox
     Friend WithEvents RBStrucSearch As System.Windows.Forms.RadioButton
@@ -970,5 +958,9 @@ Partial Class FormHome
     Friend WithEvents TSMLogin As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TSMEditPassword As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChkBoxPrint As System.Windows.Forms.CheckBox
+    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

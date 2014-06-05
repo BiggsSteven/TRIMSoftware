@@ -2,12 +2,16 @@
 Imports System.Data.SqlClient
 Imports System.Environment
 Public Class TransferForm
+
+    Dim Action(,) As String
+
     Private Sub TransferForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         CmboFrom.Text = String.Empty
         TxtBoxAccessCard.Text = String.Empty
         CmboTo.Text = String.Empty
         FillTechCmboBox()
         TxtBoxAccessCard.Enabled = False
+        ReDim Action(3, 0)
     End Sub
 
     Private Sub FillTechCmboBox()
@@ -37,17 +41,18 @@ Public Class TransferForm
             Dim data As DatabaseClass = New DatabaseClass
             Dim CodeScanned As String = TxtBoxAccessCard.Text
 
-            'Retrieve Tech's name and number
+            'Retrieve the Tech's name and number that currently has the Receiver
+            '
             '_____________________________________________________________________________________________________
             '
-            Dim fieldsString As String = ConfigurationManager.AppSettings("RecInv") & ".[ACCESSCARD]" _
-                                        & " , " & ConfigurationManager.AppSettings("RecInv") & ".[TECHID] " _
-                                        & " , " & ConfigurationManager.AppSettings("Tech") & ".[NAME] "
-
             Dim tables As String = ConfigurationManager.AppSettings("RecInv") _
                         & " INNER JOIN " & ConfigurationManager.AppSettings("Tech") _
                         & " ON " & ConfigurationManager.AppSettings("RecInv") & ".[TECHID]=" _
                         & ConfigurationManager.AppSettings("Tech") & ".[ID]"
+
+            Dim fieldsString As String = ConfigurationManager.AppSettings("RecInv") & ".[ACCESSCARD]" _
+                            & " , " & ConfigurationManager.AppSettings("RecInv") & ".[TECHID] " _
+                            & " , " & ConfigurationManager.AppSettings("Tech") & ".[NAME] "
 
             Dim condition As String = ConfigurationManager.AppSettings("RecInv") & ".[ACCESSCARD] = '" & CodeScanned & "'"
             Dim fields(,) As String
@@ -55,88 +60,79 @@ Public Class TransferForm
 
             '_____________________________________________________________________________________________________
 
+            'If the accessCard is found then transfer it to the appropriate person
+            'else add it to the receiver Inventory
+            Dim last As Integer = ChkListTransfers.Items.Count
             If fields.Length <> 0 Then
                 CmboFrom.SelectedItem = (fields(0, 1) & "\" & fields(0, 2))
-                makeTransfer()
-                TxtBoxAccessCard.Text = String.Empty
-                TxtBoxAccessCard.Select()
+                ChkListTransfers.Items.Add("Mov: " & TxtBoxAccessCard.Text & " from " & CmboFrom.SelectedItem & " to " & CmboTo.SelectedItem)
+                ChkListTransfers.SetItemChecked(ChkListTransfers.Items.Count - 1, True)
+                ReDim Preserve Action(3, last)
+                Action(0, last) = "Mov"
+                Action(1, last) = TxtBoxAccessCard.Text
+                Action(2, last) = CmboFrom.SelectedItem
+                Action(3, last) = CmboTo.SelectedItem()
+
+
             Else
                 CmboFrom.SelectedItem = "0000000001\COMPANY"
-                TxtboxSerial.Select()
+                ChkListTransfers.Items.Add("Add: " & TxtBoxAccessCard.Text & " from " & CmboFrom.SelectedItem & " to " & CmboTo.SelectedItem)
+                ChkListTransfers.SetItemChecked(ChkListTransfers.Items.Count - 1, True)
+                ReDim Preserve Action(3, last)
+                Action(0, last) = "Add"
+                Action(1, last) = TxtBoxAccessCard.Text
+                Action(2, last) = CmboFrom.SelectedItem
+                Action(3, last) = CmboTo.SelectedItem()
             End If
 
-
-
-        End If
-    End Sub
-    Private Sub TxtBoxSerial_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles TxtboxSerial.KeyUp
-
-        If e.KeyCode = Keys.Enter Then
-            Dim data As DatabaseClass = New DatabaseClass
-            Dim CodeScanned As String = TxtboxSerial.Text
-
-            Dim table As String = ConfigurationManager.AppSettings("RecInv")
-            Dim fieldsString As String = "[SERIALNUM],[ACCESSCARD],[DATEIN],[DATEOUT],[FILEIMPORTED]"
-            Dim Values() As String = {TxtboxSerial.Text, TxtBoxAccessCard.Text, DateTime.Now.Date, DateAdd(DateInterval.Day, 13, CDate(DateTime.Now.Date)), "SCANNED"}
-            data.RunDynamicInsert(table, fieldsString, Values)
-            makeTransfer()
             TxtBoxAccessCard.Text = String.Empty
-            TxtboxSerial.Text = String.Empty
             TxtBoxAccessCard.Select()
         End If
-     
+    End Sub
+    Private Sub addRec()
+        Dim data As DatabaseClass = New DatabaseClass
+        Dim table As String = ConfigurationManager.AppSettings("RecInv")
+        Dim fieldsString As String = "[ACCESSCARD],[DATEIN],[DATEOUT],[FILEIMPORTED]"
+        Dim Values() As String = {TxtBoxAccessCard.Text, DateTime.Now, DateAdd(DateInterval.Day, 13, CDate(DateTime.Now)), "SCANNED"}
+        data.RunDynamicInsert(table, fieldsString, Values)
     End Sub
 
     Private Sub makeTransfer()
         Dim data As DatabaseClass = New DatabaseClass
-        Dim techFrom As String = CmboFrom.SelectedItem.substring(0, 10)
-        Dim techFromName As String = CmboFrom.SelectedItem.substring(11)
+        Dim table As String
+        Dim fieldsString As String
 
-        Dim accessCard As String = TxtBoxAccessCard.Text
-        Dim techTo As String = CmboTo.SelectedItem.Substring(0, 10)
-        Dim techToName As String = CmboTo.SelectedItem.Substring(11)
 
-        Dim table As String = ConfigurationManager.AppSettings("RecInv")
-        Dim fieldsString As String = "[ACCESSCARD]"
-        Dim condition As String = " [ACCESSCARD] = '" & accessCard & "'"
-        Dim Fieldreturn(,) As String
+        Dim Type As String = String.Empty
+        Dim index As Integer = 0
+        For Each index In ChkListTransfers.CheckedIndices
+            'Write Insert of receiver
+            If Action(0, index) = "Add" Then
+                table = ConfigurationManager.AppSettings("RecInv")
+                fieldsString = "[ACCESSCARD],[TECHID],[DATEIN],[DATEOUT],[FILEIMPORTED]"
+                Dim Values() As String = {Action(1, index), Action(2, index).Substring(0, 10), DateTime.Now, DateAdd(DateInterval.Day, 13, CDate(DateTime.Now)), "SCANNED"}
+                data.RunDynamicInsert(table, fieldsString, Values)
+            End If
 
-        data.RunDynamicSelect(table, fieldsString, condition, Fieldreturn)
-        If Fieldreturn.Length <> 0 Then
-
-            'Write update to RecInv table
+            'Write Update of techid
+            table = ConfigurationManager.AppSettings("RecInv")
             Dim setFields() As String = {"[TECHID]"}
-            Dim fields() As String = {techTo}
-            data.RunDynamicUpdate(table, condition, setFields, fields)
+            Dim fields() As String = {Action(3, index).Substring(0, 10)}
+            Dim Condition As String = "[ACCESSCARD] = '" & Action(1, index) & "'"
+            data.RunDynamicUpdate(table, Condition, setFields, fields)
 
             'Write Insert to RecTransfer table
             table = ConfigurationManager.AppSettings("RecTrans")
             fieldsString = "[ACCESSCARD],[FROMTECHID], [TOTECHID], [DATE]"
-            Dim Values() As String = {accessCard, techFrom, techTo, DateTime.Now.Date}
-            data.RunDynamicInsert(table, fieldsString, Values)
-
-            LblOutput.Text = "Receiver: " & accessCard & Environment.NewLine _
-                            & "Has Been moved from " & techFromName & Environment.NewLine _
-                            & "to " & techToName & " Successfully."
-
-        Else
-            LblOutput.Text = "Receiver: " & accessCard & " was not found. Transfer cancelled."
-
-        End If
-
-        CmboFrom.Text = String.Empty
-        TxtBoxAccessCard.Text = String.Empty
-
-
-
+            Dim ValueList() As String = {Action(1, index), Action(2, index).Substring(0, 10), Action(3, index).Substring(0, 10), DateTime.Now}
+            data.RunDynamicInsert(table, fieldsString, ValueList)
+        Next
     End Sub
 
     Private Sub CmboTo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CmboTo.SelectedIndexChanged
         If CmboTo.SelectedItem <> String.Empty Then
             TxtBoxAccessCard.Enabled = True
             TxtBoxAccessCard.Select()
-            TxtboxSerial.Enabled = True
-
         End If
 
     End Sub

@@ -8,7 +8,6 @@ Public Class FormHome
 
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-
         LoginForm.ShowDialog()
         LoginForm.Dispose()
         ChkBoxPrint.Checked = True
@@ -217,7 +216,7 @@ Public Class FormHome
             LblBalanceField.Text = Format(total, "c2")
 
         ElseIf LiveTable = 1 Then
-            condition = "[SERIALNUM] = '" & FieldInput & "' OR [ACCESSCARD] = '" & FieldInput _
+            condition = "[ACCESSCARD] = '" & FieldInput _
                         & "' OR [TECHID] = '" & FieldInput & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             ReceiverInvDataGridView.DataSource = data.dt

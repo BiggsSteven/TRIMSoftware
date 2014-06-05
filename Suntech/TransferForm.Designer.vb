@@ -35,18 +35,18 @@ Partial Class TransferForm
         Me.TableAdapterManager = New Suntech.DataSet1TableAdapters.TableAdapterManager
         Me.lblTechFrom = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
-        Me.LblSerial = New System.Windows.Forms.Label
-        Me.TxtboxSerial = New System.Windows.Forms.TextBox
+        Me.PnlAddReceivers = New System.Windows.Forms.Panel
+        Me.ChkListTransfers = New System.Windows.Forms.CheckedListBox
         CType(Me.ReceiverTransferBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PnlAddReceivers.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblTrans
         '
-        Me.LblTrans.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.LblTrans.AutoSize = True
         Me.LblTrans.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblTrans.Location = New System.Drawing.Point(12, 49)
+        Me.LblTrans.Location = New System.Drawing.Point(12, 9)
         Me.LblTrans.Name = "LblTrans"
         Me.LblTrans.Size = New System.Drawing.Size(101, 13)
         Me.LblTrans.TabIndex = 21
@@ -54,17 +54,15 @@ Partial Class TransferForm
         '
         'TxtBoxAccessCard
         '
-        Me.TxtBoxAccessCard.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtBoxAccessCard.Location = New System.Drawing.Point(130, 100)
+        Me.TxtBoxAccessCard.Location = New System.Drawing.Point(132, 60)
         Me.TxtBoxAccessCard.Name = "TxtBoxAccessCard"
-        Me.TxtBoxAccessCard.Size = New System.Drawing.Size(238, 20)
+        Me.TxtBoxAccessCard.Size = New System.Drawing.Size(237, 20)
         Me.TxtBoxAccessCard.TabIndex = 0
         '
         'BtnTransfer
         '
-        Me.BtnTransfer.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnTransfer.Location = New System.Drawing.Point(12, 200)
+        Me.BtnTransfer.Location = New System.Drawing.Point(12, 390)
         Me.BtnTransfer.Name = "BtnTransfer"
         Me.BtnTransfer.Size = New System.Drawing.Size(353, 50)
         Me.BtnTransfer.TabIndex = 17
@@ -74,7 +72,7 @@ Partial Class TransferForm
         'CmboTo
         '
         Me.CmboTo.FormattingEnabled = True
-        Me.CmboTo.Location = New System.Drawing.Point(131, 46)
+        Me.CmboTo.Location = New System.Drawing.Point(131, 6)
         Me.CmboTo.Name = "CmboTo"
         Me.CmboTo.Size = New System.Drawing.Size(237, 21)
         Me.CmboTo.TabIndex = 22
@@ -83,7 +81,7 @@ Partial Class TransferForm
         '
         Me.CmboFrom.Enabled = False
         Me.CmboFrom.FormattingEnabled = True
-        Me.CmboFrom.Location = New System.Drawing.Point(131, 73)
+        Me.CmboFrom.Location = New System.Drawing.Point(131, 33)
         Me.CmboFrom.Name = "CmboFrom"
         Me.CmboFrom.Size = New System.Drawing.Size(237, 21)
         Me.CmboFrom.TabIndex = 23
@@ -124,7 +122,7 @@ Partial Class TransferForm
         '
         Me.lblTechFrom.AutoSize = True
         Me.lblTechFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTechFrom.Location = New System.Drawing.Point(12, 76)
+        Me.lblTechFrom.Location = New System.Drawing.Point(12, 36)
         Me.lblTechFrom.Name = "lblTechFrom"
         Me.lblTechFrom.Size = New System.Drawing.Size(113, 13)
         Me.lblTechFrom.TabIndex = 25
@@ -134,36 +132,35 @@ Partial Class TransferForm
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 103)
+        Me.Label2.Location = New System.Drawing.Point(12, 63)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(94, 13)
         Me.Label2.TabIndex = 26
         Me.Label2.Text = "Access Card #:"
         '
-        'LblSerial
+        'PnlAddReceivers
         '
-        Me.LblSerial.AutoSize = True
-        Me.LblSerial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblSerial.Location = New System.Drawing.Point(12, 131)
-        Me.LblSerial.Name = "LblSerial"
-        Me.LblSerial.Size = New System.Drawing.Size(55, 13)
-        Me.LblSerial.TabIndex = 27
-        Me.LblSerial.Text = "Serial #:"
+        Me.PnlAddReceivers.Controls.Add(Me.ChkListTransfers)
+        Me.PnlAddReceivers.Location = New System.Drawing.Point(15, 86)
+        Me.PnlAddReceivers.Name = "PnlAddReceivers"
+        Me.PnlAddReceivers.Size = New System.Drawing.Size(354, 298)
+        Me.PnlAddReceivers.TabIndex = 27
         '
-        'TxtboxSerial
+        'ChkListTransfers
         '
-        Me.TxtboxSerial.Location = New System.Drawing.Point(131, 128)
-        Me.TxtboxSerial.Name = "TxtboxSerial"
-        Me.TxtboxSerial.Size = New System.Drawing.Size(238, 20)
-        Me.TxtboxSerial.TabIndex = 28
+        Me.ChkListTransfers.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ChkListTransfers.FormattingEnabled = True
+        Me.ChkListTransfers.Location = New System.Drawing.Point(0, 0)
+        Me.ChkListTransfers.Name = "ChkListTransfers"
+        Me.ChkListTransfers.Size = New System.Drawing.Size(354, 289)
+        Me.ChkListTransfers.TabIndex = 0
         '
         'TransferForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(381, 262)
-        Me.Controls.Add(Me.TxtboxSerial)
-        Me.Controls.Add(Me.LblSerial)
+        Me.ClientSize = New System.Drawing.Size(381, 452)
+        Me.Controls.Add(Me.PnlAddReceivers)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblTechFrom)
         Me.Controls.Add(Me.LblOutput)
@@ -174,9 +171,10 @@ Partial Class TransferForm
         Me.Controls.Add(Me.BtnTransfer)
         Me.Name = "TransferForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "TransferForm"
+        Me.Text = "Transfer Form"
         CType(Me.ReceiverTransferBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PnlAddReceivers.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -193,6 +191,6 @@ Partial Class TransferForm
     Friend WithEvents LblOutput As System.Windows.Forms.Label
     Friend WithEvents lblTechFrom As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents LblSerial As System.Windows.Forms.Label
-    Friend WithEvents TxtboxSerial As System.Windows.Forms.TextBox
+    Friend WithEvents PnlAddReceivers As System.Windows.Forms.Panel
+    Friend WithEvents ChkListTransfers As System.Windows.Forms.CheckedListBox
 End Class
