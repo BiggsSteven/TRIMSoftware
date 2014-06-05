@@ -35,6 +35,8 @@ Partial Class TransferForm
         Me.TableAdapterManager = New Suntech.DataSet1TableAdapters.TableAdapterManager
         Me.lblTechFrom = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
+        Me.LblSerial = New System.Windows.Forms.Label
+        Me.TxtboxSerial = New System.Windows.Forms.TextBox
         CType(Me.ReceiverTransferBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -138,11 +140,30 @@ Partial Class TransferForm
         Me.Label2.TabIndex = 26
         Me.Label2.Text = "Access Card #:"
         '
+        'LblSerial
+        '
+        Me.LblSerial.AutoSize = True
+        Me.LblSerial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblSerial.Location = New System.Drawing.Point(12, 131)
+        Me.LblSerial.Name = "LblSerial"
+        Me.LblSerial.Size = New System.Drawing.Size(55, 13)
+        Me.LblSerial.TabIndex = 27
+        Me.LblSerial.Text = "Serial #:"
+        '
+        'TxtboxSerial
+        '
+        Me.TxtboxSerial.Location = New System.Drawing.Point(131, 128)
+        Me.TxtboxSerial.Name = "TxtboxSerial"
+        Me.TxtboxSerial.Size = New System.Drawing.Size(238, 20)
+        Me.TxtboxSerial.TabIndex = 28
+        '
         'TransferForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(381, 262)
+        Me.Controls.Add(Me.TxtboxSerial)
+        Me.Controls.Add(Me.LblSerial)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblTechFrom)
         Me.Controls.Add(Me.LblOutput)
@@ -152,6 +173,7 @@ Partial Class TransferForm
         Me.Controls.Add(Me.TxtBoxAccessCard)
         Me.Controls.Add(Me.BtnTransfer)
         Me.Name = "TransferForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "TransferForm"
         CType(Me.ReceiverTransferBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -171,4 +193,6 @@ Partial Class TransferForm
     Friend WithEvents LblOutput As System.Windows.Forms.Label
     Friend WithEvents lblTechFrom As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents LblSerial As System.Windows.Forms.Label
+    Friend WithEvents TxtboxSerial As System.Windows.Forms.TextBox
 End Class

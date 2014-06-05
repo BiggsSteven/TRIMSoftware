@@ -31,6 +31,8 @@ Public Class DatabaseClass
     End Sub
 
     Public Sub RunDynamicSelect(ByVal table As String, ByVal fieldString As String, ByVal condition As String, ByRef field(,) As String)
+
+        'table string|fieldString|condition string| field(,)
         'build query with optional condition statement
         sqlText = "SELECT " & fieldString & " FROM " & table
 

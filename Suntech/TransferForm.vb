@@ -30,7 +30,7 @@ Public Class TransferForm
         End While
     End Sub
 
-    Private Sub TxtBoxSerial_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles TxtBoxAccessCard.KeyUp
+    Private Sub TxtBoxAccess_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles TxtBoxAccessCard.KeyUp
         'Barcode Scanner is set to press "ENTER" after scanning
         'This will run after scanning
         If e.KeyCode = Keys.Enter Then
@@ -57,13 +57,34 @@ Public Class TransferForm
 
             If fields.Length <> 0 Then
                 CmboFrom.SelectedItem = (fields(0, 1) & "\" & fields(0, 2))
+                makeTransfer()
+                TxtBoxAccessCard.Text = String.Empty
+                TxtBoxAccessCard.Select()
+            Else
+                CmboFrom.SelectedItem = "0000000001\COMPANY"
+                TxtboxSerial.Select()
             End If
 
-            makeTransfer()
-            TxtBoxAccessCard.Text = String.Empty
-            TxtBoxAccessCard.Select()
+
 
         End If
+    End Sub
+    Private Sub TxtBoxSerial_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles TxtboxSerial.KeyUp
+
+        If e.KeyCode = Keys.Enter Then
+            Dim data As DatabaseClass = New DatabaseClass
+            Dim CodeScanned As String = TxtboxSerial.Text
+
+            Dim table As String = ConfigurationManager.AppSettings("RecInv")
+            Dim fieldsString As String = "[SERIALNUM],[ACCESSCARD],[DATEIN],[DATEOUT],[FILEIMPORTED]"
+            Dim Values() As String = {TxtboxSerial.Text, TxtBoxAccessCard.Text, DateTime.Now.Date, DateAdd(DateInterval.Day, 13, CDate(DateTime.Now.Date)), "SCANNED"}
+            data.RunDynamicInsert(table, fieldsString, Values)
+            makeTransfer()
+            TxtBoxAccessCard.Text = String.Empty
+            TxtboxSerial.Text = String.Empty
+            TxtBoxAccessCard.Select()
+        End If
+     
     End Sub
 
     Private Sub makeTransfer()
@@ -114,6 +135,8 @@ Public Class TransferForm
         If CmboTo.SelectedItem <> String.Empty Then
             TxtBoxAccessCard.Enabled = True
             TxtBoxAccessCard.Select()
+            TxtboxSerial.Enabled = True
+
         End If
 
     End Sub

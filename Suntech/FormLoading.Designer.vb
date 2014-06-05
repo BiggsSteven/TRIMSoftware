@@ -52,6 +52,7 @@ Partial Class FormLoading
         Me.Controls.Add(Me.LblMessage)
         Me.Controls.Add(Me.ProgBarImport)
         Me.Name = "FormLoading"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Loading in Progress"
         Me.ResumeLayout(False)
 

@@ -63,6 +63,7 @@ Partial Class AddDupe
         Me.Controls.Add(Me.BtnDupeY)
         Me.Controls.Add(Me.lblDupe)
         Me.Name = "AddDupe"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Duplicate Records Found"
         Me.ResumeLayout(False)
 

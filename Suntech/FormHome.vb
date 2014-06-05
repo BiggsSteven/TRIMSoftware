@@ -2,12 +2,17 @@
 Imports System.Data.SqlClient
 
 Public Class FormHome
-
     Dim mRow As Integer = 0
     Dim newpage As Boolean = True
-
+    Public Permissions As String
 
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+
+        LoginForm.ShowDialog()
+        LoginForm.Dispose()
+        ChkBoxPrint.Checked = True
+
         'Sub to Initialize the Technician list
         BuildTechList()
         RBStrucSearch.Checked = True
@@ -283,15 +288,16 @@ Public Class FormHome
             Dim fields() As String = {CheckNumber, DateTime.Now.Date, ActivitiesDataGridView.Rows(0).Cells(0).Value, CDbl(LblBalanceField.Text)}
             data.RunDynamicInsert(tables, fieldString, fields)
 
-            PrintDocument1.DefaultPageSettings.Landscape = True
-            PrintDialog1.Document = PrintDocument1
-
-            Dim result As DialogResult = PrintDialog1.ShowDialog()
-            If result = DialogResult.OK Then
-                PrintDocument1.Print()
-            End If
-
             'PrintDocument1.Print()
+            If ChkBoxPrint.Checked = True Then
+                PrintDocument1.DefaultPageSettings.Landscape = True
+                PrintDialog1.Document = PrintDocument1
+
+                Dim result As DialogResult = PrintDialog1.ShowDialog()
+                If result = DialogResult.OK Then
+                    PrintDocument1.Print()
+                End If
+            End If
 
             'setup for the update to the activities
             'This is where the paid gets checked
@@ -386,4 +392,20 @@ Public Class FormHome
         End With
     End Sub
 
+    Private Sub TSMLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMLogin.Click
+        LoginForm.ShowDialog()
+        LoginForm.Dispose()
+    End Sub
+
+    Private Sub TSMEditPassword_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMEditPassword.Click
+        FrmEditPassword.ShowDialog()
+        FrmEditPassword.Dispose()
+    End Sub
+
+    Private Sub ChkBoxPrint_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChkBoxPrint.CheckedChanged
+        If ChkBoxPrint.Checked = False Then
+            MessageBox.Show("Are you sure you do not want to print an invoice for this payment?" & Environment.NewLine() _
+                            & "This will be your only chance to print one.")
+        End If
+    End Sub
 End Class

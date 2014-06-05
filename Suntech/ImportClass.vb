@@ -33,8 +33,9 @@ Public Class ImportClass
                 FormHome.Cursor = Cursors.WaitCursor
                 FormLoading.Cursor = Cursors.WaitCursor
                 FormLoading.Show()
-                FormHome.BtnGtInfo.Enabled = False
-                FormHome.BtnPayTch.Enabled = False
+                'FormHome.BtnGtInfo.Enabled = False
+                'FormHome.BtnPayTch.Enabled = False
+                FormHome.Enabled = False
 
                 bgwkr = New BackgroundWorker
                 bgwkr.WorkerReportsProgress = True
@@ -62,14 +63,12 @@ Public Class ImportClass
 
             Case 1
                 table = ConfigurationManager.AppSettings("Act")
-                ReDim editFields(2)
+                ReDim editFields(1)
                 editFields(0) = "[TOTAL]"
                 editFields(1) = "[TECHPAY]"
-                editFields(2) = "[PAID]"
-                ReDim values(2)
+                ReDim values(1)
                 values(0) = 0
                 values(1) = 0
-                values(2) = 0
                 data.RunDynamicSelect(table, fieldsString, condition, fields)
 
                 If fields.Length <> 0 Then
@@ -128,14 +127,13 @@ Public Class ImportClass
     End Sub
 
     Private Sub bgwkrRunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwkr.RunWorkerCompleted
-        FormHome.BtnGtInfo.Enabled = True
-        FormHome.BtnPayTch.Enabled = True
+        'FormHome.BtnGtInfo.Enabled = True
+        'FormHome.BtnPayTch.Enabled = True
+        FormHome.Enabled = True
         FormHome.OpenFileDialog1.Title = String.Empty
         FormHome.Cursor = Cursors.Default
-        FormLoading.Cursor = Cursors.Default
-        FormLoading.Hide()
-        FormLoading.ProgBarImport.Value = 0
-
+        FormLoading.Close()
+        FormLoading.Dispose()
         MessageBox.Show("Your files have been successfully imported.")
 
     End Sub
