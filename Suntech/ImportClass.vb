@@ -86,7 +86,7 @@ Public Class ImportClass
                 ReDim editFields(0)
                 editFields(0) = "[TECHID]"
                 ReDim values(0)
-                values(0) = "0000000000"
+                values(0) = "0000000002"
                 data.RunDynamicSelect(table, fieldsString, condition, fields)
 
 
@@ -307,7 +307,7 @@ Public Class ImportClass
             'If there is not one already by that serialNumber we need to create and insert one
             If fields.Length = 0 And lineArray(2) <> "" Then
                 Dim dateEnd As Date = DateAdd(DateInterval.Day, 13, CDate(lineArray(11)))
-                Dim MVField() As String = {lineArray(2), lineArray(3), "0000000000", CDate(lineArray(11)), dateEnd, abridgeFile(abridgeFile.Length() - 1)}
+                Dim MVField() As String = {lineArray(2), lineArray(3), "0000000002", CDate(lineArray(11)), dateEnd, abridgeFile(abridgeFile.Length() - 1)}
                 data.RunDynamicInsert(tables, fieldsString, MVField)
             End If
         End While

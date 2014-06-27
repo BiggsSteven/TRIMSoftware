@@ -56,15 +56,16 @@ Partial Class TransferForm
         '
         Me.TxtBoxAccessCard.Location = New System.Drawing.Point(132, 60)
         Me.TxtBoxAccessCard.Name = "TxtBoxAccessCard"
-        Me.TxtBoxAccessCard.Size = New System.Drawing.Size(237, 20)
+        Me.TxtBoxAccessCard.Size = New System.Drawing.Size(411, 20)
         Me.TxtBoxAccessCard.TabIndex = 0
         '
         'BtnTransfer
         '
+        Me.BtnTransfer.Enabled = False
         Me.BtnTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnTransfer.Location = New System.Drawing.Point(12, 390)
         Me.BtnTransfer.Name = "BtnTransfer"
-        Me.BtnTransfer.Size = New System.Drawing.Size(353, 50)
+        Me.BtnTransfer.Size = New System.Drawing.Size(527, 50)
         Me.BtnTransfer.TabIndex = 17
         Me.BtnTransfer.Text = "Make Transfer"
         Me.BtnTransfer.UseVisualStyleBackColor = True
@@ -74,7 +75,7 @@ Partial Class TransferForm
         Me.CmboTo.FormattingEnabled = True
         Me.CmboTo.Location = New System.Drawing.Point(131, 6)
         Me.CmboTo.Name = "CmboTo"
-        Me.CmboTo.Size = New System.Drawing.Size(237, 21)
+        Me.CmboTo.Size = New System.Drawing.Size(411, 21)
         Me.CmboTo.TabIndex = 22
         '
         'CmboFrom
@@ -83,7 +84,7 @@ Partial Class TransferForm
         Me.CmboFrom.FormattingEnabled = True
         Me.CmboFrom.Location = New System.Drawing.Point(131, 33)
         Me.CmboFrom.Name = "CmboFrom"
-        Me.CmboFrom.Size = New System.Drawing.Size(237, 21)
+        Me.CmboFrom.Size = New System.Drawing.Size(411, 21)
         Me.CmboFrom.TabIndex = 23
         '
         'LblOutput
@@ -111,6 +112,7 @@ Partial Class TransferForm
         'TableAdapterManager
         '
         Me.TableAdapterManager.ActivitiesTableAdapter = Nothing
+        Me.TableAdapterManager.AdminTableTableAdapter = Nothing
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.PayStubsTableAdapter = Nothing
         Me.TableAdapterManager.ReceiverInvTableAdapter = Nothing
@@ -143,23 +145,24 @@ Partial Class TransferForm
         Me.PnlAddReceivers.Controls.Add(Me.ChkListTransfers)
         Me.PnlAddReceivers.Location = New System.Drawing.Point(15, 86)
         Me.PnlAddReceivers.Name = "PnlAddReceivers"
-        Me.PnlAddReceivers.Size = New System.Drawing.Size(354, 298)
+        Me.PnlAddReceivers.Size = New System.Drawing.Size(528, 298)
         Me.PnlAddReceivers.TabIndex = 27
         '
         'ChkListTransfers
         '
         Me.ChkListTransfers.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ChkListTransfers.Enabled = False
         Me.ChkListTransfers.FormattingEnabled = True
         Me.ChkListTransfers.Location = New System.Drawing.Point(0, 0)
         Me.ChkListTransfers.Name = "ChkListTransfers"
-        Me.ChkListTransfers.Size = New System.Drawing.Size(354, 289)
+        Me.ChkListTransfers.Size = New System.Drawing.Size(528, 289)
         Me.ChkListTransfers.TabIndex = 0
         '
         'TransferForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(381, 452)
+        Me.ClientSize = New System.Drawing.Size(555, 452)
         Me.Controls.Add(Me.PnlAddReceivers)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblTechFrom)

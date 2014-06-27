@@ -93,7 +93,8 @@ Public Class FormHome
         Dim data As DatabaseClass = New DatabaseClass
         'set query
         Dim bgnDate As String = DTPkrFrom.Value.Date
-        Dim endDate As String = DTPkrEnd.Value.Date
+        Dim duration As TimeSpan = New System.TimeSpan(23, 59, 59)
+        Dim endDate As String = DTPkrEnd.Value.Date.Add(duration)
 
         'reset datasource
         Dim fieldsString As String = "*"
@@ -144,7 +145,8 @@ Public Class FormHome
         Dim TechSelected As String = LstBoxTech.SelectedItem
         TechSelected = TechSelected.Substring(0, 10)
         Dim bgnDate As String = DTPkrFrom.Value.Date
-        Dim endDate As String = DTPkrEnd.Value.Date
+        Dim duration As TimeSpan = New System.TimeSpan(23, 59, 59)
+        Dim endDate As String = DTPkrEnd.Value.Date.Add(duration)
 
         'reset datasource
         Dim fieldsString As String = "*"
@@ -266,7 +268,7 @@ Public Class FormHome
     End Sub
 
     Private Sub ReceiverToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReceiverToolStripMenuItem.Click
-        TransferForm.Show()
+        TransferForm.ShowDialog()
     End Sub
 
     '-----------------------------------------------------------
@@ -407,4 +409,5 @@ Public Class FormHome
                             & "This will be your only chance to print one.")
         End If
     End Sub
+
 End Class

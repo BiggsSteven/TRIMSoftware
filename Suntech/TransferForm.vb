@@ -75,7 +75,7 @@ Public Class TransferForm
 
 
             Else
-                CmboFrom.SelectedItem = "0000000001\COMPANY"
+                CmboFrom.SelectedItem = "0000000001\MASTEC"
                 ChkListTransfers.Items.Add("Add: " & TxtBoxAccessCard.Text & " from " & CmboFrom.SelectedItem & " to " & CmboTo.SelectedItem)
                 ChkListTransfers.SetItemChecked(ChkListTransfers.Items.Count - 1, True)
                 ReDim Preserve Action(3, last)
@@ -133,11 +133,20 @@ Public Class TransferForm
         If CmboTo.SelectedItem <> String.Empty Then
             TxtBoxAccessCard.Enabled = True
             TxtBoxAccessCard.Select()
+            ChkListTransfers.Enabled = True
+            BtnTransfer.Enabled = True
         End If
-
     End Sub
 
     Private Sub BtnTransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnTransfer.Click
         makeTransfer()
+        ChkListTransfers.Items.Clear()
+        ReDim Action(3, 0)
+        MessageBox.Show("All actions where processed successfully")
+
+    End Sub
+
+    Private Sub ChkListTransfers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChkListTransfers.SelectedIndexChanged
+        BtnTransfer.Enabled = True
     End Sub
 End Class

@@ -29,16 +29,12 @@ Public Class LoginForm
             Next ctrl
             FormHome.PayStubsDataGridView.Visible = False
             FormHome.TSMEditPassword.Visible = False
-            FormHome.TSMFileImport.Visible = False
-            FormHome.TSMFileTransfer.Visible = False
             FormHome.Permissions = ""
         Else
             For Each ctrl As Control In FormHome.TabAct.Controls
                 ctrl.Visible = True
             Next ctrl
             FormHome.PayStubsDataGridView.Visible = True
-            FormHome.TSMFileImport.Visible = True
-            FormHome.TSMFileTransfer.Visible = True
             FormHome.TSMEditPassword.Visible = True
 
             If fields(0, 0) = "CNS" Then
