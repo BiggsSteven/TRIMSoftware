@@ -28,14 +28,14 @@ Public Class LoginForm
                 ctrl.Visible = False
             Next ctrl
             FormHome.PayStubsDataGridView.Visible = False
-            FormHome.TSMEditPassword.Visible = False
+            FormHome.TSMSettings.Visible = False
             FormHome.Permissions = ""
         Else
             For Each ctrl As Control In FormHome.TabAct.Controls
                 ctrl.Visible = True
             Next ctrl
             FormHome.PayStubsDataGridView.Visible = True
-            FormHome.TSMEditPassword.Visible = True
+            FormHome.TSMSettings.Visible = True
 
             If fields(0, 0) = "CNS" Then
                 condition = " [USERNAME] <> '" & UsernameTextBox.Text & "'"

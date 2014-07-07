@@ -22,98 +22,98 @@ Partial Class FormHome
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormHome))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Me.MenuStripHome = New System.Windows.Forms.MenuStrip
-        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.TSMLogin = New System.Windows.Forms.ToolStripMenuItem
-        Me.TSMEditPassword = New System.Windows.Forms.ToolStripMenuItem
-        Me.TSMFileImport = New System.Windows.Forms.ToolStripMenuItem
-        Me.TSMItmTech = New System.Windows.Forms.ToolStripMenuItem
-        Me.TSMItmActive = New System.Windows.Forms.ToolStripMenuItem
-        Me.TSMItmRecList = New System.Windows.Forms.ToolStripMenuItem
-        Me.TSMFileTransfer = New System.Windows.Forms.ToolStripMenuItem
-        Me.ReceiverToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.PnlFilter = New System.Windows.Forms.Panel
-        Me.LstBoxTech = New System.Windows.Forms.ListBox
-        Me.TxtBoxSearch = New System.Windows.Forms.TextBox
-        Me.GrpSearchStyle = New System.Windows.Forms.GroupBox
-        Me.RBAll = New System.Windows.Forms.RadioButton
-        Me.RBStrucSearch = New System.Windows.Forms.RadioButton
-        Me.RBTextSearch = New System.Windows.Forms.RadioButton
-        Me.LblDtEnd = New System.Windows.Forms.Label
-        Me.LblDtFrm = New System.Windows.Forms.Label
-        Me.DTPkrEnd = New System.Windows.Forms.DateTimePicker
-        Me.DTPkrFrom = New System.Windows.Forms.DateTimePicker
-        Me.BtnGtInfo = New System.Windows.Forms.Button
-        Me.BtnPayTch = New System.Windows.Forms.Button
-        Me.ActivitiesDataGridView = New System.Windows.Forms.DataGridView
-        Me.TechIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.TypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.TotalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.TechPayDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Paid = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.MenuStripHome = New System.Windows.Forms.MenuStrip()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TSMLogin = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TSMSettings = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TSMFileImport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TSMItmTech = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TSMItmActive = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TSMItmRecList = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TSMFileTransfer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReceiverToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PnlFilter = New System.Windows.Forms.Panel()
+        Me.LstBoxTech = New System.Windows.Forms.ListBox()
+        Me.TxtBoxSearch = New System.Windows.Forms.TextBox()
+        Me.GrpSearchStyle = New System.Windows.Forms.GroupBox()
+        Me.RBAll = New System.Windows.Forms.RadioButton()
+        Me.RBStrucSearch = New System.Windows.Forms.RadioButton()
+        Me.RBTextSearch = New System.Windows.Forms.RadioButton()
+        Me.LblDtEnd = New System.Windows.Forms.Label()
+        Me.LblDtFrm = New System.Windows.Forms.Label()
+        Me.DTPkrEnd = New System.Windows.Forms.DateTimePicker()
+        Me.DTPkrFrom = New System.Windows.Forms.DateTimePicker()
+        Me.BtnGtInfo = New System.Windows.Forms.Button()
+        Me.BtnPayTch = New System.Windows.Forms.Button()
+        Me.ActivitiesDataGridView = New System.Windows.Forms.DataGridView()
+        Me.TechIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TotalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TechPayDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Paid = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ActivitiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DataSet1 = New Suntech.DataSet1
-        Me.LblBalanceHdr = New System.Windows.Forms.Label
-        Me.LblBalanceField = New System.Windows.Forms.Label
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
+        Me.DataSet1 = New Suntech.DataSet1()
+        Me.LblBalanceHdr = New System.Windows.Forms.Label()
+        Me.LblBalanceField = New System.Windows.Forms.Label()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ActivitiesBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
-        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
-        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator
-        Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox
-        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
-        Me.ActivitiesBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
-        Me.TabCtrlDGV = New System.Windows.Forms.TabControl
-        Me.TabAct = New System.Windows.Forms.TabPage
-        Me.ChkBoxPrint = New System.Windows.Forms.CheckBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.txtboxChkNum = New System.Windows.Forms.TextBox
-        Me.TabInv = New System.Windows.Forms.TabPage
-        Me.ReceiverInvDataGridView = New System.Windows.Forms.DataGridView
+        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
+        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox()
+        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ActivitiesBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton()
+        Me.TabCtrlDGV = New System.Windows.Forms.TabControl()
+        Me.TabAct = New System.Windows.Forms.TabPage()
+        Me.ChkBoxPrint = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtboxChkNum = New System.Windows.Forms.TextBox()
+        Me.TabInv = New System.Windows.Forms.TabPage()
+        Me.ReceiverInvDataGridView = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReceiverInvBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TabTrans = New System.Windows.Forms.TabPage
-        Me.ReceiverTransferDataGridView = New System.Windows.Forms.DataGridView
-        Me.AccessCard = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.TabTrans = New System.Windows.Forms.TabPage()
+        Me.ReceiverTransferDataGridView = New System.Windows.Forms.DataGridView()
+        Me.AccessCard = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReceiverTransferBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TabPayLog = New System.Windows.Forms.TabPage
-        Me.PayStubsDataGridView = New System.Windows.Forms.DataGridView
-        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.TabPayLog = New System.Windows.Forms.TabPage()
+        Me.PayStubsDataGridView = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PayStubsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument
-        Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog
-        Me.ActivitiesTableAdapter = New Suntech.DataSet1TableAdapters.ActivitiesTableAdapter
-        Me.TableAdapterManager = New Suntech.DataSet1TableAdapters.TableAdapterManager
-        Me.PayStubsTableAdapter = New Suntech.DataSet1TableAdapters.PayStubsTableAdapter
-        Me.ReceiverInvTableAdapter = New Suntech.DataSet1TableAdapters.ReceiverInvTableAdapter
-        Me.ReceiverTransferTableAdapter = New Suntech.DataSet1TableAdapters.ReceiverTransferTableAdapter
-        Me.PrintDialog1 = New System.Windows.Forms.PrintDialog
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
+        Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
+        Me.ActivitiesTableAdapter = New Suntech.DataSet1TableAdapters.ActivitiesTableAdapter()
+        Me.TableAdapterManager = New Suntech.DataSet1TableAdapters.TableAdapterManager()
+        Me.PayStubsTableAdapter = New Suntech.DataSet1TableAdapters.PayStubsTableAdapter()
+        Me.ReceiverInvTableAdapter = New Suntech.DataSet1TableAdapters.ReceiverInvTableAdapter()
+        Me.ReceiverTransferTableAdapter = New Suntech.DataSet1TableAdapters.ReceiverTransferTableAdapter()
+        Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
         Me.GrpSearchStyle.SuspendLayout()
@@ -147,7 +147,7 @@ Partial Class FormHome
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMLogin, Me.TSMEditPassword, Me.TSMFileImport, Me.TSMFileTransfer})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMLogin, Me.TSMFileImport, Me.TSMFileTransfer, Me.TSMSettings})
         Me.FileToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
@@ -156,14 +156,14 @@ Partial Class FormHome
         'TSMLogin
         '
         Me.TSMLogin.Name = "TSMLogin"
-        Me.TSMLogin.Size = New System.Drawing.Size(154, 22)
+        Me.TSMLogin.Size = New System.Drawing.Size(152, 22)
         Me.TSMLogin.Text = "Login"
         '
-        'TSMEditPassword
+        'TSMSettings
         '
-        Me.TSMEditPassword.Name = "TSMEditPassword"
-        Me.TSMEditPassword.Size = New System.Drawing.Size(154, 22)
-        Me.TSMEditPassword.Text = "Edit Password"
+        Me.TSMSettings.Name = "TSMSettings"
+        Me.TSMSettings.Size = New System.Drawing.Size(152, 22)
+        Me.TSMSettings.Text = "Settings"
         '
         'TSMFileImport
         '
@@ -171,7 +171,7 @@ Partial Class FormHome
         Me.TSMFileImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TSMFileImport.Name = "TSMFileImport"
         Me.TSMFileImport.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TSMFileImport.Size = New System.Drawing.Size(154, 22)
+        Me.TSMFileImport.Size = New System.Drawing.Size(152, 22)
         Me.TSMFileImport.Text = "Import"
         '
         'TSMItmTech
@@ -199,7 +199,7 @@ Partial Class FormHome
         '
         Me.TSMFileTransfer.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReceiverToolStripMenuItem})
         Me.TSMFileTransfer.Name = "TSMFileTransfer"
-        Me.TSMFileTransfer.Size = New System.Drawing.Size(154, 22)
+        Me.TSMFileTransfer.Size = New System.Drawing.Size(152, 22)
         Me.TSMFileTransfer.Text = "Transfer"
         '
         'ReceiverToolStripMenuItem
@@ -348,8 +348,8 @@ Partial Class FormHome
         '
         Me.ActivitiesDataGridView.AllowUserToAddRows = False
         Me.ActivitiesDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ActivitiesDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.ActivitiesDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle8
         Me.ActivitiesDataGridView.AutoGenerateColumns = False
         Me.ActivitiesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ActivitiesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TechIDDataGridViewTextBoxColumn, Me.DateDataGridViewTextBoxColumn, Me.TypeDataGridViewTextBoxColumn, Me.IDDataGridViewTextBoxColumn, Me.TotalDataGridViewTextBoxColumn, Me.TechPayDataGridViewTextBoxColumn, Me.Paid})
@@ -392,9 +392,9 @@ Partial Class FormHome
         'TotalDataGridViewTextBoxColumn
         '
         Me.TotalDataGridViewTextBoxColumn.DataPropertyName = "Total"
-        DataGridViewCellStyle2.Format = "C2"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.TotalDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle9.Format = "C2"
+        DataGridViewCellStyle9.NullValue = Nothing
+        Me.TotalDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle9
         Me.TotalDataGridViewTextBoxColumn.HeaderText = "Total"
         Me.TotalDataGridViewTextBoxColumn.Name = "TotalDataGridViewTextBoxColumn"
         Me.TotalDataGridViewTextBoxColumn.ReadOnly = True
@@ -402,9 +402,9 @@ Partial Class FormHome
         'TechPayDataGridViewTextBoxColumn
         '
         Me.TechPayDataGridViewTextBoxColumn.DataPropertyName = "TechPay"
-        DataGridViewCellStyle3.Format = "C2"
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.TechPayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle10.Format = "C2"
+        DataGridViewCellStyle10.NullValue = Nothing
+        Me.TechPayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle10
         Me.TechPayDataGridViewTextBoxColumn.HeaderText = "TechPay"
         Me.TechPayDataGridViewTextBoxColumn.Name = "TechPayDataGridViewTextBoxColumn"
         Me.TechPayDataGridViewTextBoxColumn.ReadOnly = True
@@ -637,8 +637,8 @@ Partial Class FormHome
         '
         Me.ReceiverInvDataGridView.AllowUserToAddRows = False
         Me.ReceiverInvDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ReceiverInvDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.ReceiverInvDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
         Me.ReceiverInvDataGridView.AutoGenerateColumns = False
         Me.ReceiverInvDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ReceiverInvDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -649,6 +649,30 @@ Partial Class FormHome
         Me.ReceiverInvDataGridView.Name = "ReceiverInvDataGridView"
         Me.ReceiverInvDataGridView.Size = New System.Drawing.Size(950, 528)
         Me.ReceiverInvDataGridView.TabIndex = 0
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "AccessCard"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "AccessCard"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "TechID"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "TechID"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "DateIn"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "DateIn"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateOut"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "DateOut"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         '
         'ReceiverInvBindingSource
         '
@@ -669,8 +693,8 @@ Partial Class FormHome
         '
         Me.ReceiverTransferDataGridView.AllowUserToAddRows = False
         Me.ReceiverTransferDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ReceiverTransferDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.ReceiverTransferDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle12
         Me.ReceiverTransferDataGridView.AutoGenerateColumns = False
         Me.ReceiverTransferDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ReceiverTransferDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -725,8 +749,8 @@ Partial Class FormHome
         '
         Me.PayStubsDataGridView.AllowUserToAddRows = False
         Me.PayStubsDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle6.NullValue = Nothing
-        Me.PayStubsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle13.NullValue = Nothing
+        Me.PayStubsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle13
         Me.PayStubsDataGridView.AutoGenerateColumns = False
         Me.PayStubsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.PayStubsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -759,9 +783,9 @@ Partial Class FormHome
         'DataGridViewTextBoxColumn13
         '
         Me.DataGridViewTextBoxColumn13.DataPropertyName = "Amount"
-        DataGridViewCellStyle7.Format = "C2"
-        DataGridViewCellStyle7.NullValue = Nothing
-        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle14.Format = "C2"
+        DataGridViewCellStyle14.NullValue = Nothing
+        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle14
         Me.DataGridViewTextBoxColumn13.HeaderText = "Amount"
         Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
         '
@@ -790,6 +814,7 @@ Partial Class FormHome
         'TableAdapterManager
         '
         Me.TableAdapterManager.ActivitiesTableAdapter = Me.ActivitiesTableAdapter
+        Me.TableAdapterManager.AdminTableTableAdapter = Nothing
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.PayStubsTableAdapter = Me.PayStubsTableAdapter
         Me.TableAdapterManager.ReceiverInvTableAdapter = Me.ReceiverInvTableAdapter
@@ -813,30 +838,6 @@ Partial Class FormHome
         '
         Me.PrintDialog1.UseEXDialog = True
         '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "AccessCard"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "AccessCard"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "TechID"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "TechID"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "DateIn"
-        Me.DataGridViewTextBoxColumn4.HeaderText = "DateIn"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateOut"
-        Me.DataGridViewTextBoxColumn5.HeaderText = "DateOut"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        '
         'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -848,7 +849,7 @@ Partial Class FormHome
         Me.Controls.Add(Me.MenuStripHome)
         Me.MainMenuStrip = Me.MenuStripHome
         Me.Name = "FormHome"
-        Me.Text = "SIMTIR (SIMplified Technician and Inventory Records)"
+        Me.Text = "SWOAN"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStripHome.ResumeLayout(False)
         Me.MenuStripHome.PerformLayout()
@@ -956,7 +957,7 @@ Partial Class FormHome
     Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PrintDialog1 As System.Windows.Forms.PrintDialog
     Friend WithEvents TSMLogin As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TSMEditPassword As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TSMSettings As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChkBoxPrint As System.Windows.Forms.CheckBox
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn

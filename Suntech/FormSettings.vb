@@ -1,7 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Data.SqlClient
 
-Public Class FrmEditPassword
+Public Class FrmSettings
 
     Private Sub Btn_Ok_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn_Ok.Click
         Dim data As DatabaseClass = New DatabaseClass

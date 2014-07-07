@@ -398,9 +398,9 @@ Public Class FormHome
         LoginForm.Dispose()
     End Sub
 
-    Private Sub TSMEditPassword_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMEditPassword.Click
-        FrmEditPassword.ShowDialog()
-        FrmEditPassword.Dispose()
+    Private Sub TSMEditPassword_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMSettings.Click
+        FrmSettings.ShowDialog()
+        FrmSettings.Dispose()
     End Sub
 
     Private Sub ChkBoxPrint_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChkBoxPrint.CheckedChanged
@@ -409,5 +409,4 @@ Public Class FormHome
                             & "This will be your only chance to print one.")
         End If
     End Sub
-
 End Class
