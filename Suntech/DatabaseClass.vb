@@ -13,11 +13,6 @@ Public Class DatabaseClass
 
 
     Public Sub New()
-        Dim server As String = ConfigurationManager.AppSettings("Server")
-        Dim netLib As String = ConfigurationManager.AppSettings("NetLib")
-        Dim database As String = ConfigurationManager.AppSettings("InitialCat")
-        Dim User As String = ConfigurationManager.AppSettings("User")
-        Dim Password As String = ConfigurationManager.AppSettings("Password")
 
         Dim SR As New StreamReader("C:\Constring.txt")
         Dim ConLine As String = SR.ReadToEnd()

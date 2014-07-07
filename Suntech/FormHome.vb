@@ -7,6 +7,14 @@ Public Class FormHome
     Public Permissions As String
 
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'ReceiverInstallationDataSet.PayStubs' table. You can move, or remove it, as needed.
+        Me.PayStubsTableAdapter1.Fill(Me.ReceiverInstallationDataSet.PayStubs)
+        'TODO: This line of code loads data into the 'ReceiverInstallationDataSet.ReceiverTransfer' table. You can move, or remove it, as needed.
+        Me.ReceiverTransferTableAdapter1.Fill(Me.ReceiverInstallationDataSet.ReceiverTransfer)
+        'TODO: This line of code loads data into the 'ReceiverInstallationDataSet.ReceiverInv' table. You can move, or remove it, as needed.
+        Me.ReceiverInvTableAdapter1.Fill(Me.ReceiverInstallationDataSet.ReceiverInv)
+        'TODO: This line of code loads data into the 'ReceiverInstallationDataSet.Activities' table. You can move, or remove it, as needed.
+        Me.ActivitiesTableAdapter1.Fill(Me.ReceiverInstallationDataSet.Activities)
 
         LoginForm.ShowDialog()
         LoginForm.Dispose()
@@ -409,4 +417,5 @@ Public Class FormHome
                             & "This will be your only chance to print one.")
         End If
     End Sub
+
 End Class

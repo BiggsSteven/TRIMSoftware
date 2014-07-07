@@ -30,9 +30,9 @@ Partial Class TransferForm
         Me.CmboFrom = New System.Windows.Forms.ComboBox
         Me.LblOutput = New System.Windows.Forms.Label
         Me.ReceiverTransferBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DataSet1 = New Suntech.DataSet1
-        Me.ReceiverTransferTableAdapter = New Suntech.DataSet1TableAdapters.ReceiverTransferTableAdapter
-        Me.TableAdapterManager = New Suntech.DataSet1TableAdapters.TableAdapterManager
+        Me.DataSet1 = New Suntech.ReceiverInstallationDataSet
+        Me.ReceiverTransferTableAdapter = New ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter
+        Me.TableAdapterManager = New ReceiverInstallationDataSetTableAdapters.TableAdapterManager
         Me.lblTechFrom = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.PnlAddReceivers = New System.Windows.Forms.Panel
@@ -118,7 +118,7 @@ Partial Class TransferForm
         Me.TableAdapterManager.ReceiverInvTableAdapter = Nothing
         Me.TableAdapterManager.ReceiverTransferTableAdapter = Me.ReceiverTransferTableAdapter
         Me.TableAdapterManager.TechniciansTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = Suntech.DataSet1TableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.UpdateOrder = Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'lblTechFrom
         '
@@ -182,10 +182,10 @@ Partial Class TransferForm
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DataSet1 As Suntech.DataSet1
+    Friend WithEvents DataSet1 As Suntech.ReceiverInstallationDataSet
     Friend WithEvents ReceiverTransferBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents ReceiverTransferTableAdapter As Suntech.DataSet1TableAdapters.ReceiverTransferTableAdapter
-    Friend WithEvents TableAdapterManager As Suntech.DataSet1TableAdapters.TableAdapterManager
+    Friend WithEvents ReceiverTransferTableAdapter As ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter
+    Friend WithEvents TableAdapterManager As ReceiverInstallationDataSetTableAdapters.TableAdapterManager
     Friend WithEvents LblTrans As System.Windows.Forms.Label
     Friend WithEvents TxtBoxAccessCard As System.Windows.Forms.TextBox
     Friend WithEvents BtnTransfer As System.Windows.Forms.Button
