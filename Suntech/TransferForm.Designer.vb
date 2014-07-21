@@ -22,21 +22,21 @@ Partial Class TransferForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.LblTrans = New System.Windows.Forms.Label
-        Me.TxtBoxAccessCard = New System.Windows.Forms.TextBox
-        Me.BtnTransfer = New System.Windows.Forms.Button
-        Me.CmboTo = New System.Windows.Forms.ComboBox
-        Me.CmboFrom = New System.Windows.Forms.ComboBox
-        Me.LblOutput = New System.Windows.Forms.Label
+        Me.components = New System.ComponentModel.Container()
+        Me.LblTrans = New System.Windows.Forms.Label()
+        Me.TxtBoxAccessCard = New System.Windows.Forms.TextBox()
+        Me.BtnTransfer = New System.Windows.Forms.Button()
+        Me.CmboTo = New System.Windows.Forms.ComboBox()
+        Me.CmboFrom = New System.Windows.Forms.ComboBox()
+        Me.LblOutput = New System.Windows.Forms.Label()
         Me.ReceiverTransferBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DataSet1 = New Suntech.ReceiverInstallationDataSet
-        Me.ReceiverTransferTableAdapter = New ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter
-        Me.TableAdapterManager = New ReceiverInstallationDataSetTableAdapters.TableAdapterManager
-        Me.lblTechFrom = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.PnlAddReceivers = New System.Windows.Forms.Panel
-        Me.ChkListTransfers = New System.Windows.Forms.CheckedListBox
+        Me.DataSet1 = New Suntech.ReceiverInstallationDataSet()
+        Me.ReceiverTransferTableAdapter = New Suntech.ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter()
+        Me.TableAdapterManager = New Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
+        Me.lblTechFrom = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.PnlAddReceivers = New System.Windows.Forms.Panel()
+        Me.ChkListTransfers = New System.Windows.Forms.CheckedListBox()
         CType(Me.ReceiverTransferBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PnlAddReceivers.SuspendLayout()
@@ -54,9 +54,9 @@ Partial Class TransferForm
         '
         'TxtBoxAccessCard
         '
-        Me.TxtBoxAccessCard.Location = New System.Drawing.Point(132, 60)
+        Me.TxtBoxAccessCard.Location = New System.Drawing.Point(323, 60)
         Me.TxtBoxAccessCard.Name = "TxtBoxAccessCard"
-        Me.TxtBoxAccessCard.Size = New System.Drawing.Size(411, 20)
+        Me.TxtBoxAccessCard.Size = New System.Drawing.Size(531, 20)
         Me.TxtBoxAccessCard.TabIndex = 0
         '
         'BtnTransfer
@@ -65,7 +65,7 @@ Partial Class TransferForm
         Me.BtnTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnTransfer.Location = New System.Drawing.Point(12, 390)
         Me.BtnTransfer.Name = "BtnTransfer"
-        Me.BtnTransfer.Size = New System.Drawing.Size(527, 50)
+        Me.BtnTransfer.Size = New System.Drawing.Size(838, 50)
         Me.BtnTransfer.TabIndex = 17
         Me.BtnTransfer.Text = "Make Transfer"
         Me.BtnTransfer.UseVisualStyleBackColor = True
@@ -73,18 +73,18 @@ Partial Class TransferForm
         'CmboTo
         '
         Me.CmboTo.FormattingEnabled = True
-        Me.CmboTo.Location = New System.Drawing.Point(131, 6)
+        Me.CmboTo.Location = New System.Drawing.Point(322, 6)
         Me.CmboTo.Name = "CmboTo"
-        Me.CmboTo.Size = New System.Drawing.Size(411, 21)
+        Me.CmboTo.Size = New System.Drawing.Size(531, 21)
         Me.CmboTo.TabIndex = 22
         '
         'CmboFrom
         '
         Me.CmboFrom.Enabled = False
         Me.CmboFrom.FormattingEnabled = True
-        Me.CmboFrom.Location = New System.Drawing.Point(131, 33)
+        Me.CmboFrom.Location = New System.Drawing.Point(322, 33)
         Me.CmboFrom.Name = "CmboFrom"
-        Me.CmboFrom.Size = New System.Drawing.Size(411, 21)
+        Me.CmboFrom.Size = New System.Drawing.Size(531, 21)
         Me.CmboFrom.TabIndex = 23
         '
         'LblOutput
@@ -145,7 +145,7 @@ Partial Class TransferForm
         Me.PnlAddReceivers.Controls.Add(Me.ChkListTransfers)
         Me.PnlAddReceivers.Location = New System.Drawing.Point(15, 86)
         Me.PnlAddReceivers.Name = "PnlAddReceivers"
-        Me.PnlAddReceivers.Size = New System.Drawing.Size(528, 298)
+        Me.PnlAddReceivers.Size = New System.Drawing.Size(839, 298)
         Me.PnlAddReceivers.TabIndex = 27
         '
         'ChkListTransfers
@@ -155,14 +155,14 @@ Partial Class TransferForm
         Me.ChkListTransfers.FormattingEnabled = True
         Me.ChkListTransfers.Location = New System.Drawing.Point(0, 0)
         Me.ChkListTransfers.Name = "ChkListTransfers"
-        Me.ChkListTransfers.Size = New System.Drawing.Size(528, 289)
+        Me.ChkListTransfers.Size = New System.Drawing.Size(839, 298)
         Me.ChkListTransfers.TabIndex = 0
         '
         'TransferForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(555, 452)
+        Me.ClientSize = New System.Drawing.Size(866, 452)
         Me.Controls.Add(Me.PnlAddReceivers)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblTechFrom)

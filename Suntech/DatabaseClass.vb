@@ -37,7 +37,7 @@ Public Class DatabaseClass
 
         'runs query and returns it to the program
         sqlDa = New SqlDataAdapter(sqlText, sqlCon)
-        dt.Clear()
+        dt = New DataTable
         sqlDa.Fill(dt)
 
         'passes data to a 2 diminsional array
@@ -46,7 +46,7 @@ Public Class DatabaseClass
         Do While (rowCount < dt.Rows.Count())
             Dim columnCount As Integer = 0
             Do While (columnCount < dt.Columns.Count())
-                field(rowCount, columnCount) = dt.Rows(rowCount).Item(columnCount)
+                field(rowCount, columnCount) = "" & dt.Rows(rowCount).Item(columnCount)
                 columnCount += 1
             Loop
             rowCount += 1
@@ -57,10 +57,14 @@ Public Class DatabaseClass
         'Builds Query String
         Dim values As String = String.Empty
         For counter As Integer = 0 To (field.Length() - 1)
-            If counter = 0 Then
+            If counter = 0 And field(counter) <> "" Then
                 values += "'" & field(counter) & "'"
-            Else
+            ElseIf counter = 0 And field(counter) = "" Then
+                values += "NULL"
+            ElseIf counter <> 0 And field(counter) <> "" Then
                 values += ",'" & field(counter) & "'"
+            ElseIf counter <> 0 And field(counter) = "" Then
+                values += ",NULL"
             End If
 
         Next
@@ -78,10 +82,14 @@ Public Class DatabaseClass
         Dim counter As Integer = 0
         sqlText = "UPDATE " & table & " SET "
         While counter < EditFields.Length()
-            If counter = 0 Then
+            If counter = 0 And field(counter) <> "" Then
                 EditFields(counter) += " = '" & field(counter) & "'"
-            Else
+            ElseIf counter = 0 And field(counter) = "" Then
+                EditFields(counter) += " = NULL"
+            ElseIf counter <> 0 And field(counter) <> "" Then
                 EditFields(counter) = ", " & EditFields(counter) & " = '" & field(counter) & "'"
+            ElseIf counter <> 0 And field(counter) = "" Then
+                EditFields(counter) = ", " & EditFields(counter) & " = NULL"
             End If
             sqlText += EditFields(counter)
             counter += 1

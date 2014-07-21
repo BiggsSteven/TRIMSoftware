@@ -7,15 +7,6 @@ Public Class FormHome
     Public Permissions As String
 
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'ReceiverInstallationDataSet.PayStubs' table. You can move, or remove it, as needed.
-        Me.PayStubsTableAdapter1.Fill(Me.ReceiverInstallationDataSet.PayStubs)
-        'TODO: This line of code loads data into the 'ReceiverInstallationDataSet.ReceiverTransfer' table. You can move, or remove it, as needed.
-        Me.ReceiverTransferTableAdapter1.Fill(Me.ReceiverInstallationDataSet.ReceiverTransfer)
-        'TODO: This line of code loads data into the 'ReceiverInstallationDataSet.ReceiverInv' table. You can move, or remove it, as needed.
-        Me.ReceiverInvTableAdapter1.Fill(Me.ReceiverInstallationDataSet.ReceiverInv)
-        'TODO: This line of code loads data into the 'ReceiverInstallationDataSet.Activities' table. You can move, or remove it, as needed.
-        Me.ActivitiesTableAdapter1.Fill(Me.ReceiverInstallationDataSet.Activities)
-
         LoginForm.ShowDialog()
         LoginForm.Dispose()
         ChkBoxPrint.Checked = True
@@ -32,14 +23,14 @@ Public Class FormHome
 
         'runs a select Query to retrieve list of Techs
         Dim table As String = ConfigurationManager.AppSettings("Tech")
-        Dim fieldString As String = "[ID], [NAME]"
+        Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName]"
         Dim TechArray(,) As String
         data.RunDynamicSelect(table, fieldString, "", TechArray)
 
         'Populate listbox with Technicians
         Dim counter As Integer = 0
         While (counter < TechArray.GetLength(0))
-            LstBoxTech.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 1))
+            LstBoxTech.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 3) & ", " & TechArray(counter, 1) & " " & TechArray(counter, 2))
             counter += 1
         End While
 
@@ -254,25 +245,15 @@ Public Class FormHome
     End Sub
 
     '-----------------------------------------------------------
-    Private Sub TSMItemTech_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmTech.Click
-        Dim ImportItem As ImportClass = New ImportClass
-        ImportItem.selectFile(0, "Import Technician")
-        BuildTechList()
-    End Sub
 
     Private Sub TSMItmActive_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmActive.Click
         Dim ImportItem As ImportClass = New ImportClass
         ImportItem.selectFile(1, "Import Activity")
     End Sub
 
-    Private Sub TSMItmRecList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmRecList.Click
+    Private Sub TSMItmRecList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim ImportItem As ImportClass = New ImportClass
         ImportItem.selectFile(2, "Import Receivers")
-    End Sub
-
-    Private Sub TSMItmRecRet_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        'Dim ImportItem As ImportClass = New ImportClass
-        'ImportItem.selectFile(2, "Import Receivers")
     End Sub
 
     Private Sub ReceiverToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReceiverToolStripMenuItem.Click
@@ -283,10 +264,6 @@ Public Class FormHome
     Private Sub BtnPayTch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPayTch.Click
         Dim data As DatabaseClass = New DatabaseClass
         Dim CheckNumber As String = txtboxChkNum.Text
-
-
-
-
 
         'If done write and has a checknumber and a non-zero balance
         If CheckNumber <> String.Empty And Format(CDbl(LblBalanceField.Text), "c2") <> Format(0, "c2") Then
@@ -417,5 +394,4 @@ Public Class FormHome
                             & "This will be your only chance to print one.")
         End If
     End Sub
-
 End Class

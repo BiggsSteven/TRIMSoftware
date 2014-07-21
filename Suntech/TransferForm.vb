@@ -15,23 +15,34 @@ Public Class TransferForm
     End Sub
 
     Private Sub FillTechCmboBox()
-        Dim data As DatabaseClass = New DatabaseClass
         CmboFrom.Items.Clear()
         CmboTo.Items.Clear()
-
+        Dim data As DatabaseClass = New DatabaseClass
         'runs a select Query to retrieve list of Techs
         Dim table As String = ConfigurationManager.AppSettings("Tech")
-        Dim fieldString As String = "[ID], [NAME]"
+        Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName]"
         Dim TechArray(,) As String
         data.RunDynamicSelect(table, fieldString, "", TechArray)
+
+
+        CmboFrom.Items.Add("--------\------,----- -")
+        CmboTo.Items.Add("--------\------,----- -")
 
         'Populate listbox with Technicians
         Dim counter As Integer = 0
         While (counter < TechArray.GetLength(0))
-            CmboFrom.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 1))
-            CmboTo.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 1))
+            CmboFrom.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 3) & ", " & TechArray(counter, 1) & " " & TechArray(counter, 2))
+            CmboTo.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 3) & ", " & TechArray(counter, 1) & " " & TechArray(counter, 2))
+
             counter += 1
         End While
+
+        If CmboFrom.Items.Count <> 0 Then
+            CmboFrom.SelectedItem = CmboFrom.Items.Item(0)
+        End If
+        If CmboTo.Items.Count <> 0 Then
+            CmboTo.SelectedItem = CmboTo.Items.Item(0)
+        End If
     End Sub
 
     Private Sub TxtBoxAccess_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles TxtBoxAccessCard.KeyUp
@@ -52,7 +63,12 @@ Public Class TransferForm
 
             Dim fieldsString As String = ConfigurationManager.AppSettings("RecInv") & ".[ACCESSCARD]" _
                             & " , " & ConfigurationManager.AppSettings("RecInv") & ".[TECHID] " _
-                            & " , " & ConfigurationManager.AppSettings("Tech") & ".[NAME] "
+                            & " , " & ConfigurationManager.AppSettings("Tech") & ".[LastName] " _
+                            & " , " & ConfigurationManager.AppSettings("Tech") & ".[FirstName] " _
+                            & " , " & ConfigurationManager.AppSettings("Tech") & ".[MiddleInitial] "
+
+
+
 
             Dim condition As String = ConfigurationManager.AppSettings("RecInv") & ".[ACCESSCARD] = '" & CodeScanned & "'"
             Dim fields(,) As String
@@ -64,24 +80,35 @@ Public Class TransferForm
             'else add it to the receiver Inventory
             Dim last As Integer = ChkListTransfers.Items.Count
             If fields.Length <> 0 Then
-                CmboFrom.SelectedItem = (fields(0, 1) & "\" & fields(0, 2))
+                Dim placeholder As Integer = 1
+                Dim counter As Integer = 0
+                For Each item In CmboFrom.Items
+                    Dim tempBit() As String = item.split("\")
+                    If tempBit(0) = fields(0, 1) Then
+                        placeholder = counter
+                    End If
+                    counter += 1
+                Next
+
+
+                CmboFrom.SelectedIndex() = placeholder
                 ChkListTransfers.Items.Add("Mov: " & TxtBoxAccessCard.Text & " from " & CmboFrom.SelectedItem & " to " & CmboTo.SelectedItem)
                 ChkListTransfers.SetItemChecked(ChkListTransfers.Items.Count - 1, True)
                 ReDim Preserve Action(3, last)
                 Action(0, last) = "Mov"
                 Action(1, last) = TxtBoxAccessCard.Text
-                Action(2, last) = CmboFrom.SelectedItem
+                Action(2, last) = CmboFrom.SelectedItem()
                 Action(3, last) = CmboTo.SelectedItem()
 
 
             Else
-                CmboFrom.SelectedItem = "0000000001\MASTEC"
+                CmboFrom.SelectedIndex = 1
                 ChkListTransfers.Items.Add("Add: " & TxtBoxAccessCard.Text & " from " & CmboFrom.SelectedItem & " to " & CmboTo.SelectedItem)
                 ChkListTransfers.SetItemChecked(ChkListTransfers.Items.Count - 1, True)
                 ReDim Preserve Action(3, last)
                 Action(0, last) = "Add"
                 Action(1, last) = TxtBoxAccessCard.Text
-                Action(2, last) = CmboFrom.SelectedItem
+                Action(2, last) = CmboFrom.SelectedItem()
                 Action(3, last) = CmboTo.SelectedItem()
             End If
 
@@ -89,6 +116,7 @@ Public Class TransferForm
             TxtBoxAccessCard.Select()
         End If
     End Sub
+
     Private Sub addRec()
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("RecInv")

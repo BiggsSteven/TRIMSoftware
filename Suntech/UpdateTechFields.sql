@@ -11,3 +11,12 @@ EmailAdd nvarchar(50)
 
 UPDATE dbo.Technicians
 set PayPercentage=.70
+
+CREATE TABLE ReceiverInstallation.OptionsSelected
+(
+DefaultPay numeric(18,2),
+UseStaticSrvc bit,
+SrvcPay numeric(18,2),
+)
+
+Insert INTO ReceiverInstallation.dbo.OptionsSelected values(.70,1,30)

@@ -40,25 +40,30 @@ Partial Class FrmSettings
         Me.Btn_Cancel = New System.Windows.Forms.Button()
         Me.TabCtrlSttng = New System.Windows.Forms.TabControl()
         Me.TabGeneral = New System.Windows.Forms.TabPage()
+        Me.GrpBoxPay = New System.Windows.Forms.GroupBox()
+        Me.ChkboxSvcPay = New System.Windows.Forms.CheckBox()
+        Me.LblSvcPay = New System.Windows.Forms.Label()
+        Me.TxtBoxSvcPay = New System.Windows.Forms.TextBox()
         Me.TabEditTech = New System.Windows.Forms.TabPage()
-        Me.BtnEditTechCncl = New System.Windows.Forms.Button()
-        Me.BtnEditTechSave = New System.Windows.Forms.Button()
-        Me.CmboBoxTechs = New System.Windows.Forms.ComboBox()
-        Me.RBEditTech = New System.Windows.Forms.RadioButton()
+        Me.PnlEditTech = New System.Windows.Forms.Panel()
         Me.RBAddTech = New System.Windows.Forms.RadioButton()
-        Me.IDTextBox = New System.Windows.Forms.TextBox()
+        Me.BtnEditTechCncl = New System.Windows.Forms.Button()
+        Me.TxtboxEmail = New System.Windows.Forms.TextBox()
         Me.TechniciansBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ReceiverInstallationDataSet = New Suntech.ReceiverInstallationDataSet()
-        Me.LocationTextBox = New System.Windows.Forms.TextBox()
-        Me.HomeAddressTextBox = New System.Windows.Forms.TextBox()
-        Me.FirstNameTextBox = New System.Windows.Forms.TextBox()
-        Me.MiddleInitialTextBox = New System.Windows.Forms.TextBox()
-        Me.LastNameTextBox = New System.Windows.Forms.TextBox()
-        Me.PayPercentageTextBox = New System.Windows.Forms.TextBox()
-        Me.SSNTextBox = New System.Windows.Forms.TextBox()
-        Me.FedIDNumTextBox = New System.Windows.Forms.TextBox()
-        Me.PhoneNumTextBox = New System.Windows.Forms.TextBox()
-        Me.EmailAddTextBox = New System.Windows.Forms.TextBox()
+        Me.BtnEditTechSave = New System.Windows.Forms.Button()
+        Me.CmboBoxTechs = New System.Windows.Forms.ComboBox()
+        Me.TxtboxPhone = New System.Windows.Forms.TextBox()
+        Me.RBEditTech = New System.Windows.Forms.RadioButton()
+        Me.TxtBoxFedID = New System.Windows.Forms.TextBox()
+        Me.TxtboxID = New System.Windows.Forms.TextBox()
+        Me.TxtBoxSSN = New System.Windows.Forms.TextBox()
+        Me.TxtboxLoc = New System.Windows.Forms.TextBox()
+        Me.TxtboxPayPerc = New System.Windows.Forms.TextBox()
+        Me.TxtboxAddr = New System.Windows.Forms.TextBox()
+        Me.TxtBoxLast = New System.Windows.Forms.TextBox()
+        Me.txtBoxFirst = New System.Windows.Forms.TextBox()
+        Me.TxtBoxMI = New System.Windows.Forms.TextBox()
         Me.TabEditPword = New System.Windows.Forms.TabPage()
         Me.LblOldPass = New System.Windows.Forms.Label()
         Me.LblConfirmPass = New System.Windows.Forms.Label()
@@ -68,6 +73,9 @@ Partial Class FrmSettings
         Me.BtnEditPassOK = New System.Windows.Forms.Button()
         Me.TechniciansTableAdapter = New Suntech.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter()
         Me.TableAdapterManager = New Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
+        Me.BtnGenSave = New System.Windows.Forms.Button()
+        Me.BtnGenCncl = New System.Windows.Forms.Button()
+        Me.GrpBoxPass = New System.Windows.Forms.GroupBox()
         LblEmailAddress = New System.Windows.Forms.Label()
         LblPhoneNum = New System.Windows.Forms.Label()
         LblFedIDNum = New System.Windows.Forms.Label()
@@ -80,16 +88,20 @@ Partial Class FrmSettings
         LblLocation = New System.Windows.Forms.Label()
         LblID = New System.Windows.Forms.Label()
         Me.TabCtrlSttng.SuspendLayout()
+        Me.TabGeneral.SuspendLayout()
+        Me.GrpBoxPay.SuspendLayout()
         Me.TabEditTech.SuspendLayout()
+        Me.PnlEditTech.SuspendLayout()
         CType(Me.TechniciansBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReceiverInstallationDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabEditPword.SuspendLayout()
+        Me.GrpBoxPass.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblEmailAddress
         '
         LblEmailAddress.AutoSize = True
-        LblEmailAddress.Location = New System.Drawing.Point(8, 356)
+        LblEmailAddress.Location = New System.Drawing.Point(5, 339)
         LblEmailAddress.Name = "LblEmailAddress"
         LblEmailAddress.Size = New System.Drawing.Size(76, 13)
         LblEmailAddress.TabIndex = 22
@@ -98,7 +110,7 @@ Partial Class FrmSettings
         'LblPhoneNum
         '
         LblPhoneNum.AutoSize = True
-        LblPhoneNum.Location = New System.Drawing.Point(8, 330)
+        LblPhoneNum.Location = New System.Drawing.Point(5, 313)
         LblPhoneNum.Name = "LblPhoneNum"
         LblPhoneNum.Size = New System.Drawing.Size(81, 13)
         LblPhoneNum.TabIndex = 20
@@ -107,7 +119,7 @@ Partial Class FrmSettings
         'LblFedIDNum
         '
         LblFedIDNum.AutoSize = True
-        LblFedIDNum.Location = New System.Drawing.Point(8, 243)
+        LblFedIDNum.Location = New System.Drawing.Point(5, 226)
         LblFedIDNum.Name = "LblFedIDNum"
         LblFedIDNum.Size = New System.Drawing.Size(82, 13)
         LblFedIDNum.TabIndex = 18
@@ -116,7 +128,7 @@ Partial Class FrmSettings
         'LblSSN
         '
         LblSSN.AutoSize = True
-        LblSSN.Location = New System.Drawing.Point(8, 217)
+        LblSSN.Location = New System.Drawing.Point(5, 200)
         LblSSN.Name = "LblSSN"
         LblSSN.Size = New System.Drawing.Size(32, 13)
         LblSSN.TabIndex = 16
@@ -125,7 +137,7 @@ Partial Class FrmSettings
         'LblPayPercentage
         '
         LblPayPercentage.AutoSize = True
-        LblPayPercentage.Location = New System.Drawing.Point(8, 438)
+        LblPayPercentage.Location = New System.Drawing.Point(5, 421)
         LblPayPercentage.Name = "LblPayPercentage"
         LblPayPercentage.Size = New System.Drawing.Size(86, 13)
         LblPayPercentage.TabIndex = 14
@@ -134,7 +146,7 @@ Partial Class FrmSettings
         'LblLastName
         '
         LblLastName.AutoSize = True
-        LblLastName.Location = New System.Drawing.Point(476, 177)
+        LblLastName.Location = New System.Drawing.Point(473, 160)
         LblLastName.Name = "LblLastName"
         LblLastName.Size = New System.Drawing.Size(61, 13)
         LblLastName.TabIndex = 12
@@ -143,7 +155,7 @@ Partial Class FrmSettings
         'LblMiddleInitial
         '
         LblMiddleInitial.AutoSize = True
-        LblMiddleInitial.Location = New System.Drawing.Point(327, 177)
+        LblMiddleInitial.Location = New System.Drawing.Point(324, 160)
         LblMiddleInitial.Name = "LblMiddleInitial"
         LblMiddleInitial.Size = New System.Drawing.Size(68, 13)
         LblMiddleInitial.TabIndex = 10
@@ -152,7 +164,7 @@ Partial Class FrmSettings
         'LblFirstName
         '
         LblFirstName.AutoSize = True
-        LblFirstName.Location = New System.Drawing.Point(8, 177)
+        LblFirstName.Location = New System.Drawing.Point(5, 160)
         LblFirstName.Name = "LblFirstName"
         LblFirstName.Size = New System.Drawing.Size(60, 13)
         LblFirstName.TabIndex = 8
@@ -161,7 +173,7 @@ Partial Class FrmSettings
         'LblHomeAddress
         '
         LblHomeAddress.AutoSize = True
-        LblHomeAddress.Location = New System.Drawing.Point(8, 304)
+        LblHomeAddress.Location = New System.Drawing.Point(5, 287)
         LblHomeAddress.Name = "LblHomeAddress"
         LblHomeAddress.Size = New System.Drawing.Size(79, 13)
         LblHomeAddress.TabIndex = 6
@@ -170,7 +182,7 @@ Partial Class FrmSettings
         'LblLocation
         '
         LblLocation.AutoSize = True
-        LblLocation.Location = New System.Drawing.Point(6, 412)
+        LblLocation.Location = New System.Drawing.Point(3, 395)
         LblLocation.Name = "LblLocation"
         LblLocation.Size = New System.Drawing.Size(64, 13)
         LblLocation.TabIndex = 4
@@ -179,7 +191,7 @@ Partial Class FrmSettings
         'LblID
         '
         LblID.AutoSize = True
-        LblID.Location = New System.Drawing.Point(8, 144)
+        LblID.Location = New System.Drawing.Point(5, 127)
         LblID.Name = "LblID"
         LblID.Size = New System.Drawing.Size(77, 13)
         LblID.TabIndex = 0
@@ -197,7 +209,7 @@ Partial Class FrmSettings
         'LblNewPass
         '
         Me.LblNewPass.AutoSize = True
-        Me.LblNewPass.Location = New System.Drawing.Point(167, 186)
+        Me.LblNewPass.Location = New System.Drawing.Point(34, 88)
         Me.LblNewPass.Name = "LblNewPass"
         Me.LblNewPass.Size = New System.Drawing.Size(106, 13)
         Me.LblNewPass.TabIndex = 4
@@ -205,7 +217,7 @@ Partial Class FrmSettings
         '
         'TxtBoxPass
         '
-        Me.TxtBoxPass.Location = New System.Drawing.Point(298, 183)
+        Me.TxtBoxPass.Location = New System.Drawing.Point(165, 85)
         Me.TxtBoxPass.Name = "TxtBoxPass"
         Me.TxtBoxPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TxtBoxPass.Size = New System.Drawing.Size(234, 20)
@@ -235,42 +247,57 @@ Partial Class FrmSettings
         'TabGeneral
         '
         Me.TabGeneral.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.TabGeneral.Controls.Add(Me.BtnGenSave)
+        Me.TabGeneral.Controls.Add(Me.BtnGenCncl)
+        Me.TabGeneral.Controls.Add(Me.GrpBoxPay)
         Me.TabGeneral.Location = New System.Drawing.Point(4, 22)
         Me.TabGeneral.Name = "TabGeneral"
         Me.TabGeneral.Size = New System.Drawing.Size(758, 504)
         Me.TabGeneral.TabIndex = 2
         Me.TabGeneral.Text = "General"
         '
+        'GrpBoxPay
+        '
+        Me.GrpBoxPay.Controls.Add(Me.ChkboxSvcPay)
+        Me.GrpBoxPay.Controls.Add(Me.LblSvcPay)
+        Me.GrpBoxPay.Controls.Add(Me.TxtBoxSvcPay)
+        Me.GrpBoxPay.Location = New System.Drawing.Point(36, 36)
+        Me.GrpBoxPay.Name = "GrpBoxPay"
+        Me.GrpBoxPay.Size = New System.Drawing.Size(670, 174)
+        Me.GrpBoxPay.TabIndex = 0
+        Me.GrpBoxPay.TabStop = False
+        Me.GrpBoxPay.Text = "Pay Style Settings"
+        '
+        'ChkboxSvcPay
+        '
+        Me.ChkboxSvcPay.AutoSize = True
+        Me.ChkboxSvcPay.Location = New System.Drawing.Point(29, 41)
+        Me.ChkboxSvcPay.Name = "ChkboxSvcPay"
+        Me.ChkboxSvcPay.Size = New System.Drawing.Size(130, 17)
+        Me.ChkboxSvcPay.TabIndex = 6
+        Me.ChkboxSvcPay.Text = "Use static service pay"
+        Me.ChkboxSvcPay.UseVisualStyleBackColor = True
+        '
+        'LblSvcPay
+        '
+        Me.LblSvcPay.AutoSize = True
+        Me.LblSvcPay.Location = New System.Drawing.Point(49, 85)
+        Me.LblSvcPay.Name = "LblSvcPay"
+        Me.LblSvcPay.Size = New System.Drawing.Size(73, 13)
+        Me.LblSvcPay.TabIndex = 5
+        Me.LblSvcPay.Text = "Enter amount:"
+        '
+        'TxtBoxSvcPay
+        '
+        Me.TxtBoxSvcPay.Location = New System.Drawing.Point(140, 82)
+        Me.TxtBoxSvcPay.Name = "TxtBoxSvcPay"
+        Me.TxtBoxSvcPay.Size = New System.Drawing.Size(80, 20)
+        Me.TxtBoxSvcPay.TabIndex = 3
+        '
         'TabEditTech
         '
         Me.TabEditTech.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.TabEditTech.Controls.Add(Me.BtnEditTechCncl)
-        Me.TabEditTech.Controls.Add(Me.BtnEditTechSave)
-        Me.TabEditTech.Controls.Add(Me.CmboBoxTechs)
-        Me.TabEditTech.Controls.Add(Me.RBEditTech)
-        Me.TabEditTech.Controls.Add(Me.RBAddTech)
-        Me.TabEditTech.Controls.Add(LblID)
-        Me.TabEditTech.Controls.Add(Me.IDTextBox)
-        Me.TabEditTech.Controls.Add(LblLocation)
-        Me.TabEditTech.Controls.Add(Me.LocationTextBox)
-        Me.TabEditTech.Controls.Add(LblHomeAddress)
-        Me.TabEditTech.Controls.Add(Me.HomeAddressTextBox)
-        Me.TabEditTech.Controls.Add(LblFirstName)
-        Me.TabEditTech.Controls.Add(Me.FirstNameTextBox)
-        Me.TabEditTech.Controls.Add(LblMiddleInitial)
-        Me.TabEditTech.Controls.Add(Me.MiddleInitialTextBox)
-        Me.TabEditTech.Controls.Add(LblLastName)
-        Me.TabEditTech.Controls.Add(Me.LastNameTextBox)
-        Me.TabEditTech.Controls.Add(LblPayPercentage)
-        Me.TabEditTech.Controls.Add(Me.PayPercentageTextBox)
-        Me.TabEditTech.Controls.Add(LblSSN)
-        Me.TabEditTech.Controls.Add(Me.SSNTextBox)
-        Me.TabEditTech.Controls.Add(LblFedIDNum)
-        Me.TabEditTech.Controls.Add(Me.FedIDNumTextBox)
-        Me.TabEditTech.Controls.Add(LblPhoneNum)
-        Me.TabEditTech.Controls.Add(Me.PhoneNumTextBox)
-        Me.TabEditTech.Controls.Add(LblEmailAddress)
-        Me.TabEditTech.Controls.Add(Me.EmailAddTextBox)
+        Me.TabEditTech.Controls.Add(Me.PnlEditTech)
         Me.TabEditTech.Location = New System.Drawing.Point(4, 22)
         Me.TabEditTech.Name = "TabEditTech"
         Me.TabEditTech.Padding = New System.Windows.Forms.Padding(3)
@@ -278,48 +305,45 @@ Partial Class FrmSettings
         Me.TabEditTech.TabIndex = 1
         Me.TabEditTech.Text = "Add/EditTech"
         '
-        'BtnEditTechCncl
+        'PnlEditTech
         '
-        Me.BtnEditTechCncl.Location = New System.Drawing.Point(675, 473)
-        Me.BtnEditTechCncl.Name = "BtnEditTechCncl"
-        Me.BtnEditTechCncl.Size = New System.Drawing.Size(75, 23)
-        Me.BtnEditTechCncl.TabIndex = 28
-        Me.BtnEditTechCncl.Text = "Cancel"
-        Me.BtnEditTechCncl.UseVisualStyleBackColor = True
-        '
-        'BtnEditTechSave
-        '
-        Me.BtnEditTechSave.Location = New System.Drawing.Point(594, 473)
-        Me.BtnEditTechSave.Name = "BtnEditTechSave"
-        Me.BtnEditTechSave.Size = New System.Drawing.Size(75, 23)
-        Me.BtnEditTechSave.TabIndex = 27
-        Me.BtnEditTechSave.Text = "Save"
-        Me.BtnEditTechSave.UseVisualStyleBackColor = True
-        '
-        'CmboBoxTechs
-        '
-        Me.CmboBoxTechs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmboBoxTechs.FormattingEnabled = True
-        Me.CmboBoxTechs.Location = New System.Drawing.Point(8, 65)
-        Me.CmboBoxTechs.Name = "CmboBoxTechs"
-        Me.CmboBoxTechs.Size = New System.Drawing.Size(368, 21)
-        Me.CmboBoxTechs.TabIndex = 26
-        '
-        'RBEditTech
-        '
-        Me.RBEditTech.AutoSize = True
-        Me.RBEditTech.Location = New System.Drawing.Point(132, 30)
-        Me.RBEditTech.Name = "RBEditTech"
-        Me.RBEditTech.Size = New System.Drawing.Size(99, 17)
-        Me.RBEditTech.TabIndex = 25
-        Me.RBEditTech.TabStop = True
-        Me.RBEditTech.Text = "Edit Technician"
-        Me.RBEditTech.UseVisualStyleBackColor = True
+        Me.PnlEditTech.Controls.Add(Me.RBAddTech)
+        Me.PnlEditTech.Controls.Add(Me.BtnEditTechCncl)
+        Me.PnlEditTech.Controls.Add(Me.TxtboxEmail)
+        Me.PnlEditTech.Controls.Add(Me.BtnEditTechSave)
+        Me.PnlEditTech.Controls.Add(LblEmailAddress)
+        Me.PnlEditTech.Controls.Add(Me.CmboBoxTechs)
+        Me.PnlEditTech.Controls.Add(Me.TxtboxPhone)
+        Me.PnlEditTech.Controls.Add(Me.RBEditTech)
+        Me.PnlEditTech.Controls.Add(LblPhoneNum)
+        Me.PnlEditTech.Controls.Add(Me.TxtBoxFedID)
+        Me.PnlEditTech.Controls.Add(LblID)
+        Me.PnlEditTech.Controls.Add(LblFedIDNum)
+        Me.PnlEditTech.Controls.Add(Me.TxtboxID)
+        Me.PnlEditTech.Controls.Add(Me.TxtBoxSSN)
+        Me.PnlEditTech.Controls.Add(LblLocation)
+        Me.PnlEditTech.Controls.Add(LblSSN)
+        Me.PnlEditTech.Controls.Add(Me.TxtboxLoc)
+        Me.PnlEditTech.Controls.Add(Me.TxtboxPayPerc)
+        Me.PnlEditTech.Controls.Add(LblHomeAddress)
+        Me.PnlEditTech.Controls.Add(LblPayPercentage)
+        Me.PnlEditTech.Controls.Add(Me.TxtboxAddr)
+        Me.PnlEditTech.Controls.Add(Me.TxtBoxLast)
+        Me.PnlEditTech.Controls.Add(LblFirstName)
+        Me.PnlEditTech.Controls.Add(LblLastName)
+        Me.PnlEditTech.Controls.Add(Me.txtBoxFirst)
+        Me.PnlEditTech.Controls.Add(Me.TxtBoxMI)
+        Me.PnlEditTech.Controls.Add(LblMiddleInitial)
+        Me.PnlEditTech.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PnlEditTech.Location = New System.Drawing.Point(3, 3)
+        Me.PnlEditTech.Name = "PnlEditTech"
+        Me.PnlEditTech.Size = New System.Drawing.Size(752, 498)
+        Me.PnlEditTech.TabIndex = 29
         '
         'RBAddTech
         '
         Me.RBAddTech.AutoSize = True
-        Me.RBAddTech.Location = New System.Drawing.Point(8, 30)
+        Me.RBAddTech.Location = New System.Drawing.Point(5, 13)
         Me.RBAddTech.Name = "RBAddTech"
         Me.RBAddTech.Size = New System.Drawing.Size(109, 17)
         Me.RBAddTech.TabIndex = 24
@@ -327,13 +351,22 @@ Partial Class FrmSettings
         Me.RBAddTech.Text = "Add a Technician"
         Me.RBAddTech.UseVisualStyleBackColor = True
         '
-        'IDTextBox
+        'BtnEditTechCncl
         '
-        Me.IDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "ID", True))
-        Me.IDTextBox.Location = New System.Drawing.Point(100, 141)
-        Me.IDTextBox.Name = "IDTextBox"
-        Me.IDTextBox.Size = New System.Drawing.Size(278, 20)
-        Me.IDTextBox.TabIndex = 1
+        Me.BtnEditTechCncl.Location = New System.Drawing.Point(672, 470)
+        Me.BtnEditTechCncl.Name = "BtnEditTechCncl"
+        Me.BtnEditTechCncl.Size = New System.Drawing.Size(75, 23)
+        Me.BtnEditTechCncl.TabIndex = 13
+        Me.BtnEditTechCncl.Text = "Cancel"
+        Me.BtnEditTechCncl.UseVisualStyleBackColor = True
+        '
+        'TxtboxEmail
+        '
+        Me.TxtboxEmail.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "EmailAdd", True))
+        Me.TxtboxEmail.Location = New System.Drawing.Point(97, 336)
+        Me.TxtboxEmail.Name = "TxtboxEmail"
+        Me.TxtboxEmail.Size = New System.Drawing.Size(331, 20)
+        Me.TxtboxEmail.TabIndex = 9
         '
         'TechniciansBindingSource
         '
@@ -345,99 +378,123 @@ Partial Class FrmSettings
         Me.ReceiverInstallationDataSet.DataSetName = "ReceiverInstallationDataSet"
         Me.ReceiverInstallationDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'LocationTextBox
+        'BtnEditTechSave
         '
-        Me.LocationTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "Location", True))
-        Me.LocationTextBox.Location = New System.Drawing.Point(98, 409)
-        Me.LocationTextBox.Name = "LocationTextBox"
-        Me.LocationTextBox.Size = New System.Drawing.Size(278, 20)
-        Me.LocationTextBox.TabIndex = 5
+        Me.BtnEditTechSave.Location = New System.Drawing.Point(591, 470)
+        Me.BtnEditTechSave.Name = "BtnEditTechSave"
+        Me.BtnEditTechSave.Size = New System.Drawing.Size(75, 23)
+        Me.BtnEditTechSave.TabIndex = 12
+        Me.BtnEditTechSave.Text = "Save"
+        Me.BtnEditTechSave.UseVisualStyleBackColor = True
         '
-        'HomeAddressTextBox
+        'CmboBoxTechs
         '
-        Me.HomeAddressTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "HomeAddress", True))
-        Me.HomeAddressTextBox.Location = New System.Drawing.Point(100, 301)
-        Me.HomeAddressTextBox.Name = "HomeAddressTextBox"
-        Me.HomeAddressTextBox.Size = New System.Drawing.Size(644, 20)
-        Me.HomeAddressTextBox.TabIndex = 7
+        Me.CmboBoxTechs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmboBoxTechs.FormattingEnabled = True
+        Me.CmboBoxTechs.Location = New System.Drawing.Point(5, 48)
+        Me.CmboBoxTechs.Name = "CmboBoxTechs"
+        Me.CmboBoxTechs.Size = New System.Drawing.Size(368, 21)
+        Me.CmboBoxTechs.TabIndex = 26
         '
-        'FirstNameTextBox
+        'TxtboxPhone
         '
-        Me.FirstNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "FirstName", True))
-        Me.FirstNameTextBox.Location = New System.Drawing.Point(100, 174)
-        Me.FirstNameTextBox.Name = "FirstNameTextBox"
-        Me.FirstNameTextBox.Size = New System.Drawing.Size(201, 20)
-        Me.FirstNameTextBox.TabIndex = 9
+        Me.TxtboxPhone.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "PhoneNum", True))
+        Me.TxtboxPhone.Location = New System.Drawing.Point(97, 310)
+        Me.TxtboxPhone.Name = "TxtboxPhone"
+        Me.TxtboxPhone.Size = New System.Drawing.Size(149, 20)
+        Me.TxtboxPhone.TabIndex = 8
         '
-        'MiddleInitialTextBox
+        'RBEditTech
         '
-        Me.MiddleInitialTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "MiddleInitial", True))
-        Me.MiddleInitialTextBox.Location = New System.Drawing.Point(401, 174)
-        Me.MiddleInitialTextBox.Name = "MiddleInitialTextBox"
-        Me.MiddleInitialTextBox.Size = New System.Drawing.Size(40, 20)
-        Me.MiddleInitialTextBox.TabIndex = 11
+        Me.RBEditTech.AutoSize = True
+        Me.RBEditTech.Location = New System.Drawing.Point(129, 13)
+        Me.RBEditTech.Name = "RBEditTech"
+        Me.RBEditTech.Size = New System.Drawing.Size(99, 17)
+        Me.RBEditTech.TabIndex = 25
+        Me.RBEditTech.TabStop = True
+        Me.RBEditTech.Text = "Edit Technician"
+        Me.RBEditTech.UseVisualStyleBackColor = True
         '
-        'LastNameTextBox
+        'TxtBoxFedID
         '
-        Me.LastNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "LastName", True))
-        Me.LastNameTextBox.Location = New System.Drawing.Point(543, 174)
-        Me.LastNameTextBox.Name = "LastNameTextBox"
-        Me.LastNameTextBox.Size = New System.Drawing.Size(201, 20)
-        Me.LastNameTextBox.TabIndex = 13
+        Me.TxtBoxFedID.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "FedIDNum", True))
+        Me.TxtBoxFedID.Location = New System.Drawing.Point(97, 223)
+        Me.TxtBoxFedID.Name = "TxtBoxFedID"
+        Me.TxtBoxFedID.Size = New System.Drawing.Size(149, 20)
+        Me.TxtBoxFedID.TabIndex = 6
         '
-        'PayPercentageTextBox
+        'TxtboxID
         '
-        Me.PayPercentageTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "PayPercentage", True))
-        Me.PayPercentageTextBox.Location = New System.Drawing.Point(100, 435)
-        Me.PayPercentageTextBox.Name = "PayPercentageTextBox"
-        Me.PayPercentageTextBox.Size = New System.Drawing.Size(78, 20)
-        Me.PayPercentageTextBox.TabIndex = 15
+        Me.TxtboxID.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "ID", True))
+        Me.TxtboxID.Location = New System.Drawing.Point(97, 124)
+        Me.TxtboxID.Name = "TxtboxID"
+        Me.TxtboxID.Size = New System.Drawing.Size(278, 20)
+        Me.TxtboxID.TabIndex = 1
         '
-        'SSNTextBox
+        'TxtBoxSSN
         '
-        Me.SSNTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "SSN", True))
-        Me.SSNTextBox.Location = New System.Drawing.Point(100, 214)
-        Me.SSNTextBox.Name = "SSNTextBox"
-        Me.SSNTextBox.Size = New System.Drawing.Size(149, 20)
-        Me.SSNTextBox.TabIndex = 17
+        Me.TxtBoxSSN.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "SSN", True))
+        Me.TxtBoxSSN.Location = New System.Drawing.Point(97, 197)
+        Me.TxtBoxSSN.Name = "TxtBoxSSN"
+        Me.TxtBoxSSN.Size = New System.Drawing.Size(149, 20)
+        Me.TxtBoxSSN.TabIndex = 5
         '
-        'FedIDNumTextBox
+        'TxtboxLoc
         '
-        Me.FedIDNumTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "FedIDNum", True))
-        Me.FedIDNumTextBox.Location = New System.Drawing.Point(100, 240)
-        Me.FedIDNumTextBox.Name = "FedIDNumTextBox"
-        Me.FedIDNumTextBox.Size = New System.Drawing.Size(149, 20)
-        Me.FedIDNumTextBox.TabIndex = 19
+        Me.TxtboxLoc.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "Location", True))
+        Me.TxtboxLoc.Location = New System.Drawing.Point(95, 392)
+        Me.TxtboxLoc.Name = "TxtboxLoc"
+        Me.TxtboxLoc.Size = New System.Drawing.Size(278, 20)
+        Me.TxtboxLoc.TabIndex = 10
         '
-        'PhoneNumTextBox
+        'TxtboxPayPerc
         '
-        Me.PhoneNumTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "PhoneNum", True))
-        Me.PhoneNumTextBox.Location = New System.Drawing.Point(100, 327)
-        Me.PhoneNumTextBox.Name = "PhoneNumTextBox"
-        Me.PhoneNumTextBox.Size = New System.Drawing.Size(149, 20)
-        Me.PhoneNumTextBox.TabIndex = 21
+        Me.TxtboxPayPerc.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "PayPercentage", True))
+        Me.TxtboxPayPerc.Location = New System.Drawing.Point(97, 418)
+        Me.TxtboxPayPerc.Name = "TxtboxPayPerc"
+        Me.TxtboxPayPerc.Size = New System.Drawing.Size(78, 20)
+        Me.TxtboxPayPerc.TabIndex = 11
         '
-        'EmailAddTextBox
+        'TxtboxAddr
         '
-        Me.EmailAddTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "EmailAdd", True))
-        Me.EmailAddTextBox.Location = New System.Drawing.Point(100, 353)
-        Me.EmailAddTextBox.Name = "EmailAddTextBox"
-        Me.EmailAddTextBox.Size = New System.Drawing.Size(331, 20)
-        Me.EmailAddTextBox.TabIndex = 23
+        Me.TxtboxAddr.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "HomeAddress", True))
+        Me.TxtboxAddr.Location = New System.Drawing.Point(97, 284)
+        Me.TxtboxAddr.Name = "TxtboxAddr"
+        Me.TxtboxAddr.Size = New System.Drawing.Size(644, 20)
+        Me.TxtboxAddr.TabIndex = 7
+        '
+        'TxtBoxLast
+        '
+        Me.TxtBoxLast.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "LastName", True))
+        Me.TxtBoxLast.Location = New System.Drawing.Point(540, 157)
+        Me.TxtBoxLast.Name = "TxtBoxLast"
+        Me.TxtBoxLast.Size = New System.Drawing.Size(201, 20)
+        Me.TxtBoxLast.TabIndex = 4
+        '
+        'txtBoxFirst
+        '
+        Me.txtBoxFirst.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "FirstName", True))
+        Me.txtBoxFirst.Location = New System.Drawing.Point(97, 157)
+        Me.txtBoxFirst.Name = "txtBoxFirst"
+        Me.txtBoxFirst.Size = New System.Drawing.Size(201, 20)
+        Me.txtBoxFirst.TabIndex = 2
+        '
+        'TxtBoxMI
+        '
+        Me.TxtBoxMI.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "MiddleInitial", True))
+        Me.TxtBoxMI.Location = New System.Drawing.Point(398, 157)
+        Me.TxtBoxMI.Name = "TxtBoxMI"
+        Me.TxtBoxMI.Size = New System.Drawing.Size(40, 20)
+        Me.TxtBoxMI.TabIndex = 3
         '
         'TabEditPword
         '
         Me.TabEditPword.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.TabEditPword.Controls.Add(Me.LblOldPass)
-        Me.TabEditPword.Controls.Add(Me.LblConfirmPass)
-        Me.TabEditPword.Controls.Add(Me.TxtBoxConfirmPass)
-        Me.TabEditPword.Controls.Add(Me.TxtBoxCurrentPass)
+        Me.TabEditPword.Controls.Add(Me.GrpBoxPass)
         Me.TabEditPword.Controls.Add(Me.BtnEditPassCncl)
         Me.TabEditPword.Controls.Add(Me.BtnEditPassOK)
-        Me.TabEditPword.Controls.Add(Me.LblNewPass)
         Me.TabEditPword.Controls.Add(Me.Btn_Cancel)
         Me.TabEditPword.Controls.Add(Me.Btn_Ok)
-        Me.TabEditPword.Controls.Add(Me.TxtBoxPass)
         Me.TabEditPword.Location = New System.Drawing.Point(4, 22)
         Me.TabEditPword.Name = "TabEditPword"
         Me.TabEditPword.Padding = New System.Windows.Forms.Padding(3)
@@ -448,7 +505,7 @@ Partial Class FrmSettings
         'LblOldPass
         '
         Me.LblOldPass.AutoSize = True
-        Me.LblOldPass.Location = New System.Drawing.Point(167, 146)
+        Me.LblOldPass.Location = New System.Drawing.Point(34, 48)
         Me.LblOldPass.Name = "LblOldPass"
         Me.LblOldPass.Size = New System.Drawing.Size(120, 13)
         Me.LblOldPass.TabIndex = 10
@@ -457,7 +514,7 @@ Partial Class FrmSettings
         'LblConfirmPass
         '
         Me.LblConfirmPass.AutoSize = True
-        Me.LblConfirmPass.Location = New System.Drawing.Point(167, 226)
+        Me.LblConfirmPass.Location = New System.Drawing.Point(34, 128)
         Me.LblConfirmPass.Name = "LblConfirmPass"
         Me.LblConfirmPass.Size = New System.Drawing.Size(123, 13)
         Me.LblConfirmPass.TabIndex = 9
@@ -465,14 +522,14 @@ Partial Class FrmSettings
         '
         'TxtBoxConfirmPass
         '
-        Me.TxtBoxConfirmPass.Location = New System.Drawing.Point(298, 223)
+        Me.TxtBoxConfirmPass.Location = New System.Drawing.Point(165, 125)
         Me.TxtBoxConfirmPass.Name = "TxtBoxConfirmPass"
         Me.TxtBoxConfirmPass.Size = New System.Drawing.Size(234, 20)
         Me.TxtBoxConfirmPass.TabIndex = 8
         '
         'TxtBoxCurrentPass
         '
-        Me.TxtBoxCurrentPass.Location = New System.Drawing.Point(298, 143)
+        Me.TxtBoxCurrentPass.Location = New System.Drawing.Point(165, 45)
         Me.TxtBoxCurrentPass.Name = "TxtBoxCurrentPass"
         Me.TxtBoxCurrentPass.Size = New System.Drawing.Size(234, 20)
         Me.TxtBoxCurrentPass.TabIndex = 7
@@ -510,6 +567,39 @@ Partial Class FrmSettings
         Me.TableAdapterManager.TechniciansTableAdapter = Me.TechniciansTableAdapter
         Me.TableAdapterManager.UpdateOrder = Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
+        'BtnGenSave
+        '
+        Me.BtnGenSave.Location = New System.Drawing.Point(594, 473)
+        Me.BtnGenSave.Name = "BtnGenSave"
+        Me.BtnGenSave.Size = New System.Drawing.Size(75, 23)
+        Me.BtnGenSave.TabIndex = 7
+        Me.BtnGenSave.Text = "Save"
+        Me.BtnGenSave.UseVisualStyleBackColor = True
+        '
+        'BtnGenCncl
+        '
+        Me.BtnGenCncl.Location = New System.Drawing.Point(675, 473)
+        Me.BtnGenCncl.Name = "BtnGenCncl"
+        Me.BtnGenCncl.Size = New System.Drawing.Size(75, 23)
+        Me.BtnGenCncl.TabIndex = 8
+        Me.BtnGenCncl.Text = "Cancel"
+        Me.BtnGenCncl.UseVisualStyleBackColor = True
+        '
+        'GrpBoxPass
+        '
+        Me.GrpBoxPass.Controls.Add(Me.LblOldPass)
+        Me.GrpBoxPass.Controls.Add(Me.TxtBoxPass)
+        Me.GrpBoxPass.Controls.Add(Me.LblConfirmPass)
+        Me.GrpBoxPass.Controls.Add(Me.LblNewPass)
+        Me.GrpBoxPass.Controls.Add(Me.TxtBoxConfirmPass)
+        Me.GrpBoxPass.Controls.Add(Me.TxtBoxCurrentPass)
+        Me.GrpBoxPass.Location = New System.Drawing.Point(36, 36)
+        Me.GrpBoxPass.Name = "GrpBoxPass"
+        Me.GrpBoxPass.Size = New System.Drawing.Size(670, 174)
+        Me.GrpBoxPass.TabIndex = 11
+        Me.GrpBoxPass.TabStop = False
+        Me.GrpBoxPass.Text = "Change Password"
+        '
         'FrmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -520,12 +610,17 @@ Partial Class FrmSettings
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Settings"
         Me.TabCtrlSttng.ResumeLayout(False)
+        Me.TabGeneral.ResumeLayout(False)
+        Me.GrpBoxPay.ResumeLayout(False)
+        Me.GrpBoxPay.PerformLayout()
         Me.TabEditTech.ResumeLayout(False)
-        Me.TabEditTech.PerformLayout()
+        Me.PnlEditTech.ResumeLayout(False)
+        Me.PnlEditTech.PerformLayout()
         CType(Me.TechniciansBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReceiverInstallationDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabEditPword.ResumeLayout(False)
-        Me.TabEditPword.PerformLayout()
+        Me.GrpBoxPass.ResumeLayout(False)
+        Me.GrpBoxPass.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -542,17 +637,17 @@ Partial Class FrmSettings
     Friend WithEvents TableAdapterManager As Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager
     Friend WithEvents RBEditTech As System.Windows.Forms.RadioButton
     Friend WithEvents RBAddTech As System.Windows.Forms.RadioButton
-    Friend WithEvents IDTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents LocationTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents HomeAddressTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents FirstNameTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents MiddleInitialTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents LastNameTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents PayPercentageTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents SSNTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents FedIDNumTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents PhoneNumTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents EmailAddTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents TxtboxID As System.Windows.Forms.TextBox
+    Friend WithEvents TxtboxLoc As System.Windows.Forms.TextBox
+    Friend WithEvents TxtboxAddr As System.Windows.Forms.TextBox
+    Friend WithEvents txtBoxFirst As System.Windows.Forms.TextBox
+    Friend WithEvents TxtBoxMI As System.Windows.Forms.TextBox
+    Friend WithEvents TxtBoxLast As System.Windows.Forms.TextBox
+    Friend WithEvents TxtboxPayPerc As System.Windows.Forms.TextBox
+    Friend WithEvents TxtBoxSSN As System.Windows.Forms.TextBox
+    Friend WithEvents TxtBoxFedID As System.Windows.Forms.TextBox
+    Friend WithEvents TxtboxPhone As System.Windows.Forms.TextBox
+    Friend WithEvents TxtboxEmail As System.Windows.Forms.TextBox
     Friend WithEvents TabGeneral As System.Windows.Forms.TabPage
     Friend WithEvents CmboBoxTechs As System.Windows.Forms.ComboBox
     Friend WithEvents TxtBoxConfirmPass As System.Windows.Forms.TextBox
@@ -563,4 +658,12 @@ Partial Class FrmSettings
     Friend WithEvents LblConfirmPass As System.Windows.Forms.Label
     Friend WithEvents BtnEditTechCncl As System.Windows.Forms.Button
     Friend WithEvents BtnEditTechSave As System.Windows.Forms.Button
+    Friend WithEvents PnlEditTech As System.Windows.Forms.Panel
+    Friend WithEvents GrpBoxPay As System.Windows.Forms.GroupBox
+    Friend WithEvents ChkboxSvcPay As System.Windows.Forms.CheckBox
+    Friend WithEvents LblSvcPay As System.Windows.Forms.Label
+    Friend WithEvents TxtBoxSvcPay As System.Windows.Forms.TextBox
+    Friend WithEvents BtnGenSave As System.Windows.Forms.Button
+    Friend WithEvents BtnGenCncl As System.Windows.Forms.Button
+    Friend WithEvents GrpBoxPass As System.Windows.Forms.GroupBox
 End Class
