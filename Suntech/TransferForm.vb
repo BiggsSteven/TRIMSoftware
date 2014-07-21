@@ -158,11 +158,14 @@ Public Class TransferForm
     End Sub
 
     Private Sub CmboTo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CmboTo.SelectedIndexChanged
-        If CmboTo.SelectedItem <> String.Empty Then
+        If CmboTo.SelectedIndex <> 0 Then
             TxtBoxAccessCard.Enabled = True
-            TxtBoxAccessCard.Select()
             ChkListTransfers.Enabled = True
             BtnTransfer.Enabled = True
+        Else
+            TxtBoxAccessCard.Enabled = False
+            ChkListTransfers.Enabled = False
+            BtnTransfer.Enabled = False
         End If
     End Sub
 
