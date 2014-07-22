@@ -40,6 +40,8 @@ Partial Class FrmSettings
         Me.Btn_Cancel = New System.Windows.Forms.Button()
         Me.TabCtrlSttng = New System.Windows.Forms.TabControl()
         Me.TabGeneral = New System.Windows.Forms.TabPage()
+        Me.BtnGenSave = New System.Windows.Forms.Button()
+        Me.BtnGenCncl = New System.Windows.Forms.Button()
         Me.GrpBoxPay = New System.Windows.Forms.GroupBox()
         Me.ChkboxSvcPay = New System.Windows.Forms.CheckBox()
         Me.LblSvcPay = New System.Windows.Forms.Label()
@@ -65,6 +67,7 @@ Partial Class FrmSettings
         Me.txtBoxFirst = New System.Windows.Forms.TextBox()
         Me.TxtBoxMI = New System.Windows.Forms.TextBox()
         Me.TabEditPword = New System.Windows.Forms.TabPage()
+        Me.GrpBoxPass = New System.Windows.Forms.GroupBox()
         Me.LblOldPass = New System.Windows.Forms.Label()
         Me.LblConfirmPass = New System.Windows.Forms.Label()
         Me.TxtBoxConfirmPass = New System.Windows.Forms.TextBox()
@@ -73,9 +76,11 @@ Partial Class FrmSettings
         Me.BtnEditPassOK = New System.Windows.Forms.Button()
         Me.TechniciansTableAdapter = New Suntech.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter()
         Me.TableAdapterManager = New Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
-        Me.BtnGenSave = New System.Windows.Forms.Button()
-        Me.BtnGenCncl = New System.Windows.Forms.Button()
-        Me.GrpBoxPass = New System.Windows.Forms.GroupBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LblComp = New System.Windows.Forms.Label()
+        Me.LblDistro = New System.Windows.Forms.Label()
+        Me.TxtboxComp = New System.Windows.Forms.TextBox()
+        Me.TxtboxDistro = New System.Windows.Forms.TextBox()
         LblEmailAddress = New System.Windows.Forms.Label()
         LblPhoneNum = New System.Windows.Forms.Label()
         LblFedIDNum = New System.Windows.Forms.Label()
@@ -96,6 +101,7 @@ Partial Class FrmSettings
         CType(Me.ReceiverInstallationDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabEditPword.SuspendLayout()
         Me.GrpBoxPass.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblEmailAddress
@@ -247,6 +253,7 @@ Partial Class FrmSettings
         'TabGeneral
         '
         Me.TabGeneral.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.TabGeneral.Controls.Add(Me.GroupBox1)
         Me.TabGeneral.Controls.Add(Me.BtnGenSave)
         Me.TabGeneral.Controls.Add(Me.BtnGenCncl)
         Me.TabGeneral.Controls.Add(Me.GrpBoxPay)
@@ -256,12 +263,30 @@ Partial Class FrmSettings
         Me.TabGeneral.TabIndex = 2
         Me.TabGeneral.Text = "General"
         '
+        'BtnGenSave
+        '
+        Me.BtnGenSave.Location = New System.Drawing.Point(594, 473)
+        Me.BtnGenSave.Name = "BtnGenSave"
+        Me.BtnGenSave.Size = New System.Drawing.Size(75, 23)
+        Me.BtnGenSave.TabIndex = 7
+        Me.BtnGenSave.Text = "Save"
+        Me.BtnGenSave.UseVisualStyleBackColor = True
+        '
+        'BtnGenCncl
+        '
+        Me.BtnGenCncl.Location = New System.Drawing.Point(675, 473)
+        Me.BtnGenCncl.Name = "BtnGenCncl"
+        Me.BtnGenCncl.Size = New System.Drawing.Size(75, 23)
+        Me.BtnGenCncl.TabIndex = 8
+        Me.BtnGenCncl.Text = "Cancel"
+        Me.BtnGenCncl.UseVisualStyleBackColor = True
+        '
         'GrpBoxPay
         '
         Me.GrpBoxPay.Controls.Add(Me.ChkboxSvcPay)
         Me.GrpBoxPay.Controls.Add(Me.LblSvcPay)
         Me.GrpBoxPay.Controls.Add(Me.TxtBoxSvcPay)
-        Me.GrpBoxPay.Location = New System.Drawing.Point(36, 36)
+        Me.GrpBoxPay.Location = New System.Drawing.Point(44, 235)
         Me.GrpBoxPay.Name = "GrpBoxPay"
         Me.GrpBoxPay.Size = New System.Drawing.Size(670, 174)
         Me.GrpBoxPay.TabIndex = 0
@@ -502,6 +527,21 @@ Partial Class FrmSettings
         Me.TabEditPword.TabIndex = 0
         Me.TabEditPword.Text = "Edit Password"
         '
+        'GrpBoxPass
+        '
+        Me.GrpBoxPass.Controls.Add(Me.LblOldPass)
+        Me.GrpBoxPass.Controls.Add(Me.TxtBoxPass)
+        Me.GrpBoxPass.Controls.Add(Me.LblConfirmPass)
+        Me.GrpBoxPass.Controls.Add(Me.LblNewPass)
+        Me.GrpBoxPass.Controls.Add(Me.TxtBoxConfirmPass)
+        Me.GrpBoxPass.Controls.Add(Me.TxtBoxCurrentPass)
+        Me.GrpBoxPass.Location = New System.Drawing.Point(36, 36)
+        Me.GrpBoxPass.Name = "GrpBoxPass"
+        Me.GrpBoxPass.Size = New System.Drawing.Size(670, 174)
+        Me.GrpBoxPass.TabIndex = 11
+        Me.GrpBoxPass.TabStop = False
+        Me.GrpBoxPass.Text = "Change Password"
+        '
         'LblOldPass
         '
         Me.LblOldPass.AutoSize = True
@@ -567,38 +607,49 @@ Partial Class FrmSettings
         Me.TableAdapterManager.TechniciansTableAdapter = Me.TechniciansTableAdapter
         Me.TableAdapterManager.UpdateOrder = Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
-        'BtnGenSave
+        'GroupBox1
         '
-        Me.BtnGenSave.Location = New System.Drawing.Point(594, 473)
-        Me.BtnGenSave.Name = "BtnGenSave"
-        Me.BtnGenSave.Size = New System.Drawing.Size(75, 23)
-        Me.BtnGenSave.TabIndex = 7
-        Me.BtnGenSave.Text = "Save"
-        Me.BtnGenSave.UseVisualStyleBackColor = True
+        Me.GroupBox1.Controls.Add(Me.LblComp)
+        Me.GroupBox1.Controls.Add(Me.LblDistro)
+        Me.GroupBox1.Controls.Add(Me.TxtboxComp)
+        Me.GroupBox1.Controls.Add(Me.TxtboxDistro)
+        Me.GroupBox1.Location = New System.Drawing.Point(44, 24)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(670, 174)
+        Me.GroupBox1.TabIndex = 10
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Titles"
         '
-        'BtnGenCncl
+        'LblComp
         '
-        Me.BtnGenCncl.Location = New System.Drawing.Point(675, 473)
-        Me.BtnGenCncl.Name = "BtnGenCncl"
-        Me.BtnGenCncl.Size = New System.Drawing.Size(75, 23)
-        Me.BtnGenCncl.TabIndex = 8
-        Me.BtnGenCncl.Text = "Cancel"
-        Me.BtnGenCncl.UseVisualStyleBackColor = True
+        Me.LblComp.AutoSize = True
+        Me.LblComp.Location = New System.Drawing.Point(26, 99)
+        Me.LblComp.Name = "LblComp"
+        Me.LblComp.Size = New System.Drawing.Size(118, 13)
+        Me.LblComp.TabIndex = 3
+        Me.LblComp.Text = "Enter Company's name:"
         '
-        'GrpBoxPass
+        'LblDistro
         '
-        Me.GrpBoxPass.Controls.Add(Me.LblOldPass)
-        Me.GrpBoxPass.Controls.Add(Me.TxtBoxPass)
-        Me.GrpBoxPass.Controls.Add(Me.LblConfirmPass)
-        Me.GrpBoxPass.Controls.Add(Me.LblNewPass)
-        Me.GrpBoxPass.Controls.Add(Me.TxtBoxConfirmPass)
-        Me.GrpBoxPass.Controls.Add(Me.TxtBoxCurrentPass)
-        Me.GrpBoxPass.Location = New System.Drawing.Point(36, 36)
-        Me.GrpBoxPass.Name = "GrpBoxPass"
-        Me.GrpBoxPass.Size = New System.Drawing.Size(670, 174)
-        Me.GrpBoxPass.TabIndex = 11
-        Me.GrpBoxPass.TabStop = False
-        Me.GrpBoxPass.Text = "Change Password"
+        Me.LblDistro.Location = New System.Drawing.Point(26, 42)
+        Me.LblDistro.Name = "LblDistro"
+        Me.LblDistro.Size = New System.Drawing.Size(305, 17)
+        Me.LblDistro.TabIndex = 2
+        Me.LblDistro.Text = "Enter Distributor's by the car light."
+        '
+        'TxtboxComp
+        '
+        Me.TxtboxComp.Location = New System.Drawing.Point(328, 96)
+        Me.TxtboxComp.Name = "TxtboxComp"
+        Me.TxtboxComp.Size = New System.Drawing.Size(231, 20)
+        Me.TxtboxComp.TabIndex = 1
+        '
+        'TxtboxDistro
+        '
+        Me.TxtboxDistro.Location = New System.Drawing.Point(328, 39)
+        Me.TxtboxDistro.Name = "TxtboxDistro"
+        Me.TxtboxDistro.Size = New System.Drawing.Size(231, 20)
+        Me.TxtboxDistro.TabIndex = 0
         '
         'FrmSettings
         '
@@ -621,6 +672,8 @@ Partial Class FrmSettings
         Me.TabEditPword.ResumeLayout(False)
         Me.GrpBoxPass.ResumeLayout(False)
         Me.GrpBoxPass.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -666,4 +719,9 @@ Partial Class FrmSettings
     Friend WithEvents BtnGenSave As System.Windows.Forms.Button
     Friend WithEvents BtnGenCncl As System.Windows.Forms.Button
     Friend WithEvents GrpBoxPass As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents LblComp As System.Windows.Forms.Label
+    Friend WithEvents LblDistro As System.Windows.Forms.Label
+    Friend WithEvents TxtboxComp As System.Windows.Forms.TextBox
+    Friend WithEvents TxtboxDistro As System.Windows.Forms.TextBox
 End Class

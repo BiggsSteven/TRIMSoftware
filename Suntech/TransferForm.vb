@@ -115,7 +115,7 @@ Public Class TransferForm
 
                 TxtBoxAccessCard.Text = String.Empty
                 TxtBoxAccessCard.Select()
-
+                BtnTransfer.Enabled = True
             Else
                 MessageBox.Show("Please check each field and ensure that each is correct.")
             End If
@@ -160,13 +160,14 @@ Public Class TransferForm
             Dim ValueList() As String = {Action(1, index), Action(2, index).Substring(0, 10), Action(3, index).Substring(0, 10), DateTime.Now}
             data.RunDynamicInsert(table, fieldsString, ValueList)
         Next
+        BtnTransfer.Enabled = False
+
     End Sub
 
     Private Sub CmboTo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CmboTo.SelectedIndexChanged
         If CmboTo.SelectedIndex <> 0 Then
             TxtBoxAccessCard.Enabled = True
             ChkListTransfers.Enabled = True
-            BtnTransfer.Enabled = True
         Else
             TxtBoxAccessCard.Enabled = False
             ChkListTransfers.Enabled = False

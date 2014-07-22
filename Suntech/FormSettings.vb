@@ -4,9 +4,49 @@ Imports System.Data.SqlClient
 Public Class FrmSettings
 
     Private Sub FrmSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'General Tab
+        fillSettings()
+
+        BtnGenSave.Enabled = False
+        If ChkboxSvcPay.Checked Then
+            TxtBoxSvcPay.Enabled = True
+        Else
+            TxtBoxSvcPay.Enabled = False
+        End If
+
+        'Add/Edit Tab
         CmboBoxTechs.Enabled = False
         RBAddTech.Checked = True
-        fillSettings()
+
+        'Password Change
+
+
+    End Sub
+    '--------------------------------------------------------------------------------------------------------------------
+
+    'General settings Section
+
+    '--------------------------------------------------------------------------------------------------------------------
+    Public Sub fillSettings()
+        'Retrieve data from database
+        Dim data As DatabaseClass = New DatabaseClass
+        Dim table As String = ConfigurationManager.AppSettings("Options")
+        Dim fieldString As String = "[UseStaticSrvc],[SrvcPay],[DistroName],[CompanyName]"
+        Dim condition As String = ""
+        Dim fields(,) As String
+        data.RunDynamicSelect(table, fieldString, condition, fields)
+
+        'Fill Options with values from database
+        If fields.Length > 0 Then
+            ChkboxSvcPay.Checked = fields(0, 0)
+            TxtBoxSvcPay.Text = FormatCurrency(Convert.ToDouble(fields(0, 1)), 2)
+            TxtboxDistro.Text = fields(0, 2)
+            TxtboxComp.Text = fields(0, 3)
+        End If
+
+    End Sub
+
+    Private Sub ChkboxSvcPay_CheckedChanged(sender As Object, e As EventArgs) Handles ChkboxSvcPay.CheckedChanged
         If ChkboxSvcPay.Checked Then
             TxtBoxSvcPay.Enabled = True
         Else
@@ -14,19 +54,52 @@ Public Class FrmSettings
         End If
     End Sub
 
+    Private Sub BtnGenSave_Click(sender As Object, e As EventArgs) Handles BtnGenSave.Click
+
+        Dim data As DatabaseClass = New DatabaseClass
+        Dim table As String = ConfigurationManager.AppSettings("Options")
+        Dim condition As String = ""
+        Dim editfields() As String = {"[UseStaticSrvc]", "[SrvcPay]", "[DistroName]", "[CompanyName]"}
+        Dim svcPay As Double = TxtBoxSvcPay.Text
+        Dim values() As String = {ChkboxSvcPay.Checked, svcPay, TxtboxDistro.Text, TxtboxComp.Text}
+        data.RunDynamicUpdate(table, condition, editfields, values)
+        MessageBox.Show("Settings successfully saved.")
+
+    End Sub
+
+    Private Sub BtnCncl_Click(sender As Object, e As EventArgs) Handles BtnGenCncl.Click
+        Me.Close()
+    End Sub
+
+    Private Sub TxtboxDistro_TextChanged(sender As Object, e As EventArgs) Handles TxtboxDistro.TextChanged
+        BtnGenSave.Enabled = True
+    End Sub
+
+    Private Sub TxtboxComp_TextChanged(sender As Object, e As EventArgs) Handles TxtboxComp.TextChanged
+        BtnGenSave.Enabled = True
+    End Sub
+
+    Private Sub TxtBoxSvcPay_TextChanged(sender As Object, e As EventArgs) Handles TxtBoxSvcPay.TextChanged
+        BtnGenSave.Enabled = True
+    End Sub
+
+    Private Sub TxtBoxSvcPay_LostFocus(sender As Object, e As EventArgs) Handles TxtBoxSvcPay.LostFocus
+        TxtBoxSvcPay.Text = FormatCurrency(TxtBoxSvcPay.Text)
+    End Sub
+
+    '--------------------------------------------------------------------------------------------------------------------
+
     'Add/Edit Tech Section
+
+    '--------------------------------------------------------------------------------------------------------------------
     Private Sub RBAddTech_CheckedChanged(sender As Object, e As EventArgs) Handles RBAddTech.CheckedChanged
         CmboBoxTechs.Enabled = False
         clearTxtBoxes()
-
     End Sub
 
     Private Sub RBEditTech_CheckedChanged(sender As Object, e As EventArgs) Handles RBEditTech.CheckedChanged
         CmboBoxTechs.Enabled = True
         UpdateTechList()
-
-
-
     End Sub
 
     Private Sub UpdateTechList()
@@ -59,15 +132,16 @@ Public Class FrmSettings
     Private Sub clearTxtBoxes()
         For Each element As Control In PnlEditTech.Controls
             If TypeOf element Is TextBox Then
+                element.Enabled = True
                 element.Text = String.Empty
             End If
         Next
     End Sub
 
     Private Sub CmboBoxTechs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmboBoxTechs.SelectedIndexChanged
+        'Retrieve selection from database
         Dim TechSelected As String = CmboBoxTechs.SelectedItem
         TechSelected = TechSelected.Substring(0, TechSelected.IndexOf("\"))
-
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("Tech")
         Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName], [SSN], [FedIDNum], [HomeAddress], [PhoneNum], [EmailAdd], [Location], [PayPercentage]"
@@ -75,7 +149,15 @@ Public Class FrmSettings
         Dim TechArray(,) As String
         data.RunDynamicSelect(table, fieldString, condition, TechArray)
 
-        If TechArray.Length <> 0 Then
+        'If the selection is Distributor or Company they should not be editable
+        'Else fill the fields with the appropriate data
+        If TechSelected = "0000000001" Or TechSelected = "0000000002" Then
+            For Each element As Control In PnlEditTech.Controls
+                If TypeOf element Is TextBox Then
+                    element.Enabled = False
+                End If
+            Next
+        ElseIf TechArray.Length <> 0 Then
             TxtboxID.Text = TechArray(0, 0)
             txtBoxFirst.Text = TechArray(0, 1)
             TxtBoxMI.Text = TechArray(0, 2)
@@ -148,8 +230,11 @@ Public Class FrmSettings
     Private Sub BtnEditTechCncl_Click(sender As Object, e As EventArgs) Handles BtnEditTechCncl.Click
         Me.Close()
     End Sub
+    '--------------------------------------------------------------------------------------------------------------------
 
     'Password Edit Section
+
+    '--------------------------------------------------------------------------------------------------------------------
     Private Sub changePass()
         Dim data As DatabaseClass = New DatabaseClass
         Dim tables As String = ConfigurationManager.AppSettings("Login")
@@ -190,47 +275,6 @@ Public Class FrmSettings
     End Sub
 
     Private Sub BtnEditPassCncl_Click(sender As Object, e As EventArgs) Handles BtnEditPassCncl.Click
-        Me.Close()
-    End Sub
-
-    'General settings Section
-    Public Sub fillSettings()
-        Dim data As DatabaseClass = New DatabaseClass
-        Dim table As String = ConfigurationManager.AppSettings("Options")
-        Dim fieldString As String = "[UseStaticSrvc],[SrvcPay]"
-        Dim condition As String = ""
-        Dim fields(,) As String
-        data.RunDynamicSelect(table, fieldString, condition, fields)
-
-        If fields.Length > 0 Then
-            ChkboxSvcPay.Checked = fields(0, 0)
-            Dim svcPay As Double = fields(0, 1)
-            TxtBoxSvcPay.Text = svcPay
-        End If
-
-    End Sub
-
-    Private Sub ChkboxSvcPay_CheckedChanged(sender As Object, e As EventArgs) Handles ChkboxSvcPay.CheckedChanged
-        If ChkboxSvcPay.Checked Then
-            TxtBoxSvcPay.Enabled = True
-        Else
-            TxtBoxSvcPay.Enabled = False
-        End If
-    End Sub
-
-    Private Sub BtnGenSave_Click(sender As Object, e As EventArgs) Handles BtnGenSave.Click
-
-        Dim data As DatabaseClass = New DatabaseClass
-        Dim table As String = ConfigurationManager.AppSettings("Options")
-        Dim condition As String = ""
-        Dim editfields() As String = {"[UseStaticSrvc]", "[SrvcPay]"}
-        Dim values() As String = {ChkboxSvcPay.Checked, TxtBoxSvcPay.Text}
-        data.RunDynamicUpdate(table, condition, editfields, values)
-        MessageBox.Show("Settings successfully saved.")
-
-    End Sub
-
-    Private Sub BtnCncl_Click(sender As Object, e As EventArgs) Handles BtnGenCncl.Click
         Me.Close()
     End Sub
 
