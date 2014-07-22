@@ -49,71 +49,76 @@ Public Class TransferForm
         'Barcode Scanner is set to press "ENTER" after scanning
         'This will run after scanning
         If e.KeyCode = Keys.Enter Then
-            Dim data As DatabaseClass = New DatabaseClass
-            Dim CodeScanned As String = TxtBoxAccessCard.Text
+            If CmboTo.SelectedIndex <> 0 And TxtBoxAccessCard.Text <> String.Empty Then
+                Dim data As DatabaseClass = New DatabaseClass
+                Dim CodeScanned As String = TxtBoxAccessCard.Text
 
-            'Retrieve the Tech's name and number that currently has the Receiver
-            '
-            '_____________________________________________________________________________________________________
-            '
-            Dim tables As String = ConfigurationManager.AppSettings("RecInv") _
-                        & " INNER JOIN " & ConfigurationManager.AppSettings("Tech") _
-                        & " ON " & ConfigurationManager.AppSettings("RecInv") & ".[TECHID]=" _
-                        & ConfigurationManager.AppSettings("Tech") & ".[ID]"
+                'Retrieve the Tech's name and number that currently has the Receiver
+                '
+                '_____________________________________________________________________________________________________
+                '
+                Dim tables As String = ConfigurationManager.AppSettings("RecInv") _
+                            & " INNER JOIN " & ConfigurationManager.AppSettings("Tech") _
+                            & " ON " & ConfigurationManager.AppSettings("RecInv") & ".[TECHID]=" _
+                            & ConfigurationManager.AppSettings("Tech") & ".[ID]"
 
-            Dim fieldsString As String = ConfigurationManager.AppSettings("RecInv") & ".[ACCESSCARD]" _
-                            & " , " & ConfigurationManager.AppSettings("RecInv") & ".[TECHID] " _
-                            & " , " & ConfigurationManager.AppSettings("Tech") & ".[LastName] " _
-                            & " , " & ConfigurationManager.AppSettings("Tech") & ".[FirstName] " _
-                            & " , " & ConfigurationManager.AppSettings("Tech") & ".[MiddleInitial] "
-
-
-
-
-            Dim condition As String = ConfigurationManager.AppSettings("RecInv") & ".[ACCESSCARD] = '" & CodeScanned & "'"
-            Dim fields(,) As String
-            data.RunDynamicSelect(tables, fieldsString, condition, fields)
-
-            '_____________________________________________________________________________________________________
-
-            'If the accessCard is found then transfer it to the appropriate person
-            'else add it to the receiver Inventory
-            Dim last As Integer = ChkListTransfers.Items.Count
-            If fields.Length <> 0 Then
-                Dim placeholder As Integer = 1
-                Dim counter As Integer = 0
-                For Each item In CmboFrom.Items
-                    Dim tempBit() As String = item.split("\")
-                    If tempBit(0) = fields(0, 1) Then
-                        placeholder = counter
-                    End If
-                    counter += 1
-                Next
+                Dim fieldsString As String = ConfigurationManager.AppSettings("RecInv") & ".[ACCESSCARD]" _
+                                & " , " & ConfigurationManager.AppSettings("RecInv") & ".[TECHID] " _
+                                & " , " & ConfigurationManager.AppSettings("Tech") & ".[LastName] " _
+                                & " , " & ConfigurationManager.AppSettings("Tech") & ".[FirstName] " _
+                                & " , " & ConfigurationManager.AppSettings("Tech") & ".[MiddleInitial] "
 
 
-                CmboFrom.SelectedIndex() = placeholder
-                ChkListTransfers.Items.Add("Mov: " & TxtBoxAccessCard.Text & " from " & CmboFrom.SelectedItem & " to " & CmboTo.SelectedItem)
-                ChkListTransfers.SetItemChecked(ChkListTransfers.Items.Count - 1, True)
-                ReDim Preserve Action(3, last)
-                Action(0, last) = "Mov"
-                Action(1, last) = TxtBoxAccessCard.Text
-                Action(2, last) = CmboFrom.SelectedItem()
-                Action(3, last) = CmboTo.SelectedItem()
 
+
+                Dim condition As String = ConfigurationManager.AppSettings("RecInv") & ".[ACCESSCARD] = '" & CodeScanned & "'"
+                Dim fields(,) As String
+                data.RunDynamicSelect(tables, fieldsString, condition, fields)
+
+                '_____________________________________________________________________________________________________
+
+                'If the accessCard is found then transfer it to the appropriate person
+                'else add it to the receiver Inventory
+                Dim last As Integer = ChkListTransfers.Items.Count
+                If fields.Length <> 0 Then
+                    Dim placeholder As Integer = 1
+                    Dim counter As Integer = 0
+                    For Each item In CmboFrom.Items
+                        Dim tempBit() As String = item.split("\")
+                        If tempBit(0) = fields(0, 1) Then
+                            placeholder = counter
+                        End If
+                        counter += 1
+                    Next
+
+
+                    CmboFrom.SelectedIndex() = placeholder
+                    ChkListTransfers.Items.Add("Mov: " & TxtBoxAccessCard.Text & " from " & CmboFrom.SelectedItem & " to " & CmboTo.SelectedItem)
+                    ChkListTransfers.SetItemChecked(ChkListTransfers.Items.Count - 1, True)
+                    ReDim Preserve Action(3, last)
+                    Action(0, last) = "Mov"
+                    Action(1, last) = TxtBoxAccessCard.Text
+                    Action(2, last) = CmboFrom.SelectedItem()
+                    Action(3, last) = CmboTo.SelectedItem()
+
+
+                Else
+                    CmboFrom.SelectedIndex = 1
+                    ChkListTransfers.Items.Add("Add: " & TxtBoxAccessCard.Text & " from " & CmboFrom.SelectedItem & " to " & CmboTo.SelectedItem)
+                    ChkListTransfers.SetItemChecked(ChkListTransfers.Items.Count - 1, True)
+                    ReDim Preserve Action(3, last)
+                    Action(0, last) = "Add"
+                    Action(1, last) = TxtBoxAccessCard.Text
+                    Action(2, last) = CmboFrom.SelectedItem()
+                    Action(3, last) = CmboTo.SelectedItem()
+                End If
+
+                TxtBoxAccessCard.Text = String.Empty
+                TxtBoxAccessCard.Select()
 
             Else
-                CmboFrom.SelectedIndex = 1
-                ChkListTransfers.Items.Add("Add: " & TxtBoxAccessCard.Text & " from " & CmboFrom.SelectedItem & " to " & CmboTo.SelectedItem)
-                ChkListTransfers.SetItemChecked(ChkListTransfers.Items.Count - 1, True)
-                ReDim Preserve Action(3, last)
-                Action(0, last) = "Add"
-                Action(1, last) = TxtBoxAccessCard.Text
-                Action(2, last) = CmboFrom.SelectedItem()
-                Action(3, last) = CmboTo.SelectedItem()
+                MessageBox.Show("Please check each field and ensure that each is correct.")
             End If
-
-            TxtBoxAccessCard.Text = String.Empty
-            TxtBoxAccessCard.Select()
         End If
     End Sub
 
@@ -165,7 +170,6 @@ Public Class TransferForm
         Else
             TxtBoxAccessCard.Enabled = False
             ChkListTransfers.Enabled = False
-            BtnTransfer.Enabled = False
         End If
     End Sub
 
