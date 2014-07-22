@@ -28,10 +28,10 @@ Public Class FrmSettings
 
     '--------------------------------------------------------------------------------------------------------------------
     Public Sub fillSettings()
-        'Retrieve data from database
+        'Retrieve data from Options Database
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("Options")
-        Dim fieldString As String = "[UseStaticSrvc],[SrvcPay],[DistroName],[CompanyName]"
+        Dim fieldString As String = "[UseStaticSrvc],[SrvcPay]"
         Dim condition As String = ""
         Dim fields(,) As String
         data.RunDynamicSelect(table, fieldString, condition, fields)
@@ -40,10 +40,24 @@ Public Class FrmSettings
         If fields.Length > 0 Then
             ChkboxSvcPay.Checked = fields(0, 0)
             TxtBoxSvcPay.Text = FormatCurrency(Convert.ToDouble(fields(0, 1)), 2)
-            TxtboxDistro.Text = fields(0, 2)
-            TxtboxComp.Text = fields(0, 3)
         End If
 
+        'Retrieve Distributor and Company from 
+        table = ConfigurationManager.AppSettings("Tech")
+        fieldString = "[ID][LastName]"
+        ReDim fields(0, 0)
+        condition = "[ID] = '0000000001' or [ID] = '0000000002' "
+        data.RunDynamicSelect(table, fieldString, condition, fields)
+
+        If fields.Length > 1 Then
+            If fields(0, 0) = "0000000001" Then
+                TxtboxDistro.Text = fields(0, 1)
+                TxtboxComp.Text = fields(1, 1)
+            ElseIf fields(0, 0) = "0000000002" Then
+                TxtboxComp.Text = fields(0, 1)
+                TxtboxDistro.Text = fields(1, 1)
+            End If
+        End If
     End Sub
 
     Private Sub ChkboxSvcPay_CheckedChanged(sender As Object, e As EventArgs) Handles ChkboxSvcPay.CheckedChanged
@@ -55,14 +69,31 @@ Public Class FrmSettings
     End Sub
 
     Private Sub BtnGenSave_Click(sender As Object, e As EventArgs) Handles BtnGenSave.Click
-
+        'Saves to the Options table
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("Options")
         Dim condition As String = ""
-        Dim editfields() As String = {"[UseStaticSrvc]", "[SrvcPay]", "[DistroName]", "[CompanyName]"}
+        Dim editfields() As String = {"[UseStaticSrvc]", "[SrvcPay]"}
         Dim svcPay As Double = TxtBoxSvcPay.Text
-        Dim values() As String = {ChkboxSvcPay.Checked, svcPay, TxtboxDistro.Text, TxtboxComp.Text}
+        Dim values() As String = {ChkboxSvcPay.Checked, svcPay}
         data.RunDynamicUpdate(table, condition, editfields, values)
+
+        'saves to the Tech Table for Distro
+        table = ConfigurationManager.AppSettings("Tech")
+        condition = "[ID] = '0000000001' "
+        ReDim editfields(0)
+        editfields(0) = "[LastName]"
+        ReDim values(0)
+        values(0) = TxtboxDistro.Text
+        data.RunDynamicUpdate(table, condition, editfields, values)
+
+        'saves to the Tech Table for Company
+        condition = "[ID] = '0000000002' "
+        ReDim values(0)
+        values(0) = TxtboxDistro.Text
+        data.RunDynamicUpdate(table, condition, editfields, values)
+
+
         MessageBox.Show("Settings successfully saved.")
 
     End Sub
