@@ -6,9 +6,9 @@ Public Class TransferForm
     Dim Action(,) As String
 
     Private Sub TransferForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        CmboTo.Text = String.Empty
         CmboFrom.Text = String.Empty
         TxtBoxAccessCard.Text = String.Empty
-        CmboTo.Text = String.Empty
         FillTechCmboBox()
         TxtBoxAccessCard.Enabled = False
         ReDim Action(3, 0)

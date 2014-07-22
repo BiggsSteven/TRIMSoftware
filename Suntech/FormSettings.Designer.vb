@@ -40,6 +40,11 @@ Partial Class FrmSettings
         Me.Btn_Cancel = New System.Windows.Forms.Button()
         Me.TabCtrlSttng = New System.Windows.Forms.TabControl()
         Me.TabGeneral = New System.Windows.Forms.TabPage()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LblComp = New System.Windows.Forms.Label()
+        Me.LblDistro = New System.Windows.Forms.Label()
+        Me.TxtboxComp = New System.Windows.Forms.TextBox()
+        Me.TxtboxDistro = New System.Windows.Forms.TextBox()
         Me.BtnGenSave = New System.Windows.Forms.Button()
         Me.BtnGenCncl = New System.Windows.Forms.Button()
         Me.GrpBoxPay = New System.Windows.Forms.GroupBox()
@@ -76,11 +81,6 @@ Partial Class FrmSettings
         Me.BtnEditPassOK = New System.Windows.Forms.Button()
         Me.TechniciansTableAdapter = New Suntech.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter()
         Me.TableAdapterManager = New Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.LblComp = New System.Windows.Forms.Label()
-        Me.LblDistro = New System.Windows.Forms.Label()
-        Me.TxtboxComp = New System.Windows.Forms.TextBox()
-        Me.TxtboxDistro = New System.Windows.Forms.TextBox()
         LblEmailAddress = New System.Windows.Forms.Label()
         LblPhoneNum = New System.Windows.Forms.Label()
         LblFedIDNum = New System.Windows.Forms.Label()
@@ -94,6 +94,7 @@ Partial Class FrmSettings
         LblID = New System.Windows.Forms.Label()
         Me.TabCtrlSttng.SuspendLayout()
         Me.TabGeneral.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.GrpBoxPay.SuspendLayout()
         Me.TabEditTech.SuspendLayout()
         Me.PnlEditTech.SuspendLayout()
@@ -101,7 +102,6 @@ Partial Class FrmSettings
         CType(Me.ReceiverInstallationDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabEditPword.SuspendLayout()
         Me.GrpBoxPass.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblEmailAddress
@@ -262,6 +262,51 @@ Partial Class FrmSettings
         Me.TabGeneral.Size = New System.Drawing.Size(758, 504)
         Me.TabGeneral.TabIndex = 2
         Me.TabGeneral.Text = "General"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.LblComp)
+        Me.GroupBox1.Controls.Add(Me.LblDistro)
+        Me.GroupBox1.Controls.Add(Me.TxtboxComp)
+        Me.GroupBox1.Controls.Add(Me.TxtboxDistro)
+        Me.GroupBox1.Location = New System.Drawing.Point(44, 24)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(670, 174)
+        Me.GroupBox1.TabIndex = 10
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Titles"
+        '
+        'LblComp
+        '
+        Me.LblComp.AutoSize = True
+        Me.LblComp.Location = New System.Drawing.Point(26, 99)
+        Me.LblComp.Name = "LblComp"
+        Me.LblComp.Size = New System.Drawing.Size(118, 13)
+        Me.LblComp.TabIndex = 3
+        Me.LblComp.Text = "Enter Company's name:"
+        '
+        'LblDistro
+        '
+        Me.LblDistro.AutoSize = True
+        Me.LblDistro.Location = New System.Drawing.Point(26, 42)
+        Me.LblDistro.Name = "LblDistro"
+        Me.LblDistro.Size = New System.Drawing.Size(123, 13)
+        Me.LblDistro.TabIndex = 2
+        Me.LblDistro.Text = "Enter Distributor's Name:"
+        '
+        'TxtboxComp
+        '
+        Me.TxtboxComp.Location = New System.Drawing.Point(295, 96)
+        Me.TxtboxComp.Name = "TxtboxComp"
+        Me.TxtboxComp.Size = New System.Drawing.Size(266, 20)
+        Me.TxtboxComp.TabIndex = 1
+        '
+        'TxtboxDistro
+        '
+        Me.TxtboxDistro.Location = New System.Drawing.Point(295, 39)
+        Me.TxtboxDistro.Name = "TxtboxDistro"
+        Me.TxtboxDistro.Size = New System.Drawing.Size(266, 20)
+        Me.TxtboxDistro.TabIndex = 0
         '
         'BtnGenSave
         '
@@ -607,50 +652,6 @@ Partial Class FrmSettings
         Me.TableAdapterManager.TechniciansTableAdapter = Me.TechniciansTableAdapter
         Me.TableAdapterManager.UpdateOrder = Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.LblComp)
-        Me.GroupBox1.Controls.Add(Me.LblDistro)
-        Me.GroupBox1.Controls.Add(Me.TxtboxComp)
-        Me.GroupBox1.Controls.Add(Me.TxtboxDistro)
-        Me.GroupBox1.Location = New System.Drawing.Point(44, 24)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(670, 174)
-        Me.GroupBox1.TabIndex = 10
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Titles"
-        '
-        'LblComp
-        '
-        Me.LblComp.AutoSize = True
-        Me.LblComp.Location = New System.Drawing.Point(26, 99)
-        Me.LblComp.Name = "LblComp"
-        Me.LblComp.Size = New System.Drawing.Size(118, 13)
-        Me.LblComp.TabIndex = 3
-        Me.LblComp.Text = "Enter Company's name:"
-        '
-        'LblDistro
-        '
-        Me.LblDistro.Location = New System.Drawing.Point(26, 42)
-        Me.LblDistro.Name = "LblDistro"
-        Me.LblDistro.Size = New System.Drawing.Size(305, 17)
-        Me.LblDistro.TabIndex = 2
-        Me.LblDistro.Text = "Enter Distributor's by the car light."
-        '
-        'TxtboxComp
-        '
-        Me.TxtboxComp.Location = New System.Drawing.Point(328, 96)
-        Me.TxtboxComp.Name = "TxtboxComp"
-        Me.TxtboxComp.Size = New System.Drawing.Size(231, 20)
-        Me.TxtboxComp.TabIndex = 1
-        '
-        'TxtboxDistro
-        '
-        Me.TxtboxDistro.Location = New System.Drawing.Point(328, 39)
-        Me.TxtboxDistro.Name = "TxtboxDistro"
-        Me.TxtboxDistro.Size = New System.Drawing.Size(231, 20)
-        Me.TxtboxDistro.TabIndex = 0
-        '
         'FrmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -662,6 +663,8 @@ Partial Class FrmSettings
         Me.Text = "Settings"
         Me.TabCtrlSttng.ResumeLayout(False)
         Me.TabGeneral.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.GrpBoxPay.ResumeLayout(False)
         Me.GrpBoxPay.PerformLayout()
         Me.TabEditTech.ResumeLayout(False)
@@ -672,8 +675,6 @@ Partial Class FrmSettings
         Me.TabEditPword.ResumeLayout(False)
         Me.GrpBoxPass.ResumeLayout(False)
         Me.GrpBoxPass.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

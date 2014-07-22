@@ -38,20 +38,14 @@ Public Class FormHome
             LstBoxTech.SelectedItem = LstBoxTech.Items.Item(0)
         End If
     End Sub
-    '-----------------------------------------------------------
-    Private Sub RBTextSearch_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RBTextSearch.CheckedChanged
-        If RBTextSearch.Checked = True Then
-            TxtBoxSearch.Enabled = True
-            TxtBoxSearch.Select()
-            LstBoxTech.Enabled = False
-            DTPkrFrom.Enabled = False
-            DTPkrEnd.Enabled = False
-            LblDtFrm.Enabled = False
-            LblDtEnd.Enabled = False
-        End If
-    End Sub
+    '--------------------------------------------------------------------------------------------------------------------
+
+    'This section sets the fields for the different search types
+
+    '--------------------------------------------------------------------------------------------------------------------
 
     Private Sub RBStrucSearch_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RBStrucSearch.CheckedChanged
+        'This is the basic Tech + dateRange search
         If RBStrucSearch.Checked = True Then
             TxtBoxSearch.Enabled = False
             TxtBoxSearch.Text = String.Empty
@@ -60,10 +54,12 @@ Public Class FormHome
             DTPkrEnd.Enabled = True
             LblDtFrm.Enabled = True
             LblDtEnd.Enabled = True
+            BtnPayTch.Enabled = True
         End If
     End Sub
 
     Private Sub RBAll_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RBAll.CheckedChanged
+        'This is the search that searches just by date range
         If RBAll.Checked = True Then
             TxtBoxSearch.Enabled = False
             TxtBoxSearch.Text = String.Empty
@@ -72,42 +68,68 @@ Public Class FormHome
             DTPkrEnd.Enabled = True
             LblDtFrm.Enabled = True
             LblDtEnd.Enabled = True
+            BtnPayTch.Enabled = False
         End If
     End Sub
 
-    '-----------------------------------------------------------
-    Private Sub BtnGtInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGtInfo.Click
-        Dim data As DatabaseClass = New DatabaseClass
-
+    Private Sub RBTextSearch_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RBTextSearch.CheckedChanged
+        'This searches the whole log for the prescense of the entered string
         If RBTextSearch.Checked = True Then
-            BuildTextQuery()
-        ElseIf RBStrucSearch.Checked = True Then
+            TxtBoxSearch.Enabled = True
+            TxtBoxSearch.Select()
+            LstBoxTech.Enabled = False
+            DTPkrFrom.Enabled = False
+            DTPkrEnd.Enabled = False
+            LblDtFrm.Enabled = False
+            LblDtEnd.Enabled = False
+            BtnPayTch.Enabled = False
+        End If
+    End Sub
+
+
+    '--------------------------------------------------------------------------------------------------------------------
+
+    'This section runs a query based off the type selected
+
+    '--------------------------------------------------------------------------------------------------------------------
+    Private Sub BtnGtInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGtInfo.Click
+        'Determines the type of Query being run
+        If RBStrucSearch.Checked = True Then
             BuildStrucQuery()
         ElseIf RBAll.Checked = True Then
             BuildUnfilteredQuery()
+        ElseIf RBTextSearch.Checked = True Then
+            BuildTextQuery()
         End If
     End Sub
 
-    Private Sub BuildUnfilteredQuery()
+    Private Sub BuildStrucQuery()
+        'This is the basic search type Tech + datarange
         Dim data As DatabaseClass = New DatabaseClass
-        'set query
+        Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
+                         ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
+
+        'get tech from selection
+        Dim TechSelected As String = LstBoxTech.SelectedItem
+        TechSelected = TechSelected.Substring(0, 10)
+
+        'get date range from selection
         Dim bgnDate As String = DTPkrFrom.Value.Date
         Dim duration As TimeSpan = New System.TimeSpan(23, 59, 59)
         Dim endDate As String = DTPkrEnd.Value.Date.Add(duration)
 
-        'reset datasource
+        'declare Query pieces
         Dim fieldsString As String = "*"
-
-        Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
-                                 ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
         Dim LiveTable As Integer = TabCtrlDGV.SelectedIndex()
         Dim fields(,) As String
         Dim condition As String
 
+        'Based off the table selected the Query is different.
         If LiveTable = 0 Then
-            condition = "[DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            'Searches for the Activities of a tech and calculates the total
+            condition = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
-            ActivitiesDataGridView.DataSource = data.dt
+            ActivitiesDataGridView.DataSource = data.dt 'resets the datagridview
             Dim rowsCount As Integer = 0
             Dim total As Double = 0
             While rowsCount < ActivitiesDataGridView.Rows.Count
@@ -119,18 +141,22 @@ Public Class FormHome
             LblBalanceField.Text = Format(total, "c2")
 
         ElseIf LiveTable = 1 Then
-            condition = "([DATEIN] BETWEEN '" & bgnDate & "' AND '" _
+            'Searches for Inventory of a technician
+            condition = "[TECHID] = '" & TechSelected & "' AND ([DATEIN] BETWEEN '" & bgnDate & "' AND '" _
             & endDate & "' OR [DATEOUT] BETWEEN '" & bgnDate & "' AND '" & endDate & "')"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             ReceiverInvDataGridView.DataSource = data.dt
 
         ElseIf LiveTable = 2 Then
-            condition = "[DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            'Searches transfer logs that contain a technicians id
+            condition = "([FROMTECHID] = '" & TechSelected & "' OR [TOTECHID] = '" & TechSelected _
+                        & "') AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             ReceiverTransferDataGridView.DataSource = data.dt
 
         ElseIf LiveTable = 3 Then
-            condition = "[DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            'Searches the payment log for a tech's id
+            condition = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             PayStubsDataGridView.DataSource = data.dt
         End If
@@ -138,26 +164,27 @@ Public Class FormHome
 
     End Sub
 
-    Private Sub BuildStrucQuery()
+    Private Sub BuildUnfilteredQuery()
+        'This is the search for all techs
         Dim data As DatabaseClass = New DatabaseClass
-        'set query
-        Dim TechSelected As String = LstBoxTech.SelectedItem
-        TechSelected = TechSelected.Substring(0, 10)
+        Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
+                         ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
+
+        'Sets the range
         Dim bgnDate As String = DTPkrFrom.Value.Date
         Dim duration As TimeSpan = New System.TimeSpan(23, 59, 59)
         Dim endDate As String = DTPkrEnd.Value.Date.Add(duration)
 
-        'reset datasource
+        'Declare Query Pieces
         Dim fieldsString As String = "*"
-
-        Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
-                                 ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
         Dim LiveTable As Integer = TabCtrlDGV.SelectedIndex()
         Dim fields(,) As String
         Dim condition As String
 
+        '
         If LiveTable = 0 Then
-            condition = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            'Searches for the Activities of a tech and calculates the total
+            condition = "[DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             ActivitiesDataGridView.DataSource = data.dt
             Dim rowsCount As Integer = 0
@@ -171,19 +198,21 @@ Public Class FormHome
             LblBalanceField.Text = Format(total, "c2")
 
         ElseIf LiveTable = 1 Then
-            condition = "[TECHID] = '" & TechSelected & "' AND ([DATEIN] BETWEEN '" & bgnDate & "' AND '" _
+            'Searches for Inventory of all techs in that date range
+            condition = "([DATEIN] BETWEEN '" & bgnDate & "' AND '" _
             & endDate & "' OR [DATEOUT] BETWEEN '" & bgnDate & "' AND '" & endDate & "')"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             ReceiverInvDataGridView.DataSource = data.dt
 
         ElseIf LiveTable = 2 Then
-            condition = "([FROMTECHID] = '" & TechSelected & "' OR [TOTECHID] = '" & TechSelected _
-                        & "') AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            'Searches transfer logs for all in that date range
+            condition = "[DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             ReceiverTransferDataGridView.DataSource = data.dt
 
         ElseIf LiveTable = 3 Then
-            condition = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            'Searches the payment log for all in the date range
+            condition = "[DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             PayStubsDataGridView.DataSource = data.dt
         End If
@@ -192,17 +221,21 @@ Public Class FormHome
     End Sub
 
     Private Sub BuildTextQuery()
+        'This Query searches the table for the instance of a string in particular columns
         Dim data As DatabaseClass = New DatabaseClass
+        Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
+                                 ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
+        'set the searched for string
         Dim fieldsString As String = "*"
         Dim FieldInput As String = TxtBoxSearch.Text
 
-        Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
-                                 ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
+        'set the parts of the string
         Dim LiveTable As Integer = TabCtrlDGV.SelectedIndex()
         Dim fields(,) As String
         Dim condition As String
 
         If LiveTable = 0 Then
+            'Searches the Activity log for the appearance of a string
             condition = "[ID] = '" & FieldInput & "' OR [TECHID] = '" & FieldInput & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             ActivitiesDataGridView.DataSource = data.dt
@@ -217,18 +250,21 @@ Public Class FormHome
             LblBalanceField.Text = Format(total, "c2")
 
         ElseIf LiveTable = 1 Then
+            'Searches the Inventory for the appearance of a string
             condition = "[ACCESSCARD] = '" & FieldInput _
                         & "' OR [TECHID] = '" & FieldInput & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             ReceiverInvDataGridView.DataSource = data.dt
 
         ElseIf LiveTable = 2 Then
+            'Searches the transfer log for the appearance of a string
             condition = "[ACCESSCARD] = '" & FieldInput & "' OR [FROMTECHID] = '" & FieldInput _
                         & "' OR [TOTECHID] = '" & FieldInput & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             ReceiverTransferDataGridView.DataSource = data.dt
 
         ElseIf LiveTable = 3 Then
+            'Searches the payment log for the appearance of a string
             condition = "[CHECKNUMBER] = '" & FieldInput & "' OR [TECHID] = '" & FieldInput & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             PayStubsDataGridView.DataSource = data.dt
@@ -243,24 +279,36 @@ Public Class FormHome
             BuildTextQuery()
         End If
     End Sub
+    '--------------------------------------------------------------------------------------------------------------------
 
-    '-----------------------------------------------------------
+    'This section sets the menu actions
+
+    '--------------------------------------------------------------------------------------------------------------------
+
+    Private Sub TSMLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMLogin.Click
+        LoginForm.ShowDialog()
+        LoginForm.Dispose()
+    End Sub
 
     Private Sub TSMItmActive_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMItmActive.Click
         Dim ImportItem As ImportClass = New ImportClass
         ImportItem.selectFile(1, "Import Activity")
     End Sub
 
-    Private Sub TSMItmRecList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim ImportItem As ImportClass = New ImportClass
-        ImportItem.selectFile(2, "Import Receivers")
-    End Sub
-
     Private Sub ReceiverToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReceiverToolStripMenuItem.Click
         TransferForm.ShowDialog()
     End Sub
 
-    '-----------------------------------------------------------
+    Private Sub TSMSettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMSettings.Click
+        FrmSettings.ShowDialog()
+        FrmSettings.Dispose()
+    End Sub
+
+    '--------------------------------------------------------------------------------------------------------------------
+
+    'This section handles the tech payment process
+
+    '--------------------------------------------------------------------------------------------------------------------
     Private Sub BtnPayTch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPayTch.Click
         Dim data As DatabaseClass = New DatabaseClass
         Dim CheckNumber As String = txtboxChkNum.Text
@@ -376,16 +424,6 @@ Public Class FormHome
             Dim rcp As RectangleF = New RectangleF(e.MarginBounds.Left, y, ActivitiesDataGridView.Size.Width(), ActivitiesDataGridView.Rows(0).Cells(0).Size.Height * 3)
             e.Graphics.DrawString(Bottom, .Font, Brushes.Black, rcp, fmt)
         End With
-    End Sub
-
-    Private Sub TSMLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMLogin.Click
-        LoginForm.ShowDialog()
-        LoginForm.Dispose()
-    End Sub
-
-    Private Sub TSMEditPassword_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSMSettings.Click
-        FrmSettings.ShowDialog()
-        FrmSettings.Dispose()
     End Sub
 
     Private Sub ChkBoxPrint_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChkBoxPrint.CheckedChanged

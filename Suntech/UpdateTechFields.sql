@@ -17,9 +17,7 @@ CREATE TABLE ReceiverInstallation.dbo.OptionsSelected
 DefaultPay numeric(18,2),
 UseStaticSrvc bit,
 SrvcPay numeric(18,2),
-DistroName nvarchar(50),
-CompanyName nvarchar(50)
 )
 
 Insert INTO ReceiverInstallation.dbo.OptionsSelected 
-values(.70,1,30,'Mastec','Suntech')
+values(.70,1,30)
