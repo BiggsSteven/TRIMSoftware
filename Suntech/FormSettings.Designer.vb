@@ -323,7 +323,7 @@ Partial Class FrmSettings
         Me.BtnGenCncl.Name = "BtnGenCncl"
         Me.BtnGenCncl.Size = New System.Drawing.Size(75, 23)
         Me.BtnGenCncl.TabIndex = 8
-        Me.BtnGenCncl.Text = "Cancel"
+        Me.BtnGenCncl.Text = "Close"
         Me.BtnGenCncl.UseVisualStyleBackColor = True
         '
         'GrpBoxPay
@@ -427,7 +427,7 @@ Partial Class FrmSettings
         Me.BtnEditTechCncl.Name = "BtnEditTechCncl"
         Me.BtnEditTechCncl.Size = New System.Drawing.Size(75, 23)
         Me.BtnEditTechCncl.TabIndex = 13
-        Me.BtnEditTechCncl.Text = "Cancel"
+        Me.BtnEditTechCncl.Text = "Close"
         Me.BtnEditTechCncl.UseVisualStyleBackColor = True
         '
         'TxtboxEmail
@@ -625,7 +625,7 @@ Partial Class FrmSettings
         Me.BtnEditPassCncl.Name = "BtnEditPassCncl"
         Me.BtnEditPassCncl.Size = New System.Drawing.Size(75, 23)
         Me.BtnEditPassCncl.TabIndex = 6
-        Me.BtnEditPassCncl.Text = "Cancel"
+        Me.BtnEditPassCncl.Text = "Close"
         Me.BtnEditPassCncl.UseVisualStyleBackColor = True
         '
         'BtnEditPassOK

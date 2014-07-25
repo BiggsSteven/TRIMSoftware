@@ -22,11 +22,13 @@ Public Class FrmSettings
 
 
     End Sub
+
     '--------------------------------------------------------------------------------------------------------------------
 
     'General settings Section
 
     '--------------------------------------------------------------------------------------------------------------------
+
     Public Sub fillSettings()
         'Retrieve data from Options Database
         Dim data As DatabaseClass = New DatabaseClass
@@ -44,7 +46,7 @@ Public Class FrmSettings
 
         'Retrieve Distributor and Company from 
         table = ConfigurationManager.AppSettings("Tech")
-        fieldString = "[ID][LastName]"
+        fieldString = "[ID],[LastName]"
         ReDim fields(0, 0)
         condition = "[ID] = '0000000001' or [ID] = '0000000002' "
         data.RunDynamicSelect(table, fieldString, condition, fields)
@@ -89,16 +91,19 @@ Public Class FrmSettings
 
         'saves to the Tech Table for Company
         condition = "[ID] = '0000000002' "
+        ReDim editfields(0)
+        editfields(0) = "[LastName]"
         ReDim values(0)
-        values(0) = TxtboxDistro.Text
+        values(0) = TxtboxComp.Text
         data.RunDynamicUpdate(table, condition, editfields, values)
-
 
         MessageBox.Show("Settings successfully saved.")
 
+        FormHome.BuildTechList()
     End Sub
 
     Private Sub BtnCncl_Click(sender As Object, e As EventArgs) Handles BtnGenCncl.Click
+        FormHome.BuildTechList()
         Me.Close()
     End Sub
 
@@ -123,6 +128,7 @@ Public Class FrmSettings
     'Add/Edit Tech Section
 
     '--------------------------------------------------------------------------------------------------------------------
+
     Private Sub RBAddTech_CheckedChanged(sender As Object, e As EventArgs) Handles RBAddTech.CheckedChanged
         CmboBoxTechs.Enabled = False
         clearTxtBoxes()
@@ -189,6 +195,11 @@ Public Class FrmSettings
                 End If
             Next
         ElseIf TechArray.Length <> 0 Then
+            For Each element As Control In PnlEditTech.Controls
+                If TypeOf element Is TextBox Then
+                    element.Enabled = True
+                End If
+            Next
             TxtboxID.Text = TechArray(0, 0)
             txtBoxFirst.Text = TechArray(0, 1)
             TxtBoxMI.Text = TechArray(0, 2)
@@ -242,30 +253,36 @@ Public Class FrmSettings
             End If
         ElseIf RBAddTech.Checked = True Then
 
+            'Checks if the Tech is already in the system
             Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName], [SSN], [FedIDNum], [HomeAddress], [PhoneNum], [EmailAdd], [Location], [PayPercentage]"
             Dim condition As String = "[ID] = '" & TxtboxID.Text & "' "
             Dim TechArray(,) As String
             data.RunDynamicSelect(table, fieldString, condition, TechArray)
 
             If TechArray.Length = 0 Then
+                'The Tech is not present so we add it now
                 Dim values() As String = {TxtboxID.Text, txtBoxFirst.Text, TxtBoxMI.Text, TxtBoxLast.Text, TxtBoxSSN.Text, TxtBoxFedID.Text, TxtboxAddr.Text, TxtboxPhone.Text, TxtboxEmail.Text, TxtboxLoc.Text, TxtboxPayPerc.Text}
                 data.RunDynamicInsert(table, fieldString, values)
             Else
+                'notify the user that the tech is already present
                 MessageBox.Show("The Technician ID you are trying to add is already in the system.")
             End If
         End If
         UpdateTechList()
         clearTxtBoxes()
+        FormHome.BuildTechList()
     End Sub
 
     Private Sub BtnEditTechCncl_Click(sender As Object, e As EventArgs) Handles BtnEditTechCncl.Click
         Me.Close()
     End Sub
+
     '--------------------------------------------------------------------------------------------------------------------
 
     'Password Edit Section
 
     '--------------------------------------------------------------------------------------------------------------------
+
     Private Sub changePass()
         Dim data As DatabaseClass = New DatabaseClass
         Dim tables As String = ConfigurationManager.AppSettings("Login")

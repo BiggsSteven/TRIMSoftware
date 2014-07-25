@@ -15,15 +15,16 @@ Public Class LoginForm
     Public Sub CheckSecurity()
         Dim data As DatabaseClass = New DatabaseClass
 
-        'table string|fieldString|condition string| field(,)
+        'Searches the database for information matching the data entered
         Dim table As String = ConfigurationManager.AppSettings("Login")
         Dim fieldsString As String = "[USERNAME],[PASSWORD]"
         Dim condition As String = " [USERNAME] = '" & UsernameTextBox.Text & "' AND [PASSWORD] = '" & PasswordTextBox.Text & "'"
         Dim fields(,) As String
-
         data.RunDynamicSelect(table, fieldsString, condition, fields)
 
+
         If fields.Length = 0 Then
+            'This locks the Activity tabs controls if the credintials are not correct
             For Each ctrl As Control In FormHome.TabAct.Controls
                 ctrl.Visible = False
             Next ctrl
@@ -31,16 +32,12 @@ Public Class LoginForm
             FormHome.TSMSettings.Visible = False
             FormHome.Permissions = ""
         Else
+            'This unlocks them in case they were previously locked
             For Each ctrl As Control In FormHome.TabAct.Controls
                 ctrl.Visible = True
             Next ctrl
             FormHome.PayStubsDataGridView.Visible = True
             FormHome.TSMSettings.Visible = True
-
-            If fields(0, 0) = "CNS" Then
-                condition = " [USERNAME] <> '" & UsernameTextBox.Text & "'"
-                data.RunDynamicSelect(table, fieldsString, condition, fields)
-            End If
             FormHome.Permissions = fields(0, 0)
         End If
 

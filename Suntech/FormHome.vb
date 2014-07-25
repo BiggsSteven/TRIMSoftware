@@ -38,6 +38,7 @@ Public Class FormHome
             LstBoxTech.SelectedItem = LstBoxTech.Items.Item(0)
         End If
     End Sub
+
     '--------------------------------------------------------------------------------------------------------------------
 
     'This section sets the fields for the different search types

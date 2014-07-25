@@ -8,6 +8,7 @@ Imports System.Threading
 Imports System.ComponentModel
 
 Public Class ImportClass
+
     Private TypeSelected As Integer
     Private FileSelected As String
     Private WithEvents bgwkr As BackgroundWorker
@@ -24,34 +25,30 @@ Public Class ImportClass
         'Get File from OFD
         FileSelected = String.Empty
         If FormHome.OpenFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-            Fileselected = FormHome.OpenFileDialog1.FileName
+            FileSelected = FormHome.OpenFileDialog1.FileName
         End If
 
         'If it wasn't cancelled then start threading
         If FileSelected <> String.Empty Then
-                FormHome.Cursor = Cursors.WaitCursor
-                FormLoading.Cursor = Cursors.WaitCursor
-                FormLoading.Show()
-                'FormHome.BtnGtInfo.Enabled = False
-                'FormHome.BtnPayTch.Enabled = False
-                FormHome.Enabled = False
+            FormHome.Cursor = Cursors.WaitCursor
+            FormLoading.Cursor = Cursors.WaitCursor
+            FormLoading.Show()
+            'FormHome.BtnGtInfo.Enabled = False
+            'FormHome.BtnPayTch.Enabled = False
+            FormHome.Enabled = False
 
-                bgwkr = New BackgroundWorker
-                bgwkr.WorkerReportsProgress = True
+            bgwkr = New BackgroundWorker
+            bgwkr.WorkerReportsProgress = True
 
-                bgwkr.RunWorkerAsync()
+            bgwkr.RunWorkerAsync()
         End If
     End Sub
-
-
 
     Private Sub bgwkr_DoWork(ByVal sender As System.Object, ByVal e As DoWorkEventArgs) Handles bgwkr.DoWork
 
         Select Case TypeSelected
             Case 1
                 importAct(FileSelected)
-            Case 2
-                importRec(FileSelected)
         End Select
 
     End Sub
@@ -68,12 +65,9 @@ Public Class ImportClass
         FormHome.Cursor = Cursors.Default
         FormLoading.Close()
         FormLoading.Dispose()
-
-
     End Sub
 
     Private Sub importAct(ByVal selectedFile As String)
-
 
         '-------------------------------------------------
         'Created Excel Reference to access cells within it.
@@ -139,14 +133,22 @@ Public Class ImportClass
             'Check the first activity for previous appearances
             If XLRow = 4 Then
                 tables = ConfigurationManager.AppSettings("Act")
-                fieldsString = "[ID],[FILEIMPORTED]"
-                condition = " [ID] = '" & tempArray(0) & "' "
+                fieldsString = "[ID],[FILEIMPORTED],[TYPE]"
+                'Since the same activity ID may be present as long as Type is Service and non service
+                If tempArray(3) = "Service" Then
+                    condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] = 'Service' "
+                Else
+                    condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] <> 'Service' "
+                End If
                 data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
                 If fields.Length <> 0 Then
-                    Dim oldFile As String = fields(0, 1)
+                    'The activity is present
+                    Dim oldFile As String = fields(0, 1) 'This is the file that is currently on record for this activity
                     AddDupe.ShowDialog()
                     If AddDupe.Choice Then
+                        'Chosen to Reimport File
+                        'Update all files with the old filename to have values of 0, 0, and new filename
                         condition = " [FILEIMPORTED] = '" & oldFile & "' "
                         Dim editfields() As String = {"[TOTAL]", "[TECHPAY]", "[FILEIMPORTED]"}
                         ReDim values(2)
@@ -157,15 +159,17 @@ Public Class ImportClass
                         AddDupe.Choice = False
                         proceed = True
                     Else
+                        'Do not proceed
                         proceed = False
                     End If
                 End If
-
             End If
+
             If proceed = True Then
+                'Proceeds
                 XLColumn = 0
 
-                '---------------------------------------
+                '---------------------------------------------------------------
                 'Get the Technicians paypercentage
                 Dim techPayPercent As Double = 0
                 tables = ConfigurationManager.AppSettings("Tech")
@@ -180,7 +184,7 @@ Public Class ImportClass
                     techPayPercent = DefaultPay
                 End If
 
-                '---------------------------------------
+                '---------------------------------------------------------------
                 'If setting is checked, successful service calls receives a static amount
                 'If technician did work correctly he gets a % of the income
                 'If technician did work incorrectly he gets 100% of the negative value
@@ -201,7 +205,14 @@ Public Class ImportClass
                 'Search Activities for if Activity and Tech has already been entered
                 tables = ConfigurationManager.AppSettings("Act")
                 fieldsString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID],[FILEIMPORTED]"
-                condition = " [ID] = '" & tempArray(0) & "' AND [TECHID] = '" & tempArray(2) & "'"
+
+
+                If tempArray(3) = "Service" Then
+                    condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] = 'Service' "
+                Else
+                    condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] <> 'Service' "
+                End If
+
                 ReDim fields(0, 0)
                 data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
@@ -234,7 +245,7 @@ Public Class ImportClass
                     '-------------------------
                 End If
 
-
+                'Display progress
                 bgwkr.ReportProgress(CInt(100 * (XLRow / XLastRow)))
                 XLRow += 1
 
