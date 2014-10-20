@@ -45,20 +45,18 @@ Partial Class FrmSettings
         Me.LblDistro = New System.Windows.Forms.Label()
         Me.TxtboxComp = New System.Windows.Forms.TextBox()
         Me.TxtboxDistro = New System.Windows.Forms.TextBox()
-        Me.BtnGenSave = New System.Windows.Forms.Button()
-        Me.BtnGenCncl = New System.Windows.Forms.Button()
         Me.GrpBoxPay = New System.Windows.Forms.GroupBox()
         Me.ChkboxSvcPay = New System.Windows.Forms.CheckBox()
         Me.LblSvcPay = New System.Windows.Forms.Label()
         Me.TxtBoxSvcPay = New System.Windows.Forms.TextBox()
         Me.TabEditTech = New System.Windows.Forms.TabPage()
         Me.PnlEditTech = New System.Windows.Forms.Panel()
+        Me.BtnNextTech = New System.Windows.Forms.Button()
+        Me.BtnPrevTech = New System.Windows.Forms.Button()
         Me.RBAddTech = New System.Windows.Forms.RadioButton()
-        Me.BtnEditTechCncl = New System.Windows.Forms.Button()
         Me.TxtboxEmail = New System.Windows.Forms.TextBox()
         Me.TechniciansBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ReceiverInstallationDataSet = New Suntech.ReceiverInstallationDataSet()
-        Me.BtnEditTechSave = New System.Windows.Forms.Button()
+        Me.ReceiverInstallationDataSet = New TRIMsoftware.ReceiverInstallationDataSet()
         Me.CmboBoxTechs = New System.Windows.Forms.ComboBox()
         Me.TxtboxPhone = New System.Windows.Forms.TextBox()
         Me.RBEditTech = New System.Windows.Forms.RadioButton()
@@ -77,10 +75,10 @@ Partial Class FrmSettings
         Me.LblConfirmPass = New System.Windows.Forms.Label()
         Me.TxtBoxConfirmPass = New System.Windows.Forms.TextBox()
         Me.TxtBoxCurrentPass = New System.Windows.Forms.TextBox()
-        Me.BtnEditPassCncl = New System.Windows.Forms.Button()
-        Me.BtnEditPassOK = New System.Windows.Forms.Button()
-        Me.TechniciansTableAdapter = New Suntech.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter()
-        Me.TableAdapterManager = New Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
+        Me.BtnGenSave = New System.Windows.Forms.Button()
+        Me.BtnGenCncl = New System.Windows.Forms.Button()
+        Me.TechniciansTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter()
+        Me.TableAdapterManager = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
         LblEmailAddress = New System.Windows.Forms.Label()
         LblPhoneNum = New System.Windows.Forms.Label()
         LblFedIDNum = New System.Windows.Forms.Label()
@@ -227,7 +225,7 @@ Partial Class FrmSettings
         Me.TxtBoxPass.Name = "TxtBoxPass"
         Me.TxtBoxPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TxtBoxPass.Size = New System.Drawing.Size(234, 20)
-        Me.TxtBoxPass.TabIndex = 1
+        Me.TxtBoxPass.TabIndex = 2
         '
         'Btn_Cancel
         '
@@ -243,23 +241,21 @@ Partial Class FrmSettings
         Me.TabCtrlSttng.Controls.Add(Me.TabGeneral)
         Me.TabCtrlSttng.Controls.Add(Me.TabEditTech)
         Me.TabCtrlSttng.Controls.Add(Me.TabEditPword)
-        Me.TabCtrlSttng.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabCtrlSttng.Dock = System.Windows.Forms.DockStyle.Top
         Me.TabCtrlSttng.Location = New System.Drawing.Point(0, 0)
         Me.TabCtrlSttng.Name = "TabCtrlSttng"
         Me.TabCtrlSttng.SelectedIndex = 0
-        Me.TabCtrlSttng.Size = New System.Drawing.Size(766, 530)
+        Me.TabCtrlSttng.Size = New System.Drawing.Size(766, 520)
         Me.TabCtrlSttng.TabIndex = 5
         '
         'TabGeneral
         '
         Me.TabGeneral.BackColor = System.Drawing.SystemColors.ControlLight
         Me.TabGeneral.Controls.Add(Me.GroupBox1)
-        Me.TabGeneral.Controls.Add(Me.BtnGenSave)
-        Me.TabGeneral.Controls.Add(Me.BtnGenCncl)
         Me.TabGeneral.Controls.Add(Me.GrpBoxPay)
         Me.TabGeneral.Location = New System.Drawing.Point(4, 22)
         Me.TabGeneral.Name = "TabGeneral"
-        Me.TabGeneral.Size = New System.Drawing.Size(758, 504)
+        Me.TabGeneral.Size = New System.Drawing.Size(758, 494)
         Me.TabGeneral.TabIndex = 2
         Me.TabGeneral.Text = "General"
         '
@@ -308,24 +304,6 @@ Partial Class FrmSettings
         Me.TxtboxDistro.Size = New System.Drawing.Size(266, 20)
         Me.TxtboxDistro.TabIndex = 0
         '
-        'BtnGenSave
-        '
-        Me.BtnGenSave.Location = New System.Drawing.Point(594, 473)
-        Me.BtnGenSave.Name = "BtnGenSave"
-        Me.BtnGenSave.Size = New System.Drawing.Size(75, 23)
-        Me.BtnGenSave.TabIndex = 7
-        Me.BtnGenSave.Text = "Save"
-        Me.BtnGenSave.UseVisualStyleBackColor = True
-        '
-        'BtnGenCncl
-        '
-        Me.BtnGenCncl.Location = New System.Drawing.Point(675, 473)
-        Me.BtnGenCncl.Name = "BtnGenCncl"
-        Me.BtnGenCncl.Size = New System.Drawing.Size(75, 23)
-        Me.BtnGenCncl.TabIndex = 8
-        Me.BtnGenCncl.Text = "Close"
-        Me.BtnGenCncl.UseVisualStyleBackColor = True
-        '
         'GrpBoxPay
         '
         Me.GrpBoxPay.Controls.Add(Me.ChkboxSvcPay)
@@ -371,16 +349,16 @@ Partial Class FrmSettings
         Me.TabEditTech.Location = New System.Drawing.Point(4, 22)
         Me.TabEditTech.Name = "TabEditTech"
         Me.TabEditTech.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabEditTech.Size = New System.Drawing.Size(758, 504)
+        Me.TabEditTech.Size = New System.Drawing.Size(758, 494)
         Me.TabEditTech.TabIndex = 1
         Me.TabEditTech.Text = "Add/EditTech"
         '
         'PnlEditTech
         '
+        Me.PnlEditTech.Controls.Add(Me.BtnNextTech)
+        Me.PnlEditTech.Controls.Add(Me.BtnPrevTech)
         Me.PnlEditTech.Controls.Add(Me.RBAddTech)
-        Me.PnlEditTech.Controls.Add(Me.BtnEditTechCncl)
         Me.PnlEditTech.Controls.Add(Me.TxtboxEmail)
-        Me.PnlEditTech.Controls.Add(Me.BtnEditTechSave)
         Me.PnlEditTech.Controls.Add(LblEmailAddress)
         Me.PnlEditTech.Controls.Add(Me.CmboBoxTechs)
         Me.PnlEditTech.Controls.Add(Me.TxtboxPhone)
@@ -407,8 +385,26 @@ Partial Class FrmSettings
         Me.PnlEditTech.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PnlEditTech.Location = New System.Drawing.Point(3, 3)
         Me.PnlEditTech.Name = "PnlEditTech"
-        Me.PnlEditTech.Size = New System.Drawing.Size(752, 498)
+        Me.PnlEditTech.Size = New System.Drawing.Size(752, 488)
         Me.PnlEditTech.TabIndex = 29
+        '
+        'BtnNextTech
+        '
+        Me.BtnNextTech.Location = New System.Drawing.Point(398, 462)
+        Me.BtnNextTech.Name = "BtnNextTech"
+        Me.BtnNextTech.Size = New System.Drawing.Size(75, 23)
+        Me.BtnNextTech.TabIndex = 17
+        Me.BtnNextTech.Text = ">"
+        Me.BtnNextTech.UseVisualStyleBackColor = True
+        '
+        'BtnPrevTech
+        '
+        Me.BtnPrevTech.Location = New System.Drawing.Point(317, 462)
+        Me.BtnPrevTech.Name = "BtnPrevTech"
+        Me.BtnPrevTech.Size = New System.Drawing.Size(75, 23)
+        Me.BtnPrevTech.TabIndex = 16
+        Me.BtnPrevTech.Text = "<"
+        Me.BtnPrevTech.UseVisualStyleBackColor = True
         '
         'RBAddTech
         '
@@ -416,19 +412,10 @@ Partial Class FrmSettings
         Me.RBAddTech.Location = New System.Drawing.Point(5, 13)
         Me.RBAddTech.Name = "RBAddTech"
         Me.RBAddTech.Size = New System.Drawing.Size(109, 17)
-        Me.RBAddTech.TabIndex = 24
+        Me.RBAddTech.TabIndex = 1
         Me.RBAddTech.TabStop = True
         Me.RBAddTech.Text = "Add a Technician"
         Me.RBAddTech.UseVisualStyleBackColor = True
-        '
-        'BtnEditTechCncl
-        '
-        Me.BtnEditTechCncl.Location = New System.Drawing.Point(672, 470)
-        Me.BtnEditTechCncl.Name = "BtnEditTechCncl"
-        Me.BtnEditTechCncl.Size = New System.Drawing.Size(75, 23)
-        Me.BtnEditTechCncl.TabIndex = 13
-        Me.BtnEditTechCncl.Text = "Close"
-        Me.BtnEditTechCncl.UseVisualStyleBackColor = True
         '
         'TxtboxEmail
         '
@@ -436,7 +423,7 @@ Partial Class FrmSettings
         Me.TxtboxEmail.Location = New System.Drawing.Point(97, 336)
         Me.TxtboxEmail.Name = "TxtboxEmail"
         Me.TxtboxEmail.Size = New System.Drawing.Size(331, 20)
-        Me.TxtboxEmail.TabIndex = 9
+        Me.TxtboxEmail.TabIndex = 12
         '
         'TechniciansBindingSource
         '
@@ -448,15 +435,6 @@ Partial Class FrmSettings
         Me.ReceiverInstallationDataSet.DataSetName = "ReceiverInstallationDataSet"
         Me.ReceiverInstallationDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'BtnEditTechSave
-        '
-        Me.BtnEditTechSave.Location = New System.Drawing.Point(591, 470)
-        Me.BtnEditTechSave.Name = "BtnEditTechSave"
-        Me.BtnEditTechSave.Size = New System.Drawing.Size(75, 23)
-        Me.BtnEditTechSave.TabIndex = 12
-        Me.BtnEditTechSave.Text = "Save"
-        Me.BtnEditTechSave.UseVisualStyleBackColor = True
-        '
         'CmboBoxTechs
         '
         Me.CmboBoxTechs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -464,7 +442,7 @@ Partial Class FrmSettings
         Me.CmboBoxTechs.Location = New System.Drawing.Point(5, 48)
         Me.CmboBoxTechs.Name = "CmboBoxTechs"
         Me.CmboBoxTechs.Size = New System.Drawing.Size(368, 21)
-        Me.CmboBoxTechs.TabIndex = 26
+        Me.CmboBoxTechs.TabIndex = 3
         '
         'TxtboxPhone
         '
@@ -472,7 +450,7 @@ Partial Class FrmSettings
         Me.TxtboxPhone.Location = New System.Drawing.Point(97, 310)
         Me.TxtboxPhone.Name = "TxtboxPhone"
         Me.TxtboxPhone.Size = New System.Drawing.Size(149, 20)
-        Me.TxtboxPhone.TabIndex = 8
+        Me.TxtboxPhone.TabIndex = 11
         '
         'RBEditTech
         '
@@ -480,7 +458,7 @@ Partial Class FrmSettings
         Me.RBEditTech.Location = New System.Drawing.Point(129, 13)
         Me.RBEditTech.Name = "RBEditTech"
         Me.RBEditTech.Size = New System.Drawing.Size(99, 17)
-        Me.RBEditTech.TabIndex = 25
+        Me.RBEditTech.TabIndex = 2
         Me.RBEditTech.TabStop = True
         Me.RBEditTech.Text = "Edit Technician"
         Me.RBEditTech.UseVisualStyleBackColor = True
@@ -491,7 +469,7 @@ Partial Class FrmSettings
         Me.TxtBoxFedID.Location = New System.Drawing.Point(97, 223)
         Me.TxtBoxFedID.Name = "TxtBoxFedID"
         Me.TxtBoxFedID.Size = New System.Drawing.Size(149, 20)
-        Me.TxtBoxFedID.TabIndex = 6
+        Me.TxtBoxFedID.TabIndex = 9
         '
         'TxtboxID
         '
@@ -499,7 +477,7 @@ Partial Class FrmSettings
         Me.TxtboxID.Location = New System.Drawing.Point(97, 124)
         Me.TxtboxID.Name = "TxtboxID"
         Me.TxtboxID.Size = New System.Drawing.Size(278, 20)
-        Me.TxtboxID.TabIndex = 1
+        Me.TxtboxID.TabIndex = 4
         '
         'TxtBoxSSN
         '
@@ -507,7 +485,7 @@ Partial Class FrmSettings
         Me.TxtBoxSSN.Location = New System.Drawing.Point(97, 197)
         Me.TxtBoxSSN.Name = "TxtBoxSSN"
         Me.TxtBoxSSN.Size = New System.Drawing.Size(149, 20)
-        Me.TxtBoxSSN.TabIndex = 5
+        Me.TxtBoxSSN.TabIndex = 8
         '
         'TxtboxLoc
         '
@@ -515,7 +493,7 @@ Partial Class FrmSettings
         Me.TxtboxLoc.Location = New System.Drawing.Point(95, 392)
         Me.TxtboxLoc.Name = "TxtboxLoc"
         Me.TxtboxLoc.Size = New System.Drawing.Size(278, 20)
-        Me.TxtboxLoc.TabIndex = 10
+        Me.TxtboxLoc.TabIndex = 13
         '
         'TxtboxPayPerc
         '
@@ -523,7 +501,7 @@ Partial Class FrmSettings
         Me.TxtboxPayPerc.Location = New System.Drawing.Point(97, 418)
         Me.TxtboxPayPerc.Name = "TxtboxPayPerc"
         Me.TxtboxPayPerc.Size = New System.Drawing.Size(78, 20)
-        Me.TxtboxPayPerc.TabIndex = 11
+        Me.TxtboxPayPerc.TabIndex = 14
         '
         'TxtboxAddr
         '
@@ -531,7 +509,7 @@ Partial Class FrmSettings
         Me.TxtboxAddr.Location = New System.Drawing.Point(97, 284)
         Me.TxtboxAddr.Name = "TxtboxAddr"
         Me.TxtboxAddr.Size = New System.Drawing.Size(644, 20)
-        Me.TxtboxAddr.TabIndex = 7
+        Me.TxtboxAddr.TabIndex = 10
         '
         'TxtBoxLast
         '
@@ -539,7 +517,7 @@ Partial Class FrmSettings
         Me.TxtBoxLast.Location = New System.Drawing.Point(540, 157)
         Me.TxtBoxLast.Name = "TxtBoxLast"
         Me.TxtBoxLast.Size = New System.Drawing.Size(201, 20)
-        Me.TxtBoxLast.TabIndex = 4
+        Me.TxtBoxLast.TabIndex = 7
         '
         'txtBoxFirst
         '
@@ -547,7 +525,7 @@ Partial Class FrmSettings
         Me.txtBoxFirst.Location = New System.Drawing.Point(97, 157)
         Me.txtBoxFirst.Name = "txtBoxFirst"
         Me.txtBoxFirst.Size = New System.Drawing.Size(201, 20)
-        Me.txtBoxFirst.TabIndex = 2
+        Me.txtBoxFirst.TabIndex = 5
         '
         'TxtBoxMI
         '
@@ -555,20 +533,18 @@ Partial Class FrmSettings
         Me.TxtBoxMI.Location = New System.Drawing.Point(398, 157)
         Me.TxtBoxMI.Name = "TxtBoxMI"
         Me.TxtBoxMI.Size = New System.Drawing.Size(40, 20)
-        Me.TxtBoxMI.TabIndex = 3
+        Me.TxtBoxMI.TabIndex = 6
         '
         'TabEditPword
         '
         Me.TabEditPword.BackColor = System.Drawing.SystemColors.ControlLight
         Me.TabEditPword.Controls.Add(Me.GrpBoxPass)
-        Me.TabEditPword.Controls.Add(Me.BtnEditPassCncl)
-        Me.TabEditPword.Controls.Add(Me.BtnEditPassOK)
         Me.TabEditPword.Controls.Add(Me.Btn_Cancel)
         Me.TabEditPword.Controls.Add(Me.Btn_Ok)
         Me.TabEditPword.Location = New System.Drawing.Point(4, 22)
         Me.TabEditPword.Name = "TabEditPword"
         Me.TabEditPword.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabEditPword.Size = New System.Drawing.Size(758, 504)
+        Me.TabEditPword.Size = New System.Drawing.Size(758, 494)
         Me.TabEditPword.TabIndex = 0
         Me.TabEditPword.Text = "Edit Password"
         '
@@ -610,32 +586,32 @@ Partial Class FrmSettings
         Me.TxtBoxConfirmPass.Location = New System.Drawing.Point(165, 125)
         Me.TxtBoxConfirmPass.Name = "TxtBoxConfirmPass"
         Me.TxtBoxConfirmPass.Size = New System.Drawing.Size(234, 20)
-        Me.TxtBoxConfirmPass.TabIndex = 8
+        Me.TxtBoxConfirmPass.TabIndex = 3
         '
         'TxtBoxCurrentPass
         '
         Me.TxtBoxCurrentPass.Location = New System.Drawing.Point(165, 45)
         Me.TxtBoxCurrentPass.Name = "TxtBoxCurrentPass"
         Me.TxtBoxCurrentPass.Size = New System.Drawing.Size(234, 20)
-        Me.TxtBoxCurrentPass.TabIndex = 7
+        Me.TxtBoxCurrentPass.TabIndex = 1
         '
-        'BtnEditPassCncl
+        'BtnGenSave
         '
-        Me.BtnEditPassCncl.Location = New System.Drawing.Point(675, 473)
-        Me.BtnEditPassCncl.Name = "BtnEditPassCncl"
-        Me.BtnEditPassCncl.Size = New System.Drawing.Size(75, 23)
-        Me.BtnEditPassCncl.TabIndex = 6
-        Me.BtnEditPassCncl.Text = "Close"
-        Me.BtnEditPassCncl.UseVisualStyleBackColor = True
+        Me.BtnGenSave.Location = New System.Drawing.Point(598, 542)
+        Me.BtnGenSave.Name = "BtnGenSave"
+        Me.BtnGenSave.Size = New System.Drawing.Size(75, 23)
+        Me.BtnGenSave.TabIndex = 18
+        Me.BtnGenSave.Text = "OK"
+        Me.BtnGenSave.UseVisualStyleBackColor = True
         '
-        'BtnEditPassOK
+        'BtnGenCncl
         '
-        Me.BtnEditPassOK.Location = New System.Drawing.Point(594, 473)
-        Me.BtnEditPassOK.Name = "BtnEditPassOK"
-        Me.BtnEditPassOK.Size = New System.Drawing.Size(75, 23)
-        Me.BtnEditPassOK.TabIndex = 5
-        Me.BtnEditPassOK.Text = "OK"
-        Me.BtnEditPassOK.UseVisualStyleBackColor = True
+        Me.BtnGenCncl.Location = New System.Drawing.Point(679, 542)
+        Me.BtnGenCncl.Name = "BtnGenCncl"
+        Me.BtnGenCncl.Size = New System.Drawing.Size(75, 23)
+        Me.BtnGenCncl.TabIndex = 19
+        Me.BtnGenCncl.Text = "Cancel"
+        Me.BtnGenCncl.UseVisualStyleBackColor = True
         '
         'TechniciansTableAdapter
         '
@@ -650,14 +626,17 @@ Partial Class FrmSettings
         Me.TableAdapterManager.ReceiverInvTableAdapter = Nothing
         Me.TableAdapterManager.ReceiverTransferTableAdapter = Nothing
         Me.TableAdapterManager.TechniciansTableAdapter = Me.TechniciansTableAdapter
-        Me.TableAdapterManager.UpdateOrder = Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.UpdateOrder = TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'FrmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(766, 530)
+        Me.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.ClientSize = New System.Drawing.Size(766, 577)
         Me.Controls.Add(Me.TabCtrlSttng)
+        Me.Controls.Add(Me.BtnGenSave)
+        Me.Controls.Add(Me.BtnGenCncl)
         Me.Name = "FrmSettings"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Settings"
@@ -685,10 +664,10 @@ Partial Class FrmSettings
     Friend WithEvents TabCtrlSttng As System.Windows.Forms.TabControl
     Friend WithEvents TabEditPword As System.Windows.Forms.TabPage
     Friend WithEvents TabEditTech As System.Windows.Forms.TabPage
-    Friend WithEvents ReceiverInstallationDataSet As Suntech.ReceiverInstallationDataSet
+    Friend WithEvents ReceiverInstallationDataSet As TRIMsoftware.ReceiverInstallationDataSet
     Friend WithEvents TechniciansBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents TechniciansTableAdapter As Suntech.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter
-    Friend WithEvents TableAdapterManager As Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager
+    Friend WithEvents TechniciansTableAdapter As TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter
+    Friend WithEvents TableAdapterManager As TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager
     Friend WithEvents RBEditTech As System.Windows.Forms.RadioButton
     Friend WithEvents RBAddTech As System.Windows.Forms.RadioButton
     Friend WithEvents TxtboxID As System.Windows.Forms.TextBox
@@ -706,12 +685,8 @@ Partial Class FrmSettings
     Friend WithEvents CmboBoxTechs As System.Windows.Forms.ComboBox
     Friend WithEvents TxtBoxConfirmPass As System.Windows.Forms.TextBox
     Friend WithEvents TxtBoxCurrentPass As System.Windows.Forms.TextBox
-    Friend WithEvents BtnEditPassCncl As System.Windows.Forms.Button
-    Friend WithEvents BtnEditPassOK As System.Windows.Forms.Button
     Friend WithEvents LblOldPass As System.Windows.Forms.Label
     Friend WithEvents LblConfirmPass As System.Windows.Forms.Label
-    Friend WithEvents BtnEditTechCncl As System.Windows.Forms.Button
-    Friend WithEvents BtnEditTechSave As System.Windows.Forms.Button
     Friend WithEvents PnlEditTech As System.Windows.Forms.Panel
     Friend WithEvents GrpBoxPay As System.Windows.Forms.GroupBox
     Friend WithEvents ChkboxSvcPay As System.Windows.Forms.CheckBox
@@ -725,4 +700,6 @@ Partial Class FrmSettings
     Friend WithEvents LblDistro As System.Windows.Forms.Label
     Friend WithEvents TxtboxComp As System.Windows.Forms.TextBox
     Friend WithEvents TxtboxDistro As System.Windows.Forms.TextBox
+    Friend WithEvents BtnNextTech As System.Windows.Forms.Button
+    Friend WithEvents BtnPrevTech As System.Windows.Forms.Button
 End Class

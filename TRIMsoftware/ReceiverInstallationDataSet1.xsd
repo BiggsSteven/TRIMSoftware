@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="ReceiverInstallationConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ReceiverInstallationConnectionString (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Suntech.My.MySettings.GlobalReference.Default.ReceiverInstallationConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="ReceiverInstallationConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="ReceiverInstallationConnectionString (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.TRIMsoftware.My.MySettings.GlobalReference.Default.ReceiverInstallationConnectionString" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ActivitiesTableAdapter" GeneratorDataComponentClassName="ActivitiesTableAdapter" Name="Activities" UserDataComponentName="ActivitiesTableAdapter">
@@ -336,7 +336,7 @@ SELECT ID, Name, Location, HomeAddress, FirstName, MiddleInitial, LastName, PayP
   <xs:element name="ReceiverInstallationDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="ReceiverInstallationDataSet" msprop:Generator_UserDSName="ReceiverInstallationDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Activities" msprop:Generator_TableClassName="ActivitiesDataTable" msprop:Generator_TableVarName="tableActivities" msprop:Generator_TablePropName="Activities" msprop:Generator_RowDeletingName="ActivitiesRowDeleting" msprop:Generator_RowChangingName="ActivitiesRowChanging" msprop:Generator_RowEvHandlerName="ActivitiesRowChangeEventHandler" msprop:Generator_RowDeletedName="ActivitiesRowDeleted" msprop:Generator_UserTableName="Activities" msprop:Generator_RowChangedName="ActivitiesRowChanged" msprop:Generator_RowEvArgName="ActivitiesRowChangeEvent" msprop:Generator_RowClassName="ActivitiesRow">
+        <xs:element name="Activities" msprop:Generator_TableClassName="ActivitiesDataTable" msprop:Generator_TableVarName="tableActivities" msprop:Generator_RowChangedName="ActivitiesRowChanged" msprop:Generator_TablePropName="Activities" msprop:Generator_RowDeletingName="ActivitiesRowDeleting" msprop:Generator_RowChangingName="ActivitiesRowChanging" msprop:Generator_RowEvHandlerName="ActivitiesRowChangeEventHandler" msprop:Generator_RowDeletedName="ActivitiesRowDeleted" msprop:Generator_RowClassName="ActivitiesRow" msprop:Generator_UserTableName="Activities" msprop:Generator_RowEvArgName="ActivitiesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID">
@@ -367,7 +367,7 @@ SELECT ID, Name, Location, HomeAddress, FirstName, MiddleInitial, LastName, PayP
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="AdminTable" msprop:Generator_TableClassName="AdminTableDataTable" msprop:Generator_TableVarName="tableAdminTable" msprop:Generator_TablePropName="AdminTable" msprop:Generator_RowDeletingName="AdminTableRowDeleting" msprop:Generator_RowChangingName="AdminTableRowChanging" msprop:Generator_RowEvHandlerName="AdminTableRowChangeEventHandler" msprop:Generator_RowDeletedName="AdminTableRowDeleted" msprop:Generator_UserTableName="AdminTable" msprop:Generator_RowChangedName="AdminTableRowChanged" msprop:Generator_RowEvArgName="AdminTableRowChangeEvent" msprop:Generator_RowClassName="AdminTableRow">
+        <xs:element name="AdminTable" msprop:Generator_TableClassName="AdminTableDataTable" msprop:Generator_TableVarName="tableAdminTable" msprop:Generator_RowChangedName="AdminTableRowChanged" msprop:Generator_TablePropName="AdminTable" msprop:Generator_RowDeletingName="AdminTableRowDeleting" msprop:Generator_RowChangingName="AdminTableRowChanging" msprop:Generator_RowEvHandlerName="AdminTableRowChangeEventHandler" msprop:Generator_RowDeletedName="AdminTableRowDeleted" msprop:Generator_RowClassName="AdminTableRow" msprop:Generator_UserTableName="AdminTable" msprop:Generator_RowEvArgName="AdminTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Username" msprop:Generator_ColumnVarNameInTable="columnUsername" msprop:Generator_ColumnPropNameInRow="Username" msprop:Generator_ColumnPropNameInTable="UsernameColumn" msprop:Generator_UserColumnName="Username">
@@ -387,7 +387,7 @@ SELECT ID, Name, Location, HomeAddress, FirstName, MiddleInitial, LastName, PayP
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="PayStubs" msprop:Generator_TableClassName="PayStubsDataTable" msprop:Generator_TableVarName="tablePayStubs" msprop:Generator_TablePropName="PayStubs" msprop:Generator_RowDeletingName="PayStubsRowDeleting" msprop:Generator_RowChangingName="PayStubsRowChanging" msprop:Generator_RowEvHandlerName="PayStubsRowChangeEventHandler" msprop:Generator_RowDeletedName="PayStubsRowDeleted" msprop:Generator_UserTableName="PayStubs" msprop:Generator_RowChangedName="PayStubsRowChanged" msprop:Generator_RowEvArgName="PayStubsRowChangeEvent" msprop:Generator_RowClassName="PayStubsRow">
+        <xs:element name="PayStubs" msprop:Generator_TableClassName="PayStubsDataTable" msprop:Generator_TableVarName="tablePayStubs" msprop:Generator_RowChangedName="PayStubsRowChanged" msprop:Generator_TablePropName="PayStubs" msprop:Generator_RowDeletingName="PayStubsRowDeleting" msprop:Generator_RowChangingName="PayStubsRowChanging" msprop:Generator_RowEvHandlerName="PayStubsRowChangeEventHandler" msprop:Generator_RowDeletedName="PayStubsRowDeleted" msprop:Generator_RowClassName="PayStubsRow" msprop:Generator_UserTableName="PayStubs" msprop:Generator_RowEvArgName="PayStubsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CheckNumber" msprop:Generator_ColumnVarNameInTable="columnCheckNumber" msprop:Generator_ColumnPropNameInRow="CheckNumber" msprop:Generator_ColumnPropNameInTable="CheckNumberColumn" msprop:Generator_UserColumnName="CheckNumber" minOccurs="0">
@@ -409,7 +409,7 @@ SELECT ID, Name, Location, HomeAddress, FirstName, MiddleInitial, LastName, PayP
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ReceiverInv" msprop:Generator_TableClassName="ReceiverInvDataTable" msprop:Generator_TableVarName="tableReceiverInv" msprop:Generator_TablePropName="ReceiverInv" msprop:Generator_RowDeletingName="ReceiverInvRowDeleting" msprop:Generator_RowChangingName="ReceiverInvRowChanging" msprop:Generator_RowEvHandlerName="ReceiverInvRowChangeEventHandler" msprop:Generator_RowDeletedName="ReceiverInvRowDeleted" msprop:Generator_UserTableName="ReceiverInv" msprop:Generator_RowChangedName="ReceiverInvRowChanged" msprop:Generator_RowEvArgName="ReceiverInvRowChangeEvent" msprop:Generator_RowClassName="ReceiverInvRow">
+        <xs:element name="ReceiverInv" msprop:Generator_TableClassName="ReceiverInvDataTable" msprop:Generator_TableVarName="tableReceiverInv" msprop:Generator_RowChangedName="ReceiverInvRowChanged" msprop:Generator_TablePropName="ReceiverInv" msprop:Generator_RowDeletingName="ReceiverInvRowDeleting" msprop:Generator_RowChangingName="ReceiverInvRowChanging" msprop:Generator_RowEvHandlerName="ReceiverInvRowChangeEventHandler" msprop:Generator_RowDeletedName="ReceiverInvRowDeleted" msprop:Generator_RowClassName="ReceiverInvRow" msprop:Generator_UserTableName="ReceiverInv" msprop:Generator_RowEvArgName="ReceiverInvRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="AccessCard" msprop:Generator_ColumnVarNameInTable="columnAccessCard" msprop:Generator_ColumnPropNameInRow="AccessCard" msprop:Generator_ColumnPropNameInTable="AccessCardColumn" msprop:Generator_UserColumnName="AccessCard" minOccurs="0">
@@ -431,7 +431,7 @@ SELECT ID, Name, Location, HomeAddress, FirstName, MiddleInitial, LastName, PayP
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ReceiverTransfer" msprop:Generator_TableClassName="ReceiverTransferDataTable" msprop:Generator_TableVarName="tableReceiverTransfer" msprop:Generator_TablePropName="ReceiverTransfer" msprop:Generator_RowDeletingName="ReceiverTransferRowDeleting" msprop:Generator_RowChangingName="ReceiverTransferRowChanging" msprop:Generator_RowEvHandlerName="ReceiverTransferRowChangeEventHandler" msprop:Generator_RowDeletedName="ReceiverTransferRowDeleted" msprop:Generator_UserTableName="ReceiverTransfer" msprop:Generator_RowChangedName="ReceiverTransferRowChanged" msprop:Generator_RowEvArgName="ReceiverTransferRowChangeEvent" msprop:Generator_RowClassName="ReceiverTransferRow">
+        <xs:element name="ReceiverTransfer" msprop:Generator_TableClassName="ReceiverTransferDataTable" msprop:Generator_TableVarName="tableReceiverTransfer" msprop:Generator_RowChangedName="ReceiverTransferRowChanged" msprop:Generator_TablePropName="ReceiverTransfer" msprop:Generator_RowDeletingName="ReceiverTransferRowDeleting" msprop:Generator_RowChangingName="ReceiverTransferRowChanging" msprop:Generator_RowEvHandlerName="ReceiverTransferRowChangeEventHandler" msprop:Generator_RowDeletedName="ReceiverTransferRowDeleted" msprop:Generator_RowClassName="ReceiverTransferRow" msprop:Generator_UserTableName="ReceiverTransfer" msprop:Generator_RowEvArgName="ReceiverTransferRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="AccessCard" msprop:Generator_ColumnVarNameInTable="columnAccessCard" msprop:Generator_ColumnPropNameInRow="AccessCard" msprop:Generator_ColumnPropNameInTable="AccessCardColumn" msprop:Generator_UserColumnName="AccessCard">
@@ -459,7 +459,7 @@ SELECT ID, Name, Location, HomeAddress, FirstName, MiddleInitial, LastName, PayP
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Technicians" msprop:Generator_TableClassName="TechniciansDataTable" msprop:Generator_TableVarName="tableTechnicians" msprop:Generator_TablePropName="Technicians" msprop:Generator_RowDeletingName="TechniciansRowDeleting" msprop:Generator_RowChangingName="TechniciansRowChanging" msprop:Generator_RowEvHandlerName="TechniciansRowChangeEventHandler" msprop:Generator_RowDeletedName="TechniciansRowDeleted" msprop:Generator_UserTableName="Technicians" msprop:Generator_RowChangedName="TechniciansRowChanged" msprop:Generator_RowEvArgName="TechniciansRowChangeEvent" msprop:Generator_RowClassName="TechniciansRow">
+        <xs:element name="Technicians" msprop:Generator_TableClassName="TechniciansDataTable" msprop:Generator_TableVarName="tableTechnicians" msprop:Generator_RowChangedName="TechniciansRowChanged" msprop:Generator_TablePropName="Technicians" msprop:Generator_RowDeletingName="TechniciansRowDeleting" msprop:Generator_RowChangingName="TechniciansRowChanging" msprop:Generator_RowEvHandlerName="TechniciansRowChangeEventHandler" msprop:Generator_RowDeletedName="TechniciansRowDeleted" msprop:Generator_RowClassName="TechniciansRow" msprop:Generator_UserTableName="Technicians" msprop:Generator_RowEvArgName="TechniciansRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID">

@@ -3672,7 +3672,7 @@ Namespace ReceiverInstallationDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.Suntech.My.MySettings.Default.ReceiverInstallationConnectionString
+            Me._connection.ConnectionString = Global.TRIMsoftware.My.MySettings.Default.ReceiverInstallationConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4113,7 +4113,7 @@ Namespace ReceiverInstallationDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.Suntech.My.MySettings.Default.ReceiverInstallationConnectionString
+            Me._connection.ConnectionString = Global.TRIMsoftware.My.MySettings.Default.ReceiverInstallationConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4356,7 +4356,7 @@ Namespace ReceiverInstallationDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.Suntech.My.MySettings.Default.ReceiverInstallationConnectionString
+            Me._connection.ConnectionString = Global.TRIMsoftware.My.MySettings.Default.ReceiverInstallationConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4609,7 +4609,7 @@ Namespace ReceiverInstallationDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.Suntech.My.MySettings.Default.ReceiverInstallationConnectionString
+            Me._connection.ConnectionString = Global.TRIMsoftware.My.MySettings.Default.ReceiverInstallationConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4862,7 +4862,7 @@ Namespace ReceiverInstallationDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.Suntech.My.MySettings.Default.ReceiverInstallationConnectionString
+            Me._connection.ConnectionString = Global.TRIMsoftware.My.MySettings.Default.ReceiverInstallationConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5232,7 +5232,7 @@ Namespace ReceiverInstallationDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.Suntech.My.MySettings.Default.ReceiverInstallationConnectionString
+            Me._connection.ConnectionString = Global.TRIMsoftware.My.MySettings.Default.ReceiverInstallationConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

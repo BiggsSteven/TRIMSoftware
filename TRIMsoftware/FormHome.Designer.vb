@@ -61,7 +61,7 @@ Partial Class FormHome
         Me.TechPayDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Paid = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ActivitiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ReceiverInstallationDataSet = New Suntech.ReceiverInstallationDataSet()
+        Me.ReceiverInstallationDataSet = New TRIMsoftware.ReceiverInstallationDataSet()
         Me.LblBalanceHdr = New System.Windows.Forms.Label()
         Me.LblBalanceField = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
@@ -107,15 +107,15 @@ Partial Class FormHome
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
-        Me.ActivitiesTableAdapter = New Suntech.ReceiverInstallationDataSetTableAdapters.ActivitiesTableAdapter()
-        Me.TableAdapterManager = New Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
-        Me.PayStubsTableAdapter = New Suntech.ReceiverInstallationDataSetTableAdapters.PayStubsTableAdapter()
-        Me.ReceiverInvTableAdapter = New Suntech.ReceiverInstallationDataSetTableAdapters.ReceiverInvTableAdapter()
-        Me.ReceiverTransferTableAdapter = New Suntech.ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter()
-        Me.ActivitiesTableAdapter1 = New Suntech.ReceiverInstallationDataSetTableAdapters.ActivitiesTableAdapter()
-        Me.ReceiverInvTableAdapter1 = New Suntech.ReceiverInstallationDataSetTableAdapters.ReceiverInvTableAdapter()
-        Me.ReceiverTransferTableAdapter1 = New Suntech.ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter()
-        Me.PayStubsTableAdapter1 = New Suntech.ReceiverInstallationDataSetTableAdapters.PayStubsTableAdapter()
+        Me.ActivitiesTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ActivitiesTableAdapter()
+        Me.TableAdapterManager = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
+        Me.PayStubsTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.PayStubsTableAdapter()
+        Me.ReceiverInvTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ReceiverInvTableAdapter()
+        Me.ReceiverTransferTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter()
+        Me.ActivitiesTableAdapter1 = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ActivitiesTableAdapter()
+        Me.ReceiverInvTableAdapter1 = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ReceiverInvTableAdapter()
+        Me.ReceiverTransferTableAdapter1 = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter()
+        Me.PayStubsTableAdapter1 = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.PayStubsTableAdapter()
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
         Me.GrpSearchStyle.SuspendLayout()
@@ -158,7 +158,7 @@ Partial Class FormHome
         'TSMLogin
         '
         Me.TSMLogin.Name = "TSMLogin"
-        Me.TSMLogin.Size = New System.Drawing.Size(152, 22)
+        Me.TSMLogin.Size = New System.Drawing.Size(121, 22)
         Me.TSMLogin.Text = "Login"
         '
         'TSMFileImport
@@ -167,21 +167,21 @@ Partial Class FormHome
         Me.TSMFileImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TSMFileImport.Name = "TSMFileImport"
         Me.TSMFileImport.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TSMFileImport.Size = New System.Drawing.Size(152, 22)
+        Me.TSMFileImport.Size = New System.Drawing.Size(121, 22)
         Me.TSMFileImport.Text = "Import"
         '
         'TSMItmActive
         '
         Me.TSMItmActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TSMItmActive.Name = "TSMItmActive"
-        Me.TSMItmActive.Size = New System.Drawing.Size(152, 22)
+        Me.TSMItmActive.Size = New System.Drawing.Size(126, 22)
         Me.TSMItmActive.Text = "Activities"
         '
         'TSMFileTransfer
         '
         Me.TSMFileTransfer.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReceiverToolStripMenuItem})
         Me.TSMFileTransfer.Name = "TSMFileTransfer"
-        Me.TSMFileTransfer.Size = New System.Drawing.Size(152, 22)
+        Me.TSMFileTransfer.Size = New System.Drawing.Size(121, 22)
         Me.TSMFileTransfer.Text = "Transfer"
         '
         'ReceiverToolStripMenuItem
@@ -193,7 +193,7 @@ Partial Class FormHome
         'TSMSettings
         '
         Me.TSMSettings.Name = "TSMSettings"
-        Me.TSMSettings.Size = New System.Drawing.Size(152, 22)
+        Me.TSMSettings.Size = New System.Drawing.Size(121, 22)
         Me.TSMSettings.Text = "Settings"
         '
         'PnlFilter
@@ -812,7 +812,7 @@ Partial Class FormHome
         Me.TableAdapterManager.ReceiverInvTableAdapter = Me.ReceiverInvTableAdapter
         Me.TableAdapterManager.ReceiverTransferTableAdapter = Me.ReceiverTransferTableAdapter
         Me.TableAdapterManager.TechniciansTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = Suntech.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.UpdateOrder = TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'PayStubsTableAdapter
         '
@@ -853,7 +853,7 @@ Partial Class FormHome
         Me.Controls.Add(Me.MenuStripHome)
         Me.MainMenuStrip = Me.MenuStripHome
         Me.Name = "FormHome"
-        Me.Text = "SWOAN"
+        Me.Text = "T.R.I.M."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStripHome.ResumeLayout(False)
         Me.MenuStripHome.PerformLayout()
@@ -964,10 +964,10 @@ Partial Class FormHome
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ReceiverInstallationDataSet As Suntech.ReceiverInstallationDataSet
-    Friend WithEvents ActivitiesTableAdapter1 As Suntech.ReceiverInstallationDataSetTableAdapters.ActivitiesTableAdapter
-    Friend WithEvents ReceiverInvTableAdapter1 As Suntech.ReceiverInstallationDataSetTableAdapters.ReceiverInvTableAdapter
-    Friend WithEvents ReceiverTransferTableAdapter1 As Suntech.ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter
-    Friend WithEvents PayStubsTableAdapter1 As Suntech.ReceiverInstallationDataSetTableAdapters.PayStubsTableAdapter
+    Friend WithEvents ReceiverInstallationDataSet As TRIMsoftware.ReceiverInstallationDataSet
+    Friend WithEvents ActivitiesTableAdapter1 As TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ActivitiesTableAdapter
+    Friend WithEvents ReceiverInvTableAdapter1 As TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ReceiverInvTableAdapter
+    Friend WithEvents ReceiverTransferTableAdapter1 As TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter
+    Friend WithEvents PayStubsTableAdapter1 As TRIMsoftware.ReceiverInstallationDataSetTableAdapters.PayStubsTableAdapter
 
 End Class

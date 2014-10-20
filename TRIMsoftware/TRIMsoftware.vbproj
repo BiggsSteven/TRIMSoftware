@@ -7,9 +7,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F089D894-EE64-4D94-8606-5C837F2552CA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Suntech.My.MyApplication</StartupObject>
-    <RootNamespace>Suntech</RootNamespace>
-    <AssemblyName>Suntech</AssemblyName>
+    <StartupObject>TRIMsoftware.My.MyApplication</StartupObject>
+    <RootNamespace>TRIMsoftware</RootNamespace>
+    <AssemblyName>TRIMsoftware</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -49,7 +49,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Suntech.xml</DocumentationFile>
+    <DocumentationFile>TRIMsoftware.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -58,7 +58,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Suntech.xml</DocumentationFile>
+    <DocumentationFile>TRIMsoftware.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
   </PropertyGroup>
   <ItemGroup>
@@ -154,6 +154,7 @@
     <Compile Include="TransferForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TRIMsoftware.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AddDupe.resx">
@@ -211,7 +212,7 @@
     <None Include="ReceiverInstallationDataSet1.xss">
       <DependentUpon>ReceiverInstallationDataSet1.xsd</DependentUpon>
     </None>
-    <None Include="Suntech_TemporaryKey.pfx" />
+    <None Include="TRIMsoftware_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

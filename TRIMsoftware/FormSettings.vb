@@ -3,11 +3,15 @@ Imports System.Data.SqlClient
 
 Public Class FrmSettings
 
+    Dim genFlag As Boolean = False
+    Dim TechFlag As Boolean = False
+    Dim passFlag As Boolean = False
+
+
     Private Sub FrmSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'General Tab
         fillSettings()
 
-        BtnGenSave.Enabled = False
         If ChkboxSvcPay.Checked Then
             TxtBoxSvcPay.Enabled = True
         Else
@@ -21,6 +25,23 @@ Public Class FrmSettings
         'Password Change
 
 
+    End Sub
+
+    Private Sub BtnGenSave_Click(sender As Object, e As EventArgs) Handles BtnGenSave.Click
+        If genFlag = True Then
+            GeneralSave()
+        End If
+        If TechFlag = True Then
+            SaveEditTech()
+        End If
+        If passFlag = True Then
+            PassOK()
+        End If
+    End Sub
+
+    Private Sub BtnCncl_Click(sender As Object, e As EventArgs) Handles BtnGenCncl.Click
+        FormHome.BuildTechList()
+        Me.Close()
     End Sub
 
     '--------------------------------------------------------------------------------------------------------------------
@@ -62,15 +83,33 @@ Public Class FrmSettings
         End If
     End Sub
 
+
+    Private Sub TxtboxDistro_TextChanged(sender As Object, e As EventArgs) Handles TxtboxDistro.TextChanged
+        genFlag = True
+    End Sub
+
+    Private Sub TxtboxComp_TextChanged(sender As Object, e As EventArgs) Handles TxtboxComp.TextChanged
+        genFlag = True
+    End Sub
+
     Private Sub ChkboxSvcPay_CheckedChanged(sender As Object, e As EventArgs) Handles ChkboxSvcPay.CheckedChanged
         If ChkboxSvcPay.Checked Then
             TxtBoxSvcPay.Enabled = True
         Else
             TxtBoxSvcPay.Enabled = False
         End If
+        genFlag = True
     End Sub
 
-    Private Sub BtnGenSave_Click(sender As Object, e As EventArgs) Handles BtnGenSave.Click
+    Private Sub TxtBoxSvcPay_TextChanged(sender As Object, e As EventArgs) Handles TxtBoxSvcPay.TextChanged
+        genFlag = True
+    End Sub
+
+    Private Sub TxtBoxSvcPay_LostFocus(sender As Object, e As EventArgs) Handles TxtBoxSvcPay.LostFocus
+        TxtBoxSvcPay.Text = FormatCurrency(TxtBoxSvcPay.Text)
+    End Sub
+
+    Public Sub GeneralSave()
         'Saves to the Options table
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("Options")
@@ -97,30 +136,8 @@ Public Class FrmSettings
         values(0) = TxtboxComp.Text
         data.RunDynamicUpdate(table, condition, editfields, values)
 
-        MessageBox.Show("Settings successfully saved.")
-
-        FormHome.BuildTechList()
-    End Sub
-
-    Private Sub BtnCncl_Click(sender As Object, e As EventArgs) Handles BtnGenCncl.Click
         FormHome.BuildTechList()
         Me.Close()
-    End Sub
-
-    Private Sub TxtboxDistro_TextChanged(sender As Object, e As EventArgs) Handles TxtboxDistro.TextChanged
-        BtnGenSave.Enabled = True
-    End Sub
-
-    Private Sub TxtboxComp_TextChanged(sender As Object, e As EventArgs) Handles TxtboxComp.TextChanged
-        BtnGenSave.Enabled = True
-    End Sub
-
-    Private Sub TxtBoxSvcPay_TextChanged(sender As Object, e As EventArgs) Handles TxtBoxSvcPay.TextChanged
-        BtnGenSave.Enabled = True
-    End Sub
-
-    Private Sub TxtBoxSvcPay_LostFocus(sender As Object, e As EventArgs) Handles TxtBoxSvcPay.LostFocus
-        TxtBoxSvcPay.Text = FormatCurrency(TxtBoxSvcPay.Text)
     End Sub
 
     '--------------------------------------------------------------------------------------------------------------------
@@ -215,7 +232,7 @@ Public Class FrmSettings
 
     End Sub
 
-    Private Sub BtnEditTechSave_Click(sender As Object, e As EventArgs) Handles BtnEditTechSave.Click
+    Private Sub SaveEditTech()
 
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("Tech")
@@ -273,10 +290,6 @@ Public Class FrmSettings
         FormHome.BuildTechList()
     End Sub
 
-    Private Sub BtnEditTechCncl_Click(sender As Object, e As EventArgs) Handles BtnEditTechCncl.Click
-        Me.Close()
-    End Sub
-
     '--------------------------------------------------------------------------------------------------------------------
 
     'Password Edit Section
@@ -293,7 +306,7 @@ Public Class FrmSettings
         data.RunDynamicUpdate(tables, condition, editFields, values)
     End Sub
 
-    Private Sub BtnEditPassOK_Click(sender As Object, e As EventArgs) Handles BtnEditPassOK.Click
+    Private Sub PassOK()
 
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("Login")
@@ -322,8 +335,28 @@ Public Class FrmSettings
         End If
     End Sub
 
-    Private Sub BtnEditPassCncl_Click(sender As Object, e As EventArgs) Handles BtnEditPassCncl.Click
-        Me.Close()
+    Private Sub TxtBoxCurrentPass_LostFocus(sender As Object, e As EventArgs) Handles TxtBoxCurrentPass.LostFocus
+        If (TxtBoxCurrentPass.Text <> String.Empty) And (TxtBoxPass.Text <> String.Empty) And (TxtBoxConfirmPass.Text <> String.Empty) Then
+            passFlag = True
+        Else
+            passFlag = False
+        End If
+    End Sub
+
+    Private Sub TxtBoxPass_LostFocus(sender As Object, e As EventArgs) Handles TxtBoxPass.LostFocus
+        If (TxtBoxCurrentPass.Text <> String.Empty) And (TxtBoxPass.Text <> String.Empty) And (TxtBoxConfirmPass.Text <> String.Empty) Then
+            passFlag = True
+        Else
+            passFlag = False
+        End If
+    End Sub
+
+    Private Sub TxtBoxConfirmPass_LostFocus(sender As Object, e As EventArgs) Handles TxtBoxConfirmPass.LostFocus
+        If (TxtBoxCurrentPass.Text <> String.Empty) And (TxtBoxPass.Text <> String.Empty) And (TxtBoxConfirmPass.Text <> String.Empty) Then
+            passFlag = True
+        Else
+            passFlag = False
+        End If
     End Sub
 
 End Class
