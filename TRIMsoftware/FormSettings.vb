@@ -37,6 +37,7 @@ Public Class FrmSettings
         If passFlag = True Then
             PassOK()
         End If
+        Me.Close()
     End Sub
 
     Private Sub BtnCncl_Click(sender As Object, e As EventArgs) Handles BtnGenCncl.Click
@@ -137,7 +138,6 @@ Public Class FrmSettings
         data.RunDynamicUpdate(table, condition, editfields, values)
 
         FormHome.BuildTechList()
-        Me.Close()
     End Sub
 
     '--------------------------------------------------------------------------------------------------------------------
@@ -296,16 +296,6 @@ Public Class FrmSettings
 
     '--------------------------------------------------------------------------------------------------------------------
 
-    Private Sub changePass()
-        Dim data As DatabaseClass = New DatabaseClass
-        Dim tables As String = ConfigurationManager.AppSettings("Login")
-        Dim editFields() As String = {"[PASSWORD]"}
-        Dim values() As String = {TxtBoxPass.Text}
-        Dim condition As String = " [USERNAME] = '" & FormHome.Permissions & "'"
-
-        data.RunDynamicUpdate(tables, condition, editFields, values)
-    End Sub
-
     Private Sub PassOK()
 
         Dim data As DatabaseClass = New DatabaseClass
@@ -320,19 +310,28 @@ Public Class FrmSettings
         If fields.Length <> 0 Then
             'Check new password is same
             If TxtBoxPass.Text = TxtBoxConfirmPass.Text And TxtBoxPass.Text <> String.Empty Then
-                MessageBox.Show("Your password has been successfully changed.")
                 changePass()
                 TxtBoxCurrentPass.Text = String.Empty
             ElseIf TxtBoxPass.Text <> String.Empty Then
-                MessageBox.Show("The password used is not valid because it contains no characters. Please enter a different password.")
+                MessageBox.Show("Error! The password used is not valid because it contains no characters. Please enter a different password. Password Save cancelled.")
             Else
-                MessageBox.Show("The two new passwords do not match please re-enter each.")
+                MessageBox.Show("Error! The two new passwords do not match please re-enter each. Password change cancelled.")
             End If
             TxtBoxPass.Text = String.Empty
             TxtBoxConfirmPass.Text = String.Empty
         Else
-            MessageBox.Show("The current password entered was not recognized.")
+            MessageBox.Show("Error! The current password entered was not recognized. Password change cancelled.")
         End If
+    End Sub
+
+    Private Sub changePass()
+        Dim data As DatabaseClass = New DatabaseClass
+        Dim tables As String = ConfigurationManager.AppSettings("Login")
+        Dim editFields() As String = {"[PASSWORD]"}
+        Dim values() As String = {TxtBoxPass.Text}
+        Dim condition As String = " [USERNAME] = '" & FormHome.Permissions & "'"
+
+        data.RunDynamicUpdate(tables, condition, editFields, values)
     End Sub
 
     Private Sub TxtBoxCurrentPass_LostFocus(sender As Object, e As EventArgs) Handles TxtBoxCurrentPass.LostFocus
