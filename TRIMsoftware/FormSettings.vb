@@ -31,7 +31,7 @@ Public Class FrmSettings
         If genFlag = True Then
             GeneralSave()
         End If
-        If TechFlag = True Then
+        If TxtboxID.Text <> String.Empty Then
             SaveEditTech()
         End If
         If passFlag = True Then
@@ -208,6 +208,7 @@ Public Class FrmSettings
         If TechSelected = "0000000001" Or TechSelected = "0000000002" Then
             For Each element As Control In PnlEditTech.Controls
                 If TypeOf element Is TextBox Then
+                    element.Text = String.Empty
                     element.Enabled = False
                 End If
             Next
@@ -229,7 +230,6 @@ Public Class FrmSettings
             TxtboxLoc.Text = TechArray(0, 9)
             TxtboxPayPerc.Text = TechArray(0, 10)
         End If
-
     End Sub
 
     Private Sub SaveEditTech()
@@ -288,6 +288,14 @@ Public Class FrmSettings
         UpdateTechList()
         clearTxtBoxes()
         FormHome.BuildTechList()
+    End Sub
+
+    Private Sub BtnPrevTech_Click(sender As Object, e As EventArgs) Handles BtnPrevTech.Click
+
+    End Sub
+
+    Private Sub BtnNextTech_Click(sender As Object, e As EventArgs) Handles BtnNextTech.Click
+
     End Sub
 
     '--------------------------------------------------------------------------------------------------------------------
