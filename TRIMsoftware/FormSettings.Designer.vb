@@ -79,6 +79,7 @@ Partial Class FrmSettings
         Me.BtnGenCncl = New System.Windows.Forms.Button()
         Me.TechniciansTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter()
         Me.TableAdapterManager = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
+        Me.BtnSaveTech = New System.Windows.Forms.Button()
         LblEmailAddress = New System.Windows.Forms.Label()
         LblPhoneNum = New System.Windows.Forms.Label()
         LblFedIDNum = New System.Windows.Forms.Label()
@@ -355,6 +356,7 @@ Partial Class FrmSettings
         '
         'PnlEditTech
         '
+        Me.PnlEditTech.Controls.Add(Me.BtnSaveTech)
         Me.PnlEditTech.Controls.Add(Me.BtnNextTech)
         Me.PnlEditTech.Controls.Add(Me.BtnPrevTech)
         Me.PnlEditTech.Controls.Add(Me.RBAddTech)
@@ -390,7 +392,7 @@ Partial Class FrmSettings
         '
         'BtnNextTech
         '
-        Me.BtnNextTech.Location = New System.Drawing.Point(398, 462)
+        Me.BtnNextTech.Location = New System.Drawing.Point(428, 462)
         Me.BtnNextTech.Name = "BtnNextTech"
         Me.BtnNextTech.Size = New System.Drawing.Size(75, 23)
         Me.BtnNextTech.TabIndex = 17
@@ -399,7 +401,7 @@ Partial Class FrmSettings
         '
         'BtnPrevTech
         '
-        Me.BtnPrevTech.Location = New System.Drawing.Point(317, 462)
+        Me.BtnPrevTech.Location = New System.Drawing.Point(266, 462)
         Me.BtnPrevTech.Name = "BtnPrevTech"
         Me.BtnPrevTech.Size = New System.Drawing.Size(75, 23)
         Me.BtnPrevTech.TabIndex = 16
@@ -628,6 +630,15 @@ Partial Class FrmSettings
         Me.TableAdapterManager.TechniciansTableAdapter = Me.TechniciansTableAdapter
         Me.TableAdapterManager.UpdateOrder = TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
+        'BtnSaveTech
+        '
+        Me.BtnSaveTech.Location = New System.Drawing.Point(347, 462)
+        Me.BtnSaveTech.Name = "BtnSaveTech"
+        Me.BtnSaveTech.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSaveTech.TabIndex = 23
+        Me.BtnSaveTech.Text = "Save"
+        Me.BtnSaveTech.UseVisualStyleBackColor = True
+        '
         'FrmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -702,4 +713,5 @@ Partial Class FrmSettings
     Friend WithEvents TxtboxDistro As System.Windows.Forms.TextBox
     Friend WithEvents BtnNextTech As System.Windows.Forms.Button
     Friend WithEvents BtnPrevTech As System.Windows.Forms.Button
+    Friend WithEvents BtnSaveTech As System.Windows.Forms.Button
 End Class

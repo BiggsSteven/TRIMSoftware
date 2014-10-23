@@ -84,7 +84,6 @@ Public Class FrmSettings
         End If
     End Sub
 
-
     Private Sub TxtboxDistro_TextChanged(sender As Object, e As EventArgs) Handles TxtboxDistro.TextChanged
         genFlag = True
     End Sub
@@ -148,11 +147,15 @@ Public Class FrmSettings
 
     Private Sub RBAddTech_CheckedChanged(sender As Object, e As EventArgs) Handles RBAddTech.CheckedChanged
         CmboBoxTechs.Enabled = False
+        BtnPrevTech.Enabled = False
+        BtnNextTech.Enabled = False
         clearTxtBoxes()
     End Sub
 
     Private Sub RBEditTech_CheckedChanged(sender As Object, e As EventArgs) Handles RBEditTech.CheckedChanged
         CmboBoxTechs.Enabled = True
+        BtnPrevTech.Enabled = True
+        BtnNextTech.Enabled = True
         UpdateTechList()
     End Sub
 
@@ -230,12 +233,33 @@ Public Class FrmSettings
             TxtboxLoc.Text = TechArray(0, 9)
             TxtboxPayPerc.Text = TechArray(0, 10)
         End If
+
+        TechSelected = CmboBoxTechs.SelectedItem
+
+        BtnPrevTech.Enabled = True
+        BtnNextTech.Enabled = True
+        BtnSaveTech.Enabled = True
+
+        'Disable buttons to prevent errors
+        If CmboBoxTechs.Items.IndexOf(TechSelected) = 0 Then
+            BtnPrevTech.Enabled = False
+            BtnSaveTech.Enabled = False
+
+        ElseIf CmboBoxTechs.Items.IndexOf(TechSelected) = CmboBoxTechs.Items.Count - 1 Then
+            BtnNextTech.Enabled = False
+
+        ElseIf CmboBoxTechs.Items.IndexOf(TechSelected) = 1 Or CmboBoxTechs.Items.IndexOf(TechSelected) = 2 Then
+            BtnSaveTech.Enabled = False
+        End If
+
+
     End Sub
 
     Private Sub SaveEditTech()
 
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("Tech")
+
 
         'If the tech is being editted
         If RBEditTech.Checked = True Then
@@ -248,7 +272,7 @@ Public Class FrmSettings
             data.RunDynamicSelect(table, fieldString, condition, TechArray)
 
             'If the tech selected exist, this filters out the "----------\ ------- -
-            If TechArray.Length <> 0 Then
+            If TechArray.Length <> 0 And TechSelected <> "0000000001" And TechSelected <> "0000000002" Then
                 Dim fieldParts() As String = {"[ID]", "[FirstName]", "[MiddleInitial]", "[LastName]", "[SSN]", "[FedIDNum]", "[HomeAddress]", "[PhoneNum]", "[EmailAdd]", "[Location]", "[PayPercentage]"}
                 Dim fields() As Control = {TxtboxID, txtBoxFirst, TxtBoxMI, TxtBoxLast, TxtBoxSSN, TxtBoxFedID, TxtboxAddr, TxtboxPhone, TxtboxEmail, TxtboxLoc, TxtboxPayPerc}
 
@@ -285,17 +309,51 @@ Public Class FrmSettings
                 MessageBox.Show("The Technician ID you are trying to add is already in the system.")
             End If
         End If
-        UpdateTechList()
-        clearTxtBoxes()
         FormHome.BuildTechList()
     End Sub
 
     Private Sub BtnPrevTech_Click(sender As Object, e As EventArgs) Handles BtnPrevTech.Click
+        SaveEditTech()
+        'Save current selection - 1
+        Dim TechSelectedName As String = CmboBoxTechs.SelectedItem
+        Dim TechSelection As Integer = CmboBoxTechs.Items.IndexOf(TechSelectedName) - 1
 
+        UpdateTechList()
+
+        'Set current selection back after list is rebuilt
+        If CmboBoxTechs.Items.Count > TechSelection And TechSelection >= 0 Then
+            CmboBoxTechs.SelectedItem = CmboBoxTechs.Items.Item(TechSelection)
+        End If
     End Sub
 
     Private Sub BtnNextTech_Click(sender As Object, e As EventArgs) Handles BtnNextTech.Click
+        SaveEditTech()
 
+        'Save current selection
+        Dim TechSelectedName As String = CmboBoxTechs.SelectedItem
+        Dim TechSelection As Integer = CmboBoxTechs.Items.IndexOf(TechSelectedName) + 1
+
+        UpdateTechList()
+
+        'Set current selection back after list is rebuilt
+        If CmboBoxTechs.Items.Count > TechSelection Then
+            CmboBoxTechs.SelectedItem = CmboBoxTechs.Items.Item(TechSelection)
+        End If
+    End Sub
+
+    Private Sub BtnSaveTech_Click(sender As Object, e As EventArgs) Handles BtnSaveTech.Click
+        SaveEditTech()
+
+        'Save current selection
+        Dim TechSelectedName As String = CmboBoxTechs.SelectedItem
+        Dim TechSelection As Integer = CmboBoxTechs.Items.IndexOf(TechSelectedName)
+
+        UpdateTechList()
+
+        'Set current selection back after list is rebuilt
+        If CmboBoxTechs.Items.Count > TechSelection Then
+            CmboBoxTechs.SelectedItem = CmboBoxTechs.Items.Item(TechSelection)
+        End If
     End Sub
 
     '--------------------------------------------------------------------------------------------------------------------
