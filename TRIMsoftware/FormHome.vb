@@ -23,14 +23,17 @@ Public Class FormHome
 
         'runs a select Query to retrieve list of Techs
         Dim table As String = ConfigurationManager.AppSettings("Tech")
-        Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName]"
+        Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName],[Active]"
         Dim TechArray(,) As String
         data.RunDynamicSelect(table, fieldString, "", TechArray)
 
         'Populate listbox with Technicians
         Dim counter As Integer = 0
         While (counter < TechArray.GetLength(0))
-            LstBoxTech.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 3) & ", " & TechArray(counter, 1) & " " & TechArray(counter, 2))
+            'Only show active technicians
+            If TechArray(counter, 4) = True Then
+                LstBoxTech.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 3) & ", " & TechArray(counter, 1) & " " & TechArray(counter, 2))
+            End If
             counter += 1
         End While
 
