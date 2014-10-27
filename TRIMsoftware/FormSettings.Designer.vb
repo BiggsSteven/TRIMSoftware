@@ -51,6 +51,9 @@ Partial Class FrmSettings
         Me.TxtBoxSvcPay = New System.Windows.Forms.TextBox()
         Me.TabEditTech = New System.Windows.Forms.TabPage()
         Me.PnlEditTech = New System.Windows.Forms.Panel()
+        Me.CBActiveSet = New System.Windows.Forms.CheckBox()
+        Me.CBShowInactive = New System.Windows.Forms.CheckBox()
+        Me.BtnSaveTech = New System.Windows.Forms.Button()
         Me.BtnNextTech = New System.Windows.Forms.Button()
         Me.BtnPrevTech = New System.Windows.Forms.Button()
         Me.RBAddTech = New System.Windows.Forms.RadioButton()
@@ -79,7 +82,6 @@ Partial Class FrmSettings
         Me.BtnGenCncl = New System.Windows.Forms.Button()
         Me.TechniciansTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter()
         Me.TableAdapterManager = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
-        Me.BtnSaveTech = New System.Windows.Forms.Button()
         LblEmailAddress = New System.Windows.Forms.Label()
         LblPhoneNum = New System.Windows.Forms.Label()
         LblFedIDNum = New System.Windows.Forms.Label()
@@ -246,7 +248,7 @@ Partial Class FrmSettings
         Me.TabCtrlSttng.Location = New System.Drawing.Point(0, 0)
         Me.TabCtrlSttng.Name = "TabCtrlSttng"
         Me.TabCtrlSttng.SelectedIndex = 0
-        Me.TabCtrlSttng.Size = New System.Drawing.Size(766, 520)
+        Me.TabCtrlSttng.Size = New System.Drawing.Size(766, 536)
         Me.TabCtrlSttng.TabIndex = 5
         '
         'TabGeneral
@@ -256,7 +258,7 @@ Partial Class FrmSettings
         Me.TabGeneral.Controls.Add(Me.GrpBoxPay)
         Me.TabGeneral.Location = New System.Drawing.Point(4, 22)
         Me.TabGeneral.Name = "TabGeneral"
-        Me.TabGeneral.Size = New System.Drawing.Size(758, 494)
+        Me.TabGeneral.Size = New System.Drawing.Size(758, 510)
         Me.TabGeneral.TabIndex = 2
         Me.TabGeneral.Text = "General"
         '
@@ -350,12 +352,14 @@ Partial Class FrmSettings
         Me.TabEditTech.Location = New System.Drawing.Point(4, 22)
         Me.TabEditTech.Name = "TabEditTech"
         Me.TabEditTech.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabEditTech.Size = New System.Drawing.Size(758, 494)
+        Me.TabEditTech.Size = New System.Drawing.Size(758, 510)
         Me.TabEditTech.TabIndex = 1
         Me.TabEditTech.Text = "Add/EditTech"
         '
         'PnlEditTech
         '
+        Me.PnlEditTech.Controls.Add(Me.CBActiveSet)
+        Me.PnlEditTech.Controls.Add(Me.CBShowInactive)
         Me.PnlEditTech.Controls.Add(Me.BtnSaveTech)
         Me.PnlEditTech.Controls.Add(Me.BtnNextTech)
         Me.PnlEditTech.Controls.Add(Me.BtnPrevTech)
@@ -387,12 +391,41 @@ Partial Class FrmSettings
         Me.PnlEditTech.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PnlEditTech.Location = New System.Drawing.Point(3, 3)
         Me.PnlEditTech.Name = "PnlEditTech"
-        Me.PnlEditTech.Size = New System.Drawing.Size(752, 488)
+        Me.PnlEditTech.Size = New System.Drawing.Size(752, 504)
         Me.PnlEditTech.TabIndex = 29
+        '
+        'CBActiveSet
+        '
+        Me.CBActiveSet.AutoSize = True
+        Me.CBActiveSet.Location = New System.Drawing.Point(6, 452)
+        Me.CBActiveSet.Name = "CBActiveSet"
+        Me.CBActiveSet.Size = New System.Drawing.Size(56, 17)
+        Me.CBActiveSet.TabIndex = 25
+        Me.CBActiveSet.Text = "Active"
+        Me.CBActiveSet.UseVisualStyleBackColor = True
+        '
+        'CBShowInactive
+        '
+        Me.CBShowInactive.AutoSize = True
+        Me.CBShowInactive.Location = New System.Drawing.Point(379, 50)
+        Me.CBShowInactive.Name = "CBShowInactive"
+        Me.CBShowInactive.Size = New System.Drawing.Size(94, 17)
+        Me.CBShowInactive.TabIndex = 24
+        Me.CBShowInactive.Text = "Show Inactive"
+        Me.CBShowInactive.UseVisualStyleBackColor = True
+        '
+        'BtnSaveTech
+        '
+        Me.BtnSaveTech.Location = New System.Drawing.Point(343, 469)
+        Me.BtnSaveTech.Name = "BtnSaveTech"
+        Me.BtnSaveTech.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSaveTech.TabIndex = 23
+        Me.BtnSaveTech.Text = "Save"
+        Me.BtnSaveTech.UseVisualStyleBackColor = True
         '
         'BtnNextTech
         '
-        Me.BtnNextTech.Location = New System.Drawing.Point(428, 462)
+        Me.BtnNextTech.Location = New System.Drawing.Point(424, 469)
         Me.BtnNextTech.Name = "BtnNextTech"
         Me.BtnNextTech.Size = New System.Drawing.Size(75, 23)
         Me.BtnNextTech.TabIndex = 17
@@ -401,7 +434,7 @@ Partial Class FrmSettings
         '
         'BtnPrevTech
         '
-        Me.BtnPrevTech.Location = New System.Drawing.Point(266, 462)
+        Me.BtnPrevTech.Location = New System.Drawing.Point(262, 469)
         Me.BtnPrevTech.Name = "BtnPrevTech"
         Me.BtnPrevTech.Size = New System.Drawing.Size(75, 23)
         Me.BtnPrevTech.TabIndex = 16
@@ -546,7 +579,7 @@ Partial Class FrmSettings
         Me.TabEditPword.Location = New System.Drawing.Point(4, 22)
         Me.TabEditPword.Name = "TabEditPword"
         Me.TabEditPword.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabEditPword.Size = New System.Drawing.Size(758, 494)
+        Me.TabEditPword.Size = New System.Drawing.Size(758, 510)
         Me.TabEditPword.TabIndex = 0
         Me.TabEditPword.Text = "Edit Password"
         '
@@ -630,15 +663,6 @@ Partial Class FrmSettings
         Me.TableAdapterManager.TechniciansTableAdapter = Me.TechniciansTableAdapter
         Me.TableAdapterManager.UpdateOrder = TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
-        'BtnSaveTech
-        '
-        Me.BtnSaveTech.Location = New System.Drawing.Point(347, 462)
-        Me.BtnSaveTech.Name = "BtnSaveTech"
-        Me.BtnSaveTech.Size = New System.Drawing.Size(75, 23)
-        Me.BtnSaveTech.TabIndex = 23
-        Me.BtnSaveTech.Text = "Save"
-        Me.BtnSaveTech.UseVisualStyleBackColor = True
-        '
         'FrmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -714,4 +738,6 @@ Partial Class FrmSettings
     Friend WithEvents BtnNextTech As System.Windows.Forms.Button
     Friend WithEvents BtnPrevTech As System.Windows.Forms.Button
     Friend WithEvents BtnSaveTech As System.Windows.Forms.Button
+    Friend WithEvents CBActiveSet As System.Windows.Forms.CheckBox
+    Friend WithEvents CBShowInactive As System.Windows.Forms.CheckBox
 End Class

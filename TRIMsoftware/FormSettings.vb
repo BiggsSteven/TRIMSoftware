@@ -166,7 +166,7 @@ Public Class FrmSettings
         Dim data As DatabaseClass = New DatabaseClass
         'runs a select Query to retrieve list of Techs
         Dim table As String = ConfigurationManager.AppSettings("Tech")
-        Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName]"
+        Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName],[Active]"
         Dim TechArray(,) As String
         data.RunDynamicSelect(table, fieldString, "", TechArray)
 
@@ -177,7 +177,10 @@ Public Class FrmSettings
         'Populate listbox with Technicians
         Dim counter As Integer = 0
         While (counter < TechArray.GetLength(0))
-            CmboBoxTechs.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 3) & ", " & TechArray(counter, 1) & " " & TechArray(counter, 2))
+            'If (active and not 01 nor 02) or (showinactive and not 01 nor 02)
+            If (TechArray(counter, 4) = True Or CBShowInactive.Checked = True) And TechArray(counter, 0) <> "0000000001" And TechArray(counter, 0) <> "0000000002" Then
+                CmboBoxTechs.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 3) & ", " & TechArray(counter, 1) & " " & TechArray(counter, 2))
+            End If
             counter += 1
         End While
 
@@ -192,6 +195,8 @@ Public Class FrmSettings
                 element.Enabled = True
                 element.Text = String.Empty
             End If
+            CBActiveSet.Enabled = True
+            CBActiveSet.Checked = False
         Next
     End Sub
 
@@ -201,25 +206,28 @@ Public Class FrmSettings
         TechSelected = TechSelected.Substring(0, TechSelected.IndexOf("\"))
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("Tech")
-        Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName], [SSN], [FedIDNum], [HomeAddress], [PhoneNum], [EmailAdd], [Location], [PayPercentage]"
+        Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName], [SSN], [FedIDNum], [HomeAddress], [PhoneNum], [EmailAdd], [Location], [PayPercentage],[Active]"
         Dim condition As String = "[ID] = '" & TechSelected & "' "
         Dim TechArray(,) As String
         data.RunDynamicSelect(table, fieldString, condition, TechArray)
 
-        'If the selection is Distributor or Company they should not be editable
+        'If the selection is Start, the Distributor, or the Company they should not be editable
         'Else fill the fields with the appropriate data
-        If TechSelected = "0000000001" Or TechSelected = "0000000002" Then
+        If TechSelected = "----------" Then
             For Each element As Control In PnlEditTech.Controls
                 If TypeOf element Is TextBox Then
                     element.Text = String.Empty
                     element.Enabled = False
                 End If
+                CBActiveSet.Checked = False
+                CBActiveSet.Enabled = False
             Next
         ElseIf TechArray.Length <> 0 Then
             For Each element As Control In PnlEditTech.Controls
                 If TypeOf element Is TextBox Then
                     element.Enabled = True
                 End If
+                CBActiveSet.Enabled = True
             Next
             TxtboxID.Text = TechArray(0, 0)
             txtBoxFirst.Text = TechArray(0, 1)
@@ -232,10 +240,10 @@ Public Class FrmSettings
             TxtboxEmail.Text = TechArray(0, 8)
             TxtboxLoc.Text = TechArray(0, 9)
             TxtboxPayPerc.Text = TechArray(0, 10)
+            CBActiveSet.Checked = TechArray(0, 11)
         End If
 
         TechSelected = CmboBoxTechs.SelectedItem
-
         BtnPrevTech.Enabled = True
         BtnNextTech.Enabled = True
         BtnSaveTech.Enabled = True
@@ -247,9 +255,6 @@ Public Class FrmSettings
 
         ElseIf CmboBoxTechs.Items.IndexOf(TechSelected) = CmboBoxTechs.Items.Count - 1 Then
             BtnNextTech.Enabled = False
-
-        ElseIf CmboBoxTechs.Items.IndexOf(TechSelected) = 1 Or CmboBoxTechs.Items.IndexOf(TechSelected) = 2 Then
-            BtnSaveTech.Enabled = False
         End If
 
 
@@ -354,6 +359,18 @@ Public Class FrmSettings
         If CmboBoxTechs.Items.Count > TechSelection Then
             CmboBoxTechs.SelectedItem = CmboBoxTechs.Items.Item(TechSelection)
         End If
+    End Sub
+
+    Private Sub CBActiveSet_CheckedChanged(sender As Object, e As EventArgs) Handles CBActiveSet.CheckedChanged
+        If CBActiveSet.Checked = True Then
+            CBActiveSet.Text = "Active"
+        Else
+            CBActiveSet.Text = "Inactive"
+        End If
+    End Sub
+
+    Private Sub CBShowInactive_CheckedChanged(sender As Object, e As EventArgs) Handles CBShowInactive.CheckedChanged
+        UpdateTechList()
     End Sub
 
     '--------------------------------------------------------------------------------------------------------------------
