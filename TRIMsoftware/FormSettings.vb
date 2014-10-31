@@ -149,6 +149,7 @@ Public Class FrmSettings
         CmboBoxTechs.Enabled = False
         BtnPrevTech.Enabled = False
         BtnNextTech.Enabled = False
+        BtnSaveTech.Enabled = True
         clearTxtBoxes()
     End Sub
 
@@ -269,7 +270,7 @@ Public Class FrmSettings
         'If the tech is being editted
         If RBEditTech.Checked = True Then
             'get  the tech's record that is seleced
-            Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName], [SSN], [FedIDNum], [HomeAddress], [PhoneNum], [EmailAdd], [Location], [PayPercentage]"
+            Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName], [SSN], [FedIDNum], [HomeAddress], [PhoneNum], [EmailAdd], [Location], [PayPercentage],[Active]"
             Dim TechSelected As String = CmboBoxTechs.SelectedItem
             TechSelected = TechSelected.Substring(0, TechSelected.IndexOf("\"))
             Dim condition As String = "[ID] = '" & TechSelected & "' "
@@ -277,7 +278,7 @@ Public Class FrmSettings
             data.RunDynamicSelect(table, fieldString, condition, TechArray)
 
             'If the tech selected exist, this filters out the "----------\ ------- -
-            If TechArray.Length <> 0 And TechSelected <> "0000000001" And TechSelected <> "0000000002" Then
+            If TechArray.Length <> 0 Then
                 Dim fieldParts() As String = {"[ID]", "[FirstName]", "[MiddleInitial]", "[LastName]", "[SSN]", "[FedIDNum]", "[HomeAddress]", "[PhoneNum]", "[EmailAdd]", "[Location]", "[PayPercentage]"}
                 Dim fields() As Control = {TxtboxID, txtBoxFirst, TxtBoxMI, TxtBoxLast, TxtBoxSSN, TxtBoxFedID, TxtboxAddr, TxtboxPhone, TxtboxEmail, TxtboxLoc, TxtboxPayPerc}
 
@@ -286,16 +287,23 @@ Public Class FrmSettings
                 Do While counter < fields.Length
                     'If the textbox field does not match the field in the database
                     If fields(counter).Text <> TechArray(0, counter) Then
+                            Dim editfields() As String = {fieldParts(counter)}
+                            Dim values() As String = {fields(counter).Text}
+                            data.RunDynamicUpdate(table, condition, editfields, values)
 
-                        Dim editfields() As String = {fieldParts(counter)}
-                        Dim values() As String = {fields(counter).Text}
-                        data.RunDynamicUpdate(table, condition, editfields, values)
+
                         If counter = 0 Then
                             condition = "[ID] = '" & fields(counter).Text & "' "
                         End If
                     End If
                     counter += 1
                 Loop
+                'Update Active Status seperate because it is based of .checked instead of .text
+                If CBActiveSet.Checked <> TechArray(0, 11) Then
+                    Dim editfields() As String = {"[Active]"}
+                    Dim values() As String = {CBActiveSet.Checked}
+                    data.RunDynamicUpdate(table, condition, editfields, values)
+                End If
             End If
         ElseIf RBAddTech.Checked = True Then
 
@@ -307,7 +315,7 @@ Public Class FrmSettings
 
             If TechArray.Length = 0 Then
                 'The Tech is not present so we add it now
-                Dim values() As String = {TxtboxID.Text, txtBoxFirst.Text, TxtBoxMI.Text, TxtBoxLast.Text, TxtBoxSSN.Text, TxtBoxFedID.Text, TxtboxAddr.Text, TxtboxPhone.Text, TxtboxEmail.Text, TxtboxLoc.Text, TxtboxPayPerc.Text}
+                Dim values() As String = {TxtboxID.Text, txtBoxFirst.Text, TxtBoxMI.Text, TxtBoxLast.Text, TxtBoxSSN.Text, TxtBoxFedID.Text, TxtboxAddr.Text, TxtboxPhone.Text, TxtboxEmail.Text, TxtboxLoc.Text, TxtboxPayPerc.Text, CBActiveSet.Checked}
                 data.RunDynamicInsert(table, fieldString, values)
             Else
                 'notify the user that the tech is already present
@@ -347,18 +355,25 @@ Public Class FrmSettings
     End Sub
 
     Private Sub BtnSaveTech_Click(sender As Object, e As EventArgs) Handles BtnSaveTech.Click
-        SaveEditTech()
-
-        'Save current selection
-        Dim TechSelectedName As String = CmboBoxTechs.SelectedItem
-        Dim TechSelection As Integer = CmboBoxTechs.Items.IndexOf(TechSelectedName)
-
-        UpdateTechList()
-
-        'Set current selection back after list is rebuilt
-        If CmboBoxTechs.Items.Count > TechSelection Then
-            CmboBoxTechs.SelectedItem = CmboBoxTechs.Items.Item(TechSelection)
+        If TxtboxID.Text <> String.Empty Then
+            SaveEditTech()
+        Else
+            MessageBox.Show("Cannot add Technician with blank TechID")
         End If
+
+        If RBEditTech.Checked = True Then
+            'Save current selection
+            Dim TechSelectedName As String = CmboBoxTechs.SelectedItem
+            Dim TechSelection As Integer = CmboBoxTechs.Items.IndexOf(TechSelectedName)
+
+            UpdateTechList()
+
+            'Set current selection back after list is rebuilt
+            If CmboBoxTechs.Items.Count > TechSelection Then
+                CmboBoxTechs.SelectedItem = CmboBoxTechs.Items.Item(TechSelection)
+            End If
+        End If
+
     End Sub
 
     Private Sub CBActiveSet_CheckedChanged(sender As Object, e As EventArgs) Handles CBActiveSet.CheckedChanged

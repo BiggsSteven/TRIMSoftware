@@ -212,7 +212,7 @@ Partial Class FormHome
         Me.PnlFilter.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PnlFilter.Location = New System.Drawing.Point(0, 24)
         Me.PnlFilter.Name = "PnlFilter"
-        Me.PnlFilter.Size = New System.Drawing.Size(229, 757)
+        Me.PnlFilter.Size = New System.Drawing.Size(229, 633)
         Me.PnlFilter.TabIndex = 1
         '
         'LstBoxTech
@@ -223,7 +223,7 @@ Partial Class FormHome
         Me.LstBoxTech.Location = New System.Drawing.Point(0, 118)
         Me.LstBoxTech.Name = "LstBoxTech"
         Me.LstBoxTech.ScrollAlwaysVisible = True
-        Me.LstBoxTech.Size = New System.Drawing.Size(227, 448)
+        Me.LstBoxTech.Size = New System.Drawing.Size(227, 315)
         Me.LstBoxTech.TabIndex = 0
         '
         'PnlDate
@@ -233,9 +233,9 @@ Partial Class FormHome
         Me.PnlDate.Controls.Add(Me.DTPkrEnd)
         Me.PnlDate.Controls.Add(Me.LblDtEnd)
         Me.PnlDate.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PnlDate.Location = New System.Drawing.Point(0, 566)
+        Me.PnlDate.Location = New System.Drawing.Point(0, 433)
         Me.PnlDate.Name = "PnlDate"
-        Me.PnlDate.Size = New System.Drawing.Size(227, 136)
+        Me.PnlDate.Size = New System.Drawing.Size(227, 145)
         Me.PnlDate.TabIndex = 10
         '
         'LblDtFrm
@@ -327,7 +327,7 @@ Partial Class FormHome
         '
         Me.BtnGtInfo.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.BtnGtInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnGtInfo.Location = New System.Drawing.Point(0, 702)
+        Me.BtnGtInfo.Location = New System.Drawing.Point(0, 578)
         Me.BtnGtInfo.Name = "BtnGtInfo"
         Me.BtnGtInfo.Size = New System.Drawing.Size(227, 53)
         Me.BtnGtInfo.TabIndex = 3
@@ -358,7 +358,7 @@ Partial Class FormHome
         Me.ActivitiesDataGridView.Location = New System.Drawing.Point(3, 3)
         Me.ActivitiesDataGridView.Name = "ActivitiesDataGridView"
         Me.ActivitiesDataGridView.ReadOnly = True
-        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(950, 626)
+        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(950, 502)
         Me.ActivitiesDataGridView.TabIndex = 0
         '
         'TechIDDataGridViewTextBoxColumn
@@ -569,7 +569,7 @@ Partial Class FormHome
         Me.TabCtrlDGV.Location = New System.Drawing.Point(229, 24)
         Me.TabCtrlDGV.Name = "TabCtrlDGV"
         Me.TabCtrlDGV.SelectedIndex = 0
-        Me.TabCtrlDGV.Size = New System.Drawing.Size(964, 757)
+        Me.TabCtrlDGV.Size = New System.Drawing.Size(964, 633)
         Me.TabCtrlDGV.TabIndex = 8
         '
         'TabAct
@@ -579,7 +579,7 @@ Partial Class FormHome
         Me.TabAct.Location = New System.Drawing.Point(4, 22)
         Me.TabAct.Name = "TabAct"
         Me.TabAct.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabAct.Size = New System.Drawing.Size(956, 731)
+        Me.TabAct.Size = New System.Drawing.Size(956, 607)
         Me.TabAct.TabIndex = 0
         Me.TabAct.Text = "Technician Activities"
         Me.TabAct.UseVisualStyleBackColor = True
@@ -593,7 +593,7 @@ Partial Class FormHome
         Me.PnlPay.Controls.Add(Me.LblBalanceField)
         Me.PnlPay.Controls.Add(Me.LblBalanceHdr)
         Me.PnlPay.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PnlPay.Location = New System.Drawing.Point(3, 629)
+        Me.PnlPay.Location = New System.Drawing.Point(3, 505)
         Me.PnlPay.Name = "PnlPay"
         Me.PnlPay.Size = New System.Drawing.Size(950, 99)
         Me.PnlPay.TabIndex = 10
@@ -862,7 +862,7 @@ Partial Class FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1193, 781)
+        Me.ClientSize = New System.Drawing.Size(1193, 657)
         Me.Controls.Add(Me.TabCtrlDGV)
         Me.Controls.Add(Me.ActivitiesBindingNavigator)
         Me.Controls.Add(Me.PnlFilter)

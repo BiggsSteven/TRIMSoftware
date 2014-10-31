@@ -82,6 +82,7 @@ Partial Class FrmSettings
         Me.BtnGenCncl = New System.Windows.Forms.Button()
         Me.TechniciansTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter()
         Me.TableAdapterManager = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         LblEmailAddress = New System.Windows.Forms.Label()
         LblPhoneNum = New System.Windows.Forms.Label()
         LblFedIDNum = New System.Windows.Forms.Label()
@@ -103,12 +104,13 @@ Partial Class FrmSettings
         CType(Me.ReceiverInstallationDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabEditPword.SuspendLayout()
         Me.GrpBoxPass.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblEmailAddress
         '
         LblEmailAddress.AutoSize = True
-        LblEmailAddress.Location = New System.Drawing.Point(5, 339)
+        LblEmailAddress.Location = New System.Drawing.Point(5, 278)
         LblEmailAddress.Name = "LblEmailAddress"
         LblEmailAddress.Size = New System.Drawing.Size(76, 13)
         LblEmailAddress.TabIndex = 22
@@ -117,7 +119,7 @@ Partial Class FrmSettings
         'LblPhoneNum
         '
         LblPhoneNum.AutoSize = True
-        LblPhoneNum.Location = New System.Drawing.Point(5, 313)
+        LblPhoneNum.Location = New System.Drawing.Point(5, 252)
         LblPhoneNum.Name = "LblPhoneNum"
         LblPhoneNum.Size = New System.Drawing.Size(81, 13)
         LblPhoneNum.TabIndex = 20
@@ -126,7 +128,7 @@ Partial Class FrmSettings
         'LblFedIDNum
         '
         LblFedIDNum.AutoSize = True
-        LblFedIDNum.Location = New System.Drawing.Point(5, 226)
+        LblFedIDNum.Location = New System.Drawing.Point(5, 189)
         LblFedIDNum.Name = "LblFedIDNum"
         LblFedIDNum.Size = New System.Drawing.Size(82, 13)
         LblFedIDNum.TabIndex = 18
@@ -135,7 +137,7 @@ Partial Class FrmSettings
         'LblSSN
         '
         LblSSN.AutoSize = True
-        LblSSN.Location = New System.Drawing.Point(5, 200)
+        LblSSN.Location = New System.Drawing.Point(5, 163)
         LblSSN.Name = "LblSSN"
         LblSSN.Size = New System.Drawing.Size(32, 13)
         LblSSN.TabIndex = 16
@@ -144,7 +146,7 @@ Partial Class FrmSettings
         'LblPayPercentage
         '
         LblPayPercentage.AutoSize = True
-        LblPayPercentage.Location = New System.Drawing.Point(5, 421)
+        LblPayPercentage.Location = New System.Drawing.Point(5, 346)
         LblPayPercentage.Name = "LblPayPercentage"
         LblPayPercentage.Size = New System.Drawing.Size(86, 13)
         LblPayPercentage.TabIndex = 14
@@ -153,7 +155,7 @@ Partial Class FrmSettings
         'LblLastName
         '
         LblLastName.AutoSize = True
-        LblLastName.Location = New System.Drawing.Point(473, 160)
+        LblLastName.Location = New System.Drawing.Point(401, 123)
         LblLastName.Name = "LblLastName"
         LblLastName.Size = New System.Drawing.Size(61, 13)
         LblLastName.TabIndex = 12
@@ -162,7 +164,7 @@ Partial Class FrmSettings
         'LblMiddleInitial
         '
         LblMiddleInitial.AutoSize = True
-        LblMiddleInitial.Location = New System.Drawing.Point(324, 160)
+        LblMiddleInitial.Location = New System.Drawing.Point(281, 123)
         LblMiddleInitial.Name = "LblMiddleInitial"
         LblMiddleInitial.Size = New System.Drawing.Size(68, 13)
         LblMiddleInitial.TabIndex = 10
@@ -171,7 +173,7 @@ Partial Class FrmSettings
         'LblFirstName
         '
         LblFirstName.AutoSize = True
-        LblFirstName.Location = New System.Drawing.Point(5, 160)
+        LblFirstName.Location = New System.Drawing.Point(5, 123)
         LblFirstName.Name = "LblFirstName"
         LblFirstName.Size = New System.Drawing.Size(60, 13)
         LblFirstName.TabIndex = 8
@@ -180,7 +182,7 @@ Partial Class FrmSettings
         'LblHomeAddress
         '
         LblHomeAddress.AutoSize = True
-        LblHomeAddress.Location = New System.Drawing.Point(5, 287)
+        LblHomeAddress.Location = New System.Drawing.Point(5, 226)
         LblHomeAddress.Name = "LblHomeAddress"
         LblHomeAddress.Size = New System.Drawing.Size(79, 13)
         LblHomeAddress.TabIndex = 6
@@ -189,7 +191,7 @@ Partial Class FrmSettings
         'LblLocation
         '
         LblLocation.AutoSize = True
-        LblLocation.Location = New System.Drawing.Point(3, 395)
+        LblLocation.Location = New System.Drawing.Point(3, 320)
         LblLocation.Name = "LblLocation"
         LblLocation.Size = New System.Drawing.Size(64, 13)
         LblLocation.TabIndex = 4
@@ -198,7 +200,7 @@ Partial Class FrmSettings
         'LblID
         '
         LblID.AutoSize = True
-        LblID.Location = New System.Drawing.Point(5, 127)
+        LblID.Location = New System.Drawing.Point(5, 90)
         LblID.Name = "LblID"
         LblID.Size = New System.Drawing.Size(77, 13)
         LblID.TabIndex = 0
@@ -224,7 +226,7 @@ Partial Class FrmSettings
         '
         'TxtBoxPass
         '
-        Me.TxtBoxPass.Location = New System.Drawing.Point(165, 85)
+        Me.TxtBoxPass.Location = New System.Drawing.Point(285, 85)
         Me.TxtBoxPass.Name = "TxtBoxPass"
         Me.TxtBoxPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TxtBoxPass.Size = New System.Drawing.Size(234, 20)
@@ -244,11 +246,11 @@ Partial Class FrmSettings
         Me.TabCtrlSttng.Controls.Add(Me.TabGeneral)
         Me.TabCtrlSttng.Controls.Add(Me.TabEditTech)
         Me.TabCtrlSttng.Controls.Add(Me.TabEditPword)
-        Me.TabCtrlSttng.Dock = System.Windows.Forms.DockStyle.Top
+        Me.TabCtrlSttng.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabCtrlSttng.Location = New System.Drawing.Point(0, 0)
         Me.TabCtrlSttng.Name = "TabCtrlSttng"
         Me.TabCtrlSttng.SelectedIndex = 0
-        Me.TabCtrlSttng.Size = New System.Drawing.Size(766, 536)
+        Me.TabCtrlSttng.Size = New System.Drawing.Size(662, 460)
         Me.TabCtrlSttng.TabIndex = 5
         '
         'TabGeneral
@@ -258,7 +260,7 @@ Partial Class FrmSettings
         Me.TabGeneral.Controls.Add(Me.GrpBoxPay)
         Me.TabGeneral.Location = New System.Drawing.Point(4, 22)
         Me.TabGeneral.Name = "TabGeneral"
-        Me.TabGeneral.Size = New System.Drawing.Size(758, 510)
+        Me.TabGeneral.Size = New System.Drawing.Size(654, 434)
         Me.TabGeneral.TabIndex = 2
         Me.TabGeneral.Text = "General"
         '
@@ -268,9 +270,9 @@ Partial Class FrmSettings
         Me.GroupBox1.Controls.Add(Me.LblDistro)
         Me.GroupBox1.Controls.Add(Me.TxtboxComp)
         Me.GroupBox1.Controls.Add(Me.TxtboxDistro)
-        Me.GroupBox1.Location = New System.Drawing.Point(44, 24)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 24)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(670, 174)
+        Me.GroupBox1.Size = New System.Drawing.Size(638, 174)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Titles"
@@ -295,14 +297,14 @@ Partial Class FrmSettings
         '
         'TxtboxComp
         '
-        Me.TxtboxComp.Location = New System.Drawing.Point(295, 96)
+        Me.TxtboxComp.Location = New System.Drawing.Point(203, 96)
         Me.TxtboxComp.Name = "TxtboxComp"
         Me.TxtboxComp.Size = New System.Drawing.Size(266, 20)
         Me.TxtboxComp.TabIndex = 1
         '
         'TxtboxDistro
         '
-        Me.TxtboxDistro.Location = New System.Drawing.Point(295, 39)
+        Me.TxtboxDistro.Location = New System.Drawing.Point(203, 39)
         Me.TxtboxDistro.Name = "TxtboxDistro"
         Me.TxtboxDistro.Size = New System.Drawing.Size(266, 20)
         Me.TxtboxDistro.TabIndex = 0
@@ -312,9 +314,9 @@ Partial Class FrmSettings
         Me.GrpBoxPay.Controls.Add(Me.ChkboxSvcPay)
         Me.GrpBoxPay.Controls.Add(Me.LblSvcPay)
         Me.GrpBoxPay.Controls.Add(Me.TxtBoxSvcPay)
-        Me.GrpBoxPay.Location = New System.Drawing.Point(44, 235)
+        Me.GrpBoxPay.Location = New System.Drawing.Point(8, 235)
         Me.GrpBoxPay.Name = "GrpBoxPay"
-        Me.GrpBoxPay.Size = New System.Drawing.Size(670, 174)
+        Me.GrpBoxPay.Size = New System.Drawing.Size(638, 174)
         Me.GrpBoxPay.TabIndex = 0
         Me.GrpBoxPay.TabStop = False
         Me.GrpBoxPay.Text = "Pay Style Settings"
@@ -352,12 +354,13 @@ Partial Class FrmSettings
         Me.TabEditTech.Location = New System.Drawing.Point(4, 22)
         Me.TabEditTech.Name = "TabEditTech"
         Me.TabEditTech.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabEditTech.Size = New System.Drawing.Size(758, 510)
+        Me.TabEditTech.Size = New System.Drawing.Size(654, 434)
         Me.TabEditTech.TabIndex = 1
         Me.TabEditTech.Text = "Add/EditTech"
         '
         'PnlEditTech
         '
+        Me.PnlEditTech.AutoScroll = True
         Me.PnlEditTech.Controls.Add(Me.CBActiveSet)
         Me.PnlEditTech.Controls.Add(Me.CBShowInactive)
         Me.PnlEditTech.Controls.Add(Me.BtnSaveTech)
@@ -391,13 +394,13 @@ Partial Class FrmSettings
         Me.PnlEditTech.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PnlEditTech.Location = New System.Drawing.Point(3, 3)
         Me.PnlEditTech.Name = "PnlEditTech"
-        Me.PnlEditTech.Size = New System.Drawing.Size(752, 504)
+        Me.PnlEditTech.Size = New System.Drawing.Size(648, 428)
         Me.PnlEditTech.TabIndex = 29
         '
         'CBActiveSet
         '
         Me.CBActiveSet.AutoSize = True
-        Me.CBActiveSet.Location = New System.Drawing.Point(6, 452)
+        Me.CBActiveSet.Location = New System.Drawing.Point(6, 377)
         Me.CBActiveSet.Name = "CBActiveSet"
         Me.CBActiveSet.Size = New System.Drawing.Size(56, 17)
         Me.CBActiveSet.TabIndex = 25
@@ -416,7 +419,7 @@ Partial Class FrmSettings
         '
         'BtnSaveTech
         '
-        Me.BtnSaveTech.Location = New System.Drawing.Point(343, 469)
+        Me.BtnSaveTech.Location = New System.Drawing.Point(298, 398)
         Me.BtnSaveTech.Name = "BtnSaveTech"
         Me.BtnSaveTech.Size = New System.Drawing.Size(75, 23)
         Me.BtnSaveTech.TabIndex = 23
@@ -425,7 +428,7 @@ Partial Class FrmSettings
         '
         'BtnNextTech
         '
-        Me.BtnNextTech.Location = New System.Drawing.Point(424, 469)
+        Me.BtnNextTech.Location = New System.Drawing.Point(379, 398)
         Me.BtnNextTech.Name = "BtnNextTech"
         Me.BtnNextTech.Size = New System.Drawing.Size(75, 23)
         Me.BtnNextTech.TabIndex = 17
@@ -434,7 +437,7 @@ Partial Class FrmSettings
         '
         'BtnPrevTech
         '
-        Me.BtnPrevTech.Location = New System.Drawing.Point(262, 469)
+        Me.BtnPrevTech.Location = New System.Drawing.Point(217, 398)
         Me.BtnPrevTech.Name = "BtnPrevTech"
         Me.BtnPrevTech.Size = New System.Drawing.Size(75, 23)
         Me.BtnPrevTech.TabIndex = 16
@@ -455,7 +458,7 @@ Partial Class FrmSettings
         'TxtboxEmail
         '
         Me.TxtboxEmail.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "EmailAdd", True))
-        Me.TxtboxEmail.Location = New System.Drawing.Point(97, 336)
+        Me.TxtboxEmail.Location = New System.Drawing.Point(97, 275)
         Me.TxtboxEmail.Name = "TxtboxEmail"
         Me.TxtboxEmail.Size = New System.Drawing.Size(331, 20)
         Me.TxtboxEmail.TabIndex = 12
@@ -482,7 +485,7 @@ Partial Class FrmSettings
         'TxtboxPhone
         '
         Me.TxtboxPhone.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "PhoneNum", True))
-        Me.TxtboxPhone.Location = New System.Drawing.Point(97, 310)
+        Me.TxtboxPhone.Location = New System.Drawing.Point(97, 249)
         Me.TxtboxPhone.Name = "TxtboxPhone"
         Me.TxtboxPhone.Size = New System.Drawing.Size(149, 20)
         Me.TxtboxPhone.TabIndex = 11
@@ -501,7 +504,7 @@ Partial Class FrmSettings
         'TxtBoxFedID
         '
         Me.TxtBoxFedID.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "FedIDNum", True))
-        Me.TxtBoxFedID.Location = New System.Drawing.Point(97, 223)
+        Me.TxtBoxFedID.Location = New System.Drawing.Point(97, 186)
         Me.TxtBoxFedID.Name = "TxtBoxFedID"
         Me.TxtBoxFedID.Size = New System.Drawing.Size(149, 20)
         Me.TxtBoxFedID.TabIndex = 9
@@ -509,7 +512,7 @@ Partial Class FrmSettings
         'TxtboxID
         '
         Me.TxtboxID.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "ID", True))
-        Me.TxtboxID.Location = New System.Drawing.Point(97, 124)
+        Me.TxtboxID.Location = New System.Drawing.Point(97, 87)
         Me.TxtboxID.Name = "TxtboxID"
         Me.TxtboxID.Size = New System.Drawing.Size(278, 20)
         Me.TxtboxID.TabIndex = 4
@@ -517,7 +520,7 @@ Partial Class FrmSettings
         'TxtBoxSSN
         '
         Me.TxtBoxSSN.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "SSN", True))
-        Me.TxtBoxSSN.Location = New System.Drawing.Point(97, 197)
+        Me.TxtBoxSSN.Location = New System.Drawing.Point(97, 160)
         Me.TxtBoxSSN.Name = "TxtBoxSSN"
         Me.TxtBoxSSN.Size = New System.Drawing.Size(149, 20)
         Me.TxtBoxSSN.TabIndex = 8
@@ -525,7 +528,7 @@ Partial Class FrmSettings
         'TxtboxLoc
         '
         Me.TxtboxLoc.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "Location", True))
-        Me.TxtboxLoc.Location = New System.Drawing.Point(95, 392)
+        Me.TxtboxLoc.Location = New System.Drawing.Point(95, 317)
         Me.TxtboxLoc.Name = "TxtboxLoc"
         Me.TxtboxLoc.Size = New System.Drawing.Size(278, 20)
         Me.TxtboxLoc.TabIndex = 13
@@ -533,7 +536,7 @@ Partial Class FrmSettings
         'TxtboxPayPerc
         '
         Me.TxtboxPayPerc.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "PayPercentage", True))
-        Me.TxtboxPayPerc.Location = New System.Drawing.Point(97, 418)
+        Me.TxtboxPayPerc.Location = New System.Drawing.Point(97, 343)
         Me.TxtboxPayPerc.Name = "TxtboxPayPerc"
         Me.TxtboxPayPerc.Size = New System.Drawing.Size(78, 20)
         Me.TxtboxPayPerc.TabIndex = 14
@@ -541,31 +544,31 @@ Partial Class FrmSettings
         'TxtboxAddr
         '
         Me.TxtboxAddr.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "HomeAddress", True))
-        Me.TxtboxAddr.Location = New System.Drawing.Point(97, 284)
+        Me.TxtboxAddr.Location = New System.Drawing.Point(97, 223)
         Me.TxtboxAddr.Name = "TxtboxAddr"
-        Me.TxtboxAddr.Size = New System.Drawing.Size(644, 20)
+        Me.TxtboxAddr.Size = New System.Drawing.Size(529, 20)
         Me.TxtboxAddr.TabIndex = 10
         '
         'TxtBoxLast
         '
         Me.TxtBoxLast.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "LastName", True))
-        Me.TxtBoxLast.Location = New System.Drawing.Point(540, 157)
+        Me.TxtBoxLast.Location = New System.Drawing.Point(468, 120)
         Me.TxtBoxLast.Name = "TxtBoxLast"
-        Me.TxtBoxLast.Size = New System.Drawing.Size(201, 20)
+        Me.TxtBoxLast.Size = New System.Drawing.Size(158, 20)
         Me.TxtBoxLast.TabIndex = 7
         '
         'txtBoxFirst
         '
         Me.txtBoxFirst.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "FirstName", True))
-        Me.txtBoxFirst.Location = New System.Drawing.Point(97, 157)
+        Me.txtBoxFirst.Location = New System.Drawing.Point(97, 120)
         Me.txtBoxFirst.Name = "txtBoxFirst"
-        Me.txtBoxFirst.Size = New System.Drawing.Size(201, 20)
+        Me.txtBoxFirst.Size = New System.Drawing.Size(178, 20)
         Me.txtBoxFirst.TabIndex = 5
         '
         'TxtBoxMI
         '
         Me.TxtBoxMI.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TechniciansBindingSource, "MiddleInitial", True))
-        Me.TxtBoxMI.Location = New System.Drawing.Point(398, 157)
+        Me.TxtBoxMI.Location = New System.Drawing.Point(355, 120)
         Me.TxtBoxMI.Name = "TxtBoxMI"
         Me.TxtBoxMI.Size = New System.Drawing.Size(40, 20)
         Me.TxtBoxMI.TabIndex = 6
@@ -579,7 +582,7 @@ Partial Class FrmSettings
         Me.TabEditPword.Location = New System.Drawing.Point(4, 22)
         Me.TabEditPword.Name = "TabEditPword"
         Me.TabEditPword.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabEditPword.Size = New System.Drawing.Size(758, 510)
+        Me.TabEditPword.Size = New System.Drawing.Size(654, 473)
         Me.TabEditPword.TabIndex = 0
         Me.TabEditPword.Text = "Edit Password"
         '
@@ -593,7 +596,7 @@ Partial Class FrmSettings
         Me.GrpBoxPass.Controls.Add(Me.TxtBoxCurrentPass)
         Me.GrpBoxPass.Location = New System.Drawing.Point(36, 36)
         Me.GrpBoxPass.Name = "GrpBoxPass"
-        Me.GrpBoxPass.Size = New System.Drawing.Size(670, 174)
+        Me.GrpBoxPass.Size = New System.Drawing.Size(610, 174)
         Me.GrpBoxPass.TabIndex = 11
         Me.GrpBoxPass.TabStop = False
         Me.GrpBoxPass.Text = "Change Password"
@@ -618,21 +621,22 @@ Partial Class FrmSettings
         '
         'TxtBoxConfirmPass
         '
-        Me.TxtBoxConfirmPass.Location = New System.Drawing.Point(165, 125)
+        Me.TxtBoxConfirmPass.Location = New System.Drawing.Point(285, 125)
         Me.TxtBoxConfirmPass.Name = "TxtBoxConfirmPass"
         Me.TxtBoxConfirmPass.Size = New System.Drawing.Size(234, 20)
         Me.TxtBoxConfirmPass.TabIndex = 3
         '
         'TxtBoxCurrentPass
         '
-        Me.TxtBoxCurrentPass.Location = New System.Drawing.Point(165, 45)
+        Me.TxtBoxCurrentPass.Location = New System.Drawing.Point(285, 45)
         Me.TxtBoxCurrentPass.Name = "TxtBoxCurrentPass"
         Me.TxtBoxCurrentPass.Size = New System.Drawing.Size(234, 20)
         Me.TxtBoxCurrentPass.TabIndex = 1
         '
         'BtnGenSave
         '
-        Me.BtnGenSave.Location = New System.Drawing.Point(598, 542)
+        Me.BtnGenSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnGenSave.Location = New System.Drawing.Point(494, 10)
         Me.BtnGenSave.Name = "BtnGenSave"
         Me.BtnGenSave.Size = New System.Drawing.Size(75, 23)
         Me.BtnGenSave.TabIndex = 18
@@ -641,7 +645,8 @@ Partial Class FrmSettings
         '
         'BtnGenCncl
         '
-        Me.BtnGenCncl.Location = New System.Drawing.Point(679, 542)
+        Me.BtnGenCncl.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnGenCncl.Location = New System.Drawing.Point(575, 10)
         Me.BtnGenCncl.Name = "BtnGenCncl"
         Me.BtnGenCncl.Size = New System.Drawing.Size(75, 23)
         Me.BtnGenCncl.TabIndex = 19
@@ -663,15 +668,24 @@ Partial Class FrmSettings
         Me.TableAdapterManager.TechniciansTableAdapter = Me.TechniciansTableAdapter
         Me.TableAdapterManager.UpdateOrder = TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.BtnGenSave)
+        Me.Panel1.Controls.Add(Me.BtnGenCncl)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 460)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(662, 45)
+        Me.Panel1.TabIndex = 26
+        '
         'FrmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.ClientSize = New System.Drawing.Size(766, 577)
+        Me.ClientSize = New System.Drawing.Size(662, 505)
         Me.Controls.Add(Me.TabCtrlSttng)
-        Me.Controls.Add(Me.BtnGenSave)
-        Me.Controls.Add(Me.BtnGenCncl)
+        Me.Controls.Add(Me.Panel1)
         Me.Name = "FrmSettings"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Settings"
@@ -689,6 +703,7 @@ Partial Class FrmSettings
         Me.TabEditPword.ResumeLayout(False)
         Me.GrpBoxPass.ResumeLayout(False)
         Me.GrpBoxPass.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -740,4 +755,5 @@ Partial Class FrmSettings
     Friend WithEvents BtnSaveTech As System.Windows.Forms.Button
     Friend WithEvents CBActiveSet As System.Windows.Forms.CheckBox
     Friend WithEvents CBShowInactive As System.Windows.Forms.CheckBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class
