@@ -161,32 +161,35 @@ Public Class FrmSettings
     End Sub
 
     Private Sub UpdateTechList()
-        CmboBoxTechs.Enabled = True
-        CmboBoxTechs.Items.Clear()
+        If CmboBoxTechs.Enabled = True Then
+            CmboBoxTechs.Enabled = True
 
-        Dim data As DatabaseClass = New DatabaseClass
-        'runs a select Query to retrieve list of Techs
-        Dim table As String = ConfigurationManager.AppSettings("Tech")
-        Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName],[Active]"
-        Dim TechArray(,) As String
-        data.RunDynamicSelect(table, fieldString, "", TechArray)
+            CmboBoxTechs.Items.Clear()
+
+            Dim data As DatabaseClass = New DatabaseClass
+            'runs a select Query to retrieve list of Techs
+            Dim table As String = ConfigurationManager.AppSettings("Tech")
+            Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName],[Active]"
+            Dim TechArray(,) As String
+            data.RunDynamicSelect(table, fieldString, "", TechArray)
 
 
-        CmboBoxTechs.Items.Add("--------\------,----- -")
+            CmboBoxTechs.Items.Add("--------\------,----- -")
 
 
-        'Populate listbox with Technicians
-        Dim counter As Integer = 0
-        While (counter < TechArray.GetLength(0))
-            'If (active and not 01 nor 02) or (showinactive and not 01 nor 02)
-            If (TechArray(counter, 4) = True Or CBShowInactive.Checked = True) And TechArray(counter, 0) <> "0000000001" And TechArray(counter, 0) <> "0000000002" Then
-                CmboBoxTechs.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 3) & ", " & TechArray(counter, 1) & " " & TechArray(counter, 2))
+            'Populate listbox with Technicians
+            Dim counter As Integer = 0
+            While (counter < TechArray.GetLength(0))
+                'If (active and not 01 nor 02) or (showinactive and not 01 nor 02)
+                If (TechArray(counter, 4) = True Or CBShowInactive.Checked = True) And TechArray(counter, 0) <> "0000000001" And TechArray(counter, 0) <> "0000000002" Then
+                    CmboBoxTechs.Items.Add(TechArray(counter, 0) & "\" & TechArray(counter, 3) & ", " & TechArray(counter, 1) & " " & TechArray(counter, 2))
+                End If
+                counter += 1
+            End While
+
+            If CmboBoxTechs.Items.Count <> 0 Then
+                CmboBoxTechs.SelectedItem = CmboBoxTechs.Items.Item(0)
             End If
-            counter += 1
-        End While
-
-        If CmboBoxTechs.Items.Count <> 0 Then
-            CmboBoxTechs.SelectedItem = CmboBoxTechs.Items.Item(0)
         End If
     End Sub
 
@@ -287,11 +290,9 @@ Public Class FrmSettings
                 Do While counter < fields.Length
                     'If the textbox field does not match the field in the database
                     If fields(counter).Text <> TechArray(0, counter) Then
-                            Dim editfields() As String = {fieldParts(counter)}
-                            Dim values() As String = {fields(counter).Text}
-                            data.RunDynamicUpdate(table, condition, editfields, values)
-
-
+                        Dim editfields() As String = {fieldParts(counter)}
+                        Dim values() As String = {fields(counter).Text}
+                        data.RunDynamicUpdate(table, condition, editfields, values)
                         If counter = 0 Then
                             condition = "[ID] = '" & fields(counter).Text & "' "
                         End If
@@ -308,7 +309,7 @@ Public Class FrmSettings
         ElseIf RBAddTech.Checked = True Then
 
             'Checks if the Tech is already in the system
-            Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName], [SSN], [FedIDNum], [HomeAddress], [PhoneNum], [EmailAdd], [Location], [PayPercentage]"
+            Dim fieldString As String = "[ID], [FirstName], [MiddleInitial], [LastName], [SSN], [FedIDNum], [HomeAddress], [PhoneNum], [EmailAdd], [Location], [PayPercentage], [Active]"
             Dim condition As String = "[ID] = '" & TxtboxID.Text & "' "
             Dim TechArray(,) As String
             data.RunDynamicSelect(table, fieldString, condition, TechArray)
@@ -374,14 +375,6 @@ Public Class FrmSettings
             End If
         End If
 
-    End Sub
-
-    Private Sub CBActiveSet_CheckedChanged(sender As Object, e As EventArgs) Handles CBActiveSet.CheckedChanged
-        If CBActiveSet.Checked = True Then
-            CBActiveSet.Text = "Active"
-        Else
-            CBActiveSet.Text = "Inactive"
-        End If
     End Sub
 
     Private Sub CBShowInactive_CheckedChanged(sender As Object, e As EventArgs) Handles CBShowInactive.CheckedChanged

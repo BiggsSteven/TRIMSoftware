@@ -403,7 +403,7 @@ Partial Class FrmSettings
         Me.CBActiveSet.Location = New System.Drawing.Point(6, 377)
         Me.CBActiveSet.Name = "CBActiveSet"
         Me.CBActiveSet.Size = New System.Drawing.Size(56, 17)
-        Me.CBActiveSet.TabIndex = 25
+        Me.CBActiveSet.TabIndex = 15
         Me.CBActiveSet.Text = "Active"
         Me.CBActiveSet.UseVisualStyleBackColor = True
         '
@@ -582,7 +582,7 @@ Partial Class FrmSettings
         Me.TabEditPword.Location = New System.Drawing.Point(4, 22)
         Me.TabEditPword.Name = "TabEditPword"
         Me.TabEditPword.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabEditPword.Size = New System.Drawing.Size(654, 473)
+        Me.TabEditPword.Size = New System.Drawing.Size(654, 434)
         Me.TabEditPword.TabIndex = 0
         Me.TabEditPword.Text = "Edit Password"
         '
