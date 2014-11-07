@@ -75,10 +75,9 @@ Public Class ImportClass
         Dim XLApp As Excel.Application = New Excel.ApplicationClass
         Dim xlWorkBook As Excel.Workbook = XLApp.Workbooks.Open(selectedFile)
         Dim XLWorkSheet As Excel.Worksheet = xlWorkBook.Worksheets("sheet3")
-        Dim XLRow As Integer = 4
+        Dim XLRow As Integer = 0
         Dim XLColumn As Integer = 0
-        Dim ImpColumns() As Integer = {11, 12, 9, 8, 16}   'These are the Columns we care about reading in.
-        Dim tempArray(ImpColumns.Length + 2) As String 'The Array that hold the values retrieved from the excel document
+        
         '-------------------------------------------------
         'these are the variables that hold the query parts
         Dim tables As String
@@ -120,9 +119,18 @@ Public Class ImportClass
             End If
         End While
 
+
+
+
+        Dim ImpColumns() As String 'These are the Columns we care about reading in.
+        Dim startRow As Integer
+        readRecordStart(ImpColumns, startRow)
+        Dim tempArray(ImpColumns.Length + 2) As String 'The Array that hold the values retrieved from the excel document
+        XLRow = startRow
         '------------------------------------------------------------------------------------------
         'While the worksheet still has rows to be read
-        While XLWorkSheet.Cells(XLRow, 1).Value IsNot Nothing And proceed = True
+        While XLWorkSheet.Cells(XLRow, 1).Value <> String.Empty And proceed = True
+
 
             '---------------------------------------
             'Loop through important array that saves the column number for the columns we care about
@@ -130,8 +138,10 @@ Public Class ImportClass
                 tempArray(XLColumn) = XLWorkSheet.Cells(XLRow, ImpColumns(XLColumn)).value 'save value from row to array
                 XLColumn += 1
             End While
+
+
             'Check the first activity for previous appearances
-            If XLRow = 4 Then
+            If XLRow = startRow Then
                 tables = ConfigurationManager.AppSettings("Act")
                 fieldsString = "[ID],[FILEIMPORTED],[TYPE]"
                 'Since the same activity ID may be present as long as Type is Service and non service
@@ -290,6 +300,26 @@ Public Class ImportClass
                 data.RunDynamicInsert(tables, fieldsString, MVField)
             End If
         End While
+
+    End Sub
+
+    Public Sub readRecordStart(ByRef importantColumns() As String, ByRef startRow As Integer)
+        Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser("C:\ImAcInfo.csv")
+        MyReader.TextFieldType = FileIO.FieldType.Delimited
+        MyReader.SetDelimiters(",")
+
+        While Not MyReader.EndOfData
+            Try
+                importantColumns = MyReader.ReadFields()
+            Catch ex As Microsoft.VisualBasic.
+                        FileIO.MalformedLineException
+                MsgBox("Line " & ex.Message &
+                "is not valid and will be skipped.")
+            End Try
+        End While
+
+        startRow = importantColumns(5)
+        ReDim Preserve importantColumns(4)
 
     End Sub
 

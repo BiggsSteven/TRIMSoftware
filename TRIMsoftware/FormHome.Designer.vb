@@ -632,7 +632,7 @@ Partial Class FormHome
         Me.TabInv.Location = New System.Drawing.Point(4, 22)
         Me.TabInv.Name = "TabInv"
         Me.TabInv.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabInv.Size = New System.Drawing.Size(956, 731)
+        Me.TabInv.Size = New System.Drawing.Size(956, 607)
         Me.TabInv.TabIndex = 1
         Me.TabInv.Text = "Reciever Inventory"
         Me.TabInv.UseVisualStyleBackColor = True
@@ -651,7 +651,7 @@ Partial Class FormHome
         Me.ReceiverInvDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ReceiverInvDataGridView.Location = New System.Drawing.Point(3, 3)
         Me.ReceiverInvDataGridView.Name = "ReceiverInvDataGridView"
-        Me.ReceiverInvDataGridView.Size = New System.Drawing.Size(950, 725)
+        Me.ReceiverInvDataGridView.Size = New System.Drawing.Size(950, 601)
         Me.ReceiverInvDataGridView.TabIndex = 0
         '
         'DataGridViewTextBoxColumn2
@@ -688,7 +688,7 @@ Partial Class FormHome
         Me.TabTrans.Controls.Add(Me.ReceiverTransferDataGridView)
         Me.TabTrans.Location = New System.Drawing.Point(4, 22)
         Me.TabTrans.Name = "TabTrans"
-        Me.TabTrans.Size = New System.Drawing.Size(956, 731)
+        Me.TabTrans.Size = New System.Drawing.Size(956, 607)
         Me.TabTrans.TabIndex = 2
         Me.TabTrans.Text = "Reciever History"
         Me.TabTrans.UseVisualStyleBackColor = True
@@ -707,7 +707,7 @@ Partial Class FormHome
         Me.ReceiverTransferDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ReceiverTransferDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.ReceiverTransferDataGridView.Name = "ReceiverTransferDataGridView"
-        Me.ReceiverTransferDataGridView.Size = New System.Drawing.Size(956, 731)
+        Me.ReceiverTransferDataGridView.Size = New System.Drawing.Size(956, 607)
         Me.ReceiverTransferDataGridView.TabIndex = 0
         '
         'AccessCard
@@ -744,7 +744,7 @@ Partial Class FormHome
         Me.TabPayLog.Controls.Add(Me.PayStubsDataGridView)
         Me.TabPayLog.Location = New System.Drawing.Point(4, 22)
         Me.TabPayLog.Name = "TabPayLog"
-        Me.TabPayLog.Size = New System.Drawing.Size(956, 731)
+        Me.TabPayLog.Size = New System.Drawing.Size(956, 607)
         Me.TabPayLog.TabIndex = 3
         Me.TabPayLog.Text = "Payment Log"
         Me.TabPayLog.UseVisualStyleBackColor = True
@@ -763,7 +763,7 @@ Partial Class FormHome
         Me.PayStubsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PayStubsDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.PayStubsDataGridView.Name = "PayStubsDataGridView"
-        Me.PayStubsDataGridView.Size = New System.Drawing.Size(956, 731)
+        Me.PayStubsDataGridView.Size = New System.Drawing.Size(956, 607)
         Me.PayStubsDataGridView.TabIndex = 0
         '
         'DataGridViewTextBoxColumn10

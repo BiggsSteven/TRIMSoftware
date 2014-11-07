@@ -22,7 +22,7 @@ Public Class DatabaseClass
         '"Server = 192.168.30.4\SQLEXPRESS,1433; Network Library = DBMSSOCN; Initial Catalog = ReceiverInstallation; User Id = sa; Password = Password123;"
 
         sqlCon = New SqlConnection(ConLine)
-            sqlCon.Open()
+        sqlCon.Open()
     End Sub
 
     Public Sub RunDynamicSelect(ByVal table As String, ByVal fieldString As String, ByVal condition As String, ByRef field(,) As String)
