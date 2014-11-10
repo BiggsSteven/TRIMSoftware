@@ -122,7 +122,7 @@ Public Class ImportClass
 
 
 
-        Dim ImpColumns() As String 'These are the Columns we care about reading in.
+        Dim ImpColumns() As Integer 'These are the Columns we care about reading in.
         Dim startRow As Integer
         readRecordStart(ImpColumns, startRow)
         Dim tempArray(ImpColumns.Length + 2) As String 'The Array that hold the values retrieved from the excel document
@@ -268,6 +268,13 @@ Public Class ImportClass
             MessageBox.Show("File Import was cancelled.")
         End If
 
+
+        XLWorkSheet = Nothing
+        xlWorkBook = Nothing
+        XLApp.Quit()
+        XLApp = Nothing
+
+
     End Sub
 
     Private Sub importRec(ByVal selectedFile As String)
@@ -303,14 +310,17 @@ Public Class ImportClass
 
     End Sub
 
-    Public Sub readRecordStart(ByRef importantColumns() As String, ByRef startRow As Integer)
+    Public Sub readRecordStart(ByRef importantColumns() As Integer, ByRef startRow As Integer)
         Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser("C:\ImAcInfo.csv")
         MyReader.TextFieldType = FileIO.FieldType.Delimited
         MyReader.SetDelimiters(",")
 
+        Dim temparray As String()
         While Not MyReader.EndOfData
             Try
-                importantColumns = MyReader.ReadFields()
+                temparray = MyReader.ReadFields()
+
+
             Catch ex As Microsoft.VisualBasic.
                         FileIO.MalformedLineException
                 MsgBox("Line " & ex.Message &
@@ -318,8 +328,15 @@ Public Class ImportClass
             End Try
         End While
 
-        startRow = importantColumns(5)
-        ReDim Preserve importantColumns(4)
+        Dim parser As Integer = 0
+        ReDim importantColumns(temparray.Length - 2)
+        While parser < temparray.Length() - 1
+            importantColumns(parser) = temparray(parser)
+            parser += 1
+        End While
+
+        startRow = temparray(temparray.Length() - 1)
+
 
     End Sub
 

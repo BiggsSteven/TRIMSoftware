@@ -66,7 +66,6 @@ Public Class DatabaseClass
             ElseIf counter <> 0 And field(counter) = "" Then
                 values += ",NULL"
             End If
-
         Next
 
         'Executes insert Query
@@ -104,5 +103,8 @@ Public Class DatabaseClass
         sqlCmd.ExecuteNonQuery()
 
     End Sub
+
+
+
 
 End Class
