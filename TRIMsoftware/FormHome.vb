@@ -9,7 +9,6 @@ Public Class FormHome
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoginForm.ShowDialog()
         LoginForm.Dispose()
-        ChkBoxPrint.Checked = True
 
         'Sub to Initialize the Technician list
         BuildTechList()
@@ -308,6 +307,73 @@ Public Class FormHome
         FrmSettings.Dispose()
     End Sub
 
+    Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click
+        'PrintDocument1.Print()
+
+        PrintDocument1.DefaultPageSettings.Landscape = True
+
+        PrintDialog1.Document = PrintDocument1
+
+        'PrintPreviewDialog1.Document = PrintDocument1
+        'PrintPreviewDialog1.ShowDialog()
+
+
+        Dim result As DialogResult = PrintDialog1.ShowDialog()
+        If result = DialogResult.OK Then
+
+            PrintDocument1.Print()
+        End If
+    End Sub
+
+    Private Sub PrintDocument1_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+
+        Dim tableList As DataGridView() = {ActivitiesDataGridView, ReceiverInvDataGridView, ReceiverTransferDataGridView, PayStubsDataGridView}
+        Dim holderDGV As DataGridView = tableList(TabCtrlDGV.SelectedIndex())
+
+
+        With holderDGV
+            Dim fmt As StringFormat = New StringFormat(StringFormatFlags.LineLimit)
+            fmt.LineAlignment = StringAlignment.Near
+
+            Dim y As Single = e.MarginBounds.Top
+
+            newpage = True
+            'Cycle through rows in the data grid view rows
+            Do While mRow < .RowCount
+                Dim row As DataGridViewRow = .Rows(mRow)
+                Dim x As Single = e.MarginBounds.Left
+                Dim h As Single = 0
+                'Cycle through columns in each row skipping Total and the Paid Column
+                For Each cell As DataGridViewCell In row.Cells
+                    Dim rc As RectangleF = New RectangleF(x, y, 900 / .ColumnCount, cell.Size.Height)
+                    e.Graphics.DrawRectangle(Pens.Black, rc.Left, rc.Top, rc.Width, rc.Height)
+                    If (newpage) Then
+                        e.Graphics.FillRectangle(Brushes.Gainsboro, rc.Left, rc.Top, rc.Width, rc.Height)
+                        e.Graphics.DrawString(holderDGV.Columns(cell.ColumnIndex).HeaderText.ToString(), .Font, Brushes.Black, rc, fmt)
+                    Else
+                        e.Graphics.DrawString(holderDGV.Rows(cell.RowIndex).Cells(cell.ColumnIndex).FormattedValue.ToString(), .Font, Brushes.Black, rc, fmt)
+                    End If
+                    x += rc.Width
+                    h = Math.Max(h, rc.Height)
+                Next
+                If mRow = 0 And newpage = True Then
+                    mRow -= 1
+                End If
+                newpage = False
+                y += h
+                mRow += 1
+                If y + h > e.MarginBounds.Bottom Then
+                    e.HasMorePages = True
+                    mRow -= 1
+                    newpage = True
+                    Exit Sub
+                End If
+            Loop
+            mRow = 0
+        End With
+    End Sub
+
+
     '--------------------------------------------------------------------------------------------------------------------
 
     'This section handles the tech payment process
@@ -326,16 +392,6 @@ Public Class FormHome
             Dim fields() As String = {CheckNumber, DateTime.Now.Date, ActivitiesDataGridView.Rows(0).Cells(0).Value, CDbl(LblBalanceField.Text)}
             data.RunDynamicInsert(tables, fieldString, fields)
 
-            'PrintDocument1.Print()
-            If ChkBoxPrint.Checked = True Then
-                PrintDocument1.DefaultPageSettings.Landscape = True
-                PrintDialog1.Document = PrintDocument1
-
-                Dim result As DialogResult = PrintDialog1.ShowDialog()
-                If result = DialogResult.OK Then
-                    PrintDocument1.Print()
-                End If
-            End If
 
             'setup for the update to the activities
             'This is where the paid gets checked
@@ -374,66 +430,8 @@ Public Class FormHome
 
     End Sub
 
-    Private Sub PrintDocument1_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
-        With ActivitiesDataGridView
+    Private Sub PrintPreviewDialog1_Load(sender As Object, e As EventArgs) Handles PrintPreviewDialog1.Load
 
-
-            Dim fmt As StringFormat = New StringFormat(StringFormatFlags.LineLimit)
-            fmt.LineAlignment = StringAlignment.Near
-
-            Dim y As Single = e.MarginBounds.Top
-
-            newpage = True
-            'Cycle through rows in the data grid view rows
-            Do While mRow < .RowCount
-                Dim row As DataGridViewRow = .Rows(mRow)
-                Dim x As Single = e.MarginBounds.Left
-                Dim h As Single = 0
-
-                'If the column has been paid do not include it in the pay stub
-                If row.Cells.Item("Paid").Value = False Then
-
-                    'Cycle through columns in each row skipping Total and the Paid Column
-                    For Each cell As DataGridViewCell In row.Cells
-                        If cell.ColumnIndex <> 4 And cell.ColumnIndex <> 6 Then
-                            Dim rc As RectangleF = New RectangleF(x, y, cell.Size.Width, cell.Size.Height)
-                            e.Graphics.DrawRectangle(Pens.Black, rc.Left, rc.Top, rc.Width, rc.Height)
-                            If (newpage) Then
-                                e.Graphics.DrawString(ActivitiesDataGridView.Columns(cell.ColumnIndex).HeaderText, .Font, Brushes.Black, rc, fmt)
-                            Else
-                                e.Graphics.DrawString(ActivitiesDataGridView.Rows(cell.RowIndex).Cells(cell.ColumnIndex).FormattedValue.ToString(), .Font, Brushes.Black, rc, fmt)
-                            End If
-                            x += rc.Width
-                            h = Math.Max(h, rc.Height)
-                        End If
-                    Next
-                End If
-                If mRow = 0 And newpage = True Then
-                    mRow -= 1
-                End If
-                newpage = False
-                y += h
-                mRow += 1
-                If y + h > e.MarginBounds.Bottom Then
-                    e.HasMorePages = True
-                    mRow -= 1
-                    newpage = True
-                    Exit Sub
-                End If
-            Loop
-            mRow = 0
-            Dim Bottom As String = Environment.NewLine & "Technician:   " & ActivitiesDataGridView.Rows(0).Cells(0).FormattedValue.ToString() _
-                                    & "                                      Total: " & LblBalanceField.Text
-
-            Dim rcp As RectangleF = New RectangleF(e.MarginBounds.Left, y, ActivitiesDataGridView.Size.Width(), ActivitiesDataGridView.Rows(0).Cells(0).Size.Height * 3)
-            e.Graphics.DrawString(Bottom, .Font, Brushes.Black, rcp, fmt)
-        End With
     End Sub
 
-    Private Sub ChkBoxPrint_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChkBoxPrint.CheckedChanged
-        If ChkBoxPrint.Checked = False Then
-            MessageBox.Show("Are you sure you do not want to print an invoice for this payment?" & Environment.NewLine() _
-                            & "This will be your only chance to print one.")
-        End If
-    End Sub
 End Class

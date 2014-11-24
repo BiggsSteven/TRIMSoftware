@@ -34,10 +34,9 @@ Partial Class FormHome
         Me.MenuStripHome = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSMLogin = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMFileImport = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSMItmActive = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMFileTransfer = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReceiverToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrintToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSMSettings = New System.Windows.Forms.ToolStripMenuItem()
         Me.PnlFilter = New System.Windows.Forms.Panel()
         Me.LstBoxTech = New System.Windows.Forms.ListBox()
@@ -83,7 +82,6 @@ Partial Class FormHome
         Me.TabAct = New System.Windows.Forms.TabPage()
         Me.PnlPay = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ChkBoxPrint = New System.Windows.Forms.CheckBox()
         Me.txtboxChkNum = New System.Windows.Forms.TextBox()
         Me.TabInv = New System.Windows.Forms.TabPage()
         Me.ReceiverInvDataGridView = New System.Windows.Forms.DataGridView()
@@ -153,7 +151,7 @@ Partial Class FormHome
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMLogin, Me.TSMFileImport, Me.TSMFileTransfer, Me.TSMSettings})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMLogin, Me.TSMItmActive, Me.ReceiverToolStripMenuItem, Me.PrintToolStripMenuItem, Me.TSMSettings})
         Me.FileToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
@@ -162,42 +160,32 @@ Partial Class FormHome
         'TSMLogin
         '
         Me.TSMLogin.Name = "TSMLogin"
-        Me.TSMLogin.Size = New System.Drawing.Size(121, 22)
+        Me.TSMLogin.Size = New System.Drawing.Size(182, 22)
         Me.TSMLogin.Text = "Login"
-        '
-        'TSMFileImport
-        '
-        Me.TSMFileImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMItmActive})
-        Me.TSMFileImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TSMFileImport.Name = "TSMFileImport"
-        Me.TSMFileImport.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TSMFileImport.Size = New System.Drawing.Size(121, 22)
-        Me.TSMFileImport.Text = "Import"
         '
         'TSMItmActive
         '
         Me.TSMItmActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TSMItmActive.Name = "TSMItmActive"
-        Me.TSMItmActive.Size = New System.Drawing.Size(126, 22)
-        Me.TSMItmActive.Text = "Activities"
-        '
-        'TSMFileTransfer
-        '
-        Me.TSMFileTransfer.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReceiverToolStripMenuItem})
-        Me.TSMFileTransfer.Name = "TSMFileTransfer"
-        Me.TSMFileTransfer.Size = New System.Drawing.Size(121, 22)
-        Me.TSMFileTransfer.Text = "Transfer"
+        Me.TSMItmActive.Size = New System.Drawing.Size(182, 22)
+        Me.TSMItmActive.Text = "Import Activities"
         '
         'ReceiverToolStripMenuItem
         '
         Me.ReceiverToolStripMenuItem.Name = "ReceiverToolStripMenuItem"
-        Me.ReceiverToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-        Me.ReceiverToolStripMenuItem.Text = "Receiver"
+        Me.ReceiverToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.ReceiverToolStripMenuItem.Text = "Transfer Receivers"
+        '
+        'PrintToolStripMenuItem
+        '
+        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
+        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.PrintToolStripMenuItem.Text = "Print"
         '
         'TSMSettings
         '
         Me.TSMSettings.Name = "TSMSettings"
-        Me.TSMSettings.Size = New System.Drawing.Size(121, 22)
+        Me.TSMSettings.Size = New System.Drawing.Size(182, 22)
         Me.TSMSettings.Text = "Settings"
         '
         'PnlFilter
@@ -337,7 +325,7 @@ Partial Class FormHome
         'BtnPayTch
         '
         Me.BtnPayTch.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPayTch.Location = New System.Drawing.Point(122, 66)
+        Me.BtnPayTch.Location = New System.Drawing.Point(270, 33)
         Me.BtnPayTch.Name = "BtnPayTch"
         Me.BtnPayTch.Size = New System.Drawing.Size(122, 25)
         Me.BtnPayTch.TabIndex = 3
@@ -358,7 +346,7 @@ Partial Class FormHome
         Me.ActivitiesDataGridView.Location = New System.Drawing.Point(3, 3)
         Me.ActivitiesDataGridView.Name = "ActivitiesDataGridView"
         Me.ActivitiesDataGridView.ReadOnly = True
-        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(950, 502)
+        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(950, 527)
         Me.ActivitiesDataGridView.TabIndex = 0
         '
         'TechIDDataGridViewTextBoxColumn
@@ -587,15 +575,14 @@ Partial Class FormHome
         'PnlPay
         '
         Me.PnlPay.Controls.Add(Me.Label1)
-        Me.PnlPay.Controls.Add(Me.ChkBoxPrint)
         Me.PnlPay.Controls.Add(Me.txtboxChkNum)
         Me.PnlPay.Controls.Add(Me.BtnPayTch)
         Me.PnlPay.Controls.Add(Me.LblBalanceField)
         Me.PnlPay.Controls.Add(Me.LblBalanceHdr)
         Me.PnlPay.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PnlPay.Location = New System.Drawing.Point(3, 505)
+        Me.PnlPay.Location = New System.Drawing.Point(3, 530)
         Me.PnlPay.Name = "PnlPay"
-        Me.PnlPay.Size = New System.Drawing.Size(950, 99)
+        Me.PnlPay.Size = New System.Drawing.Size(950, 74)
         Me.PnlPay.TabIndex = 10
         '
         'Label1
@@ -607,16 +594,6 @@ Partial Class FormHome
         Me.Label1.Size = New System.Drawing.Size(94, 13)
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "Check Number:"
-        '
-        'ChkBoxPrint
-        '
-        Me.ChkBoxPrint.AutoSize = True
-        Me.ChkBoxPrint.Location = New System.Drawing.Point(10, 71)
-        Me.ChkBoxPrint.Name = "ChkBoxPrint"
-        Me.ChkBoxPrint.Size = New System.Drawing.Size(106, 17)
-        Me.ChkBoxPrint.TabIndex = 9
-        Me.ChkBoxPrint.Text = "Print on Payment"
-        Me.ChkBoxPrint.UseVisualStyleBackColor = True
         '
         'txtboxChkNum
         '
@@ -904,8 +881,6 @@ Partial Class FormHome
     End Sub
     Friend WithEvents MenuStripHome As System.Windows.Forms.MenuStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TSMFileImport As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TSMItmActive As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PnlFilter As System.Windows.Forms.Panel
     Friend WithEvents LstBoxTech As System.Windows.Forms.ListBox
     Friend WithEvents BtnGtInfo As System.Windows.Forms.Button
@@ -955,8 +930,6 @@ Partial Class FormHome
     Friend WithEvents PayStubsDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents txtboxChkNum As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TSMFileTransfer As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ReceiverToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RBAll As System.Windows.Forms.RadioButton
     Friend WithEvents DataGridViewTextBoxColumn10 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn11 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -978,7 +951,6 @@ Partial Class FormHome
     Friend WithEvents PrintDialog1 As System.Windows.Forms.PrintDialog
     Friend WithEvents TSMLogin As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TSMSettings As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ChkBoxPrint As System.Windows.Forms.CheckBox
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -990,5 +962,8 @@ Partial Class FormHome
     Friend WithEvents PayStubsTableAdapter1 As TRIMsoftware.ReceiverInstallationDataSetTableAdapters.PayStubsTableAdapter
     Friend WithEvents PnlDate As System.Windows.Forms.Panel
     Friend WithEvents PnlPay As System.Windows.Forms.Panel
+    Friend WithEvents TSMItmActive As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ReceiverToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PrintToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
