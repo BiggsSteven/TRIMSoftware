@@ -14,7 +14,7 @@ Public Class DatabaseClass
 
     Public Sub New()
 
-        Dim SR As New StreamReader("C:\Constring.txt")
+        Dim SR As New StreamReader("C:\Program Files\TRIM\Constring.txt")
         Dim ConLine As String = SR.ReadToEnd()
 
 

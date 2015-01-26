@@ -281,41 +281,8 @@ Public Class ImportClass
 
     End Sub
 
-    Private Sub importRec(ByVal selectedFile As String)
-        Dim data As DatabaseClass = New DatabaseClass
-        '------------------------------------
-        'Created parser
-        Dim lineArray() As String
-        Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(selectedFile)
-        MyReader.TextFieldType = FileIO.FieldType.Delimited
-        MyReader.SetDelimiters(",")
-        Dim abridgeFile() As String = selectedFile.Split("\")
-
-        '------------------------------------
-        'Parse line
-        While Not MyReader.EndOfData
-            lineArray = MyReader.ReadFields()
-            '------------------------
-            'Check table if Reciever is present
-            Dim tables As String = ConfigurationManager.AppSettings("RecInv")
-            Dim fieldsString As String = "[SERIALNUM], [ACCESSCARD], [TECHID], [DATEIN], [DATEOUT], [FILEIMPORTED]"
-            Dim condition As String = " [SERIALNUM] = '" & lineArray(2) & "'"
-            Dim fields(,) As String = {{}, {}}
-            data.RunDynamicSelect(tables, fieldsString, condition, fields)
-
-            '------------------------
-            'If there is not one already by that serialNumber we need to create and insert one
-            If fields.Length = 0 And lineArray(2) <> "" Then
-                Dim dateEnd As Date = DateAdd(DateInterval.Day, 13, CDate(lineArray(11)))
-                Dim MVField() As String = {lineArray(2), lineArray(3), "0000000002", CDate(lineArray(11)), dateEnd, abridgeFile(abridgeFile.Length() - 1)}
-                data.RunDynamicInsert(tables, fieldsString, MVField)
-            End If
-        End While
-
-    End Sub
-
     Public Sub readRecordStart(ByRef importantColumns() As Integer, ByRef startRow As Integer)
-        Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser("C:\ImAcInfo.csv")
+        Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser("C:\Program Files\TRIM\ImAcInfo.csv")
         MyReader.TextFieldType = FileIO.FieldType.Delimited
         MyReader.SetDelimiters(",")
 
