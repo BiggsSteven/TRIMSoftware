@@ -353,10 +353,10 @@ Partial Class FormHome
         Me.ActivitiesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TechIDDataGridViewTextBoxColumn, Me.DateDataGridViewTextBoxColumn, Me.TypeDataGridViewTextBoxColumn, Me.IDDataGridViewTextBoxColumn, Me.TotalDataGridViewTextBoxColumn, Me.TechPayDataGridViewTextBoxColumn, Me.Paid})
         Me.ActivitiesDataGridView.DataSource = Me.ActivitiesBindingSource
         Me.ActivitiesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ActivitiesDataGridView.Location = New System.Drawing.Point(3, 3)
+        Me.ActivitiesDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.ActivitiesDataGridView.Name = "ActivitiesDataGridView"
         Me.ActivitiesDataGridView.ReadOnly = True
-        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(950, 566)
+        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(956, 572)
         Me.ActivitiesDataGridView.TabIndex = 0
         '
         'TechIDDataGridViewTextBoxColumn
@@ -577,7 +577,6 @@ Partial Class FormHome
         Me.TabAct.Controls.Add(Me.PnlPay)
         Me.TabAct.Location = New System.Drawing.Point(4, 22)
         Me.TabAct.Name = "TabAct"
-        Me.TabAct.Padding = New System.Windows.Forms.Padding(3)
         Me.TabAct.Size = New System.Drawing.Size(956, 646)
         Me.TabAct.TabIndex = 0
         Me.TabAct.Text = "Technician Activities"
@@ -591,9 +590,9 @@ Partial Class FormHome
         Me.PnlPay.Controls.Add(Me.LblBalanceField)
         Me.PnlPay.Controls.Add(Me.LblBalanceHdr)
         Me.PnlPay.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PnlPay.Location = New System.Drawing.Point(3, 569)
+        Me.PnlPay.Location = New System.Drawing.Point(0, 572)
         Me.PnlPay.Name = "PnlPay"
-        Me.PnlPay.Size = New System.Drawing.Size(950, 74)
+        Me.PnlPay.Size = New System.Drawing.Size(956, 74)
         Me.PnlPay.TabIndex = 10
         '
         'Label1
@@ -619,7 +618,6 @@ Partial Class FormHome
         Me.TabInv.Controls.Add(Me.ReceiverInvDataGridView)
         Me.TabInv.Location = New System.Drawing.Point(4, 22)
         Me.TabInv.Name = "TabInv"
-        Me.TabInv.Padding = New System.Windows.Forms.Padding(3)
         Me.TabInv.Size = New System.Drawing.Size(956, 646)
         Me.TabInv.TabIndex = 1
         Me.TabInv.Text = "Reciever Inventory"
@@ -637,9 +635,10 @@ Partial Class FormHome
         Me.ReceiverInvDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
         Me.ReceiverInvDataGridView.DataSource = Me.ReceiverInvBindingSource
         Me.ReceiverInvDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ReceiverInvDataGridView.Location = New System.Drawing.Point(3, 3)
+        Me.ReceiverInvDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.ReceiverInvDataGridView.Name = "ReceiverInvDataGridView"
-        Me.ReceiverInvDataGridView.Size = New System.Drawing.Size(950, 640)
+        Me.ReceiverInvDataGridView.ReadOnly = True
+        Me.ReceiverInvDataGridView.Size = New System.Drawing.Size(956, 646)
         Me.ReceiverInvDataGridView.TabIndex = 0
         '
         'DataGridViewTextBoxColumn2
@@ -647,24 +646,28 @@ Partial Class FormHome
         Me.DataGridViewTextBoxColumn2.DataPropertyName = "AccessCard"
         Me.DataGridViewTextBoxColumn2.HeaderText = "AccessCard"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
         '
         'DataGridViewTextBoxColumn3
         '
         Me.DataGridViewTextBoxColumn3.DataPropertyName = "TechID"
         Me.DataGridViewTextBoxColumn3.HeaderText = "TechID"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
         '
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "DateIn"
         Me.DataGridViewTextBoxColumn4.HeaderText = "DateIn"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
         '
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateOut"
         Me.DataGridViewTextBoxColumn5.HeaderText = "DateOut"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
         '
         'ReceiverInvBindingSource
         '
@@ -695,6 +698,7 @@ Partial Class FormHome
         Me.ReceiverTransferDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ReceiverTransferDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.ReceiverTransferDataGridView.Name = "ReceiverTransferDataGridView"
+        Me.ReceiverTransferDataGridView.ReadOnly = True
         Me.ReceiverTransferDataGridView.Size = New System.Drawing.Size(956, 646)
         Me.ReceiverTransferDataGridView.TabIndex = 0
         '
@@ -703,24 +707,28 @@ Partial Class FormHome
         Me.AccessCard.DataPropertyName = "AccessCard"
         Me.AccessCard.HeaderText = "AccessCard"
         Me.AccessCard.Name = "AccessCard"
+        Me.AccessCard.ReadOnly = True
         '
         'DataGridViewTextBoxColumn7
         '
         Me.DataGridViewTextBoxColumn7.DataPropertyName = "FromTechID"
         Me.DataGridViewTextBoxColumn7.HeaderText = "FromTechID"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+        Me.DataGridViewTextBoxColumn7.ReadOnly = True
         '
         'DataGridViewTextBoxColumn8
         '
         Me.DataGridViewTextBoxColumn8.DataPropertyName = "ToTechID"
         Me.DataGridViewTextBoxColumn8.HeaderText = "ToTechID"
         Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        Me.DataGridViewTextBoxColumn8.ReadOnly = True
         '
         'DataGridViewTextBoxColumn9
         '
         Me.DataGridViewTextBoxColumn9.DataPropertyName = "Date"
         Me.DataGridViewTextBoxColumn9.HeaderText = "Date"
         Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+        Me.DataGridViewTextBoxColumn9.ReadOnly = True
         '
         'ReceiverTransferBindingSource
         '
@@ -751,6 +759,7 @@ Partial Class FormHome
         Me.PayStubsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PayStubsDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.PayStubsDataGridView.Name = "PayStubsDataGridView"
+        Me.PayStubsDataGridView.ReadOnly = True
         Me.PayStubsDataGridView.Size = New System.Drawing.Size(956, 646)
         Me.PayStubsDataGridView.TabIndex = 0
         '
@@ -759,18 +768,21 @@ Partial Class FormHome
         Me.DataGridViewTextBoxColumn10.DataPropertyName = "CheckNumber"
         Me.DataGridViewTextBoxColumn10.HeaderText = "CheckNumber"
         Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
+        Me.DataGridViewTextBoxColumn10.ReadOnly = True
         '
         'DataGridViewTextBoxColumn11
         '
         Me.DataGridViewTextBoxColumn11.DataPropertyName = "Date"
         Me.DataGridViewTextBoxColumn11.HeaderText = "Date"
         Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
+        Me.DataGridViewTextBoxColumn11.ReadOnly = True
         '
         'DataGridViewTextBoxColumn12
         '
         Me.DataGridViewTextBoxColumn12.DataPropertyName = "TechID"
         Me.DataGridViewTextBoxColumn12.HeaderText = "TechID"
         Me.DataGridViewTextBoxColumn12.Name = "DataGridViewTextBoxColumn12"
+        Me.DataGridViewTextBoxColumn12.ReadOnly = True
         '
         'DataGridViewTextBoxColumn13
         '
@@ -780,6 +792,7 @@ Partial Class FormHome
         Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewTextBoxColumn13.HeaderText = "Amount"
         Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
+        Me.DataGridViewTextBoxColumn13.ReadOnly = True
         '
         'PayStubsBindingSource
         '
@@ -791,7 +804,6 @@ Partial Class FormHome
         Me.TabImpHist.Controls.Add(Me.ImportHistDataGridView)
         Me.TabImpHist.Location = New System.Drawing.Point(4, 22)
         Me.TabImpHist.Name = "TabImpHist"
-        Me.TabImpHist.Padding = New System.Windows.Forms.Padding(3)
         Me.TabImpHist.Size = New System.Drawing.Size(956, 646)
         Me.TabImpHist.TabIndex = 4
         Me.TabImpHist.Text = "Import Log"
@@ -807,10 +819,10 @@ Partial Class FormHome
         Me.ImportHistDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn14})
         Me.ImportHistDataGridView.DataSource = Me.ImportHistBindingSource
         Me.ImportHistDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ImportHistDataGridView.Location = New System.Drawing.Point(3, 3)
+        Me.ImportHistDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.ImportHistDataGridView.Name = "ImportHistDataGridView"
         Me.ImportHistDataGridView.ReadOnly = True
-        Me.ImportHistDataGridView.Size = New System.Drawing.Size(950, 640)
+        Me.ImportHistDataGridView.Size = New System.Drawing.Size(956, 646)
         Me.ImportHistDataGridView.TabIndex = 0
         '
         'DataGridViewTextBoxColumn1

@@ -322,6 +322,7 @@ Public Class FrmSettings
                 'notify the user that the tech is already present
                 MessageBox.Show("The Technician ID you are trying to add is already in the system.")
             End If
+            clearTxtBoxes()
         End If
         FormHome.BuildTechList()
     End Sub
