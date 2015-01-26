@@ -331,25 +331,27 @@ Public Class FormHome
 
     Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click
         'PrintDocument1.Print()
-
+        '----------------------
         PrintDocument1.DefaultPageSettings.Landscape = True
 
-        PrintDialog1.Document = PrintDocument1
 
+        'Testing: Uncomment these
+        '-------------------------
         'PrintPreviewDialog1.Document = PrintDocument1
         'PrintPreviewDialog1.ShowDialog()
 
-
+        'Non-testing: Uncomment these
+        '------------------------------
+        PrintDialog1.Document = PrintDocument1
         Dim result As DialogResult = PrintDialog1.ShowDialog()
         If result = DialogResult.OK Then
-
             PrintDocument1.Print()
         End If
     End Sub
 
     Private Sub PrintDocument1_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
 
-        Dim tableList As DataGridView() = {ActivitiesDataGridView, ReceiverInvDataGridView, ReceiverTransferDataGridView, PayStubsDataGridView}
+        Dim tableList As DataGridView() = {ActivitiesDataGridView, ReceiverInvDataGridView, ReceiverTransferDataGridView, PayStubsDataGridView, ImportHistDataGridView}
         Dim holderDGV As DataGridView = tableList(TabCtrlDGV.SelectedIndex())
 
 
@@ -449,14 +451,6 @@ Public Class FormHome
                             & "Please enter the check number into the textbox and try again.")
 
         End If
-
-    End Sub
-
-    Private Sub PrintPreviewDialog1_Load(sender As Object, e As EventArgs) Handles PrintPreviewDialog1.Load
-
-    End Sub
-
-    Private Sub PayStubsDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles PayStubsDataGridView.CellContentClick
 
     End Sub
 End Class

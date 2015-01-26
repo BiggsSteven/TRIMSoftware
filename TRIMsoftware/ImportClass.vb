@@ -128,7 +128,7 @@ Public Class ImportClass
 
         Dim ImpColumns() As Integer 'These are the Columns we care about reading in.
         Dim startRow As Integer
-        readRecordStart(ImpColumns, startRow)
+        readRecordStart(ImpColumns, startRow) 'This is where we Save the location of the important columns
         Dim tempArray(ImpColumns.Length + 2) As String 'The Array that hold the values retrieved from the excel document
         XLRow = startRow
         '------------------------------------------------------------------------------------------
