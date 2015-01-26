@@ -140,12 +140,15 @@
     </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ReceiverInstallationDataSet1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>ReceiverInstallationDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiverInstallationDataSet1.vb">
       <DependentUpon>ReceiverInstallationDataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="TransferForm.Designer.vb">
@@ -197,8 +200,8 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
+      <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="ReceiverInstallationDataSet1.xsc">

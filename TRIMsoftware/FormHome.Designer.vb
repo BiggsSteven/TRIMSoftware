@@ -104,6 +104,11 @@ Partial Class FormHome
         Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PayStubsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TabImpHist = New System.Windows.Forms.TabPage()
+        Me.ImportHistDataGridView = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImportHistBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
@@ -116,6 +121,7 @@ Partial Class FormHome
         Me.ReceiverInvTableAdapter1 = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ReceiverInvTableAdapter()
         Me.ReceiverTransferTableAdapter1 = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter()
         Me.PayStubsTableAdapter1 = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.PayStubsTableAdapter()
+        Me.ImportHistTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ImportHistTableAdapter()
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
         Me.PnlDate.SuspendLayout()
@@ -137,6 +143,9 @@ Partial Class FormHome
         Me.TabPayLog.SuspendLayout()
         CType(Me.PayStubsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PayStubsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabImpHist.SuspendLayout()
+        CType(Me.ImportHistDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImportHistBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStripHome
@@ -200,7 +209,7 @@ Partial Class FormHome
         Me.PnlFilter.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PnlFilter.Location = New System.Drawing.Point(0, 24)
         Me.PnlFilter.Name = "PnlFilter"
-        Me.PnlFilter.Size = New System.Drawing.Size(229, 633)
+        Me.PnlFilter.Size = New System.Drawing.Size(229, 672)
         Me.PnlFilter.TabIndex = 1
         '
         'LstBoxTech
@@ -211,7 +220,7 @@ Partial Class FormHome
         Me.LstBoxTech.Location = New System.Drawing.Point(0, 118)
         Me.LstBoxTech.Name = "LstBoxTech"
         Me.LstBoxTech.ScrollAlwaysVisible = True
-        Me.LstBoxTech.Size = New System.Drawing.Size(227, 315)
+        Me.LstBoxTech.Size = New System.Drawing.Size(227, 354)
         Me.LstBoxTech.TabIndex = 0
         '
         'PnlDate
@@ -221,7 +230,7 @@ Partial Class FormHome
         Me.PnlDate.Controls.Add(Me.DTPkrEnd)
         Me.PnlDate.Controls.Add(Me.LblDtEnd)
         Me.PnlDate.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PnlDate.Location = New System.Drawing.Point(0, 433)
+        Me.PnlDate.Location = New System.Drawing.Point(0, 472)
         Me.PnlDate.Name = "PnlDate"
         Me.PnlDate.Size = New System.Drawing.Size(227, 145)
         Me.PnlDate.TabIndex = 10
@@ -315,7 +324,7 @@ Partial Class FormHome
         '
         Me.BtnGtInfo.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.BtnGtInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnGtInfo.Location = New System.Drawing.Point(0, 578)
+        Me.BtnGtInfo.Location = New System.Drawing.Point(0, 617)
         Me.BtnGtInfo.Name = "BtnGtInfo"
         Me.BtnGtInfo.Size = New System.Drawing.Size(227, 53)
         Me.BtnGtInfo.TabIndex = 3
@@ -340,13 +349,14 @@ Partial Class FormHome
         Me.ActivitiesDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.ActivitiesDataGridView.AutoGenerateColumns = False
         Me.ActivitiesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.ActivitiesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ActivitiesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TechIDDataGridViewTextBoxColumn, Me.DateDataGridViewTextBoxColumn, Me.TypeDataGridViewTextBoxColumn, Me.IDDataGridViewTextBoxColumn, Me.TotalDataGridViewTextBoxColumn, Me.TechPayDataGridViewTextBoxColumn, Me.Paid})
         Me.ActivitiesDataGridView.DataSource = Me.ActivitiesBindingSource
         Me.ActivitiesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ActivitiesDataGridView.Location = New System.Drawing.Point(3, 3)
         Me.ActivitiesDataGridView.Name = "ActivitiesDataGridView"
         Me.ActivitiesDataGridView.ReadOnly = True
-        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(950, 527)
+        Me.ActivitiesDataGridView.Size = New System.Drawing.Size(950, 566)
         Me.ActivitiesDataGridView.TabIndex = 0
         '
         'TechIDDataGridViewTextBoxColumn
@@ -553,11 +563,12 @@ Partial Class FormHome
         Me.TabCtrlDGV.Controls.Add(Me.TabInv)
         Me.TabCtrlDGV.Controls.Add(Me.TabTrans)
         Me.TabCtrlDGV.Controls.Add(Me.TabPayLog)
+        Me.TabCtrlDGV.Controls.Add(Me.TabImpHist)
         Me.TabCtrlDGV.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabCtrlDGV.Location = New System.Drawing.Point(229, 24)
         Me.TabCtrlDGV.Name = "TabCtrlDGV"
         Me.TabCtrlDGV.SelectedIndex = 0
-        Me.TabCtrlDGV.Size = New System.Drawing.Size(964, 633)
+        Me.TabCtrlDGV.Size = New System.Drawing.Size(964, 672)
         Me.TabCtrlDGV.TabIndex = 8
         '
         'TabAct
@@ -567,7 +578,7 @@ Partial Class FormHome
         Me.TabAct.Location = New System.Drawing.Point(4, 22)
         Me.TabAct.Name = "TabAct"
         Me.TabAct.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabAct.Size = New System.Drawing.Size(956, 607)
+        Me.TabAct.Size = New System.Drawing.Size(956, 646)
         Me.TabAct.TabIndex = 0
         Me.TabAct.Text = "Technician Activities"
         Me.TabAct.UseVisualStyleBackColor = True
@@ -580,7 +591,7 @@ Partial Class FormHome
         Me.PnlPay.Controls.Add(Me.LblBalanceField)
         Me.PnlPay.Controls.Add(Me.LblBalanceHdr)
         Me.PnlPay.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PnlPay.Location = New System.Drawing.Point(3, 530)
+        Me.PnlPay.Location = New System.Drawing.Point(3, 569)
         Me.PnlPay.Name = "PnlPay"
         Me.PnlPay.Size = New System.Drawing.Size(950, 74)
         Me.PnlPay.TabIndex = 10
@@ -609,7 +620,7 @@ Partial Class FormHome
         Me.TabInv.Location = New System.Drawing.Point(4, 22)
         Me.TabInv.Name = "TabInv"
         Me.TabInv.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabInv.Size = New System.Drawing.Size(956, 607)
+        Me.TabInv.Size = New System.Drawing.Size(956, 646)
         Me.TabInv.TabIndex = 1
         Me.TabInv.Text = "Reciever Inventory"
         Me.TabInv.UseVisualStyleBackColor = True
@@ -628,7 +639,7 @@ Partial Class FormHome
         Me.ReceiverInvDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ReceiverInvDataGridView.Location = New System.Drawing.Point(3, 3)
         Me.ReceiverInvDataGridView.Name = "ReceiverInvDataGridView"
-        Me.ReceiverInvDataGridView.Size = New System.Drawing.Size(950, 601)
+        Me.ReceiverInvDataGridView.Size = New System.Drawing.Size(950, 640)
         Me.ReceiverInvDataGridView.TabIndex = 0
         '
         'DataGridViewTextBoxColumn2
@@ -665,7 +676,7 @@ Partial Class FormHome
         Me.TabTrans.Controls.Add(Me.ReceiverTransferDataGridView)
         Me.TabTrans.Location = New System.Drawing.Point(4, 22)
         Me.TabTrans.Name = "TabTrans"
-        Me.TabTrans.Size = New System.Drawing.Size(956, 607)
+        Me.TabTrans.Size = New System.Drawing.Size(956, 646)
         Me.TabTrans.TabIndex = 2
         Me.TabTrans.Text = "Reciever History"
         Me.TabTrans.UseVisualStyleBackColor = True
@@ -684,7 +695,7 @@ Partial Class FormHome
         Me.ReceiverTransferDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ReceiverTransferDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.ReceiverTransferDataGridView.Name = "ReceiverTransferDataGridView"
-        Me.ReceiverTransferDataGridView.Size = New System.Drawing.Size(956, 607)
+        Me.ReceiverTransferDataGridView.Size = New System.Drawing.Size(956, 646)
         Me.ReceiverTransferDataGridView.TabIndex = 0
         '
         'AccessCard
@@ -721,7 +732,7 @@ Partial Class FormHome
         Me.TabPayLog.Controls.Add(Me.PayStubsDataGridView)
         Me.TabPayLog.Location = New System.Drawing.Point(4, 22)
         Me.TabPayLog.Name = "TabPayLog"
-        Me.TabPayLog.Size = New System.Drawing.Size(956, 607)
+        Me.TabPayLog.Size = New System.Drawing.Size(956, 646)
         Me.TabPayLog.TabIndex = 3
         Me.TabPayLog.Text = "Payment Log"
         Me.TabPayLog.UseVisualStyleBackColor = True
@@ -740,7 +751,7 @@ Partial Class FormHome
         Me.PayStubsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PayStubsDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.PayStubsDataGridView.Name = "PayStubsDataGridView"
-        Me.PayStubsDataGridView.Size = New System.Drawing.Size(956, 607)
+        Me.PayStubsDataGridView.Size = New System.Drawing.Size(956, 646)
         Me.PayStubsDataGridView.TabIndex = 0
         '
         'DataGridViewTextBoxColumn10
@@ -775,6 +786,52 @@ Partial Class FormHome
         Me.PayStubsBindingSource.DataMember = "PayStubs"
         Me.PayStubsBindingSource.DataSource = Me.ReceiverInstallationDataSet
         '
+        'TabImpHist
+        '
+        Me.TabImpHist.Controls.Add(Me.ImportHistDataGridView)
+        Me.TabImpHist.Location = New System.Drawing.Point(4, 22)
+        Me.TabImpHist.Name = "TabImpHist"
+        Me.TabImpHist.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabImpHist.Size = New System.Drawing.Size(956, 646)
+        Me.TabImpHist.TabIndex = 4
+        Me.TabImpHist.Text = "Import Log"
+        Me.TabImpHist.UseVisualStyleBackColor = True
+        '
+        'ImportHistDataGridView
+        '
+        Me.ImportHistDataGridView.AllowUserToAddRows = False
+        Me.ImportHistDataGridView.AllowUserToDeleteRows = False
+        Me.ImportHistDataGridView.AutoGenerateColumns = False
+        Me.ImportHistDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.ImportHistDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.ImportHistDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn14})
+        Me.ImportHistDataGridView.DataSource = Me.ImportHistBindingSource
+        Me.ImportHistDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ImportHistDataGridView.Location = New System.Drawing.Point(3, 3)
+        Me.ImportHistDataGridView.Name = "ImportHistDataGridView"
+        Me.ImportHistDataGridView.ReadOnly = True
+        Me.ImportHistDataGridView.Size = New System.Drawing.Size(950, 640)
+        Me.ImportHistDataGridView.TabIndex = 0
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "FileImport"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "FileImport"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn14
+        '
+        Me.DataGridViewTextBoxColumn14.DataPropertyName = "Date"
+        Me.DataGridViewTextBoxColumn14.HeaderText = "Date"
+        Me.DataGridViewTextBoxColumn14.Name = "DataGridViewTextBoxColumn14"
+        Me.DataGridViewTextBoxColumn14.ReadOnly = True
+        '
+        'ImportHistBindingSource
+        '
+        Me.ImportHistBindingSource.DataMember = "ImportHist"
+        Me.ImportHistBindingSource.DataSource = Me.ReceiverInstallationDataSet
+        '
         'PrintDocument1
         '
         '
@@ -801,6 +858,7 @@ Partial Class FormHome
         Me.TableAdapterManager.ActivitiesTableAdapter = Me.ActivitiesTableAdapter
         Me.TableAdapterManager.AdminTableTableAdapter = Nothing
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.ImportHistTableAdapter = Nothing
         Me.TableAdapterManager.PayStubsTableAdapter = Me.PayStubsTableAdapter
         Me.TableAdapterManager.ReceiverInvTableAdapter = Me.ReceiverInvTableAdapter
         Me.TableAdapterManager.ReceiverTransferTableAdapter = Me.ReceiverTransferTableAdapter
@@ -835,11 +893,15 @@ Partial Class FormHome
         '
         Me.PayStubsTableAdapter1.ClearBeforeFill = True
         '
+        'ImportHistTableAdapter
+        '
+        Me.ImportHistTableAdapter.ClearBeforeFill = True
+        '
         'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1193, 657)
+        Me.ClientSize = New System.Drawing.Size(1193, 696)
         Me.Controls.Add(Me.TabCtrlDGV)
         Me.Controls.Add(Me.ActivitiesBindingNavigator)
         Me.Controls.Add(Me.PnlFilter)
@@ -875,6 +937,9 @@ Partial Class FormHome
         Me.TabPayLog.ResumeLayout(False)
         CType(Me.PayStubsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PayStubsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabImpHist.ResumeLayout(False)
+        CType(Me.ImportHistDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImportHistBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -965,5 +1030,11 @@ Partial Class FormHome
     Friend WithEvents TSMItmActive As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ReceiverToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PrintToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TabImpHist As System.Windows.Forms.TabPage
+    Friend WithEvents ImportHistBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents ImportHistTableAdapter As TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ImportHistTableAdapter
+    Friend WithEvents ImportHistDataGridView As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn14 As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

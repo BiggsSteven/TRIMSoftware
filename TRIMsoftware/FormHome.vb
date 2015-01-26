@@ -7,6 +7,7 @@ Public Class FormHome
     Public Permissions As String
 
     Private Sub FrmHome_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'ReceiverInstallationDataSet.ImportHist' table. You can move, or remove it, as needed.
         LoginForm.ShowDialog()
         LoginForm.Dispose()
 
@@ -110,7 +111,8 @@ Public Class FormHome
         'This is the basic search type Tech + datarange
         Dim data As DatabaseClass = New DatabaseClass
         Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
-                         ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
+                                    ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay"), _
+                                    ConfigurationManager.AppSettings("ImpHist")}
 
         'get tech from selection
         Dim TechSelected As String = LstBoxTech.SelectedItem
@@ -162,6 +164,12 @@ Public Class FormHome
             condition = "[TECHID] = '" & TechSelected & "' AND [DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             PayStubsDataGridView.DataSource = data.dt
+
+        ElseIf LiveTable = 4 Then
+            'Search the Import log for all imports between date
+            condition = "[DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ImportHistDataGridView.DataSource = data.dt
         End If
 
 
@@ -171,7 +179,8 @@ Public Class FormHome
         'This is the search for all techs
         Dim data As DatabaseClass = New DatabaseClass
         Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
-                         ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
+                                    ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay"), _
+                                    ConfigurationManager.AppSettings("ImpHist")}
 
         'Sets the range
         Dim bgnDate As String = DTPkrFrom.Value.Date
@@ -218,6 +227,12 @@ Public Class FormHome
             condition = "[DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             PayStubsDataGridView.DataSource = data.dt
+
+        ElseIf LiveTable = 4 Then
+            'Search the Import log for all imports between date
+            condition = "[DATE] BETWEEN '" & bgnDate & "' AND '" & endDate & "'"
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ImportHistDataGridView.DataSource = data.dt
         End If
 
 
@@ -227,7 +242,8 @@ Public Class FormHome
         'This Query searches the table for the instance of a string in particular columns
         Dim data As DatabaseClass = New DatabaseClass
         Dim tables() As String = {ConfigurationManager.AppSettings("Act"), ConfigurationManager.AppSettings("RecInv"), _
-                                 ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay")}
+                                    ConfigurationManager.AppSettings("RecTrans"), ConfigurationManager.AppSettings("Pay"), _
+                                    ConfigurationManager.AppSettings("ImpHist")}
         'set the searched for string
         Dim fieldsString As String = "*"
         Dim FieldInput As String = TxtBoxSearch.Text
@@ -271,6 +287,12 @@ Public Class FormHome
             condition = "[CHECKNUMBER] = '" & FieldInput & "' OR [TECHID] = '" & FieldInput & "'"
             data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
             PayStubsDataGridView.DataSource = data.dt
+
+        ElseIf LiveTable = 4 Then
+            'Search the Import log for all imports between date
+            condition = "[FILEIMPORT] = '" & FieldInput & "'"
+            data.RunDynamicSelect(tables(LiveTable), fieldsString, condition, fields)
+            ImportHistDataGridView.DataSource = data.dt
         End If
 
     End Sub
@@ -434,4 +456,7 @@ Public Class FormHome
 
     End Sub
 
+    Private Sub PayStubsDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles PayStubsDataGridView.CellContentClick
+
+    End Sub
 End Class
