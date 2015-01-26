@@ -58,8 +58,12 @@ Public Class ImportClass
     End Sub
 
     Private Sub bgwkrRunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwkr.RunWorkerCompleted
-        'FormHome.BtnGtInfo.Enabled = True
-        'FormHome.BtnPayTch.Enabled = True
+        Dim data As DatabaseClass = New DatabaseClass
+        Dim table As String = ConfigurationManager.AppSettings("ImpHist")
+        Dim fieldsString As String = "[FILEIMPORT],[DATE]"
+        Dim abridgeFile() As String = FileSelected.Split("\")
+        Dim fields() As String = {abridgeFile(abridgeFile.Length() - 1), DateTime.Now.Date}
+        data.RunDynamicInsert(table, fieldsString, fields)
         FormHome.Enabled = True
         FormHome.OpenFileDialog1.Title = String.Empty
         FormHome.Cursor = Cursors.Default
