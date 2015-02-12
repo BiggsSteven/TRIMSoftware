@@ -58,12 +58,6 @@ Public Class ImportClass
     End Sub
 
     Private Sub bgwkrRunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwkr.RunWorkerCompleted
-        Dim data As DatabaseClass = New DatabaseClass
-        Dim table As String = ConfigurationManager.AppSettings("ImpHist")
-        Dim fieldsString As String = "[FILEIMPORT],[DATE]"
-        Dim abridgeFile() As String = FileSelected.Split("\")
-        Dim fields() As String = {abridgeFile(abridgeFile.Length() - 1), DateTime.Now.Date}
-        data.RunDynamicInsert(table, fieldsString, fields)
         FormHome.Enabled = True
         FormHome.OpenFileDialog1.Title = String.Empty
         FormHome.Cursor = Cursors.Default
@@ -127,166 +121,198 @@ Public Class ImportClass
 
 
         Dim ImpColumns() As Integer 'These are the Columns we care about reading in.
+        Dim ColumnTitles() As String 'These are the headers of the columns, we will use these to check for a incorrect file format
         Dim startRow As Integer
-        readRecordStart(ImpColumns, startRow) 'This is where we Save the location of the important columns
+        readRecordStart(ImpColumns, ColumnTitles, startRow) 'This is where we Save the location of the important columns
         Dim tempArray(ImpColumns.Length + 2) As String 'The Array that hold the values retrieved from the excel document
-        XLRow = startRow
-        '------------------------------------------------------------------------------------------
-        'While the worksheet still has rows to be read
-        While XLWorkSheet.Cells(XLRow, 1).Value <> String.Empty And proceed = True
+        Dim ColumnsOK As Boolean = True
 
-
-            '---------------------------------------
-            'Loop through important array that saves the column number for the columns we care about
-            While XLColumn < ImpColumns.Length()
-                tempArray(XLColumn) = XLWorkSheet.Cells(XLRow, ImpColumns(XLColumn)).value 'save value from row to array
-                XLColumn += 1
-            End While
-
-
-            'Check the first activity for previous appearances
-            If XLRow = startRow Then
-                tables = ConfigurationManager.AppSettings("Act")
-                fieldsString = "[ID],[FILEIMPORTED],[TYPE]"
-                'Since the same activity ID may be present as long as Type is Service and non service
-                If tempArray(3) = "Service" Then
-                    condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] = 'Service' "
-                Else
-                    condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] <> 'Service' "
-                End If
-                data.RunDynamicSelect(tables, fieldsString, condition, fields)
-
-                If fields.Length <> 0 Then
-                    'The activity is present
-                    Dim oldFile As String = fields(0, 1) 'This is the file that is currently on record for this activity
-                    AddDupe.ShowDialog()
-                    If AddDupe.Choice Then
-                        'Chosen to Reimport File
-                        'Update all files with the old filename to have values of 0, 0, and new filename
-                        condition = " [FILEIMPORTED] = '" & oldFile & "' "
-                        Dim editfields() As String = {"[TOTAL]", "[TECHPAY]", "[FILEIMPORTED]"}
-                        ReDim values(2)
-                        values(0) = 0
-                        values(1) = 0
-                        values(2) = abridgeFile(abridgeFile.Length() - 1)
-                        data.RunDynamicUpdate(tables, condition, editfields, values)
-                        AddDupe.Choice = False
-                        proceed = True
-                    Else
-                        'Do not proceed
-                        proceed = False
-                    End If
-                End If
+        'Here we check for if the columns are in the right location. readRecordStart is what tells the file what the format should be
+        'This just checks if that format is correct before reading in.
+        'Loop through important columns saving the titles based off ImpColumns (which is a list of the column numbers we care about)
+        XLRow = startRow - 1
+        While XLColumn < ImpColumns.Length()
+            Dim tempTitle As String = XLWorkSheet.Cells(XLRow, ImpColumns(XLColumn)).value()
+            If ColumnTitles(XLColumn) <> tempTitle Then 'save value from row to array
+                ColumnsOK = False
             End If
+            XLColumn += 1
+        End While
+        XLColumn = 0
+        If ColumnsOK = True Then
+            XLRow = startRow
+            '------------------------------------------------------------------------------------------
+            'While the worksheet still has rows to be read
+            While XLWorkSheet.Cells(XLRow, 1).Value <> String.Empty And proceed = True
 
-            If proceed = True Then
-                'Proceeds
+
+                '---------------------------------------
+                'Loop through important columns saving the fields based off ImpColumns (which is a list of the column numbers we care about)
+                While XLColumn < ImpColumns.Length()
+                    tempArray(XLColumn) = XLWorkSheet.Cells(XLRow, ImpColumns(XLColumn)).value 'save value from row to array
+                    XLColumn += 1
+                End While
                 XLColumn = 0
 
-                '---------------------------------------------------------------
-                'Get the Technicians paypercentage
-                Dim techPayPercent As Double = 0
-                tables = ConfigurationManager.AppSettings("Tech")
-                fieldsString = "[ID],[PayPercentage]"
-                condition = " [ID] = '" & tempArray(2) & "' "
-                ReDim fields(0, 0)
-                data.RunDynamicSelect(tables, fieldsString, condition, fields)
+                'Check the first activity for previous appearances
+                If XLRow = startRow Then
+                    tables = ConfigurationManager.AppSettings("Act")
+                    fieldsString = "[ID],[FILEIMPORTED],[TYPE]"
+                    'Since the same activity ID may be present as long as Type is Service and non service
+                    If tempArray(3) = "Service" Then
+                        condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] = 'Service' "
+                    Else
+                        condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] <> 'Service' "
+                    End If
+                    data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
-                If fields.Length <> 0 Then
-                    techPayPercent = fields(0, 1)
-                Else
-                    techPayPercent = DefaultPay
+                    If fields.Length <> 0 Then
+                        'The activity is present
+                        Dim oldFile As String = fields(0, 1) 'This is the file that is currently on record for this activity
+                        AddDupe.ShowDialog()
+                        If AddDupe.Choice Then
+                            'Chosen to Reimport File
+                            'Update all files with the old filename to have values of 0, 0, and new filename
+                            condition = " [FILEIMPORTED] = '" & oldFile & "' "
+                            Dim editfields() As String = {"[TOTAL]", "[TECHPAY]", "[FILEIMPORTED]"}
+                            ReDim values(2)
+                            values(0) = 0
+                            values(1) = 0
+                            values(2) = abridgeFile(abridgeFile.Length() - 1)
+                            data.RunDynamicUpdate(tables, condition, editfields, values)
+                            AddDupe.Choice = False
+                            proceed = True
+                        Else
+                            'Do not proceed
+                            proceed = False
+                        End If
+                    End If
                 End If
 
-                '---------------------------------------------------------------
-                'If setting is checked, successful service calls receives a static amount
-                'If technician did work correctly he gets a % of the income
-                'If technician did work incorrectly he gets 100% of the negative value
-                If tempArray(ImpColumns.Length - 1) = 37 And SvcSettings = True Then
-                    tempArray(ImpColumns.Length) = StaticSvcPay
-                ElseIf tempArray(ImpColumns.Length - 1) >= 0 Then
-                    tempArray(ImpColumns.Length) = tempArray(ImpColumns.Length - 1) * techPayPercent
-                Else
-                    tempArray(ImpColumns.Length) = tempArray(ImpColumns.Length - 1)
-                End If
-
-                '---------------------------------------
-                'set paid to be not paid yet
-                tempArray(tempArray.Length - 2) = 0
-                tempArray(tempArray.Length - 1) = abridgeFile(abridgeFile.Length() - 1)
-
-                '---------------------------------------
-                'Search Activities for if Activity and Tech has already been entered
-                tables = ConfigurationManager.AppSettings("Act")
-                fieldsString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID],[FILEIMPORTED]"
+                If proceed = True Then
+                    'Proceeds
 
 
-                If tempArray(3) = "Service" Then
-                    condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] = 'Service' "
-                Else
-                    condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] <> 'Service' "
-                End If
+                    '---------------------------------------------------------------
+                    'Get the Technicians paypercentage
+                    Dim techPayPercent As Double = 0
+                    tables = ConfigurationManager.AppSettings("Tech")
+                    fieldsString = "[ID],[PayPercentage]"
+                    condition = " [ID] = '" & tempArray(2) & "' "
+                    ReDim fields(0, 0)
+                    data.RunDynamicSelect(tables, fieldsString, condition, fields)
 
-                ReDim fields(0, 0)
-                data.RunDynamicSelect(tables, fieldsString, condition, fields)
-
-                '---------------------------------------
-                'If there is no copy of this activity, Insert one
-                'Else update old one (this will combine all parts of an activity into one
-                If fields.Length = 0 Then
-                    data.RunDynamicInsert(tables, fieldsString, tempArray)
-                Else
-                    '-------------------------
-                    'Updating the type if it is one of the four
-                    Dim editFields() As String = {"[TYPE]"}
-                    ReDim values(0)
-                    values(0) = tempArray(3)
-
-                    If values(0) = "New Install" Or values(0) = "Upgrade" Or values(0) = "Former Install" Or values(0) = "Service" Then
-                        data.RunDynamicUpdate(tables, condition, editFields, values)
+                    'Check if technician is present in logs
+                    If fields.Length <> 0 Then
+                        'Check if technician has a paypercentage set
+                        If fields(0, 1).Length <> 0 Then
+                            techPayPercent = fields(0, 1)
+                        Else
+                            techPayPercent = DefaultPay
+                        End If
+                    Else
+                        techPayPercent = DefaultPay
                     End If
 
-                    '-------------------------
-                    'Update price
-                    ReDim editFields(1)
-                    ReDim values(1)
-                    editFields(0) = "[TOTAL]"
-                    editFields(1) = "[TECHPAY]"
-                    values(0) = Math.Round(CDbl(tempArray(4)) + CDbl(fields(0, 4)), 2)
-                    values(1) = Math.Round(CDbl(tempArray(5)) + CDbl(fields(0, 5)), 2)
+                    '---------------------------------------------------------------
+                    'If setting is checked, successful service calls receives a static amount
+                    'If technician did work correctly he gets a % of the income
+                    'If technician did work incorrectly he gets 100% of the negative value
+                    If tempArray(ImpColumns.Length - 1) = 37 And SvcSettings = True Then
+                        tempArray(ImpColumns.Length) = StaticSvcPay
+                    ElseIf tempArray(ImpColumns.Length - 1) >= 0 Then
+                        tempArray(ImpColumns.Length) = tempArray(ImpColumns.Length - 1) * techPayPercent
+                    Else
+                        tempArray(ImpColumns.Length) = tempArray(ImpColumns.Length - 1)
+                    End If
 
-                    data.RunDynamicUpdate(tables, condition, editFields, values)
-                    '-------------------------
+                    '---------------------------------------
+                    'set paid to be not paid yet
+                    tempArray(tempArray.Length - 2) = 0
+                    tempArray(tempArray.Length - 1) = abridgeFile(abridgeFile.Length() - 1)
+
+                    '---------------------------------------
+                    'Search Activities for if Activity and Tech has already been entered
+                    tables = ConfigurationManager.AppSettings("Act")
+                    fieldsString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID],[FILEIMPORTED]"
+
+
+                    If tempArray(3) = "Service" Then
+                        condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] = 'Service' "
+                    Else
+                        condition = " [ID] = '" & tempArray(0) & "' AND [TYPE] <> 'Service' "
+                    End If
+
+                    ReDim fields(0, 0)
+                    data.RunDynamicSelect(tables, fieldsString, condition, fields)
+
+                    '---------------------------------------
+                    'If there is no copy of this activity, Insert one
+                    'Else update old one (this will combine all parts of an activity into one
+                    If fields.Length = 0 Then
+                        data.RunDynamicInsert(tables, fieldsString, tempArray)
+                    Else
+                        '-------------------------
+                        'Updating the type if it is one of the four
+                        Dim editFields() As String = {"[TYPE]"}
+                        ReDim values(0)
+                        values(0) = tempArray(3)
+
+                        If values(0) = "New Install" Or values(0) = "Upgrade" Or values(0) = "Former Install" Or values(0) = "Service" Then
+                            data.RunDynamicUpdate(tables, condition, editFields, values)
+                        End If
+
+                        '-------------------------
+                        'Update price
+                        ReDim editFields(1)
+                        ReDim values(1)
+                        editFields(0) = "[TOTAL]"
+                        editFields(1) = "[TECHPAY]"
+                        values(0) = Math.Round(CDbl(tempArray(4)) + CDbl(fields(0, 4)), 2)
+                        values(1) = Math.Round(CDbl(tempArray(5)) + CDbl(fields(0, 5)), 2)
+
+                        data.RunDynamicUpdate(tables, condition, editFields, values)
+                        '-------------------------
+                    End If
+
+                    'Display progress
+                    bgwkr.ReportProgress(CInt(100 * (XLRow / XLastRow)))
+                    XLRow += 1
+
                 End If
 
-                'Display progress
-                bgwkr.ReportProgress(CInt(100 * (XLRow / XLastRow)))
-                XLRow += 1
+            End While
 
+            '------------------------------------------------------------------------------------------
+            If proceed = True Then
+                MessageBox.Show("Your files have been successfully imported.")
+                Dim table As String = ConfigurationManager.AppSettings("ImpHist")
+                fieldsString = "[FILEIMPORT],[DATE]"
+                Dim ImpHistfields() As String = {abridgeFile(abridgeFile.Length() - 1), DateTime.Now}
+                data.RunDynamicInsert(table, fieldsString, ImpHistfields)
+            Else
+                MessageBox.Show("File Import was cancelled.")
             End If
-        End While
-        '------------------------------------------------------------------------------------------
-        If proceed = True Then
-            MessageBox.Show("Your files have been successfully imported.")
         Else
-            MessageBox.Show("File Import was cancelled.")
+            MessageBox.Show("The file you are trying to import is not correctly formatted. Please contact TRIM software for assistance.")
         End If
-
-
         XLWorkSheet = Nothing
         xlWorkBook = Nothing
         XLApp.Quit()
         XLApp = Nothing
 
-
     End Sub
 
-    Public Sub readRecordStart(ByRef importantColumns() As Integer, ByRef startRow As Integer)
+    Public Sub readRecordStart(ByRef importantColumns() As Integer, ByRef ColumnTitles() As String, ByRef startRow As Integer)
         Dim MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser("C:\Program Files\TRIM\ImAcInfo.csv")
         MyReader.TextFieldType = FileIO.FieldType.Delimited
         MyReader.SetDelimiters(",")
 
+        ColumnTitles = MyReader.ReadFields()
+
         Dim temparray As String()
+
+
         While Not MyReader.EndOfData
             Try
                 temparray = MyReader.ReadFields()

@@ -316,6 +316,8 @@ Public Class FrmSettings
 
             If TechArray.Length = 0 Then
                 'The Tech is not present so we add it now
+
+
                 Dim values() As String = {TxtboxID.Text, txtBoxFirst.Text, TxtBoxMI.Text, TxtBoxLast.Text, TxtBoxSSN.Text, TxtBoxFedID.Text, TxtboxAddr.Text, TxtboxPhone.Text, TxtboxEmail.Text, TxtboxLoc.Text, TxtboxPayPerc.Text, CBActiveSet.Checked}
                 data.RunDynamicInsert(table, fieldString, values)
             Else
