@@ -46,6 +46,7 @@ Partial Class FrmSettings
         Me.TxtboxComp = New System.Windows.Forms.TextBox()
         Me.TxtboxDistro = New System.Windows.Forms.TextBox()
         Me.GrpBoxPay = New System.Windows.Forms.GroupBox()
+        Me.CBPrintOnPay = New System.Windows.Forms.CheckBox()
         Me.ChkboxSvcPay = New System.Windows.Forms.CheckBox()
         Me.LblSvcPay = New System.Windows.Forms.Label()
         Me.TxtBoxSvcPay = New System.Windows.Forms.TextBox()
@@ -83,6 +84,7 @@ Partial Class FrmSettings
         Me.TechniciansTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TechniciansTableAdapter()
         Me.TableAdapterManager = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.TableAdapterManager()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Splitter1 = New System.Windows.Forms.Splitter()
         LblEmailAddress = New System.Windows.Forms.Label()
         LblPhoneNum = New System.Windows.Forms.Label()
         LblFedIDNum = New System.Windows.Forms.Label()
@@ -311,6 +313,7 @@ Partial Class FrmSettings
         '
         'GrpBoxPay
         '
+        Me.GrpBoxPay.Controls.Add(Me.CBPrintOnPay)
         Me.GrpBoxPay.Controls.Add(Me.ChkboxSvcPay)
         Me.GrpBoxPay.Controls.Add(Me.LblSvcPay)
         Me.GrpBoxPay.Controls.Add(Me.TxtBoxSvcPay)
@@ -320,6 +323,16 @@ Partial Class FrmSettings
         Me.GrpBoxPay.TabIndex = 0
         Me.GrpBoxPay.TabStop = False
         Me.GrpBoxPay.Text = "Pay Style Settings"
+        '
+        'CBPrintOnPay
+        '
+        Me.CBPrintOnPay.AutoSize = True
+        Me.CBPrintOnPay.Location = New System.Drawing.Point(29, 130)
+        Me.CBPrintOnPay.Name = "CBPrintOnPay"
+        Me.CBPrintOnPay.Size = New System.Drawing.Size(175, 17)
+        Me.CBPrintOnPay.TabIndex = 7
+        Me.CBPrintOnPay.Text = "Print activities table on payment"
+        Me.CBPrintOnPay.UseVisualStyleBackColor = True
         '
         'ChkboxSvcPay
         '
@@ -662,6 +675,7 @@ Partial Class FrmSettings
         Me.TableAdapterManager.ActivitiesTableAdapter = Nothing
         Me.TableAdapterManager.AdminTableTableAdapter = Nothing
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.ImportHistTableAdapter = Nothing
         Me.TableAdapterManager.PayStubsTableAdapter = Nothing
         Me.TableAdapterManager.ReceiverInvTableAdapter = Nothing
         Me.TableAdapterManager.ReceiverTransferTableAdapter = Nothing
@@ -678,12 +692,21 @@ Partial Class FrmSettings
         Me.Panel1.Size = New System.Drawing.Size(662, 45)
         Me.Panel1.TabIndex = 26
         '
+        'Splitter1
+        '
+        Me.Splitter1.Location = New System.Drawing.Point(0, 0)
+        Me.Splitter1.Name = "Splitter1"
+        Me.Splitter1.Size = New System.Drawing.Size(3, 460)
+        Me.Splitter1.TabIndex = 27
+        Me.Splitter1.TabStop = False
+        '
         'FrmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlLight
         Me.ClientSize = New System.Drawing.Size(662, 505)
+        Me.Controls.Add(Me.Splitter1)
         Me.Controls.Add(Me.TabCtrlSttng)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "FrmSettings"
@@ -756,4 +779,6 @@ Partial Class FrmSettings
     Friend WithEvents CBActiveSet As System.Windows.Forms.CheckBox
     Friend WithEvents CBShowInactive As System.Windows.Forms.CheckBox
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents CBPrintOnPay As System.Windows.Forms.CheckBox
+    Friend WithEvents Splitter1 As System.Windows.Forms.Splitter
 End Class

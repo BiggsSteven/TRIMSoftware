@@ -337,22 +337,26 @@ Public Class FormHome
 
         'Testing: Uncomment these
         '-------------------------
-        'PrintPreviewDialog1.Document = PrintDocument1
-        'PrintPreviewDialog1.ShowDialog()
+        PrintPreviewDialog1.Document = PrintDocument1
+        PrintPreviewDialog1.ShowDialog()
 
         'Non-testing: Uncomment these
         '------------------------------
-        PrintDialog1.Document = PrintDocument1
-        Dim result As DialogResult = PrintDialog1.ShowDialog()
-        If result = DialogResult.OK Then
-            PrintDocument1.Print()
-        End If
+        'PrintDialog1.Document = PrintDocument1
+        'Dim result As DialogResult = PrintDialog1.ShowDialog()
+        'If result = DialogResult.OK Then
+        '    PrintDocument1.Print()
+        'End If
     End Sub
 
     Private Sub PrintDocument1_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
 
         Dim tableList As DataGridView() = {ActivitiesDataGridView, ReceiverInvDataGridView, ReceiverTransferDataGridView, PayStubsDataGridView, ImportHistDataGridView}
         Dim holderDGV As DataGridView = tableList(TabCtrlDGV.SelectedIndex())
+
+        'If TabCtrlDGV.SelectedIndex() = 0 Then
+
+        'End If
 
 
         With holderDGV

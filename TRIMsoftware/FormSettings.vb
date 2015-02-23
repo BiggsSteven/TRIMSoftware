@@ -55,7 +55,7 @@ Public Class FrmSettings
         'Retrieve data from Options Database
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("Options")
-        Dim fieldString As String = "[UseStaticSrvc],[SrvcPay]"
+        Dim fieldString As String = "[UseStaticSrvc],[SrvcPay],[PrintPay]"
         Dim condition As String = ""
         Dim fields(,) As String
         data.RunDynamicSelect(table, fieldString, condition, fields)
@@ -64,6 +64,7 @@ Public Class FrmSettings
         If fields.Length > 0 Then
             ChkboxSvcPay.Checked = fields(0, 0)
             TxtBoxSvcPay.Text = FormatCurrency(Convert.ToDouble(fields(0, 1)), 2)
+            CBPrintOnPay.Checked = fields(0, 2)
         End If
 
         'Retrieve Distributor and Company from 
@@ -109,14 +110,18 @@ Public Class FrmSettings
         TxtBoxSvcPay.Text = FormatCurrency(TxtBoxSvcPay.Text)
     End Sub
 
+    Private Sub CBPrintOnPay_CheckedChanged(sender As Object, e As EventArgs) Handles CBPrintOnPay.CheckedChanged
+        genFlag = True
+    End Sub
+
     Public Sub GeneralSave()
         'Saves to the Options table
         Dim data As DatabaseClass = New DatabaseClass
         Dim table As String = ConfigurationManager.AppSettings("Options")
         Dim condition As String = ""
-        Dim editfields() As String = {"[UseStaticSrvc]", "[SrvcPay]"}
+        Dim editfields() As String = {"[UseStaticSrvc]", "[SrvcPay]", "[PrintPay]"}
         Dim svcPay As Double = TxtBoxSvcPay.Text
-        Dim values() As String = {ChkboxSvcPay.Checked, svcPay}
+        Dim values() As String = {ChkboxSvcPay.Checked, svcPay, CBPrintOnPay.Checked}
         data.RunDynamicUpdate(table, condition, editfields, values)
 
         'saves to the Tech Table for Distro
@@ -451,5 +456,4 @@ Public Class FrmSettings
             passFlag = False
         End If
     End Sub
-
 End Class
