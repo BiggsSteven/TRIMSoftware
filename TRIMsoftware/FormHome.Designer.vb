@@ -122,6 +122,8 @@ Partial Class FormHome
         Me.ReceiverTransferTableAdapter1 = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ReceiverTransferTableAdapter()
         Me.PayStubsTableAdapter1 = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.PayStubsTableAdapter()
         Me.ImportHistTableAdapter = New TRIMsoftware.ReceiverInstallationDataSetTableAdapters.ImportHistTableAdapter()
+        Me.PrintDocument2 = New System.Drawing.Printing.PrintDocument()
+        Me.PrintPreviewDialog2 = New System.Windows.Forms.PrintPreviewDialog()
         Me.MenuStripHome.SuspendLayout()
         Me.PnlFilter.SuspendLayout()
         Me.PnlDate.SuspendLayout()
@@ -909,6 +911,19 @@ Partial Class FormHome
         '
         Me.ImportHistTableAdapter.ClearBeforeFill = True
         '
+        'PrintDocument2
+        '
+        '
+        'PrintPreviewDialog2
+        '
+        Me.PrintPreviewDialog2.AutoScrollMargin = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog2.AutoScrollMinSize = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog2.ClientSize = New System.Drawing.Size(400, 300)
+        Me.PrintPreviewDialog2.Enabled = True
+        Me.PrintPreviewDialog2.Icon = CType(resources.GetObject("PrintPreviewDialog2.Icon"), System.Drawing.Icon)
+        Me.PrintPreviewDialog2.Name = "PrintPreviewDialog2"
+        Me.PrintPreviewDialog2.Visible = False
+        '
         'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1048,5 +1063,7 @@ Partial Class FormHome
     Friend WithEvents ImportHistDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn14 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PrintDocument2 As System.Drawing.Printing.PrintDocument
+    Friend WithEvents PrintPreviewDialog2 As System.Windows.Forms.PrintPreviewDialog
 
 End Class

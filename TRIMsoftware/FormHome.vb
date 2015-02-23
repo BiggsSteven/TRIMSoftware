@@ -337,16 +337,16 @@ Public Class FormHome
 
         'Testing: Uncomment these
         '-------------------------
-        PrintPreviewDialog1.Document = PrintDocument1
-        PrintPreviewDialog1.ShowDialog()
+        'PrintPreviewDialog1.Document = PrintDocument1
+        'PrintPreviewDialog1.ShowDialog()
 
         'Non-testing: Uncomment these
         '------------------------------
-        'PrintDialog1.Document = PrintDocument1
-        'Dim result As DialogResult = PrintDialog1.ShowDialog()
-        'If result = DialogResult.OK Then
-        '    PrintDocument1.Print()
-        'End If
+        PrintDialog1.Document = PrintDocument1
+        Dim result As DialogResult = PrintDialog1.ShowDialog()
+        If result = DialogResult.OK Then
+            PrintDocument1.Print()
+        End If
     End Sub
 
     Private Sub PrintDocument1_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
@@ -420,12 +420,13 @@ Public Class FormHome
             Dim fields() As String = {CheckNumber, DateTime.Now.Date, ActivitiesDataGridView.Rows(0).Cells(0).Value, CDbl(LblBalanceField.Text)}
             data.RunDynamicInsert(tables, fieldString, fields)
 
+            PayPrintClick()
 
             'setup for the update to the activities
             'This is where the paid gets checked
             tables = ConfigurationManager.AppSettings("Act")
-            fieldString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID]"
             Dim condition As String
+            fieldString = "[ID],[DATE],[TECHID],[TYPE],[TOTAL],[TECHPAY],[PAID]"
             'Calculate pay for Tech
             Dim rowsCount As Integer = 0
             Dim total As Double = 0
@@ -456,5 +457,92 @@ Public Class FormHome
 
         End If
 
+    End Sub
+
+    Private Sub PayPrintClick()
+        Dim data As DatabaseClass = New DatabaseClass
+
+        'PrintDocument2.Print()
+        Dim tables As String = ConfigurationManager.AppSettings("Options")
+        Dim fieldString As String = "[PrintPay]"
+        Dim fields(,) As String
+        Dim condition As String
+        data.RunDynamicSelect(tables, fieldString, condition, fields)
+
+        Dim PrntSettings As Boolean = fields(0, 0)
+        If PrntSettings = True Then
+            'PrintDocument1.Print()
+            '----------------------
+            PrintDocument2.DefaultPageSettings.Landscape = True
+
+
+            'Testing: Uncomment these
+            '-------------------------
+            'PrintPreviewDialog2.Document = PrintDocument2
+            'PrintPreviewDialog2.ShowDialog()
+
+            'Non-testing: Uncomment these
+            '------------------------------
+            PrintDialog1.Document = PrintDocument2
+            Dim result As DialogResult = PrintDialog1.ShowDialog()
+            If result = DialogResult.OK Then
+                PrintDocument2.Print()
+            End If
+        End If
+    End Sub
+
+    Private Sub PrintDocument2_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument2.PrintPage
+
+        Dim holderDGV As DataGridView = ActivitiesDataGridView
+        With holderDGV
+            Dim fmt As StringFormat = New StringFormat(StringFormatFlags.LineLimit)
+            fmt.LineAlignment = StringAlignment.Near
+            Dim y As Single = e.MarginBounds.Top
+            newpage = True
+            'Cycle through rows in the data grid view rows
+            Do While mRow < .RowCount
+                Dim row As DataGridViewRow = .Rows(mRow)
+                Dim x As Single = e.MarginBounds.Left
+                Dim h As Single = 0
+
+                'If the row has been paid do not include it in the pay stub
+                If row.Cells.Item("Paid").Value = False Then
+
+                    'Cycle through columns in each row skipping Total and the Paid Column
+                    For Each cell As DataGridViewCell In row.Cells
+                        If cell.ColumnIndex <> 4 And cell.ColumnIndex <> 6 Then
+                            Dim rc As RectangleF = New RectangleF(x, y, 900 / (.ColumnCount - 2), cell.Size.Height)
+                            e.Graphics.DrawRectangle(Pens.Black, rc.Left, rc.Top, rc.Width, rc.Height)
+                            If (newpage) Then
+                                e.Graphics.FillRectangle(Brushes.Gainsboro, rc.Left, rc.Top, rc.Width, rc.Height)
+                                e.Graphics.DrawString(holderDGV.Columns(cell.ColumnIndex).HeaderText.ToString(), .Font, Brushes.Black, rc, fmt)
+                            Else
+                                e.Graphics.DrawString(holderDGV.Rows(cell.RowIndex).Cells(cell.ColumnIndex).FormattedValue.ToString(), .Font, Brushes.Black, rc, fmt)
+                            End If
+                            x += rc.Width
+                            h = Math.Max(h, rc.Height)
+                        End If
+                    Next
+                End If
+                If mRow = 0 And newpage = True Then
+                    mRow -= 1
+                End If
+                newpage = False
+                y += h
+                mRow += 1
+                If y + h > e.MarginBounds.Bottom Then
+                    e.HasMorePages = True
+                    mRow -= 1
+                    newpage = True
+                    Exit Sub
+                End If
+            Loop
+            mRow = 0
+            Dim Bottom As String = Environment.NewLine & "Technician:   " & ActivitiesDataGridView.Rows(0).Cells(0).FormattedValue.ToString() _
+                        & "                                      Total: " & LblBalanceField.Text
+
+            Dim rcp As RectangleF = New RectangleF(e.MarginBounds.Left, y, ActivitiesDataGridView.Size.Width(), ActivitiesDataGridView.Rows(0).Cells(0).Size.Height * 3)
+            e.Graphics.DrawString(Bottom, .Font, Brushes.Black, rcp, fmt)
+        End With
     End Sub
 End Class
