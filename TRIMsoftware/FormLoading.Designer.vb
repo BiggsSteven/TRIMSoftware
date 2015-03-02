@@ -22,8 +22,9 @@ Partial Class FormLoading
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ProgBarImport = New System.Windows.Forms.ProgressBar
-        Me.LblMessage = New System.Windows.Forms.Label
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormLoading))
+        Me.ProgBarImport = New System.Windows.Forms.ProgressBar()
+        Me.LblMessage = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ProgBarImport
@@ -41,7 +42,7 @@ Partial Class FormLoading
         Me.LblMessage.Size = New System.Drawing.Size(259, 129)
         Me.LblMessage.TabIndex = 1
         Me.LblMessage.Text = "Please wait while the file you selected is imported. This may take a few minutes." & _
-            ""
+    ""
         Me.LblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FormLoading
@@ -51,6 +52,7 @@ Partial Class FormLoading
         Me.ClientSize = New System.Drawing.Size(284, 262)
         Me.Controls.Add(Me.LblMessage)
         Me.Controls.Add(Me.ProgBarImport)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormLoading"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Loading in Progress"

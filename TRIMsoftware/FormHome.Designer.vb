@@ -23,14 +23,14 @@ Partial Class FormHome
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormHome))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.MenuStripHome = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSMLogin = New System.Windows.Forms.ToolStripMenuItem()
@@ -347,8 +347,8 @@ Partial Class FormHome
         '
         Me.ActivitiesDataGridView.AllowUserToAddRows = False
         Me.ActivitiesDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ActivitiesDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.ActivitiesDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle15
         Me.ActivitiesDataGridView.AutoGenerateColumns = False
         Me.ActivitiesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ActivitiesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -392,9 +392,9 @@ Partial Class FormHome
         'TotalDataGridViewTextBoxColumn
         '
         Me.TotalDataGridViewTextBoxColumn.DataPropertyName = "Total"
-        DataGridViewCellStyle2.Format = "C2"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.TotalDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle16.Format = "C2"
+        DataGridViewCellStyle16.NullValue = Nothing
+        Me.TotalDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle16
         Me.TotalDataGridViewTextBoxColumn.HeaderText = "Total"
         Me.TotalDataGridViewTextBoxColumn.Name = "TotalDataGridViewTextBoxColumn"
         Me.TotalDataGridViewTextBoxColumn.ReadOnly = True
@@ -402,9 +402,9 @@ Partial Class FormHome
         'TechPayDataGridViewTextBoxColumn
         '
         Me.TechPayDataGridViewTextBoxColumn.DataPropertyName = "TechPay"
-        DataGridViewCellStyle3.Format = "C2"
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.TechPayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle17.Format = "C2"
+        DataGridViewCellStyle17.NullValue = Nothing
+        Me.TechPayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle17
         Me.TechPayDataGridViewTextBoxColumn.HeaderText = "TechPay"
         Me.TechPayDataGridViewTextBoxColumn.Name = "TechPayDataGridViewTextBoxColumn"
         Me.TechPayDataGridViewTextBoxColumn.ReadOnly = True
@@ -629,8 +629,8 @@ Partial Class FormHome
         '
         Me.ReceiverInvDataGridView.AllowUserToAddRows = False
         Me.ReceiverInvDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ReceiverInvDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.ReceiverInvDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle18
         Me.ReceiverInvDataGridView.AutoGenerateColumns = False
         Me.ReceiverInvDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ReceiverInvDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -690,8 +690,8 @@ Partial Class FormHome
         '
         Me.ReceiverTransferDataGridView.AllowUserToAddRows = False
         Me.ReceiverTransferDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ReceiverTransferDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.ReceiverTransferDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle19
         Me.ReceiverTransferDataGridView.AutoGenerateColumns = False
         Me.ReceiverTransferDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ReceiverTransferDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -751,8 +751,8 @@ Partial Class FormHome
         '
         Me.PayStubsDataGridView.AllowUserToAddRows = False
         Me.PayStubsDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle6.NullValue = Nothing
-        Me.PayStubsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle20.NullValue = Nothing
+        Me.PayStubsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle20
         Me.PayStubsDataGridView.AutoGenerateColumns = False
         Me.PayStubsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.PayStubsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -789,9 +789,9 @@ Partial Class FormHome
         'DataGridViewTextBoxColumn13
         '
         Me.DataGridViewTextBoxColumn13.DataPropertyName = "Amount"
-        DataGridViewCellStyle7.Format = "C2"
-        DataGridViewCellStyle7.NullValue = Nothing
-        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle21.Format = "C2"
+        DataGridViewCellStyle21.NullValue = Nothing
+        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle21
         Me.DataGridViewTextBoxColumn13.HeaderText = "Amount"
         Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
         Me.DataGridViewTextBoxColumn13.ReadOnly = True
@@ -933,6 +933,7 @@ Partial Class FormHome
         Me.Controls.Add(Me.ActivitiesBindingNavigator)
         Me.Controls.Add(Me.PnlFilter)
         Me.Controls.Add(Me.MenuStripHome)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStripHome
         Me.Name = "FormHome"
         Me.Text = "T.R.I.M."

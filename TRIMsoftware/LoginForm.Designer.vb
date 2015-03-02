@@ -29,12 +29,13 @@ Partial Class LoginForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UsernameLabel = New System.Windows.Forms.Label
-        Me.PasswordLabel = New System.Windows.Forms.Label
-        Me.UsernameTextBox = New System.Windows.Forms.TextBox
-        Me.PasswordTextBox = New System.Windows.Forms.TextBox
-        Me.OK = New System.Windows.Forms.Button
-        Me.Cancel = New System.Windows.Forms.Button
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LoginForm))
+        Me.UsernameLabel = New System.Windows.Forms.Label()
+        Me.PasswordLabel = New System.Windows.Forms.Label()
+        Me.UsernameTextBox = New System.Windows.Forms.TextBox()
+        Me.PasswordTextBox = New System.Windows.Forms.TextBox()
+        Me.OK = New System.Windows.Forms.Button()
+        Me.Cancel = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'UsernameLabel
@@ -101,6 +102,7 @@ Partial Class LoginForm
         Me.Controls.Add(Me.PasswordLabel)
         Me.Controls.Add(Me.UsernameLabel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "LoginForm"

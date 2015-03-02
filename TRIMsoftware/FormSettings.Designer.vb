@@ -34,6 +34,7 @@ Partial Class FrmSettings
         Dim LblHomeAddress As System.Windows.Forms.Label
         Dim LblLocation As System.Windows.Forms.Label
         Dim LblID As System.Windows.Forms.Label
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSettings))
         Me.Btn_Ok = New System.Windows.Forms.Button()
         Me.LblNewPass = New System.Windows.Forms.Label()
         Me.TxtBoxPass = New System.Windows.Forms.TextBox()
@@ -709,6 +710,7 @@ Partial Class FrmSettings
         Me.Controls.Add(Me.Splitter1)
         Me.Controls.Add(Me.TabCtrlSttng)
         Me.Controls.Add(Me.Panel1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmSettings"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Settings"

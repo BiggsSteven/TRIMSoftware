@@ -23,6 +23,7 @@ Partial Class TransferForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TransferForm))
         Me.LblTrans = New System.Windows.Forms.Label()
         Me.TxtBoxAccessCard = New System.Windows.Forms.TextBox()
         Me.BtnTransfer = New System.Windows.Forms.Button()
@@ -114,6 +115,7 @@ Partial Class TransferForm
         Me.TableAdapterManager.ActivitiesTableAdapter = Nothing
         Me.TableAdapterManager.AdminTableTableAdapter = Nothing
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.ImportHistTableAdapter = Nothing
         Me.TableAdapterManager.PayStubsTableAdapter = Nothing
         Me.TableAdapterManager.ReceiverInvTableAdapter = Nothing
         Me.TableAdapterManager.ReceiverTransferTableAdapter = Me.ReceiverTransferTableAdapter
@@ -172,6 +174,7 @@ Partial Class TransferForm
         Me.Controls.Add(Me.LblTrans)
         Me.Controls.Add(Me.TxtBoxAccessCard)
         Me.Controls.Add(Me.BtnTransfer)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "TransferForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Transfer Form"
